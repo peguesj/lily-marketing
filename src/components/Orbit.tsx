@@ -83,11 +83,10 @@ export default function Orbit({
 
   return (
     <div
-      className="orbit-wrap"
+      className={`orbit-wrap${isStatic ? '' : ' orbit-sway'}`}
       style={{
         width: size,
         height: size,
-        animation: isStatic ? 'none' : 'orbit-sway 14s ease-in-out infinite',
       }}
       onMouseEnter={isStatic ? undefined : () => setPaused(true)}
       onMouseLeave={isStatic ? undefined : () => setPaused(false)}
@@ -178,19 +177,6 @@ export default function Orbit({
         })}
       </div>
 
-      {!isStatic && (
-        <style>{`
-          @keyframes orbit-sway {
-            0%   { transform: rotate(0deg); }
-            15%  { transform: rotate(8deg); }
-            35%  { transform: rotate(-6deg); }
-            55%  { transform: rotate(5deg); }
-            75%  { transform: rotate(-4deg); }
-            90%  { transform: rotate(3deg); }
-            100% { transform: rotate(0deg); }
-          }
-        `}</style>
-      )}
     </div>
   );
 }
