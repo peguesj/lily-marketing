@@ -1,0 +1,126 @@
+{
+  "version": "1.0.0",
+  "branchName": "main",
+  "description": "Marketing site gap implementation \u2014 design handoff v11 parity",
+  "project": "lily-marketing",
+  "planeProjectId": "2b6977ee-89fa-4540-9f6c-bdc3d225aadf",
+  "createdAt": "2026-04-28",
+  "stories": [
+    {
+      "id": "US-MKT-001",
+      "title": "LinkedIn URL fix in SiteFooter",
+      "file": "src/components/SiteFooter.tsx",
+      "commit": "61da33f",
+      "planeIssueId": "0352eb5a-fbec-4e17-982c-9ea8190d2a21",
+      "planeSequenceId": 603,
+      "planeName": "LILY-603",
+      "passes": true,
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "Footer LinkedIn href points to linkedin.com/company/asklilyhealth",
+        "Link opens in new tab",
+        "No broken social links in SiteFooter"
+      ]
+    },
+    {
+      "id": "US-MKT-002",
+      "title": "Add 5 new icons to Icon component (arrow-left, arrow-right, x, building, phone)",
+      "file": "src/components/Icon.tsx",
+      "commit": "9010907",
+      "planeIssueId": "8e842fe8-1b41-4cad-a7e6-063ddf186481",
+      "planeSequenceId": 604,
+      "planeName": "LILY-604",
+      "passes": true,
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "Icon component supports: arrow-left, arrow-right, x, building, phone",
+        "Icons render correctly at all standard sizes",
+        "TypeScript types updated for new icon names"
+      ]
+    },
+    {
+      "id": "US-MKT-003",
+      "title": "MobileAppShowcase component \u2014 3 phone-frame mockups",
+      "file": "src/components/MobileAppShowcase.tsx",
+      "commit": "9010907",
+      "planeIssueId": "e1a8454c-4bde-4074-b43e-55ee4508cfa0",
+      "planeSequenceId": 605,
+      "planeName": "LILY-605",
+      "passes": true,
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "MobileAppShowcase renders 3 phone-frame cards",
+        "Each frame contains app screen mockup content",
+        "Responsive layout works on mobile and desktop",
+        "Component ported from design reference 07-mobile.jsx"
+      ]
+    },
+    {
+      "id": "US-MKT-004",
+      "title": "ProductTour component \u2014 14-tile slideshow with keyboard nav",
+      "file": "src/components/ProductTour.tsx",
+      "commit": "9010907",
+      "planeIssueId": "d78cc67c-6fbb-4a84-8823-8ca9a6a517f3",
+      "planeSequenceId": 606,
+      "planeName": "LILY-606",
+      "passes": true,
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "ProductTour renders 14 feature tiles in a slideshow layout",
+        "Keyboard navigation (arrow keys) advances/retreats slides",
+        "Active tile highlighted, progress indicator visible",
+        "Component ported from design reference 08-tour.jsx"
+      ]
+    },
+    {
+      "id": "US-MKT-005",
+      "title": "Wire ProductTour + MobileAppShowcase into homepage",
+      "file": "src/pages/index.astro",
+      "commit": "9010907",
+      "planeIssueId": "1be0919b-fee6-473a-a965-297a269dd244",
+      "planeSequenceId": 607,
+      "planeName": "LILY-607",
+      "passes": true,
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "Homepage index.astro imports and renders ProductTour",
+        "Homepage index.astro imports and renders MobileAppShowcase",
+        "Sections appear in correct visual order",
+        "No hydration errors in browser console"
+      ]
+    },
+    {
+      "id": "US-MKT-006",
+      "title": "Fix ProductTour reveal opacity (remove .reveal class dependency)",
+      "file": "src/components/ProductTour.tsx",
+      "commit": "pending",
+      "planeIssueId": "abd0e7f8-11b5-4e48-804b-89d1fb8b4eca",
+      "planeSequenceId": 608,
+      "planeName": "LILY-608",
+      "passes": true,
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "ProductTour tiles visible without requiring .reveal CSS class",
+        "Tiles do not flash invisible on mount",
+        "Opacity defaults to 1 when .reveal class is absent"
+      ]
+    },
+    {
+      "id": "US-MKT-007",
+      "title": "Orbit animation fix \u2014 photo stays static, badge ring animates",
+      "file": "src/components/Orbit.tsx",
+      "commit": "in-progress",
+      "planeIssueId": "aabf91ef-7d70-403d-9f0c-d854a28f2ea4",
+      "planeSequenceId": 609,
+      "planeName": "LILY-609",
+      "passes": true,
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "Center photo/avatar in Orbit component does not rotate or animate",
+        "Badge ring orbits around the static center photo",
+        "Animation is smooth with no jank",
+        "Hover state triggers pill expansion on badges only"
+      ]
+    }
+  ]
+}
