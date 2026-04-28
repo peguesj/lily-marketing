@@ -943,6 +943,10 @@ p { max-width: none; }
   border: 1px solid hsla(145, 15%, 80%, 0.5);
   cursor: pointer;
 }
+/* Hide native details marker/caret */
+.faq-item summary { list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::marker { display: none; content: ''; }
 .faq-item h4 {
   font-family: var(--brand);
   font-size: 17px; font-weight: 500;
@@ -960,12 +964,12 @@ p { max-width: none; }
   flex-shrink: 0;
   transition: transform 0.2s;
 }
+.faq-item[open] h4 .plus,
 .faq-item.open h4 .plus { transform: rotate(45deg); }
 .faq-item p {
   font-size: 14px; line-height: 1.55;
   color: hsl(var(--foreground) / 0.74);
   margin: 14px 0 0;
-  display: none;
 }
 .faq-item.open p { display: block; }
 

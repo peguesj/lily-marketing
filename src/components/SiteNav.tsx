@@ -59,28 +59,12 @@ export default function SiteNav() {
   return (
     <nav className="site-nav" aria-label="Main navigation">
       <div className="site-nav-inner">
-        {/* Logo — switches color based on active section */}
+        {/* Logo */}
         <a href="/" className="site-logo" aria-label="Lily AI home">
           <img
-            src={
-              activePath.startsWith('/practitioners')
-                ? '/assets/lily-wordmark-multi.png'
-                : activePath.startsWith('/organizations')
-                  ? '/assets/lily-wordmark-multi.png'
-                  : activePath.startsWith('/members')
-                    ? '/assets/lily-wordmark-multi.png'
-                    : '/assets/lily-wordmark-multi.png'
-            }
+            src="/assets/lily-wordmark-multi.png"
             alt="Lily"
-            className={`site-logo-mark${
-              activePath.startsWith('/practitioners')
-                ? ' logo-practitioners'
-                : activePath.startsWith('/organizations')
-                  ? ' logo-organizations'
-                  : activePath.startsWith('/members')
-                    ? ' logo-members'
-                    : ''
-            }`}
+            className="site-logo-mark"
             style={{ width: 'auto', height: 30, borderRadius: 0 }}
           />
         </a>

@@ -35,11 +35,11 @@ const COLUMNS = [
   {
     heading: 'Connect',
     links: [
-      { label: 'LinkedIn', href: '#' },
-      { label: 'Instagram', href: '#' },
-      { label: 'Twitter / X', href: '#' },
-      { label: 'Facebook', href: '#' },
-      { label: 'Newsletter', href: '/newsletter' },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/company/asklily' },
+      { label: 'Instagram', href: 'https://www.instagram.com/asklily.health' },
+      { label: 'Twitter / X', href: 'https://x.com/asklilyhealth' },
+      { label: 'Facebook', href: 'https://www.facebook.com/asklilyhealth' },
+      { label: 'Newsletter', href: '/waitlist' },
     ],
   },
 ];
@@ -57,7 +57,7 @@ export default function SiteFooter() {
               <img
                 src="/assets/lily-wordmark-multi.png"
                 alt="Lily"
-                style={{ height: 28, width: 'auto', filter: 'brightness(0) invert(1) opacity(0.85)' }}
+                style={{ height: 28, width: 'auto' }}
               />
             </a>
             <p className="ft-mission">
