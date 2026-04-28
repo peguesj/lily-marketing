@@ -5,7 +5,7 @@ export default function MobileAppShowcase() {
   return (
     <div className="app-trio">
       {/* MEMBER APP — Lily Match swipe interface */}
-      <div className="app-frame reveal delay-1">
+      <div className="app-frame">
         <div className="app-screen">
           <div className="app-notch"></div>
           <div className="app-status">
@@ -204,7 +204,7 @@ export default function MobileAppShowcase() {
       </div>
 
       {/* PRACTITIONER APP */}
-      <div className="app-frame reveal delay-2">
+      <div className="app-frame">
         <div className="app-screen">
           <div className="app-notch"></div>
           <div className="app-status">
@@ -277,7 +277,7 @@ export default function MobileAppShowcase() {
       </div>
 
       {/* ORG APP */}
-      <div className="app-frame reveal delay-3">
+      <div className="app-frame">
         <div className="app-screen">
           <div className="app-notch"></div>
           <div className="app-status">
