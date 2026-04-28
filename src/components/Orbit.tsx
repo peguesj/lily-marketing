@@ -13,6 +13,7 @@ interface OrbitProps {
   size: number;
   initials: string;
   avatarTone?: 'teal' | 'peach' | 'sage' | 'amber' | 'lilac';
+  image?: string;
   badges: OrbitBadge[];
   showVerified?: boolean;
   /** When true, badges show as static icons only — no cycling/animation. Auto-detected from size < 150 if not set. */
@@ -42,6 +43,7 @@ export default function Orbit({
   size,
   initials,
   avatarTone = 'sage',
+  image,
   badges,
   showVerified = false,
   static: staticProp,
@@ -108,7 +110,10 @@ export default function Orbit({
         style={{ fontSize }}
         aria-hidden="true"
       >
-        <span style={{ position: 'relative', zIndex: 1 }}>{initials}</span>
+        {image
+          ? <img src={image} alt={initials} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', position: 'relative', zIndex: 1 }} />
+          : <span style={{ position: 'relative', zIndex: 1 }}>{initials}</span>
+        }
       </div>
 
       {/* Verified badge */}
