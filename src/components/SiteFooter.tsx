@@ -35,7 +35,7 @@ const COLUMNS = [
   {
     heading: 'Connect',
     links: [
-      { label: 'LinkedIn', href: 'https://www.linkedin.com/company/asklily' },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/company/asklilyhealth/' },
       { label: 'Instagram', href: 'https://www.instagram.com/asklilyhealth' },
       { label: 'Twitter / X', href: 'https://x.com/asklilyhealth' },
       { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61588828805568' },
