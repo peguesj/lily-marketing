@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Icon from './Icon';
 
 export interface OrbitBadge {
   key: string;
   label: string;
   tone: 'lgbtq' | 'gender' | 'language' | 'faith' | 'bipoc' | 'trauma' | 'tele' | 'sliding';
-  icon: React.ReactNode;
+  icon: string;
   angle: number;
 }
 
@@ -145,7 +146,7 @@ export default function Orbit({
                 } as React.CSSProperties
               }
             >
-              <span className="icon">{badge.icon}</span>
+              <span className="icon"><Icon name={badge.icon} size={14} /></span>
               <span
                 className="lbl"
                 style={{ opacity: isActive ? 1 : 0 }}

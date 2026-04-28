@@ -7,16 +7,60 @@ interface Props {
   title: string;
   description?: string;
   canonical?: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown>;
+  noindex?: boolean;
+  keywords?: string;
 }
 
 const {
   title,
-  description = 'Lily AI connects people with the right mental health professionals through intelligent matching.',
+  description = 'Lily is the behavioral-health platform built for members, practitioners, and organizations. Identity-aware matching, HIPAA telehealth, AI-assisted notes, and outcomes tracking — all in one system.',
   canonical,
+  ogImage: ogImageProp,
+  jsonLd,
+  noindex = false,
+  keywords,
 } = Astro.props;
 
-const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
-const ogImage = new URL('/assets/lily-icon-fullcolor.png', Astro.site).toString();
+const siteUrl = 'https://www.asklily.health';
+const canonicalURL = canonical ?? `${siteUrl}${Astro.url.pathname === '/' ? '' : Astro.url.pathname}`;
+const ogImage = ogImageProp ?? `${siteUrl}/assets/lily-icon-fullcolor.png`;
+
+const defaultJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      "name": "Lily",
+      "url": siteUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}/assets/lily-icon-fullcolor.png`,
+      },
+      "sameAs": [],
+      "description": "Lily is the behavioral-health platform built for all three sides — members, practitioners, and organizations.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      "url": siteUrl,
+      "name": "Lily",
+      "publisher": { "@id": `${siteUrl}/#organization` },
+    },
+    {
+      "@type": "WebPage",
+      "@id": canonicalURL,
+      "url": canonicalURL,
+      "name": title,
+      "description": description,
+      "isPartOf": { "@id": `${siteUrl}/#website` },
+    },
+  ],
+};
+
+const finalJsonLd = jsonLd ? { ...defaultJsonLd, "@graph": [...defaultJsonLd["@graph"], ...Object.values(jsonLd)] } : defaultJsonLd;
 ---
 
 <!DOCTYPE html>
@@ -26,6 +70,10 @@ const ogImage = new URL('/assets/lily-icon-fullcolor.png', Astro.site).toString(
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="hsl(145, 60%, 26%)" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {keywords && <meta name="keywords" content={keywords} />}
+    <meta name="author" content="Lily" />
+    <meta name="generator" content={Astro.generator} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -33,7 +81,10 @@ const ogImage = new URL('/assets/lily-icon-fullcolor.png', Astro.site).toString(
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:site_name" content="Lily AI" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Lily" />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -42,6 +93,10 @@ const ogImage = new URL('/assets/lily-icon-fullcolor.png', Astro.site).toString(
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="canonical" href={canonicalURL} />
+    <link rel="apple-touch-icon" href="/assets/lily-icon-fullcolor.png" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(finalJsonLd)} />
 
     <!-- Font preloads — self-hosted -->
     <link
