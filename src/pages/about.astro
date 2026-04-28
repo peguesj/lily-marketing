@@ -3,13 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CTABand from '../components/CTABand.tsx';
 import Icon from '../components/Icon.tsx';
 import Illustration from '../components/Illustration.tsx';
+import content from '../content/pages/about.json';
 ---
 
 <BaseLayout
-  title="About Lily — Building the Platform Care Deserves"
-  description="Lily exists because the people who most need care are the ones the system fits worst. We're a Public Benefit Corporation chartered to fix that — for members, practitioners, and the organizations that pay for it."
+  title={content.title}
+  description={content.description}
   canonical="https://www.asklily.health/about"
-  keywords="Lily mental health company, public benefit corporation, behavioral health startup, identity-aware care, health equity"
+  keywords={content.keywords}
 >
   <main>
     <!-- HERO -->

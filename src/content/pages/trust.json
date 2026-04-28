@@ -1,0 +1,19 @@
+{
+  "title": "Trust & Safety — Lily",
+  "description": "How Lily protects your data, your privacy, and your care. HIPAA, SOC 2 Type II, BAA, and more.",
+  "keywords": "HIPAA compliant therapy, SOC 2 mental health, therapy data privacy, BAA agreement, mental health security",
+  "heroEyebrow": "Trust & Safety",
+  "heroTitle": "Your care is <em>your business</em>.",
+  "heroSubtitle": "Lily is built on a foundation of privacy, security, and clinical ethics. Here's how we protect you.",
+  "sections": [],
+  "features": [],
+  "stats": [],
+  "cta": {
+    "title": "Questions about security or compliance?",
+    "subtitle": "Our team is happy to walk you through our security posture.",
+    "primaryLabel": "Contact us",
+    "primaryHref": "/contact",
+    "secondaryLabel": "",
+    "secondaryHref": ""
+  }
+}

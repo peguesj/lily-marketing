@@ -1,0 +1,48 @@
+{
+  "title": "Pricing — Lily | Honest Pricing for Every Side",
+  "description": "Free for the people seeking care. Transparent for practitioners. Priced to scale for organizations. No surprise fees, no per-message charges, no upcharges on crisis support.",
+  "keywords": "therapy platform pricing, mental health benefit cost, EAP pricing, therapist practice management cost, PEPM behavioral health, free therapy matching",
+  "heroEyebrow": "Pricing",
+  "heroTitle": "Honest pricing for <em>every side</em>.",
+  "heroSubtitle": "Free for the people seeking care. Transparent for practitioners. Priced to scale for organizations. No surprise fees, no per-message charges, no upcharges on crisis support.",
+  "sections": [
+    {
+      "id": "members",
+      "eyebrow": "01",
+      "heading": "For members & their families",
+      "body": "If your employer, plan, or school covers Lily, everything below is free for you and your dependents.",
+      "style": "default"
+    },
+    {
+      "id": "organizations",
+      "eyebrow": "02",
+      "heading": "For organizations",
+      "body": "Per eligible employee, per month. Volume discounts at 1k, 5k, 25k. Annual billing.",
+      "style": "cream"
+    },
+    {
+      "id": "practitioners",
+      "eyebrow": "03",
+      "heading": "For practitioners",
+      "body": "Two ways to work with Lily. Pick what fits your practice.",
+      "style": "default"
+    },
+    {
+      "id": "included",
+      "eyebrow": "No upsells, no add-ons",
+      "heading": "What every plan includes — at no extra cost.",
+      "body": "",
+      "style": "cream"
+    }
+  ],
+  "features": [],
+  "stats": [],
+  "cta": {
+    "title": "Pricing that <em>scales with the work</em>, not against it.",
+    "subtitle": "Member, practitioner, organization — start where you are.",
+    "primaryLabel": "Get started",
+    "primaryHref": "/contact",
+    "secondaryLabel": "",
+    "secondaryHref": ""
+  }
+}

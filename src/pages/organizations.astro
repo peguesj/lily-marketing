@@ -4,13 +4,14 @@ import Btn from '../components/Btn.tsx';
 import CTABand from '../components/CTABand.tsx';
 import LogoStrip from '../components/LogoStrip.tsx';
 import Icon from '../components/Icon.tsx';
+import content from '../content/pages/organizations.json';
 ---
 
 <BaseLayout
-  title="For Organizations — Lily Admin | A Mental-Health Benefit Your Members Actually Use"
-  description="Stand up an identity-aware, outcomes-tracked clinical network in days. SSO, eligibility automation, de-identified reporting, BAA on request."
+  title={content.title}
+  description={content.description}
   canonical="https://www.asklily.health/organizations"
-  keywords="employee mental health benefit, EAP alternative, corporate wellness, behavioral health network, outcomes tracking, HIPAA compliant, SSO eligibility, Lily Admin"
+  keywords={content.keywords}
 >
   <main>
     <!-- HERO -->

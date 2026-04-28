@@ -1,0 +1,22 @@
+{
+  "tier": "Lily Practice",
+  "audience": "Full practice management",
+  "price": "$59",
+  "unit": "/ provider / month",
+  "description": "All-in-one: telehealth, notes, billing, outcomes, CE — replaces 3-4 tools.",
+  "note": "Includes everything in Independent plus practice management. First 60 days free.",
+  "section": "practitioners",
+  "order": 2,
+  "featured": true,
+  "featuredLabel": "",
+  "ctaLabel": "Start free trial",
+  "ctaHref": "/contact",
+  "ctaKind": "primary",
+  "features": [
+    { "text": "Telehealth, scheduling, intake, notes" },
+    { "text": "Insurance billing + superbills" },
+    { "text": "Outcomes + therapeutic alliance dashboards" },
+    { "text": "CE library, peer consult, supervision tools" },
+    { "text": "Group practice support (up to 12 providers)" }
+  ]
+}

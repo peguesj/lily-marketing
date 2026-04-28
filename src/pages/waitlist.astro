@@ -1,13 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Illustration from '../components/Illustration.tsx';
+import content from '../content/pages/waitlist.json';
 ---
 
 <BaseLayout
-  title="Join the Waitlist — Lily | Be First to Experience Identity-Aware Care"
-  description="Lily is launching soon. Join the waitlist to get early access to identity-aware therapy matching, AI-assisted wellness tools, and a platform built for all three sides."
+  title={content.title}
+  description={content.description}
   canonical="https://www.asklily.health/waitlist"
-  keywords="Lily waitlist, early access therapy platform, mental health beta, identity-aware matching waitlist"
+  keywords={content.keywords}
 >
   <main>
     <section class="page-hero">

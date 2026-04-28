@@ -2,13 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTABand from '../components/CTABand.tsx';
 import Illustration from '../components/Illustration.tsx';
+import content from '../content/pages/trust.json';
 ---
 
 <BaseLayout
-  title="Trust & Safety — Lily | Your Safety, Full Stop"
-  description="HIPAA-compliant. SOC 2 Type II audited. Encrypted at rest and in transit. We never sell your data, and we never train AI on identifiable session content."
+  title={content.title}
+  description={content.description}
   canonical="https://www.asklily.health/trust"
-  keywords="HIPAA compliant therapy, SOC 2 telehealth, encrypted therapy platform, mental health data privacy, BAA therapy, crisis support 988"
+  keywords={content.keywords}
 >
   <main>
     <!-- HERO -->

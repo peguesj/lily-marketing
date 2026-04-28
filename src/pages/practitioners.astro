@@ -4,13 +4,14 @@ import Orbit from '../components/Orbit.tsx';
 import Btn from '../components/Btn.tsx';
 import CTABand from '../components/CTABand.tsx';
 import Icon from '../components/Icon.tsx';
+import content from '../content/pages/practitioners.json';
 ---
 
 <BaseLayout
-  title="For Practitioners — Lily Practice | Practice What You Trained For"
-  description="Lily routes the right clients, runs your schedule, drafts your notes, and pays you on time — so you can spend your day in the room, not in the admin."
+  title={content.title}
+  description={content.description}
   canonical="https://www.asklily.health/practitioners"
-  keywords="therapist practice management, EHR for therapists, telehealth platform, clinical notes AI, therapist billing, insurance billing therapist, Lily Practice"
+  keywords={content.keywords}
 >
   <main>
     <!-- HERO -->

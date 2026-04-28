@@ -4,13 +4,22 @@ import Btn from '../components/Btn.tsx';
 import CTABand from '../components/CTABand.tsx';
 import Icon from '../components/Icon.tsx';
 import Illustration from '../components/Illustration.tsx';
+
+import content from '../content/pages/pricing.json';
+import faq01 from '../content/faq/pricing-01.json';
+import faq02 from '../content/faq/pricing-02.json';
+import faq03 from '../content/faq/pricing-03.json';
+import faq04 from '../content/faq/pricing-04.json';
+import faq05 from '../content/faq/pricing-05.json';
+import faq06 from '../content/faq/pricing-06.json';
+const faqs = [faq01, faq02, faq03, faq04, faq05, faq06].sort((a, b) => a.order - b.order);
 ---
 
 <BaseLayout
-  title="Pricing — Lily | Honest Pricing for Every Side"
-  description="Free for the people seeking care. Transparent for practitioners. Priced to scale for organizations. No surprise fees, no per-message charges, no upcharges on crisis support."
+  title={content.title}
+  description={content.description}
   canonical="https://www.asklily.health/pricing"
-  keywords="therapy platform pricing, mental health benefit cost, EAP pricing, therapist practice management cost, PEPM behavioral health, free therapy matching"
+  keywords={content.keywords}
 >
   <main>
     <!-- HERO -->
@@ -18,12 +27,9 @@ import Illustration from '../components/Illustration.tsx';
       <div class="container wide">
         <div class="page-hero-grid">
           <div>
-            <div class="hero-eyebrow"><span class="dot"></span>Pricing</div>
-            <h1>Honest pricing for <em>every side</em>.</h1>
-            <p>
-              Free for the people seeking care. Transparent for practitioners. Priced to scale for organizations.
-              No surprise fees, no per-message charges, no upcharges on crisis support.
-            </p>
+            <div class="hero-eyebrow"><span class="dot"></span>{content.heroEyebrow}</div>
+            <h1 set:html={content.heroTitle} />
+            <p>{content.heroSub}</p>
           </div>
           <div class="page-hero-illust-wrap">
             <Illustration client:load n={1} size={300} alt="Calm and centered" />
@@ -234,42 +240,14 @@ import Illustration from '../components/Illustration.tsx';
           <h2 class="section-title">Pricing FAQ</h2>
         </div>
         <div class="faq-list">
-          <details class="faq-item">
-            <summary>
-              <h4>Is there really nothing for covered members to pay?<span class="plus">+</span></h4>
-            </summary>
-            <p>Correct. If your employer, school, or plan sponsors Lily, Lily Match, the wellness library, AI Companion, journal, mood tracking, and crisis routing are all free. Sessions are billed through your benefit or insurance — never as a surprise.</p>
-          </details>
-          <details class="faq-item">
-            <summary>
-              <h4>What's the difference between Foundation, Care, and Health Plan?<span class="plus">+</span></h4>
-            </summary>
-            <p>Foundation gets you the network and the toolkit with standard reporting — good if you're moving off a low-engagement EAP. Care adds identity-aware matching, outcomes dashboards, programs, RBAC, and a dedicated CSM — best for benefits teams replacing a fragmented stack. Health Plan adds claims integration (837/835), network adequacy modeling, and parity reporting for payers and self-insured plans.</p>
-          </details>
-          <details class="faq-item">
-            <summary>
-              <h4>How does practitioner rev share work?<span class="plus">+</span></h4>
-            </summary>
-            <p>On the Independent plan, Lily takes 12% of Lily-sourced session revenue, dropping to 8% past 80 sessions/month. There's no monthly fee, no per-client fee, no per-claim fee. Clients you bring yourself: free. On Lily Practice ($59/provider/mo), you also get full practice management — telehealth, notes, billing, outcomes, CE.</p>
-          </details>
-          <details class="faq-item">
-            <summary>
-              <h4>What if our org is self-insured?<span class="plus">+</span></h4>
-            </summary>
-            <p>Per-utilizing-member pricing is available as an alternative on Foundation and Care — you pay only when a covered life actually books care. Talk to us; we'll model both for you.</p>
-          </details>
-          <details class="faq-item">
-            <summary>
-              <h4>Volume discounts?<span class="plus">+</span></h4>
-            </summary>
-            <p>Yes, automatic at 1k, 5k, and 25k eligible lives. Above 50k we'll quote you directly.</p>
-          </details>
-          <details class="faq-item">
-            <summary>
-              <h4>What if a member needs more sessions than their benefit covers?<span class="plus">+</span></h4>
-            </summary>
-            <p>Sessions beyond benefit caps are billed at the practitioner's session rate, often through insurance with a normal copay. Lily never adds a markup. Members always see the full cost up front before booking.</p>
-          </details>
+          {faqs.map(faq => (
+            <details class="faq-item">
+              <summary>
+                <h4>{faq.question}<span class="plus">+</span></h4>
+              </summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
         </div>
       </div>
     </section>
@@ -277,10 +255,10 @@ import Illustration from '../components/Illustration.tsx';
     <!-- CTA BAND -->
     <CTABand
       client:load
-      title="Pricing that <em>scales with the work</em>, not against it."
-      sub="Member, practitioner, organization — start where you are."
-      primaryLabel="Get started"
-      primaryHref="/contact"
+      title={content.cta.title}
+      sub={content.cta.sub}
+      primaryLabel={content.cta.primaryLabel}
+      primaryHref={content.cta.primaryHref}
     />
   </main>
 </BaseLayout>

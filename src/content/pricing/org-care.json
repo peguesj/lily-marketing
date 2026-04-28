@@ -1,0 +1,23 @@
+{
+  "tier": "Care",
+  "audience": "Benefits teams replacing fragmented stack",
+  "price": "$14",
+  "unit": "PEPM",
+  "description": "Everything in Foundation, plus identity-aware matching and outcomes that hold up to your CFO.",
+  "note": "Best for benefit teams replacing a fragmented stack — EAP + therapy point solution + coaching.",
+  "section": "organizations",
+  "order": 2,
+  "featured": true,
+  "featuredLabel": "Most picked",
+  "ctaLabel": "Talk to our team",
+  "ctaHref": "/contact",
+  "ctaKind": "primary",
+  "features": [
+    { "text": "Everything in Foundation" },
+    { "text": "Identity-aware curated network" },
+    { "text": "De-identified outcomes & engagement dashboards" },
+    { "text": "Programs, campaigns, RBAC, audit log" },
+    { "text": "Dedicated CSM + quarterly business reviews" },
+    { "text": "SCIM, custom domain, configurable consent" }
+  ]
+}

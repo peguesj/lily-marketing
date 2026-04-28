@@ -1,0 +1,23 @@
+{
+  "tier": "Health Plan",
+  "audience": "Payers, ACOs, self-insured plans",
+  "price": "$22",
+  "unit": "PEPM",
+  "description": "For payers, ACOs, and self-insured plans that need claims, network adequacy, and audit-grade data.",
+  "note": "Per-utilizing-member pricing available as an alternative — you pay only when a covered life books care.",
+  "section": "organizations",
+  "order": 3,
+  "featured": false,
+  "featuredLabel": "",
+  "ctaLabel": "Request RFP info",
+  "ctaHref": "/contact",
+  "ctaKind": "ghost",
+  "features": [
+    { "text": "Everything in Care" },
+    { "text": "Direct claims integration (837/835)" },
+    { "text": "Custom network adequacy modeling" },
+    { "text": "NQTL parity reporting" },
+    { "text": "Stepped-care pathway design" },
+    { "text": "Implementation engineer + clinical lead" }
+  ]
+}

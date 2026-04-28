@@ -4,13 +4,14 @@ import Orbit from '../components/Orbit.tsx';
 import Btn from '../components/Btn.tsx';
 import CTABand from '../components/CTABand.tsx';
 import Icon from '../components/Icon.tsx';
+import content from '../content/pages/members.json';
 ---
 
 <BaseLayout
-  title="For Members — Lily Care | Therapy That Fits You"
-  description="Stop scrolling directories. Lily Match shows you practitioners who already understand your identity, modality preference, and schedule — with insurance and sliding scale built in."
+  title={content.title}
+  description={content.description}
   canonical="https://www.asklily.health/members"
-  keywords="find a therapist, therapy matching, identity-aware therapy, BIPOC therapist, LGBTQ affirming therapist, sliding scale therapy, online therapy, Lily Match"
+  keywords={content.keywords}
 >
   <main>
     <!-- HERO -->

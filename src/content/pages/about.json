@@ -1,0 +1,19 @@
+{
+  "title": "About Lily — Mental Health Care That Fits Your Life",
+  "description": "Lily is building the behavioral-health platform that works for all three sides — members, practitioners, and organizations.",
+  "keywords": "about Lily, mental health startup, behavioral health company, therapy platform team",
+  "heroEyebrow": "About",
+  "heroTitle": "Mental health care that <em>fits your life</em>.",
+  "heroSubtitle": "We're building the behavioral-health platform that works for all three sides — because when the system works for everyone, care actually happens.",
+  "sections": [],
+  "features": [],
+  "stats": [],
+  "cta": {
+    "title": "Want to be part of the mission?",
+    "subtitle": "We're hiring across engineering, clinical, and operations.",
+    "primaryLabel": "See open roles",
+    "primaryHref": "/careers",
+    "secondaryLabel": "Contact us",
+    "secondaryHref": "/contact"
+  }
+}

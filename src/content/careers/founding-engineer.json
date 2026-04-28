@@ -1,0 +1,10 @@
+{
+  "title": "Founding Engineer",
+  "department": "Engineering",
+  "location": "Remote (US)",
+  "type": "Full-time",
+  "description": "Help build the behavioral-health platform from the ground up. Elixir/Phoenix, LiveView, PostgreSQL.",
+  "applyUrl": "mailto:careers@asklily.health",
+  "active": true,
+  "order": 1
+}

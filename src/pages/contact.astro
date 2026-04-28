@@ -2,13 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.tsx';
 import Illustration from '../components/Illustration.tsx';
+import content from '../content/pages/contact.json';
 ---
 
 <BaseLayout
-  title="Contact — Lily | Talk to Our Team"
-  description="Tell us who you are. We'll get you to a match, an application, or a demo — whichever fits."
+  title={content.title}
+  description={content.description}
   canonical="https://www.asklily.health/contact"
-  keywords="contact Lily, demo request, therapist application, mental health platform support"
+  keywords={content.keywords}
 >
   <main>
     <!-- HERO -->

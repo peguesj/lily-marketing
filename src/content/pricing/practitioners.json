@@ -1,14 +1,21 @@
 {
-  "tier": "Practitioners",
-  "audience": "Licensed therapists and counselors",
-  "price": "$49/mo",
-  "description": "Grow your practice with qualified client referrals and powerful tools.",
+  "tier": "Independent",
+  "audience": "Solo practitioners",
+  "price": "$0",
+  "unit": "platform fee",
+  "description": "Use Lily as your front office. Keep your existing tools and EHR.",
+  "note": "Pay only on Lily-sourced sessions. Bring your own clients for free.",
+  "section": "practitioners",
+  "order": 1,
+  "featured": false,
+  "featuredLabel": "",
+  "ctaLabel": "Apply to Lily",
+  "ctaHref": "/contact",
+  "ctaKind": "ghost",
   "features": [
-    { "text": "Client matching and referrals" },
-    { "text": "Practice management dashboard" },
-    { "text": "Scheduling and availability" },
-    { "text": "SOAP notes and treatment plans" },
-    { "text": "Telehealth session room" },
-    { "text": "Outcome tracking and analytics" }
+    { "text": "Free Lily-listed profile + verified badge" },
+    { "text": "Pre-matched referrals (opt in / opt out)" },
+    { "text": "12% rev share on Lily-sourced sessions, drops to 8% past 80/mo" },
+    { "text": "Direct deposit twice monthly" }
   ]
 }

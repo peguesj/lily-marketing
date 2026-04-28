@@ -1,13 +1,23 @@
 {
   "tier": "Members",
   "audience": "Individuals seeking care",
-  "price": "Free",
-  "description": "Find your perfect practitioner match with our intelligent matching system.",
+  "price": "$0",
+  "unit": "/ member / month",
+  "description": "$0 to find care. $0 for the wellness toolkit. Always.",
+  "note": "Covered by your employer, school, or health plan. Sessions billed through your benefit or insurance.",
+  "section": "members",
+  "order": 1,
+  "featured": true,
+  "featuredLabel": "",
+  "ctaLabel": "Check if you're covered",
+  "ctaHref": "/contact",
+  "ctaKind": "primary",
   "features": [
-    { "text": "Personalized therapist matching" },
-    { "text": "Self-assessment quizzes" },
-    { "text": "Wellness tracking dashboard" },
-    { "text": "Secure messaging" },
-    { "text": "Crisis support resources" }
+    { "text": "Unlimited Lily Match — re-match anytime" },
+    { "text": "AI Companion + 24/7 wellness library" },
+    { "text": "Mood tracking, journal, guided exercises" },
+    { "text": "Encrypted messaging with your provider" },
+    { "text": "988 & crisis routing — always free, always on" },
+    { "text": "Family seats for dependents 13+" }
   ]
 }

@@ -1,0 +1,19 @@
+{
+  "title": "How Lily Works — Three Steps to Better Care",
+  "description": "See how Lily connects members with the right practitioners through identity-aware matching, and how organizations get real utilization and outcomes data.",
+  "keywords": "how therapy matching works, identity-aware matching, therapy platform workflow, mental health matching process",
+  "heroEyebrow": "How it works",
+  "heroTitle": "Three steps to <em>better care</em>.",
+  "heroSubtitle": "Whether you're a member finding a therapist, a practitioner growing your practice, or an org offering a benefit — Lily makes the connection in three steps.",
+  "sections": [],
+  "features": [],
+  "stats": [],
+  "cta": {
+    "title": "Ready to see it in action?",
+    "subtitle": "Join the waitlist or request a demo.",
+    "primaryLabel": "Join the waitlist",
+    "primaryHref": "/waitlist",
+    "secondaryLabel": "Request a demo",
+    "secondaryHref": "/contact"
+  }
+}

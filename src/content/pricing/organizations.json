@@ -1,14 +1,23 @@
 {
-  "tier": "Organizations",
-  "audience": "Group practices and health systems",
-  "price": "Custom",
-  "description": "Enterprise-grade tools for managing multi-provider practices at scale.",
+  "tier": "Foundation",
+  "audience": "Organizations starting with a benefit",
+  "price": "$8",
+  "unit": "PEPM",
+  "description": "Curated network + the wellness toolkit your members will actually use.",
+  "note": "Best for orgs starting with a benefit, or moving off a low-engagement EAP.",
+  "section": "organizations",
+  "order": 1,
+  "featured": false,
+  "featuredLabel": "",
+  "ctaLabel": "Get a quote",
+  "ctaHref": "/contact",
+  "ctaKind": "ghost",
   "features": [
-    { "text": "Multi-provider staff management" },
-    { "text": "HIPAA compliance dashboard" },
-    { "text": "Organization-wide analytics" },
-    { "text": "SSO and role-based access" },
-    { "text": "Contract and billing management" },
-    { "text": "Dedicated onboarding support" }
+    { "text": "Lily Match for all eligible members" },
+    { "text": "AI Companion, library, journal" },
+    { "text": "SSO + eligibility automation" },
+    { "text": "Standard utilization reporting" },
+    { "text": "BAA, SOC 2 Type II, US data residency" },
+    { "text": "Email + chat support" }
   ]
 }

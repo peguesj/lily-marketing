@@ -5,13 +5,14 @@ import Orbit from '../components/Orbit.tsx';
 import CTABand from '../components/CTABand.tsx';
 import Icon from '../components/Icon.tsx';
 import Illustration from '../components/Illustration.tsx';
+import content from '../content/pages/how.json';
 ---
 
 <BaseLayout
-  title="How Lily Match Works — Identity-Aware Therapy Matching"
-  description="Match isn't a sorted list. It's a model that ranks fit across eight identity-aware dimensions, plus modality, availability, and economic accessibility — refreshed every time anyone changes anything."
+  title={content.title}
+  description={content.description}
   canonical="https://www.asklily.health/how"
-  keywords="how therapy matching works, identity-aware matching algorithm, find the right therapist, therapy fit score, behavioral health matching"
+  keywords={content.keywords}
 >
   <main>
     <!-- HERO -->

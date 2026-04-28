@@ -1,0 +1,74 @@
+{
+  "title": "Lily — The Behavioral-Health Platform Built for All Three Sides",
+  "description": "Lily is three connected products: Lily Care for members, Lily Practice for clinicians, and Lily Admin for organizations. One source of truth for matching, scheduling, telehealth, notes, billing, and outcomes.",
+  "keywords": "mental health platform, therapy matching, behavioral health, identity-aware matching, HIPAA telehealth, therapist directory, wellness coaching, employee mental health benefit",
+  "heroEyebrow": "Three apps · one platform · live in 50 states",
+  "heroTitle": "The behavioral-health platform built for <em>all three sides</em>.",
+  "heroSubtitle": "Lily is three connected products: <strong>Lily Care</strong> for members, <strong>Lily Practice</strong> for clinicians, and <strong>Lily Admin</strong> for organizations. Web and mobile. One source of truth for matching, scheduling, telehealth, notes, billing, and outcomes.",
+  "heroTrustItems": [
+    { "icon": "lock", "text": "HIPAA & SOC 2 Type II" },
+    { "icon": "check", "text": "Verified clinicians" },
+    { "icon": "users", "text": "8 affinity dimensions" }
+  ],
+  "sections": [
+    {
+      "id": "products",
+      "eyebrow": "The platform · three products",
+      "heading": "One system of record. <em>Three lived experiences.</em>",
+      "body": "Each side gets a product that fits how they actually work — and they all stay in sync. Match flows into scheduling, scheduling into notes, notes into outcomes. No copy-paste between tools.",
+      "style": "cream"
+    },
+    {
+      "id": "match",
+      "eyebrow": "Inside Lily Match",
+      "heading": "Match on the things that actually predict <em>alliance</em>.",
+      "body": "Forty years of psychotherapy research keep landing on the same finding: the relationship matters more than the modality. Lily Match encodes that into a fit score across eight identity-aware dimensions — so members find someone who already gets it, on session one.",
+      "style": "default"
+    },
+    {
+      "id": "outcomes",
+      "eyebrow": "Why it works",
+      "heading": "Built around the four numbers <em>that matter</em>.",
+      "body": "Every Lily surface — match, schedule, notes, dashboard — is engineered to drive these four.",
+      "style": "dark"
+    },
+    {
+      "id": "logos",
+      "eyebrow": "Trusted by forward-thinking organizations",
+      "heading": "",
+      "body": "",
+      "style": "cream"
+    }
+  ],
+  "matchBullets": [
+    "Identity, language, faith, neurodiversity, lived experience",
+    "Modality preference (CBT, EMDR, IFS, somatic, & more)",
+    "Real-time availability & insurance fit",
+    "Re-matching with no awkward conversation"
+  ],
+  "testimonial": {
+    "quote": "The first time in twelve years I haven't had to explain to a therapist what it means to be Black, queer, and the eldest daughter of immigrants. Lily put that on the page before I said a word.",
+    "initials": "AC",
+    "name": "Ada C.",
+    "role": "Lily member · Oakland, CA"
+  },
+  "features": [
+    { "icon": "heart", "title": "Lily Care", "body": "Identity-aware matching across 8 dimensions for members. Swipe to explore or browse the full directory. Re-match anytime.", "link": "/members", "linkText": "For members" },
+    { "icon": "leaf", "title": "Lily Practice", "body": "The whole practice on one screen. Pre-matched referrals, AI-assisted notes, telehealth, billing, and outcomes.", "link": "/practitioners", "linkText": "For practitioners" },
+    { "icon": "building", "title": "Lily Admin", "body": "A mental-health benefit your members actually use. Identity-aware network, de-identified outcomes, SSO-ready.", "link": "/organizations", "linkText": "For organizations" }
+  ],
+  "stats": [
+    { "value": "3.2×", "label": "Higher continuation past session four vs. directory matching" },
+    { "value": "68%", "label": "Members report identity affirmation in the first session" },
+    { "value": "11d", "label": "Median time from sign-up to first booked session" },
+    { "value": "94%", "label": "Practitioner retention at 12 months on platform" }
+  ],
+  "cta": {
+    "title": "Care that fits, on the platform that holds <em>all of it</em>.",
+    "subtitle": "Join the alpha. We're inviting members, practitioners, and organizations in waves — reserve your spot now.",
+    "primaryLabel": "Join the waitlist",
+    "primaryHref": "/contact",
+    "secondaryLabel": "Request a demo",
+    "secondaryHref": "/contact"
+  }
+}

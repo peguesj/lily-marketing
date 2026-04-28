@@ -1,0 +1,6 @@
+{
+  "question": "What's the difference between Foundation, Care, and Health Plan?",
+  "answer": "Foundation gets you the network and the toolkit with standard reporting — good if you're moving off a low-engagement EAP. Care adds identity-aware matching, outcomes dashboards, programs, RBAC, and a dedicated CSM — best for benefits teams replacing a fragmented stack. Health Plan adds claims integration (837/835), network adequacy modeling, and parity reporting for payers and self-insured plans.",
+  "page": "pricing",
+  "order": 2
+}
