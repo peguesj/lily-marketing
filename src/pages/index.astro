@@ -147,6 +147,7 @@ const logosSection = content.sections.find(s => s.id === 'logos')!;
                     size={104}
                     initials="JK"
                     avatarTone="teal"
+                    image="/assets/avatar-jk.jpg"
                     badges={[
                       { key: "trauma",  tone: "trauma",   icon: "shield",   label: "Trauma",  angle: 45  },
                       { key: "lgbtq",   tone: "lgbtq",    icon: "heart",    label: "LGBTQ+",  angle: 140 },
@@ -178,6 +179,7 @@ const logosSection = content.sections.find(s => s.id === 'logos')!;
                     size={88}
                     initials="DR"
                     avatarTone="peach"
+                    image="/assets/avatar-dr.jpg"
                     badges={[
                       { key: "bipoc",    tone: "bipoc",    icon: "users",    label: "BIPOC",  angle: 60  },
                       { key: "faith",    tone: "faith",    icon: "sparkle",  label: "Faith",  angle: 180 },
@@ -231,7 +233,7 @@ const logosSection = content.sections.find(s => s.id === 'logos')!;
         <div class="testimonial">
           <blockquote>{content.testimonial.quote}</blockquote>
           <div class="quoted">
-            <div class="lily-avatar lily-avatar-lg" style="background: radial-gradient(circle at 30% 28%, hsl(20 35% 78%), hsl(22 40% 50%)); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--brand); font-weight: 500;">{content.testimonial.initials}</div>
+            <div class="lily-avatar lily-avatar-lg" style="width: 48px; height: 48px; border-radius: 50%; overflow: hidden;"><img src="/assets/avatar-testimonial.jpg" alt={content.testimonial.name} style="width: 100%; height: 100%; object-fit: cover;" /></div>
             <div>
               <div class="who">{content.testimonial.name}</div>
               <div class="role">{content.testimonial.role}</div>
