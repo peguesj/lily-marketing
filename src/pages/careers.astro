@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABand from '../components/CTABand.tsx';
+import Icon from '../components/Icon.tsx';
+import Illustration from '../components/Illustration.tsx';
+---
+
+<BaseLayout
+  title="Careers — Lily | Build the Platform Care Deserves"
+  description="Join the team building the behavioral-health platform that finally works for members, practitioners, and organizations. Remote-first, equity-backed, mission-driven."
+  canonical="https://www.asklily.health/careers"
+  keywords="Lily careers, mental health startup jobs, behavioral health technology jobs, remote healthcare jobs"
+>
+  <main>
+    <section class="page-hero">
+      <div class="container wide">
+        <div class="page-hero-grid">
+          <div>
+            <div class="hero-eyebrow"><span class="dot"></span>We're hiring</div>
+            <h1>Come build something that <em>actually</em> matters.</h1>
+            <p>
+              Lily is a Public Benefit Corporation building the infrastructure for equitable behavioral health.
+              We're a small team with an outsized mission — and we're looking for people who want to close the gap between care and those who need it.
+            </p>
+          </div>
+          <div class="page-hero-illust-wrap">
+            <Illustration client:load n={7} size={300} alt="Team working together" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container wide">
+        <div class="section-head">
+          <div class="section-eyebrow">Open roles</div>
+          <h2 class="section-title">Where we need you.</h2>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 2rem;">
+          <div style="padding: 28px 32px; border-radius: 16px; background: #fff; border: 1px solid hsla(145, 15%, 80%, 0.5); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: hsl(145, 60%, 26%); text-transform: uppercase;">Engineering</span>
+              <h3 style="margin: 6px 0 4px; font-size: 1.2rem;">Clinical Integration Engineer</h3>
+              <p style="margin: 0; color: hsl(var(--foreground) / 0.65); font-size: 0.9rem;">Remote · Full-time · Senior</p>
+            </div>
+            <a href="/contact" class="btn ghost">Apply</a>
+          </div>
+          <div style="padding: 28px 32px; border-radius: 16px; background: #fff; border: 1px solid hsla(145, 15%, 80%, 0.5); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: hsl(145, 60%, 26%); text-transform: uppercase;">Operations</span>
+              <h3 style="margin: 6px 0 4px; font-size: 1.2rem;">Care Operations Lead</h3>
+              <p style="margin: 0; color: hsl(var(--foreground) / 0.65); font-size: 0.9rem;">Remote · Full-time · Mid-Senior</p>
+            </div>
+            <a href="/contact" class="btn ghost">Apply</a>
+          </div>
+          <div style="padding: 28px 32px; border-radius: 16px; background: #fff; border: 1px solid hsla(145, 15%, 80%, 0.5); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: hsl(145, 60%, 26%); text-transform: uppercase;">Growth</span>
+              <h3 style="margin: 6px 0 4px; font-size: 1.2rem;">Growth Partnerships Manager</h3>
+              <p style="margin: 0; color: hsl(var(--foreground) / 0.65); font-size: 0.9rem;">Remote · Full-time · Mid-Senior</p>
+            </div>
+            <a href="/contact" class="btn ghost">Apply</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cream-warm">
+      <div class="container wide">
+        <div class="section-head center">
+          <div class="section-eyebrow">Why Lily</div>
+          <h2 class="section-title">What working here looks like.</h2>
+        </div>
+        <div class="values-grid">
+          <div class="value">
+            <div class="v-icon"><Icon name="globe" size={22} /></div>
+            <div><h3>Remote-first</h3><p>Work from wherever you do your best thinking. We overlap async by default and gather in person twice a year.</p></div>
+          </div>
+          <div class="value">
+            <div class="v-icon"><Icon name="chart" size={22} /></div>
+            <div><h3>Equity from day one</h3><p>Every employee receives meaningful equity. You're building something — you should own part of it.</p></div>
+          </div>
+          <div class="value">
+            <div class="v-icon"><Icon name="heart" size={22} /></div>
+            <div><h3>Full mental health benefit</h3><p>Lily Match access, therapy sessions, and wellness tools for you and your dependents. Obviously.</p></div>
+          </div>
+          <div class="value">
+            <div class="v-icon"><Icon name="leaf" size={22} /></div>
+            <div><h3>Unlimited PTO + real rest</h3><p>Minimum two weeks off per year, enforced. Burnout is a bug, not a badge.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CTABand
+      client:load
+      title="Don't see your role? <em>Send us a note.</em>"
+      sub="We're always open to meeting people who care about behavioral health equity."
+      primaryLabel="Get in touch"
+      primaryHref="/contact"
+    />
+  </main>
+</BaseLayout>

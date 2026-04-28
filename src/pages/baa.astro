@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABand from '../components/CTABand.tsx';
+import Icon from '../components/Icon.tsx';
+---
+
+<BaseLayout
+  title="BAA Agreement — Lily | Business Associate Agreement"
+  description="Lily signs Business Associate Agreements with covered entities and business associates under HIPAA. Request yours here."
+  canonical="https://www.asklily.health/baa"
+  keywords="HIPAA BAA, business associate agreement, HIPAA compliant telehealth, behavioral health BAA"
+>
+  <main>
+    <section class="page-hero">
+      <div class="container narrow">
+        <div class="hero-eyebrow"><span class="dot"></span>HIPAA compliance</div>
+        <h1>Business Associate <em>Agreement</em>.</h1>
+        <p>HIPAA requires a signed BAA between Lily and any covered entity or business associate we work with. We've signed hundreds. Here's how it works.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container narrow">
+        <div class="values-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="value">
+            <div class="v-icon"><Icon name="shield" size={22} /></div>
+            <div><h3>What is a BAA?</h3><p>A Business Associate Agreement is a contract required by HIPAA that defines how Lily handles Protected Health Information (PHI) on behalf of your organization.</p></div>
+          </div>
+          <div class="value">
+            <div class="v-icon"><Icon name="users" size={22} /></div>
+            <div><h3>Who needs one?</h3><p>Any health plan, employer health program, healthcare provider, or business associate that shares PHI with Lily. This includes organizations using Lily Admin and all practitioner accounts.</p></div>
+          </div>
+          <div class="value">
+            <div class="v-icon"><Icon name="note" size={22} /></div>
+            <div><h3>Our standard BAA</h3><p>Lily's standard BAA covers: permitted uses of PHI, safeguard obligations, breach notification, subcontractor requirements, and data return/destruction at termination.</p></div>
+          </div>
+          <div class="value">
+            <div class="v-icon"><Icon name="calendar" size={22} /></div>
+            <div><h3>Turnaround time</h3><p>We return executed BAAs within two business days. For modified or negotiated BAAs, allow 5–7 business days. Enterprise agreements include BAA as a standard exhibit.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CTABand
+      client:load
+      title="Ready to request your BAA?"
+      sub="Send us a message and our compliance team will have it back to you within two business days."
+      primaryLabel="Request a BAA"
+      primaryHref="/contact"
+    />
+  </main>
+</BaseLayout>

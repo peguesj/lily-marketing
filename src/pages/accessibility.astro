@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.tsx';
+---
+
+<BaseLayout
+  title="Accessibility — Lily | WCAG AAA Commitment"
+  description="Lily is committed to WCAG AAA accessibility standards. Our platform is designed for keyboard navigation, screen readers, reduced motion, and high contrast."
+  canonical="https://www.asklily.health/accessibility"
+  keywords="accessible mental health platform, WCAG AAA therapy, screen reader therapy app, accessible telehealth"
+>
+  <main>
+    <section class="page-hero">
+      <div class="container narrow">
+        <div class="hero-eyebrow"><span class="dot"></span>Accessibility</div>
+        <h1>Care that works for <em>everyone</em>.</h1>
+        <p>We target WCAG 2.1 Level AAA — a 7:1 contrast ratio minimum, full keyboard support, and screen reader compatibility throughout the platform.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container narrow">
+        <div class="values-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="value">
+            <div class="v-icon"><Icon name="sparkle" size={22} /></div>
+            <div><h3>Contrast</h3><p>All text meets WCAG AAA 7:1 contrast ratio. We test on every design token change and block deploys that regress contrast.</p></div>
+          </div>
+          <div class="value">
+            <div class="v-icon"><Icon name="bookmark" size={22} /></div>
+            <div><h3>Keyboard navigation</h3><p>Every feature is reachable via keyboard. Focus indicators are always visible. Tab order follows logical reading order.</p></div>
+          </div>
+          <div class="value">
+            <div class="v-icon"><Icon name="headphones" size={22} /></div>
+            <div><h3>Screen reader support</h3><p>Semantic HTML, ARIA labels, live regions for dynamic content, and descriptive alt text throughout. Tested with VoiceOver and NVDA.</p></div>
+          </div>
+          <div class="value">
+            <div class="v-icon"><Icon name="leaf" size={22} /></div>
+            <div><h3>Reduced motion</h3><p>All animations respect <code>prefers-reduced-motion</code>. Users who need stillness get it — including the orbital matching animations.</p></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem; padding: 28px 32px; border-radius: 16px; background: hsla(145, 50%, 50%, 0.06); border: 1px solid hsla(145, 40%, 70%, 0.3);">
+          <h3 style="margin-top: 0;">Found an accessibility issue?</h3>
+          <p>We take accessibility reports seriously. If you encounter a barrier, email us at <a href="mailto:accessibility@asklily.health" style="color: hsl(145, 60%, 26%);">accessibility@asklily.health</a> and we'll respond within two business days.</p>
+          <p style="margin-bottom: 0; font-size: 0.9rem; color: hsl(var(--foreground) / 0.6);">We do not require proof of disability to process accessibility accommodation requests.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

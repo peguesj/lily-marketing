@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Cookie Policy — Lily"
+  description="How Lily uses cookies and similar tracking technologies on asklily.health."
+  canonical="https://www.asklily.health/cookies"
+>
+  <main>
+    <section class="page-hero" style="padding-bottom: 2rem;">
+      <div class="container narrow">
+        <div class="hero-eyebrow"><span class="dot"></span>Legal</div>
+        <h1>Cookie Policy</h1>
+        <p style="color: hsl(var(--foreground) / 0.6); font-size: 0.9rem;">Effective date: January 1, 2025</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container narrow">
+        <div class="legal-body" style="line-height: 1.75; color: hsl(var(--foreground) / 0.82);">
+          <h2>Cookies We Use</h2>
+          <h4>Essential cookies</h4>
+          <p>Required for the platform to function. These include session authentication tokens, CSRF protection, and user preferences. You cannot opt out of these while using the service.</p>
+          <h4>Analytics cookies</h4>
+          <p>We use privacy-respecting analytics (no third-party ad networks) to understand how the platform is used in aggregate. These cookies do not contain PHI and are de-identified by default.</p>
+          <h4>What we don't use</h4>
+          <p>Lily does not use advertising cookies, does not sell data to ad networks, and does not use third-party tracking pixels on any page that displays PHI.</p>
+
+          <h2>How to Opt Out</h2>
+          <p>You can manage cookie preferences through your browser settings. Disabling essential cookies will impair platform functionality. To opt out of analytics tracking, email <a href="mailto:privacy@asklily.health">privacy@asklily.health</a>.</p>
+
+          <h2>Contact</h2>
+          <p><a href="mailto:privacy@asklily.health">privacy@asklily.health</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

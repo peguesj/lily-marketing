@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABand from '../components/CTABand.tsx';
+---
+
+<BaseLayout
+  title="Blog — Lily | Clinical Insights & Platform Updates"
+  description="Research, product thinking, and clinical insights from the team building the behavioral-health platform for all three sides."
+  canonical="https://www.asklily.health/blog"
+  keywords="behavioral health blog, mental health technology, HIPAA AI, EAP replacement, identity-aware therapy"
+>
+  <main>
+    <section class="page-hero" style="padding-bottom: 2rem;">
+      <div class="container wide">
+        <div class="hero-eyebrow"><span class="dot"></span>Insights</div>
+        <h1 style="max-width: 640px;">Clinical insight. Product thinking. <em>Honest takes.</em></h1>
+        <p style="max-width: 560px;">From the team building the platform behavioral health deserves.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container wide">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem;">
+          <article style="border-radius: 18px; background: #fff; border: 1px solid hsla(145, 15%, 80%, 0.5); overflow: hidden;">
+            <div style="height: 160px; background: linear-gradient(135deg, hsl(145, 50%, 88%), hsl(155, 40%, 80%));"></div>
+            <div style="padding: 24px;">
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: hsl(145, 60%, 26%); text-transform: uppercase;">Research</span>
+              <h3 style="margin: 8px 0 10px; font-size: 1.15rem; line-height: 1.35;">Identity-Aware Matching: Why One Size Never Fit All</h3>
+              <p style="font-size: 0.9rem; color: hsl(var(--foreground) / 0.65); margin: 0 0 16px; line-height: 1.55;">How eight dimensions of identity translate into measurable therapeutic fit — and why ignoring them costs clinicians and clients alike.</p>
+              <span style="font-size: 12px; color: hsl(var(--foreground) / 0.45);">March 2025 · 8 min read</span>
+            </div>
+          </article>
+          <article style="border-radius: 18px; background: #fff; border: 1px solid hsla(145, 15%, 80%, 0.5); overflow: hidden;">
+            <div style="height: 160px; background: linear-gradient(135deg, hsl(28, 50%, 88%), hsl(20, 45%, 82%));"></div>
+            <div style="padding: 24px;">
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: hsl(145, 60%, 26%); text-transform: uppercase;">For HR Teams</span>
+              <h3 style="margin: 8px 0 10px; font-size: 1.15rem; line-height: 1.35;">The EAP Replacement Playbook for Benefits Leaders</h3>
+              <p style="font-size: 0.9rem; color: hsl(var(--foreground) / 0.65); margin: 0 0 16px; line-height: 1.55;">Your EAP has 3–6% utilization. Here's how identity-aware networks change that number — and what to look for in an RFP.</p>
+              <span style="font-size: 12px; color: hsl(var(--foreground) / 0.45);">February 2025 · 11 min read</span>
+            </div>
+          </article>
+          <article style="border-radius: 18px; background: #fff; border: 1px solid hsla(145, 15%, 80%, 0.5); overflow: hidden;">
+            <div style="height: 160px; background: linear-gradient(135deg, hsl(230, 50%, 88%), hsl(220, 40%, 82%));"></div>
+            <div style="padding: 24px;">
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: hsl(145, 60%, 26%); text-transform: uppercase;">Engineering</span>
+              <h3 style="margin: 8px 0 10px; font-size: 1.15rem; line-height: 1.35;">Building HIPAA-Compliant AI: Our Architecture Decisions</h3>
+              <p style="font-size: 0.9rem; color: hsl(var(--foreground) / 0.65); margin: 0 0 16px; line-height: 1.55;">How we use HIPAA-eligible LLM endpoints, avoid training on PHI, and give members meaningful opt-out controls.</p>
+              <span style="font-size: 12px; color: hsl(var(--foreground) / 0.45);">January 2025 · 14 min read</span>
+            </div>
+          </article>
+        </div>
+        <p style="text-align: center; margin-top: 3rem; color: hsl(var(--foreground) / 0.5); font-size: 0.9rem;">More posts coming soon. <a href="/waitlist" style="color: hsl(145, 60%, 26%);">Subscribe for updates.</a></p>
+      </div>
+    </section>
+
+    <CTABand
+      client:load
+      title="Insights in your inbox."
+      sub="New research, product updates, and clinical perspectives — never more than once a month."
+      primaryLabel="Join the waitlist"
+      primaryHref="/waitlist"
+    />
+  </main>
+</BaseLayout>

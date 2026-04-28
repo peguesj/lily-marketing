@@ -4494,3 +4494,11 @@ p { max-width: none; }
 }
 .hs-btn-book { color: hsl(145 60% 38%); border-color: hsla(145, 60%, 40%, 0.4); }
 
+
+/* Legal pages */
+.legal-body h2 { font-size: 1.15rem; font-family: var(--brand); margin: 2rem 0 0.5rem; color: hsl(var(--foreground)); }
+.legal-body h4 { font-size: 0.95rem; font-weight: 700; margin: 1.25rem 0 0.25rem; }
+.legal-body p, .legal-body ul { font-size: 0.95rem; }
+.legal-body ul { padding-left: 1.4rem; }
+.legal-body li { margin-bottom: 0.3rem; }
+.legal-body a { color: hsl(145, 60%, 26%); text-decoration: underline; }

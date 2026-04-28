@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABand from '../components/CTABand.tsx';
+---
+
+<BaseLayout
+  title="Press & Brand — Lily | Media Kit and Brand Guidelines"
+  description="Media contact, company boilerplate, and brand use guidelines for Lily — the behavioral-health platform built for members, practitioners, and organizations."
+  canonical="https://www.asklily.health/press"
+  keywords="Lily press kit, Lily brand guidelines, mental health platform media, asklily health media contact"
+>
+  <main>
+    <section class="page-hero">
+      <div class="container wide">
+        <div class="hero-eyebrow"><span class="dot"></span>Press &amp; Brand</div>
+        <h1>Media kit &amp; <em>brand guidelines</em>.</h1>
+        <p>Everything you need to cover Lily or use our brand correctly in your materials.</p>
+      </div>
+    </section>
+
+    <!-- PRESS SECTION -->
+    <section class="section">
+      <div class="container wide">
+        <div class="section-head">
+          <div class="section-eyebrow">Press</div>
+          <h2 class="section-title">For media inquiries.</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; align-items: start;">
+          <div>
+            <h4>Media contact</h4>
+            <p>For press inquiries, interview requests, and fact-checking, contact:</p>
+            <p style="font-size: 1.1rem; font-weight: 600;">
+              <a href="mailto:press@asklily.health" style="color: hsl(145, 60%, 26%);">press@asklily.health</a>
+            </p>
+            <p style="font-size: 0.9rem; color: hsl(var(--foreground) / 0.6);">We respond to press inquiries within one business day.</p>
+          </div>
+          <div>
+            <h4>Company boilerplate</h4>
+            <p style="font-size: 0.9rem; line-height: 1.65; border-left: 3px solid hsla(145, 50%, 50%, 0.3); padding-left: 16px; color: hsl(var(--foreground) / 0.75);">
+              Lily is a Public Benefit Corporation building the behavioral-health platform for all three sides of care. Lily Care connects members with identity-aware matched practitioners. Lily Practice gives clinicians telehealth, notes, billing, and outcomes in one tool. Lily Admin gives employers and health plans an outcomes-tracked mental health benefit. Lily is HIPAA-compliant, SOC 2 Type II audited, and based in Philadelphia and New York.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRAND GUIDELINES -->
+    <section class="section cream">
+      <div class="container wide">
+        <div class="section-head">
+          <div class="section-eyebrow">Brand use</div>
+          <h2 class="section-title">How to use the Lily brand.</h2>
+          <p class="section-sub">Please follow these guidelines when referencing or displaying Lily's visual identity in any external material.</p>
+        </div>
+
+        <!-- APPROVED LOCKUPS -->
+        <div style="margin-top: 2.5rem;">
+          <h3 style="font-size: 1.1rem; margin-bottom: 1.5rem;">Approved lockups</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div style="border-radius: 18px; background: #fff; border: 2px solid hsla(145, 50%, 50%, 0.25); padding: 32px; text-align: center;">
+              <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px; min-height: 64px;">
+                <img src="/assets/lily-wordmark-multi.png" alt="Lily wordmark" style="height: 36px; width: auto;" />
+              </div>
+              <span style="display: inline-block; background: hsl(145, 50%, 92%); color: hsl(145, 60%, 26%); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 99px; margin-bottom: 10px;">Lockup A — Wordmark</span>
+              <p style="font-size: 0.85rem; color: hsl(var(--foreground) / 0.65); margin: 0;">
+                <strong style="color: hsl(145, 60%, 26%);">For member-facing use only.</strong><br />
+                Use when addressing consumers, members, or general audiences.
+              </p>
+            </div>
+            <div style="border-radius: 18px; background: #fff; border: 2px solid hsla(145, 50%, 50%, 0.25); padding: 32px; text-align: center;">
+              <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px; min-height: 64px;">
+                <img src="/assets/lily-icon-fullcolor.png" alt="Lily icon" style="height: 52px; width: auto;" />
+              </div>
+              <span style="display: inline-block; background: hsl(28, 50%, 92%); color: hsl(28, 60%, 36%); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 99px; margin-bottom: 10px;">Lockup B — Icon only</span>
+              <p style="font-size: 0.85rem; color: hsl(var(--foreground) / 0.65); margin: 0;">
+                <strong style="color: hsl(28, 55%, 36%);">For practitioner &amp; organization use.</strong><br />
+                Use the icon mark only — never pair the full wordmark with practitioner or employer materials.
+              </p>
+            </div>
+          </div>
+          <p style="font-size: 0.8rem; color: hsl(var(--foreground) / 0.5); margin-top: 1rem; text-align: center;">
+            This usage model is consistent with how enterprise technology brands (e.g. Meta, Salesforce) distinguish consumer vs. partner brand contexts.
+          </p>
+        </div>
+
+        <!-- DO / DON'T -->
+        <div style="margin-top: 3rem;">
+          <h3 style="font-size: 1.1rem; margin-bottom: 1.5rem;">Do's and don'ts</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div style="border-radius: 14px; background: hsl(145, 50%, 96%); border: 1px solid hsl(145, 40%, 82%); padding: 24px;">
+              <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; color: hsl(145, 60%, 26%); margin-bottom: 16px; text-transform: uppercase;">✓ Do</div>
+              <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; line-height: 2;">
+                <li>Use the icon mark in practitioner/org-facing integrations and co-marketing</li>
+                <li>Maintain clear space equal to the icon's height on all sides</li>
+                <li>Use approved color versions on appropriate backgrounds</li>
+                <li>Reference Lily as "Lily" (not "Lily AI" or "LilyHealth")</li>
+                <li>Link to asklily.health as the canonical URL</li>
+              </ul>
+            </div>
+            <div style="border-radius: 14px; background: hsl(0, 50%, 97%); border: 1px solid hsl(0, 40%, 86%); padding: 24px;">
+              <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; color: hsl(0, 60%, 48%); margin-bottom: 16px; text-transform: uppercase;">✗ Don't</div>
+              <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; line-height: 2;">
+                <li>Use the wordmark+logomark in practitioner or organization contexts</li>
+                <li>Modify, recolor, or distort the logo marks</li>
+                <li>Use the logo on backgrounds that reduce legibility</li>
+                <li>Add effects (drop shadow, outline, glow) to the marks</li>
+                <li>Use our marks in a way that implies partnership without authorization</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLOR PALETTE -->
+        <div style="margin-top: 3rem;">
+          <h3 style="font-size: 1.1rem; margin-bottom: 1.5rem;">Brand palette</h3>
+          <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+            <div style="text-align: center;">
+              <div style="width: 72px; height: 72px; border-radius: 16px; background: hsl(145, 60%, 26%); margin-bottom: 8px;"></div>
+              <div style="font-size: 11px; font-weight: 600; color: hsl(var(--foreground) / 0.7);">Primary</div>
+              <div style="font-size: 10px; color: hsl(var(--foreground) / 0.45);">hsl(145 60% 26%)</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: 72px; height: 72px; border-radius: 16px; background: hsl(155, 38%, 32%); margin-bottom: 8px;"></div>
+              <div style="font-size: 11px; font-weight: 600; color: hsl(var(--foreground) / 0.7);">Secondary</div>
+              <div style="font-size: 10px; color: hsl(var(--foreground) / 0.45);">hsl(155 38% 32%)</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: 72px; height: 72px; border-radius: 16px; background: hsl(20, 60%, 58%); margin-bottom: 8px;"></div>
+              <div style="font-size: 11px; font-weight: 600; color: hsl(var(--foreground) / 0.7);">Peach</div>
+              <div style="font-size: 10px; color: hsl(var(--foreground) / 0.45);">hsl(20 60% 58%)</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: 72px; height: 72px; border-radius: 16px; background: hsl(43, 35%, 93%); border: 1px solid hsl(43, 20%, 82%); margin-bottom: 8px;"></div>
+              <div style="font-size: 11px; font-weight: 600; color: hsl(var(--foreground) / 0.7);">Cream</div>
+              <div style="font-size: 10px; color: hsl(var(--foreground) / 0.45);">hsl(43 35% 93%)</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="width: 72px; height: 72px; border-radius: 16px; background: hsl(215, 28%, 17%); margin-bottom: 8px;"></div>
+              <div style="font-size: 11px; font-weight: 600; color: hsl(var(--foreground) / 0.7);">Charcoal</div>
+              <div style="font-size: 10px; color: hsl(var(--foreground) / 0.45);">hsl(215 28% 17%)</div>
+            </div>
+          </div>
+          <p style="font-size: 0.85rem; color: hsl(var(--foreground) / 0.55); margin-top: 1rem;">
+            <strong>Typography:</strong> Space Grotesk (UI/body) · Playfair Display (brand headings)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <CTABand
+      client:load
+      title="Need something not covered here?"
+      sub="Reach out to our brand team for custom usage requests, co-marketing assets, or event materials."
+      primaryLabel="Contact us"
+      primaryHref="/contact"
+    />
+  </main>
+</BaseLayout>
