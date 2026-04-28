@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Orbit from '../components/Orbit.tsx';
 import Btn from '../components/Btn.tsx';
+import ModalCTA from '../components/ModalCTA.tsx';
 import TrustStrip from '../components/TrustStrip.tsx';
 import LogoStrip from '../components/LogoStrip.tsx';
 import CTABand from '../components/CTABand.tsx';
@@ -33,7 +34,7 @@ const logosSection = content.sections.find(s => s.id === 'logos')!;
             <h1 set:html={content.heroTitle} />
             <p class="hero-sub" set:html={content.heroSubtitle} />
             <div class="hero-actions">
-              <Btn client:load kind="primary" size="lg" href="/members" icon="arrow">Find your match</Btn>
+              <ModalCTA client:load modal="waitlist" audience="member" kind="primary" size="lg" icon="arrow">Find your match</ModalCTA>
               <Btn client:load kind="ghost" size="lg" href="/how">See how Lily works</Btn>
             </div>
             <div class="hero-trust">

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Orbit from '../components/Orbit.tsx';
 import Btn from '../components/Btn.tsx';
+import ModalCTA from '../components/ModalCTA.tsx';
 import CTABand from '../components/CTABand.tsx';
 import Icon from '../components/Icon.tsx';
 import content from '../content/pages/practitioners.json';
@@ -26,7 +27,7 @@ import content from '../content/pages/practitioners.json';
               so you can spend your day in the room, not in the admin.
             </p>
             <div class="actions">
-              <Btn client:load kind="primary" size="lg" href="/contact" icon="arrow">Apply to Lily</Btn>
+              <ModalCTA client:load modal="waitlist" audience="practitioner" kind="primary" size="lg" icon="arrow">Apply to Lily</ModalCTA>
               <Btn client:load kind="ghost" size="lg" href="/pricing">See economics</Btn>
             </div>
           </div>

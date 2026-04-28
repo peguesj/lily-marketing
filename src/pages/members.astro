@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Orbit from '../components/Orbit.tsx';
 import Btn from '../components/Btn.tsx';
+import ModalCTA from '../components/ModalCTA.tsx';
 import CTABand from '../components/CTABand.tsx';
 import Icon from '../components/Icon.tsx';
 import content from '../content/pages/members.json';
@@ -26,7 +27,7 @@ import content from '../content/pages/members.json';
               your identity, your modality preference, and your week — with insurance and sliding scale built in.
             </p>
             <div class="actions">
-              <Btn client:load kind="primary" size="lg" href="/contact" icon="arrow">Find your match</Btn>
+              <ModalCTA client:load modal="waitlist" audience="member" kind="primary" size="lg" icon="arrow">Find your match</ModalCTA>
               <Btn client:load kind="ghost" size="lg" href="/how">See how it works</Btn>
             </div>
           </div>

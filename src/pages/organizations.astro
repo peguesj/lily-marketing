@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Btn from '../components/Btn.tsx';
+import ModalCTA from '../components/ModalCTA.tsx';
 import CTABand from '../components/CTABand.tsx';
 import LogoStrip from '../components/LogoStrip.tsx';
 import Icon from '../components/Icon.tsx';
@@ -26,7 +27,7 @@ import content from '../content/pages/organizations.json';
               de-identified reporting, BAA on request. The benefit your DEI council and your CFO can both stand behind.
             </p>
             <div class="actions">
-              <Btn client:load kind="primary" size="lg" href="/contact" icon="arrow">Talk to our team</Btn>
+              <ModalCTA client:load modal="demo" kind="primary" size="lg" icon="arrow">Talk to our team</ModalCTA>
               <Btn client:load kind="ghost" size="lg" href="/pricing">See pricing</Btn>
             </div>
           </div>
