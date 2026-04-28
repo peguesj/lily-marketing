@@ -7,6 +7,8 @@ import TrustStrip from '../components/TrustStrip.tsx';
 import LogoStrip from '../components/LogoStrip.tsx';
 import CTABand from '../components/CTABand.tsx';
 import Icon from '../components/Icon.tsx';
+import ProductTour from '../components/ProductTour.tsx';
+import MobileAppShowcase from '../components/MobileAppShowcase.tsx';
 import content from '../content/pages/index.json';
 
 const productSection = content.sections.find(s => s.id === 'products')!;
@@ -206,6 +208,29 @@ const logosSection = content.sections.find(s => s.id === 'logos')!;
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- PRODUCT TOUR -->
+    <ProductTour
+      client:load
+      audience="all"
+      subtitle="Real screens from the alpha — onboarding, the AI companion, journaling, match results, session prep, the Aria scribe, caseload triage, payouts, anonymous seats, and aggregate outcomes."
+      pick={[0, 1, 2, 3, 5, 6, 7, 8, 10, 13]}
+    />
+
+    <!-- MOBILE APPS -->
+    <section class="section cream">
+      <div class="container wide">
+        <div class="section-head center">
+          <div class="section-eyebrow">Companion apps</div>
+          <h2 class="section-title">Care that travels with you.</h2>
+          <p class="section-sub">
+            Members carry mood, journaling, and crisis routing in their pocket. Practitioners carry their day, their notes, and their next deposit.
+            Benefits leaders carry the program metrics into their next Q-review.
+          </p>
+        </div>
+        <MobileAppShowcase client:load />
       </div>
     </section>
 

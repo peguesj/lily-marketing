@@ -22,7 +22,12 @@ export type IconName =
   | 'bookmark'
   | 'shield'
   | 'language'
-  | 'sparkle';
+  | 'sparkle'
+  | 'arrow-left'
+  | 'arrow-right'
+  | 'x'
+  | 'building'
+  | 'phone';
 
 interface IconProps {
   name: IconName | string;
@@ -54,6 +59,11 @@ const paths: Record<string, string> = {
   shield: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
   language: 'M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6',
   sparkle: 'M12 3v3M12 18v3M3 12h3M18 12h3m-3.22-6.78-2.12 2.12M8.34 15.66l-2.12 2.12m0-9.9 2.12 2.12M15.66 15.66l2.12 2.12M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z',
+  'arrow-left': 'M19 12H5M12 5l-7 7 7 7',
+  'arrow-right': 'M5 12h14M12 5l7 7-7 7',
+  x: 'M18 6 6 18M6 6l12 12',
+  building: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM9 22V12h6v10',
+  phone: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.09 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 17l.92-.08z',
 };
 
 export default function Icon({
