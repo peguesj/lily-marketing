@@ -1,0 +1,285 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Btn from '../components/Btn.tsx';
+import CTABand from '../components/CTABand.tsx';
+import Icon from '../components/Icon.tsx';
+import Illustration from '../components/Illustration.tsx';
+---
+
+<BaseLayout
+  title="Pricing — Lily | Honest Pricing for Every Side"
+  description="Free for the people seeking care. Transparent for practitioners. Priced to scale for organizations. No surprise fees, no per-message charges, no upcharges on crisis support."
+  canonical="https://lilycare.co/pricing"
+>
+  <main>
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="container wide">
+        <div class="page-hero-grid">
+          <div>
+            <div class="hero-eyebrow"><span class="dot"></span>Pricing</div>
+            <h1>Honest pricing for <em>every side</em>.</h1>
+            <p>
+              Free for the people seeking care. Transparent for practitioners. Priced to scale for organizations.
+              No surprise fees, no per-message charges, no upcharges on crisis support.
+            </p>
+          </div>
+          <div class="page-hero-illust-wrap">
+            <Illustration client:load n={1} size={300} alt="Calm and centered" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEMBERS — FREE -->
+    <section class="section">
+      <div class="container wide">
+        <div class="pricing-section-head">
+          <span class="ps-num">01</span>
+          <h2>For members &amp; their families</h2>
+          <p class="ps-sub">If your employer, plan, or school covers Lily, everything below is free for you and your dependents.</p>
+        </div>
+        <div class="pricing-grid" style="grid-template-columns: 1.1fr 1fr;">
+          <div class="tier featured">
+            <div class="tier-name">Members</div>
+            <div class="tier-tagline">$0 to find care. $0 for the wellness toolkit. Always.</div>
+            <div class="tier-price">
+              <span class="num">$0</span>
+              <span class="unit">/ member / month</span>
+            </div>
+            <div class="tier-note">Covered by your employer, school, or health plan. Sessions billed through your benefit or insurance.</div>
+            <ul class="tier-features">
+              <li><Icon name="check" /> Unlimited Lily Match — re-match anytime</li>
+              <li><Icon name="check" /> AI Companion + 24/7 wellness library</li>
+              <li><Icon name="check" /> Mood tracking, journal, guided exercises</li>
+              <li><Icon name="check" /> Encrypted messaging with your provider</li>
+              <li><Icon name="check" /> 988 &amp; crisis routing — always free, always on</li>
+              <li><Icon name="check" /> Family seats for dependents 13+</li>
+            </ul>
+            <Btn client:load kind="primary" href="/contact" className="tier-cta">Check if you're covered</Btn>
+          </div>
+          <div class="illust-card" style="padding: 0; border: none; background: transparent; box-shadow: none;">
+            <div class="illust-frame sage" style="height: 100%; min-height: 320px; border-radius: 22px;">
+              <Illustration client:load n={2} size={220} alt="Self-care illustration" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORGANIZATIONS — THREE TIERS -->
+    <section class="section cream">
+      <div class="container wide">
+        <div class="pricing-section-head">
+          <span class="ps-num">02</span>
+          <h2>For organizations</h2>
+          <p class="ps-sub">Per eligible employee, per month. Volume discounts at 1k, 5k, 25k. Annual billing.</p>
+        </div>
+        <div class="pricing-grid">
+          <div class="tier">
+            <div class="tier-name">Foundation</div>
+            <div class="tier-tagline">Curated network + the wellness toolkit your members will actually use.</div>
+            <div class="tier-price">
+              <span class="num">$8</span>
+              <span class="unit">PEPM</span>
+            </div>
+            <div class="tier-note">Best for orgs starting with a benefit, or moving off a low-engagement EAP.</div>
+            <ul class="tier-features">
+              <li><Icon name="check" /> Lily Match for all eligible members</li>
+              <li><Icon name="check" /> AI Companion, library, journal</li>
+              <li><Icon name="check" /> SSO + eligibility automation</li>
+              <li><Icon name="check" /> Standard utilization reporting</li>
+              <li><Icon name="check" /> BAA, SOC 2 Type II, US data residency</li>
+              <li><Icon name="check" /> Email + chat support</li>
+            </ul>
+            <Btn client:load kind="ghost" href="/contact" className="tier-cta">Get a quote</Btn>
+          </div>
+          <div class="tier featured">
+            <div class="tier-most-picked">Most picked</div>
+            <div class="tier-name">Care</div>
+            <div class="tier-tagline">Everything in Foundation, plus identity-aware matching and outcomes that hold up to your CFO.</div>
+            <div class="tier-price">
+              <span class="num">$14</span>
+              <span class="unit">PEPM</span>
+            </div>
+            <div class="tier-note">Best for benefit teams replacing a fragmented stack — EAP + therapy point solution + coaching.</div>
+            <ul class="tier-features">
+              <li><Icon name="check" /> Everything in Foundation</li>
+              <li><Icon name="check" /> Identity-aware curated network</li>
+              <li><Icon name="check" /> De-identified outcomes &amp; engagement dashboards</li>
+              <li><Icon name="check" /> Programs, campaigns, RBAC, audit log</li>
+              <li><Icon name="check" /> Dedicated CSM + quarterly business reviews</li>
+              <li><Icon name="check" /> SCIM, custom domain, configurable consent</li>
+            </ul>
+            <Btn client:load kind="primary" href="/contact" className="tier-cta">Talk to our team</Btn>
+          </div>
+          <div class="tier">
+            <div class="tier-name">Health Plan</div>
+            <div class="tier-tagline">For payers, ACOs, and self-insured plans that need claims, network adequacy, and audit-grade data.</div>
+            <div class="tier-price">
+              <span class="num">$22</span>
+              <span class="unit">PEPM</span>
+            </div>
+            <div class="tier-note">Per-utilizing-member pricing available as an alternative — you pay only when a covered life books care.</div>
+            <ul class="tier-features">
+              <li><Icon name="check" /> Everything in Care</li>
+              <li><Icon name="check" /> Direct claims integration (837/835)</li>
+              <li><Icon name="check" /> Custom network adequacy modeling</li>
+              <li><Icon name="check" /> NQTL parity reporting</li>
+              <li><Icon name="check" /> Stepped-care pathway design</li>
+              <li><Icon name="check" /> Implementation engineer + clinical lead</li>
+            </ul>
+            <Btn client:load kind="ghost" href="/contact" className="tier-cta">Request RFP info</Btn>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRACTITIONERS — TWO TIERS -->
+    <section class="section">
+      <div class="container wide">
+        <div class="pricing-section-head">
+          <span class="ps-num">03</span>
+          <h2>For practitioners</h2>
+          <p class="ps-sub">Two ways to work with Lily. Pick what fits your practice.</p>
+        </div>
+        <div class="pricing-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="tier">
+            <div class="tier-name">Independent</div>
+            <div class="tier-tagline">Use Lily as your front office. Keep your existing tools and EHR.</div>
+            <div class="tier-price">
+              <span class="num">$0</span>
+              <span class="unit">platform fee</span>
+            </div>
+            <div class="tier-note">Pay only on Lily-sourced sessions. Bring your own clients for free.</div>
+            <ul class="tier-features">
+              <li><Icon name="check" /> Free Lily-listed profile + verified badge</li>
+              <li><Icon name="check" /> Pre-matched referrals (opt in / opt out)</li>
+              <li><Icon name="check" /> 12% rev share on Lily-sourced sessions, drops to 8% past 80/mo</li>
+              <li><Icon name="check" /> Direct deposit twice monthly</li>
+            </ul>
+            <Btn client:load kind="ghost" href="/contact" className="tier-cta">Apply to Lily</Btn>
+          </div>
+          <div class="tier featured">
+            <div class="tier-name">Lily Practice</div>
+            <div class="tier-tagline">All-in-one: telehealth, notes, billing, outcomes, CE — replaces 3–4 tools.</div>
+            <div class="tier-price">
+              <span class="num">$59</span>
+              <span class="unit">/ provider / month</span>
+            </div>
+            <div class="tier-note">Includes everything in Independent plus practice management. First 60 days free.</div>
+            <ul class="tier-features">
+              <li><Icon name="check" /> Telehealth, scheduling, intake, notes</li>
+              <li><Icon name="check" /> Insurance billing + superbills</li>
+              <li><Icon name="check" /> Outcomes + therapeutic alliance dashboards</li>
+              <li><Icon name="check" /> CE library, peer consult, supervision tools</li>
+              <li><Icon name="check" /> Group practice support (up to 12 providers)</li>
+            </ul>
+            <Btn client:load kind="primary" href="/contact" className="tier-cta">Start free trial</Btn>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NO UPSELLS SECTION -->
+    <section class="section cream">
+      <div class="container wide">
+        <div class="section-head" style="margin-bottom: 32px;">
+          <div class="section-eyebrow">No upsells, no add-ons</div>
+          <h2 class="section-title">What every plan includes — at no extra cost.</h2>
+        </div>
+        <div class="illust-grid four">
+          <div class="illust-card">
+            <div class="illust-frame sage">
+              <Illustration client:load n={6} size={130} alt="" />
+            </div>
+            <div class="illust-eyebrow">Always free</div>
+            <div class="illust-title">Crisis &amp; 988 routing</div>
+            <div class="illust-body">Warm handoff to crisis services for any user, any plan. Never gated.</div>
+          </div>
+          <div class="illust-card">
+            <div class="illust-frame peach">
+              <Illustration client:load n={4} size={130} alt="" />
+            </div>
+            <div class="illust-eyebrow">Always free</div>
+            <div class="illust-title">Compliance package</div>
+            <div class="illust-body">BAA, SOC 2 Type II, HIPAA, FERPA where applicable. US data residency.</div>
+          </div>
+          <div class="illust-card">
+            <div class="illust-frame lavender">
+              <Illustration client:load n={8} size={130} alt="" />
+            </div>
+            <div class="illust-eyebrow">Always free</div>
+            <div class="illust-title">Member privacy</div>
+            <div class="illust-body">Employers never see who's in care or what's discussed. De-identified rollups only.</div>
+          </div>
+          <div class="illust-card">
+            <div class="illust-frame gold">
+              <Illustration client:load n={3} size={130} alt="" />
+            </div>
+            <div class="illust-eyebrow">Always free</div>
+            <div class="illust-title">Implementation</div>
+            <div class="illust-body">Eligibility, SSO, comms templates, launch playbooks. Live in 30 days.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="section">
+      <div class="container narrow">
+        <div class="section-head center">
+          <div class="section-eyebrow">Common questions</div>
+          <h2 class="section-title">Pricing FAQ</h2>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>
+              <h4>Is there really nothing for covered members to pay?<span class="plus">+</span></h4>
+            </summary>
+            <p>Correct. If your employer, school, or plan sponsors Lily, Lily Match, the wellness library, AI Companion, journal, mood tracking, and crisis routing are all free. Sessions are billed through your benefit or insurance — never as a surprise.</p>
+          </details>
+          <details class="faq-item">
+            <summary>
+              <h4>What's the difference between Foundation, Care, and Health Plan?<span class="plus">+</span></h4>
+            </summary>
+            <p>Foundation gets you the network and the toolkit with standard reporting — good if you're moving off a low-engagement EAP. Care adds identity-aware matching, outcomes dashboards, programs, RBAC, and a dedicated CSM — best for benefits teams replacing a fragmented stack. Health Plan adds claims integration (837/835), network adequacy modeling, and parity reporting for payers and self-insured plans.</p>
+          </details>
+          <details class="faq-item">
+            <summary>
+              <h4>How does practitioner rev share work?<span class="plus">+</span></h4>
+            </summary>
+            <p>On the Independent plan, Lily takes 12% of Lily-sourced session revenue, dropping to 8% past 80 sessions/month. There's no monthly fee, no per-client fee, no per-claim fee. Clients you bring yourself: free. On Lily Practice ($59/provider/mo), you also get full practice management — telehealth, notes, billing, outcomes, CE.</p>
+          </details>
+          <details class="faq-item">
+            <summary>
+              <h4>What if our org is self-insured?<span class="plus">+</span></h4>
+            </summary>
+            <p>Per-utilizing-member pricing is available as an alternative on Foundation and Care — you pay only when a covered life actually books care. Talk to us; we'll model both for you.</p>
+          </details>
+          <details class="faq-item">
+            <summary>
+              <h4>Volume discounts?<span class="plus">+</span></h4>
+            </summary>
+            <p>Yes, automatic at 1k, 5k, and 25k eligible lives. Above 50k we'll quote you directly.</p>
+          </details>
+          <details class="faq-item">
+            <summary>
+              <h4>What if a member needs more sessions than their benefit covers?<span class="plus">+</span></h4>
+            </summary>
+            <p>Sessions beyond benefit caps are billed at the practitioner's session rate, often through insurance with a normal copay. Lily never adds a markup. Members always see the full cost up front before booking.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <CTABand
+      client:load
+      title="Pricing that <em>scales with the work</em>, not against it."
+      sub="Member, practitioner, organization — start where you are."
+      primaryLabel="Get started"
+      primaryHref="/contact"
+    />
+  </main>
+</BaseLayout>

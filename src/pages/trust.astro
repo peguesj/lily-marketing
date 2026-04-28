@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABand from '../components/CTABand.tsx';
+import Illustration from '../components/Illustration.tsx';
+---
+
+<BaseLayout
+  title="Trust & Safety — Lily | Your Safety, Full Stop"
+  description="HIPAA-compliant. SOC 2 Type II audited. Encrypted at rest and in transit. We never sell your data, and we never train AI on identifiable session content."
+  canonical="https://lilycare.co/trust"
+>
+  <main>
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="container wide">
+        <div class="page-hero-grid">
+          <div>
+            <div class="hero-eyebrow"><span class="dot"></span>Trust &amp; security</div>
+            <h1>Care is sacred. We treat your data like it is.</h1>
+            <p>
+              HIPAA-compliant. SOC 2 Type II audited. Encrypted at rest and in transit.
+              We never sell your data, and we never train AI on identifiable session content.
+            </p>
+          </div>
+          <div class="page-hero-illust-wrap">
+            <Illustration client:load n={4} size={300} alt="Listening, attentively" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST MATRIX -->
+    <section class="section">
+      <div class="container wide">
+        <div class="trust-matrix">
+          <div class="trust-cell">
+            <span class="t-badge">HIPAA</span>
+            <h4>HIPAA-compliant by design</h4>
+            <p>End-to-end encrypted messaging. Audit logs on every PHI access. Minimum-necessary by default.</p>
+          </div>
+          <div class="trust-cell">
+            <span class="t-badge">SOC 2</span>
+            <h4>SOC 2 Type II</h4>
+            <p>Audited annually by an independent third party. Reports available under NDA.</p>
+          </div>
+          <div class="trust-cell">
+            <span class="t-badge">BAA</span>
+            <h4>BAA on request</h4>
+            <p>Standard BAA available for orgs and self-employed practitioners. We've signed hundreds.</p>
+          </div>
+          <div class="trust-cell">
+            <span class="t-badge">AES-256</span>
+            <h4>Encryption everywhere</h4>
+            <p>AES-256 at rest, TLS 1.3 in transit. Customer-managed keys for enterprise plans.</p>
+          </div>
+          <div class="trust-cell">
+            <span class="t-badge">US-only</span>
+            <h4>US data residency</h4>
+            <p>All PHI stored and processed in US-based, HIPAA-eligible cloud regions. EU residency on roadmap.</p>
+          </div>
+          <div class="trust-cell">
+            <span class="t-badge">AI policy</span>
+            <h4>AI you can audit</h4>
+            <p>Lily Coach uses HIPAA-eligible LLM endpoints. We never train on identifiable session content. Members can opt out.</p>
+          </div>
+          <div class="trust-cell">
+            <span class="t-badge">RBAC</span>
+            <h4>Role-based access</h4>
+            <p>Granular roles for org admins, billing, comms. Just-in-time clinician access. Full audit log.</p>
+          </div>
+          <div class="trust-cell">
+            <span class="t-badge">Privacy</span>
+            <h4>Privacy as default</h4>
+            <p>Members opt in to share, not out. De-identified by default in all org-side analytics.</p>
+          </div>
+          <div class="trust-cell">
+            <span class="t-badge">Crisis</span>
+            <h4>Crisis safety net</h4>
+            <p>988 routing always one tap away. Lily Coach detects risk and escalates to human support 24/7.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CRISIS RESOURCES -->
+    <section class="section cream">
+      <div class="container narrow">
+        <div class="section-head center">
+          <div class="section-eyebrow">Crisis resources</div>
+          <h2 class="section-title">Help is always one tap away.</h2>
+          <p class="section-sub">Lily's crisis routing is free, on every plan, for every user — no login required.</p>
+        </div>
+        <div class="crisis-resources">
+          <article class="crisis-card" aria-label="988 Suicide and Crisis Lifeline">
+            <div class="crisis-number">988</div>
+            <h3>Suicide &amp; Crisis Lifeline</h3>
+            <p>Call or text 988 (US). Available 24/7 in English and Spanish. Chat at 988lifeline.org.</p>
+            <a href="tel:988" class="crisis-cta">Call 988</a>
+          </article>
+          <article class="crisis-card" aria-label="Crisis Text Line">
+            <div class="crisis-number">741741</div>
+            <h3>Crisis Text Line</h3>
+            <p>Text HOME to 741741 to connect with a trained crisis counselor. Free, 24/7, confidential.</p>
+            <a href="sms:741741?body=HOME" class="crisis-cta">Text HOME</a>
+          </article>
+          <article class="crisis-card" aria-label="Emergency services">
+            <div class="crisis-number">911</div>
+            <h3>Emergency services</h3>
+            <p>For immediate danger to yourself or others. Lily coordinates with emergency responders when needed.</p>
+            <a href="tel:911" class="crisis-cta">Call 911</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <CTABand
+      client:load
+      title="Security questions? <em>We have answers</em>."
+      sub="Our team will share our SOC 2 report, BAA, security questionnaire, and DPA on request."
+      primaryLabel="Request docs"
+      primaryHref="/contact"
+    />
+  </main>
+</BaseLayout>

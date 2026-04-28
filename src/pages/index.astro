@@ -1,0 +1,294 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Orbit from '../components/Orbit.tsx';
+import Btn from '../components/Btn.tsx';
+import TrustStrip from '../components/TrustStrip.tsx';
+import LogoStrip from '../components/LogoStrip.tsx';
+import CTABand from '../components/CTABand.tsx';
+import Icon from '../components/Icon.tsx';
+---
+
+<BaseLayout
+  title="Lily — The Behavioral-Health Platform Built for All Three Sides"
+  description="Lily is three connected products: Lily Match for members, Lily Practice for clinicians, and Lily Admin for organizations. One source of truth for matching, scheduling, telehealth, notes, billing, and outcomes."
+  canonical="https://lilycare.co/"
+>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container wide">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-eyebrow">
+              <span class="dot"></span>
+              Three apps · one platform · live in 50 states
+            </div>
+            <h1>The behavioral-health platform built for <em>all three sides</em>.</h1>
+            <p class="hero-sub">
+              Lily is three connected products: <strong>Lily Match</strong> for members, <strong>Lily Practice</strong> for clinicians,
+              and <strong>Lily Admin</strong> for organizations. Web and mobile. One source of truth for matching, scheduling,
+              telehealth, notes, billing, and outcomes.
+            </p>
+            <div class="hero-actions">
+              <Btn client:load kind="primary" size="lg" href="/members" icon="arrow">Find your match</Btn>
+              <Btn client:load kind="ghost" size="lg" href="/how">See how Lily works</Btn>
+            </div>
+            <div class="hero-trust">
+              <span class="hero-trust-item"><Icon name="lock" /> HIPAA &amp; SOC 2 Type II</span>
+              <span class="hero-trust-item"><Icon name="check" /> Verified clinicians</span>
+              <span class="hero-trust-item"><Icon name="users" /> 8 affinity dimensions</span>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-orbit-stage">
+              <div class="center-orbit">
+                <Orbit
+                  client:load
+                  size={320}
+                  initials="MR"
+                  avatarTone="peach"
+                  badges={[
+                    { key: "trauma",   label: "Trauma-informed",    tone: "trauma",   icon: "shield",   angle: 30  },
+                    { key: "bipoc",    label: "BIPOC clinician",     tone: "bipoc",    icon: "users",    angle: 90  },
+                    { key: "language", label: "EN · ES",             tone: "language", icon: "language", angle: 150 },
+                    { key: "lgbtq",    label: "LGBTQIA+ affirming",  tone: "lgbtq",    icon: "heart",    angle: 210 },
+                    { key: "tele",     label: "Telehealth",          tone: "tele",     icon: "video",    angle: 270 },
+                    { key: "sliding",  label: "Sliding scale",       tone: "sliding",  icon: "cash",     angle: 330 },
+                  ]}
+                />
+              </div>
+              <div class="floating-card fc-1">
+                <span class="dot-mini"></span>
+                <div>
+                  <div class="text-pri">94% match</div>
+                  <div class="text-sec">Identity-aligned</div>
+                </div>
+              </div>
+              <div class="floating-card fc-2">
+                <Icon name="calendar" size={16} />
+                <div>
+                  <div class="text-pri">Tue 4:00 PM</div>
+                  <div class="text-sec">Open this week</div>
+                </div>
+              </div>
+              <div class="floating-card fc-3">
+                <Icon name="check" size={16} />
+                <div>
+                  <div class="text-pri">Lily Verified</div>
+                  <div class="text-sec">Licensed in CA, NY</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST STRIP -->
+    <section class="section compact" style="padding-top: 0;">
+      <div class="container">
+        <TrustStrip client:load />
+      </div>
+    </section>
+
+    <!-- THREE PRODUCTS INTRO -->
+    <section class="section cream">
+      <div class="container wide">
+        <div class="section-head center">
+          <div class="section-eyebrow">The platform · three products</div>
+          <h2 class="section-title">One system of record. <em>Three lived experiences.</em></h2>
+          <p class="section-sub">
+            Each side gets a product that fits how they actually work — and they all stay in sync.
+            Match flows into scheduling, scheduling into notes, notes into outcomes. No copy-paste between tools.
+          </p>
+        </div>
+        <div class="feature-grid" style="margin-top: 48px;">
+          <div class="feature">
+            <div class="feature-icon"><Icon name="heart" size={22} /></div>
+            <h3>Lily Match</h3>
+            <p>Identity-aware matching across 8 dimensions for members. Swipe to explore or browse the full directory. Re-match anytime.</p>
+            <a href="/members" class="feature-link">For members &rarr;</a>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><Icon name="leaf" size={22} /></div>
+            <h3>Lily Practice</h3>
+            <p>The whole practice on one screen. Pre-matched referrals, AI-assisted notes, telehealth, billing, and outcomes.</p>
+            <a href="/practitioners" class="feature-link">For practitioners &rarr;</a>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><Icon name="building" size={22} /></div>
+            <h3>Lily Admin</h3>
+            <p>A mental-health benefit your members actually use. Identity-aware network, de-identified outcomes, SSO-ready.</p>
+            <a href="/organizations" class="feature-link">For organizations &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LILY MATCH SHOWCASE -->
+    <section class="section">
+      <div class="container wide">
+        <div class="showcase">
+          <div>
+            <div class="section-eyebrow">Inside Lily Match</div>
+            <h2>Match on the things that actually predict <em>alliance</em>.</h2>
+            <p>
+              Forty years of psychotherapy research keep landing on the same finding: the relationship matters more than the
+              modality. Lily Match encodes that into a fit score across eight identity-aware dimensions —
+              so members find someone who already gets it, on session one.
+            </p>
+            <ul>
+              <li><Icon name="check" /> Identity, language, faith, neurodiversity, lived experience</li>
+              <li><Icon name="check" /> Modality preference (CBT, EMDR, IFS, somatic, &amp; more)</li>
+              <li><Icon name="check" /> Real-time availability &amp; insurance fit</li>
+              <li><Icon name="check" /> Re-matching with no awkward conversation</li>
+            </ul>
+            <div style="margin-top: 28px;">
+              <Btn client:load kind="primary" href="/how" icon="arrow">See how Match works</Btn>
+            </div>
+          </div>
+          <div>
+            <div class="ui-frame">
+              <div class="chrome">
+                <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                <div class="url">match.lilycare.co</div>
+              </div>
+              <div style="padding: 32px; background: linear-gradient(160deg, hsl(43 32% 96%), hsl(165 22% 93%));">
+                <!-- Practitioner card — Jordan Kim -->
+                <div class="pcard md" style="margin-bottom: 14px;">
+                  <Orbit
+                    client:load
+                    size={104}
+                    initials="JK"
+                    avatarTone="teal"
+                    badges={[
+                      { key: "trauma",  tone: "trauma",   icon: "shield",   label: "Trauma",  angle: 45  },
+                      { key: "lgbtq",   tone: "lgbtq",    icon: "heart",    label: "LGBTQ+",  angle: 140 },
+                      { key: "tele",    tone: "tele",     icon: "video",    label: "Tele",    angle: 235 },
+                      { key: "sliding", tone: "sliding",  icon: "cash",     label: "Sliding", angle: 320 },
+                    ]}
+                  />
+                  <div class="body">
+                    <div class="name">Jordan Kim, LMFT</div>
+                    <div class="creds">She/her · Licensed in CA, OR · 8 yrs</div>
+                    <div class="bio">Queer-affirming, somatic &amp; IFS. Specializes in trauma + identity work for first-gen Asian American clients.</div>
+                    <div class="meta-row">
+                      <span><Icon name="calendar" size={13} /> Tue 4pm open</span>
+                      <span><Icon name="cash" size={13} /> $140 · sliding</span>
+                      <span><Icon name="globe" size={13} /> CA, OR</span>
+                    </div>
+                  </div>
+                  <div class="match">
+                    <span class="lab">Match</span>
+                    <b>94</b>
+                    <span class="why">Identity · modality · open this week</span>
+                    <button class="cta">Book intro</button>
+                  </div>
+                </div>
+                <!-- Practitioner card — Dr. Maya Robinson -->
+                <div class="pcard sm">
+                  <Orbit
+                    client:load
+                    size={88}
+                    initials="DR"
+                    avatarTone="peach"
+                    badges={[
+                      { key: "bipoc",    tone: "bipoc",    icon: "users",    label: "BIPOC",  angle: 60  },
+                      { key: "faith",    tone: "faith",    icon: "sparkle",  label: "Faith",  angle: 180 },
+                      { key: "language", tone: "language", icon: "language", label: "EN/ES",  angle: 300 },
+                    ]}
+                  />
+                  <div class="body">
+                    <div class="name">Dr. Maya Robinson, PsyD</div>
+                    <div class="creds">She/her · CA · 12 yrs</div>
+                    <div class="meta-row">
+                      <span><Icon name="calendar" size={13} /> Thu 11am</span>
+                      <span><Icon name="cash" size={13} /> Aetna, BCBS</span>
+                    </div>
+                  </div>
+                  <div class="match">
+                    <span class="lab">Match</span>
+                    <b>87</b>
+                    <span class="why">Identity · insurance fit</span>
+                    <button class="cta">Book intro</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTCOMES STATS -->
+    <section class="section dark">
+      <div class="container wide">
+        <div class="section-head center">
+          <div class="section-eyebrow">Why it works</div>
+          <h2 class="section-title" style="color: hsl(43 30% 95%);">Built around the four numbers <em>that matter</em>.</h2>
+          <p class="section-sub">
+            Every Lily surface — match, schedule, notes, dashboard — is engineered to drive these four.
+          </p>
+        </div>
+        <div class="stat-row">
+          <div class="stat-big">
+            <div class="num">3.2×</div>
+            <div class="lab">Higher continuation past session four vs. directory matching</div>
+          </div>
+          <div class="stat-big">
+            <div class="num">68%</div>
+            <div class="lab">Members report identity affirmation in the first session</div>
+          </div>
+          <div class="stat-big">
+            <div class="num">11d</div>
+            <div class="lab">Median time from sign-up to first booked session</div>
+          </div>
+          <div class="stat-big">
+            <div class="num">94%</div>
+            <div class="lab">Practitioner retention at 12 months on platform</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIAL -->
+    <section class="section">
+      <div class="container narrow">
+        <div class="testimonial">
+          <blockquote>
+            The first time in twelve years I haven't had to explain to a therapist what it means to be Black,
+            queer, and the eldest daughter of immigrants. Lily put that on the page before I said a word.
+          </blockquote>
+          <div class="quoted">
+            <div class="lily-avatar lily-avatar-lg" style="background: radial-gradient(circle at 30% 28%, hsl(20 35% 78%), hsl(22 40% 50%)); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--brand); font-weight: 500;">AC</div>
+            <div>
+              <div class="who">Ada C.</div>
+              <div class="role">Lily member · Oakland, CA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGO STRIP -->
+    <section class="section compact cream">
+      <div class="container wide">
+        <div style="text-align: center; margin-bottom: 28px;">
+          <div class="section-eyebrow">Trusted by forward-thinking organizations</div>
+        </div>
+        <LogoStrip client:load />
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <CTABand
+      client:load
+      title="Care that fits, on the platform that holds <em>all of it</em>."
+      sub="Join the alpha. We're inviting members, practitioners, and organizations in waves — reserve your spot now."
+      primaryLabel="Join the waitlist"
+      primaryHref="/contact"
+      secondaryLabel="Request a demo"
+      secondaryHref="/contact"
+    />
+  </main>
+</BaseLayout>

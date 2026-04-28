@@ -1,0 +1,13 @@
+{
+  "tier": "Members",
+  "audience": "Individuals seeking care",
+  "price": "Free",
+  "description": "Find your perfect practitioner match with our intelligent matching system.",
+  "features": [
+    { "text": "Personalized therapist matching" },
+    { "text": "Self-assessment quizzes" },
+    { "text": "Wellness tracking dashboard" },
+    { "text": "Secure messaging" },
+    { "text": "Crisis support resources" }
+  ]
+}

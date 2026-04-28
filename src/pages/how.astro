@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HowModeTabs from '../components/HowModeTabs.tsx';
+import Orbit from '../components/Orbit.tsx';
+import CTABand from '../components/CTABand.tsx';
+import Icon from '../components/Icon.tsx';
+import Illustration from '../components/Illustration.tsx';
+---
+
+<BaseLayout
+  title="How Lily Match Works — Identity-Aware Therapy Matching"
+  description="Match isn't a sorted list. It's a model that ranks fit across eight identity-aware dimensions, plus modality, availability, and economic accessibility — refreshed every time anyone changes anything."
+  canonical="https://lilycare.co/how"
+>
+  <main>
+    <!-- HERO -->
+    <section class="page-hero sage">
+      <div class="container wide">
+        <div class="page-hero-grid">
+          <div>
+            <div class="hero-eyebrow"><span class="dot"></span>Lily Match</div>
+            <h1>How Lily Match <em>actually</em> works.</h1>
+            <p>
+              Match isn't a sorted list. It's a model that ranks fit across eight identity-aware dimensions,
+              plus modality, availability, and economic accessibility — refreshed every time anyone changes anything.
+            </p>
+          </div>
+          <div class="page-hero-illust-wrap">
+            <Illustration client:load n={5} size={300} alt="Pieces coming together" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE MODE TABS — React island for interactivity -->
+    <section class="section">
+      <div class="container wide">
+        <HowModeTabs client:load />
+      </div>
+    </section>
+
+    <!-- EIGHT DIMENSIONS SHOWCASE -->
+    <section class="section cream">
+      <div class="container wide">
+        <div class="showcase">
+          <div>
+            <div class="section-eyebrow">The eight dimensions</div>
+            <h2>Identity-aware doesn't mean <em>identity-only</em>.</h2>
+            <p>
+              The model weighs modality fit, availability, and access alongside identity — because
+              the relationship is the medicine, but you still need an appointment that fits in your week.
+            </p>
+            <ul>
+              <li><Icon name="check" /> Race, ethnicity, immigration story</li>
+              <li><Icon name="check" /> Gender identity, sexual orientation</li>
+              <li><Icon name="check" /> Faith &amp; spirituality</li>
+              <li><Icon name="check" /> Neurodivergence &amp; disability</li>
+              <li><Icon name="check" /> Language fluency</li>
+              <li><Icon name="check" /> Therapeutic modality (CBT, EMDR, IFS, somatic, more)</li>
+              <li><Icon name="check" /> Real-time availability</li>
+              <li><Icon name="check" /> Insurance, sliding scale, fee transparency</li>
+            </ul>
+          </div>
+          <div style="display: flex; justify-content: center;">
+            <Orbit
+              client:load
+              size={340}
+              initials="ML"
+              avatarTone="teal"
+              badges={[
+                { key: "trauma",   tone: "trauma",   icon: "shield",   label: "Trauma",  angle: 22  },
+                { key: "bipoc",    tone: "bipoc",    icon: "users",    label: "BIPOC",   angle: 67  },
+                { key: "lgbtq",    tone: "lgbtq",    icon: "heart",    label: "LGBTQ+",  angle: 112 },
+                { key: "language", tone: "language", icon: "language", label: "Lang",    angle: 157 },
+                { key: "faith",    tone: "faith",    icon: "sparkle",  label: "Faith",   angle: 202 },
+                { key: "tele",     tone: "tele",     icon: "video",    label: "Tele",    angle: 247 },
+                { key: "sliding",  tone: "sliding",  icon: "cash",     label: "$",       angle: 292 },
+                { key: "gender",   tone: "gender",   icon: "users",    label: "Gender",  angle: 337 },
+              ]}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <CTABand
+      client:load
+      title="Care that fits, <em>found</em>."
+      sub="Free intake. Three matches. Re-match anytime."
+      primaryLabel="Try Lily Match"
+      primaryHref="/contact"
+    />
+  </main>
+</BaseLayout>

@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Btn from '../components/Btn.tsx';
+import CTABand from '../components/CTABand.tsx';
+import LogoStrip from '../components/LogoStrip.tsx';
+import Icon from '../components/Icon.tsx';
+---
+
+<BaseLayout
+  title="For Organizations — Lily Admin | A Mental-Health Benefit Your Members Actually Use"
+  description="Stand up an identity-aware, outcomes-tracked clinical network in days. SSO, eligibility automation, de-identified reporting, BAA on request."
+  canonical="https://lilycare.co/organizations"
+>
+  <main>
+    <!-- HERO -->
+    <section class="page-hero amber">
+      <div class="container wide">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-eyebrow"><span class="dot"></span>For organizations</div>
+            <h1>A mental-health benefit your members <em>actually use</em>.</h1>
+            <p>
+              Stand up an identity-aware, outcomes-tracked clinical network in days. SSO, eligibility automation,
+              de-identified reporting, BAA on request. The benefit your DEI council and your CFO can both stand behind.
+            </p>
+            <div class="actions">
+              <Btn client:load kind="primary" size="lg" href="/contact" icon="arrow">Talk to our team</Btn>
+              <Btn client:load kind="ghost" size="lg" href="/pricing">See pricing</Btn>
+            </div>
+          </div>
+          <div>
+            <div class="ui-frame">
+              <div class="chrome">
+                <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                <div class="url">admin.lilyai.net</div>
+              </div>
+              <div style="padding: 24px; background: linear-gradient(160deg, hsl(40 30% 96%), hsl(43 32% 95%));">
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin-bottom: 14px;">
+                  <div class="stat" style="padding: 12px;">
+                    <div><div class="num" style="font-size: 18px;">1,824</div><div class="lab">Eligible</div></div>
+                  </div>
+                  <div class="stat" style="padding: 12px;">
+                    <div><div class="num" style="font-size: 18px;">612</div><div class="lab">Activated</div></div>
+                  </div>
+                  <div class="stat" style="padding: 12px;">
+                    <div><div class="num" style="font-size: 18px;">34%</div><div class="lab">Engagement</div></div>
+                  </div>
+                  <div class="stat" style="padding: 12px;">
+                    <div><div class="num" style="font-size: 18px;">−18%</div><div class="lab">PHQ-9 cohort</div></div>
+                  </div>
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid hsl(145 10% 88%);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                    <strong style="font-family: var(--brand);">Engagement · last 90 days</strong>
+                    <span class="chip green">+12%</span>
+                  </div>
+                  <svg viewBox="0 0 600 140" style="width: 100%; height: 140px;" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="org-chart-gradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="hsl(40 80% 60%)" stop-opacity="0.4"/>
+                        <stop offset="100%" stop-color="hsl(40 80% 60%)" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M20,110 L80,95 L140,90 L200,76 L260,64 L320,58 L380,52 L440,42 L500,34 L560,28 L580,28 L580,130 L20,130 Z" fill="url(#org-chart-gradient)"/>
+                    <polyline points="20,110 80,95 140,90 200,76 260,64 320,58 380,52 440,42 500,34 560,28" fill="none" stroke="hsl(40 70% 45%)" stroke-width="2.4"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE GRID -->
+    <section class="section">
+      <div class="container wide">
+        <div class="section-head center">
+          <div class="section-eyebrow">What you get</div>
+          <h2 class="section-title">Procurement-ready, member-loved.</h2>
+        </div>
+        <div class="feature-grid">
+          <div class="feature">
+            <div class="feature-icon"><Icon name="lock" size={22} /></div>
+            <h3>SSO &amp; eligibility</h3>
+            <p>SAML/OIDC, SCIM, CSV, or API. Members activate in one click. Off-boarding handled automatically.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><Icon name="users" size={22} /></div>
+            <h3>Curated network</h3>
+            <p>Filter to in-network clinicians by license, identity, modality, and language. We co-curate with you.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><Icon name="chart" size={22} /></div>
+            <h3>De-identified outcomes</h3>
+            <p>Aggregate engagement, PHQ-9/GAD-7 trends, time-to-care. Never a member name.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><Icon name="shield" size={22} /></div>
+            <h3>BAA &amp; SOC 2</h3>
+            <p>Signed BAA on request. SOC 2 Type II audited annually. US data residency. Your security team will be happy.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><Icon name="calendar" size={22} /></div>
+            <h3>Programs &amp; campaigns</h3>
+            <p>Schedule moments — onboarding, re-engagement, post-RIF, returning parents — with templates that work.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><Icon name="cash" size={22} /></div>
+            <h3>Predictable billing</h3>
+            <p>Per-eligible, per-utilizing, or hybrid. Choose what matches your finance model.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGO STRIP -->
+    <section class="section cream-warm">
+      <div class="container wide">
+        <div class="section-head center">
+          <div class="section-eyebrow">Trusted by</div>
+        </div>
+        <LogoStrip client:load />
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <CTABand
+      client:load
+      title="Bring care that <em>fits</em> to every person you cover."
+      sub="Most Lily orgs go live in under 14 days. Talk to us about your workforce."
+      primaryLabel="Join the org waitlist"
+      primaryHref="/contact"
+      secondaryLabel="Request a demo"
+      secondaryHref="/contact"
+    />
+  </main>
+</BaseLayout>

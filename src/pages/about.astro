@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABand from '../components/CTABand.tsx';
+import Icon from '../components/Icon.tsx';
+import Illustration from '../components/Illustration.tsx';
+---
+
+<BaseLayout
+  title="About Lily — Building the Platform Care Deserves"
+  description="Lily exists because the people who most need care are the ones the system fits worst. We're a Public Benefit Corporation chartered to fix that — for members, practitioners, and the organizations that pay for it."
+  canonical="https://lilycare.co/about"
+>
+  <main>
+    <!-- HERO -->
+    <section class="page-hero peach">
+      <div class="container wide">
+        <div class="page-hero-grid">
+          <div>
+            <div class="hero-eyebrow"><span class="dot"></span>About</div>
+            <h1>We're building the platform <em>care</em> deserves.</h1>
+            <p>
+              Lily exists because the people who most need care are the ones the system fits worst.
+              We're a Public Benefit Corporation chartered to fix that — for members, practitioners, and the organizations that pay for it.
+            </p>
+          </div>
+          <div class="page-hero-illust-wrap">
+            <Illustration client:load n={7} size={300} alt="Holding what's heavy, together" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES GRID -->
+    <section class="section">
+      <div class="container wide">
+        <div class="section-head center">
+          <div class="section-eyebrow">Our values</div>
+          <h2 class="section-title">Four principles, every screen.</h2>
+        </div>
+        <div class="values-grid">
+          <div class="value">
+            <div class="v-icon"><Icon name="heart" size={22} /></div>
+            <div>
+              <h3>Care over conversion</h3>
+              <p>Every product decision asks: does this make care better? Engagement metrics serve outcomes, never the other way.</p>
+            </div>
+          </div>
+          <div class="value">
+            <div class="v-icon"><Icon name="users" size={22} /></div>
+            <div>
+              <h3>Identity is not a feature</h3>
+              <p>Race, gender, faith, neurodivergence, lived experience — we treat them as the load-bearing structure of fit, not a filter chip.</p>
+            </div>
+          </div>
+          <div class="value">
+            <div class="v-icon"><Icon name="shield" size={22} /></div>
+            <div>
+              <h3>Privacy as posture</h3>
+              <p>We assume every byte is sensitive until you say otherwise. Defaults are conservative, audits are public, and members own their data.</p>
+            </div>
+          </div>
+          <div class="value">
+            <div class="v-icon"><Icon name="leaf" size={22} /></div>
+            <div>
+              <h3>Practitioners are the product</h3>
+              <p>We build for clinicians the way Stripe builds for developers. The best clinicians stay because the tools respect their time.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUNDERS' WORDS -->
+    <section class="section cream-warm">
+      <div class="container">
+        <div class="founders-quotes">
+          <div class="testimonial">
+            <blockquote>
+              We didn't start Lily because the world needed another therapy app.
+              We started it because we'd watched too many friends — Black, queer, neurodivergent, immigrant, all of the above —
+              give up on therapy after the third try. The system was the bug. We're the patch.
+            </blockquote>
+            <div class="quoted">
+              <div
+                class="lily-avatar lily-avatar-lg"
+                style="background: radial-gradient(circle at 30% 28%, hsl(20 35% 78%), hsl(28 50% 38%)); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--brand); font-weight: 500;"
+                aria-hidden="true"
+              >AN</div>
+              <div>
+                <div class="who">Alphonso Nathan</div>
+                <div class="role">Founder · Philadelphia · NYC</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial">
+            <blockquote>
+              In a world where seeking mental health services is polarized between performative and a humiliation ritual,
+              the Lily platform is long overdue. It has been an ambitious effort to strike the balance and deliver a truly qualitative solution.
+            </blockquote>
+            <div class="quoted">
+              <div
+                class="lily-avatar lily-avatar-lg"
+                style="background: radial-gradient(circle at 30% 28%, hsl(165 30% 78%), hsl(165 50% 38%)); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--brand); font-weight: 500;"
+                aria-hidden="true"
+              >JP</div>
+              <div>
+                <div class="who">Jeremiah Pegues</div>
+                <div class="role">CTO · New York</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <CTABand
+      client:load
+      title="Build with us. Heal with us."
+      sub="We're hiring clinicians, engineers, and operators who want care to actually fit."
+      primaryLabel="See open roles"
+      primaryHref="/contact"
+      secondaryLabel="Get in touch"
+      secondaryHref="/contact"
+    />
+  </main>
+</BaseLayout>

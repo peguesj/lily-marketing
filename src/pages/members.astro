@@ -1,0 +1,488 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Orbit from '../components/Orbit.tsx';
+import Btn from '../components/Btn.tsx';
+import CTABand from '../components/CTABand.tsx';
+import Icon from '../components/Icon.tsx';
+---
+
+<BaseLayout
+  title="For Members — Lily Match | Therapy That Fits You"
+  description="Stop scrolling directories. Lily Match shows you practitioners who already understand your identity, modality preference, and schedule — with insurance and sliding scale built in."
+  canonical="https://lilycare.co/members"
+>
+  <main>
+    <!-- HERO -->
+    <section class="page-hero peach">
+      <div class="container wide">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-eyebrow"><span class="dot"></span>For members</div>
+            <h1>Therapy that fits <em>you</em>.</h1>
+            <p>
+              Stop scrolling directories and decoding alphabet soup. Lily Match shows you practitioners who already understand
+              your identity, your modality preference, and your week — with insurance and sliding scale built in.
+            </p>
+            <div class="actions">
+              <Btn client:load kind="primary" size="lg" href="/contact" icon="arrow">Find your match</Btn>
+              <Btn client:load kind="ghost" size="lg" href="/how">See how it works</Btn>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: center;">
+            <Orbit
+              client:load
+              size={300}
+              initials="ML"
+              avatarTone="peach"
+              badges={[
+                { key: "trauma",   tone: "trauma",   icon: "shield",   label: "Trauma-informed", angle: 30  },
+                { key: "lgbtq",    tone: "lgbtq",    icon: "heart",    label: "LGBTQIA+",        angle: 100 },
+                { key: "language", tone: "language", icon: "language", label: "EN · ES",         angle: 170 },
+                { key: "bipoc",    tone: "bipoc",    icon: "users",    label: "BIPOC",           angle: 240 },
+                { key: "tele",     tone: "tele",     icon: "video",    label: "Telehealth",      angle: 310 },
+              ]}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS BENTO GRID -->
+    <section class="section">
+      <div class="container wide">
+        <div class="section-head center">
+          <div class="section-eyebrow">What you get</div>
+          <h2 class="section-title">Everything to start, sustain, and steward your care.</h2>
+          <p class="section-sub">A connected toolkit, not a stack of apps. Each piece nudges the next — so the work compounds instead of fragmenting.</p>
+        </div>
+
+        <div class="benefits-bento">
+          <!-- Lily Match hero tile -->
+          <div class="bento-tile bt-match">
+            <div class="bt-tag"><Icon name="spark" size={12} /> Flagship feature</div>
+            <div class="bt-match-stage">
+              <!-- Phone mockup -->
+              <div class="bt-match-phone-wrap">
+                <div class="bt-match-phone">
+                  <div class="bt-match-phone-notch"></div>
+                  <div class="bt-match-phone-status">
+                    <span>9:41</span>
+                    <span style="opacity: 0.55; font-size: 8px;">5G</span>
+                  </div>
+                  <div class="bt-match-phone-head">
+                    <div>
+                      <div class="bt-match-phone-eyebrow">Today's matches</div>
+                      <div class="bt-match-phone-title">For you, Maya</div>
+                    </div>
+                    <div class="bt-match-phone-pip"><Icon name="filter" size={11} /></div>
+                  </div>
+                  <div class="bt-match-phone-progress">
+                    <span class="active"></span><span></span><span></span><span></span><span></span>
+                  </div>
+                  <div class="bt-match-phone-stack">
+                    <div class="bt-match-card back2"></div>
+                    <div class="bt-match-card back1"></div>
+                    <div class="bt-match-card front">
+                      <div class="bt-match-card-stamp pass">PASS</div>
+                      <div class="bt-match-card-stamp book">BOOK</div>
+                      <div class="bt-match-card-row">
+                        <div class="bt-match-card-avatar">JK</div>
+                        <div>
+                          <div class="bt-match-card-name">Jordan Kim, LMFT</div>
+                          <div class="bt-match-card-meta">she/her · 8 yrs · CA, OR</div>
+                        </div>
+                      </div>
+                      <div class="bt-match-card-chips">
+                        <span class="c-lgbtq">LGBTQ+</span>
+                        <span class="c-trauma">Trauma</span>
+                        <span class="c-modality">IFS</span>
+                      </div>
+                      <div class="bt-match-card-quote">
+                        "Queer-affirming, somatic. First-gen Asian American clients."
+                      </div>
+                      <div class="bt-match-card-score">
+                        <div class="bt-match-card-ring"><span>94</span></div>
+                        <div class="bt-match-card-score-body">
+                          <div>match · <b>identity, modality, schedule</b></div>
+                          <div class="bt-match-card-score-meta">Open Thu 4:30p · BCBS</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bt-match-phone-actions">
+                    <button class="bt-match-phone-btn pass" aria-label="Pass">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                    <button class="bt-match-phone-btn save" aria-label="Save">
+                      <Icon name="bookmark" size={15} />
+                    </button>
+                    <button class="bt-match-phone-btn book" aria-label="Book">
+                      <Icon name="heart" size={17} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mini directory snippet -->
+              <div class="bt-match-directory">
+                <div class="bt-match-dir-head">
+                  <span class="eyebrow-mini">Directory · 4 sources</span>
+                  <span class="bt-match-dir-count">218 results</span>
+                </div>
+                <div class="bt-match-dir-search">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>
+                  <span class="bt-match-dir-search-text">BIPOC trauma therapist · Brooklyn</span>
+                </div>
+                <div class="bt-match-dir-filters">
+                  <span class="filter on">Lily Verified</span>
+                  <span class="filter on">BCBS</span>
+                  <span class="filter on">EMDR</span>
+                  <span class="filter">Telehealth</span>
+                  <span class="filter">+12</span>
+                </div>
+                <div class="bt-match-dir-row top">
+                  <div class="bt-match-avatar tone-peach">MR</div>
+                  <div class="bt-match-dir-row-body">
+                    <div class="bt-match-dir-row-name">
+                      <span>Dr. Maya Robinson</span>
+                      <span class="bt-match-dir-row-creds">PsyD</span>
+                      <span class="bt-match-row-verified" title="Verified on Lily"><Icon name="check" size={9} /></span>
+                    </div>
+                    <div class="bt-match-dir-row-bio">BIPOC adults · identity &amp; trauma</div>
+                    <div class="bt-match-dir-row-meta">Brooklyn · 2.4mi · ★ 4.9</div>
+                    <div class="bt-match-dir-row-chips"><span>EMDR</span><span>BCBS</span></div>
+                  </div>
+                  <div class="bt-match-dir-row-score"><b>94</b><span class="lab">match</span></div>
+                </div>
+                <div class="bt-match-dir-row">
+                  <div class="bt-match-avatar tone-sage">JC</div>
+                  <div class="bt-match-dir-row-body">
+                    <div class="bt-match-dir-row-name">
+                      <span>Jamie Chen</span>
+                      <span class="bt-match-dir-row-creds">LMFT</span>
+                      <span class="bt-match-dir-row-listed">Listed</span>
+                    </div>
+                    <div class="bt-match-dir-row-bio">Faith-integrated · grief work</div>
+                    <div class="bt-match-dir-row-meta">Queens · 5.1mi · Mandarin</div>
+                    <div class="bt-match-dir-row-chips"><span>Grief</span><span>OON</span></div>
+                  </div>
+                  <div class="bt-match-dir-row-score"><b>78</b><span class="lab">match</span></div>
+                </div>
+                <div class="bt-match-dir-row">
+                  <div class="bt-match-avatar tone-lilac">EO</div>
+                  <div class="bt-match-dir-row-body">
+                    <div class="bt-match-dir-row-name">
+                      <span>Dr. Elena Ortiz</span>
+                      <span class="bt-match-dir-row-creds">PhD</span>
+                      <span class="bt-match-row-verified" title="Verified on Lily"><Icon name="check" size={9} /></span>
+                    </div>
+                    <div class="bt-match-dir-row-bio">Bilingual perinatal psychologist</div>
+                    <div class="bt-match-dir-row-meta">Telehealth · CA · Tomorrow 10a</div>
+                    <div class="bt-match-dir-row-chips"><span>Perinatal</span><span>Aetna</span></div>
+                  </div>
+                  <div class="bt-match-dir-row-score"><b>91</b><span class="lab">match</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="bt-body">
+              <h3>Lily Match</h3>
+              <p>Identity-aware matching across <strong>8 dimensions</strong>. Swipe to explore — or browse the full directory across 4 sources. Re-match anytime.</p>
+              <div class="bt-chips">
+                <span>Identity</span><span>Modality</span><span>Faith</span><span>Language</span>
+                <span>Lived experience</span><span>Insurance</span><span>Schedule</span><span>Style</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Booking tile -->
+          <div class="bento-tile bt-booking">
+            <div class="bt-mini-cal">
+              <div class="cal-head">
+                <span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span>
+              </div>
+              <div class="cal-grid">
+                <div class="slot"></div>
+                <div class="slot taken">11a</div>
+                <div class="slot"></div>
+                <div class="slot pick">4p</div>
+                <div class="slot taken">2p</div>
+                <div class="slot"></div>
+                <div class="slot"></div>
+                <div class="slot taken">9a</div>
+                <div class="slot"></div>
+                <div class="slot pick">3p</div>
+                <div class="slot"></div>
+                <div class="slot"></div>
+              </div>
+            </div>
+            <div class="bt-body">
+              <h3>Effortless booking</h3>
+              <p>See real availability. Book instantly. Telehealth or in-person — your call.</p>
+            </div>
+          </div>
+
+          <!-- Secure messaging tile -->
+          <div class="bento-tile bt-chat">
+            <div class="bt-chat-stage">
+              <div class="bubble in">How did the breathwork land this week?</div>
+              <div class="bubble out">Honestly? Better than I expected.</div>
+              <div class="bubble in typing"><span></span><span></span><span></span></div>
+              <div class="bt-lock"><Icon name="lock" size={11} /> End-to-end encrypted</div>
+            </div>
+            <div class="bt-body">
+              <h3>Secure messaging</h3>
+              <p>Stay connected between sessions. Encrypted end-to-end, never shared.</p>
+            </div>
+          </div>
+
+          <!-- Wellness library tile -->
+          <div class="bento-tile bt-library">
+            <div class="bt-cards">
+              <div class="card-mini c1"><Icon name="book" size={14} /><span>Journaling prompts</span></div>
+              <div class="card-mini c2"><Icon name="chart" size={14} /><span>Mood tracker</span></div>
+              <div class="card-mini c3"><Icon name="headphones" size={14} /><span>Guided practices</span></div>
+              <div class="card-mini c4"><Icon name="check" size={14} /><span>Quizzes</span></div>
+            </div>
+            <div class="bt-body">
+              <h3>Wellness library</h3>
+              <p>Journaling, mood tracking, guided practices, quizzes — yours to use, free.</p>
+            </div>
+          </div>
+
+          <!-- AI companion tile -->
+          <div class="bento-tile bt-ai">
+            <div class="bt-orb-stage">
+              <div class="ai-orb">
+                <span class="orb-ring r1"></span>
+                <span class="orb-ring r2"></span>
+                <span class="orb-ring r3"></span>
+                <div class="orb-core">Aria</div>
+              </div>
+              <div class="ai-availability"><span class="dot-mini"></span>Always available · 24/7</div>
+            </div>
+            <div class="bt-body">
+              <h3>AI companion</h3>
+              <p>A clinically-grounded reflection partner. Never a replacement — always a bridge to your practitioner.</p>
+            </div>
+          </div>
+
+          <!-- Insurance tile -->
+          <div class="bento-tile bt-cash">
+            <div class="bt-receipt">
+              <div class="rec-row"><span>Session · 50min</span><span>$165</span></div>
+              <div class="rec-row dim"><span>Aetna covers</span><span>− $140</span></div>
+              <div class="rec-divider"></div>
+              <div class="rec-row total"><span>You pay</span><span>$25</span></div>
+              <div class="rec-stamp">Sliding scale eligible</div>
+            </div>
+            <div class="bt-body">
+              <h3>Insurance &amp; sliding scale</h3>
+              <p>Filter by what your insurance covers. See the price before you book.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEMBER DASHBOARD STAGE -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head center">
+          <div class="section-eyebrow">The dashboard</div>
+          <h2 class="section-title">Your Lily home — <em>calm</em>, never noisy.</h2>
+          <p class="section-sub">A single space for your next session, your reflections, and the tools you actually reach for. Same on every device.</p>
+        </div>
+
+        <div class="dash-stage">
+          <!-- Desktop mockup -->
+          <div class="dash-desktop">
+            <div class="dash-window-bar">
+              <span></span><span></span><span></span>
+              <div class="dash-window-url">app.lilycare.com</div>
+            </div>
+            <div class="dash-app">
+              <aside class="dash-side">
+                <div class="dash-side-brand">
+                  <div class="dash-side-logo">L</div>
+                  <span>Lily Care</span>
+                </div>
+                <nav>
+                  <a class="active"><Icon name="spark" size={14} /> Home</a>
+                  <a><Icon name="users" size={14} /> My care team</a>
+                  <a><Icon name="calendar" size={14} /> Sessions</a>
+                  <a><Icon name="chat" size={14} /> Messages <span class="dash-side-count">2</span></a>
+                  <a><Icon name="book" size={14} /> Reflect</a>
+                  <a><Icon name="leaf" size={14} /> Library</a>
+                </nav>
+                <div class="dash-side-foot">
+                  <div class="dash-mini-avatar">M</div>
+                  <div>
+                    <div class="dash-mini-name">Maya R.</div>
+                    <div class="dash-mini-meta">BCBS · 12 sessions</div>
+                  </div>
+                </div>
+              </aside>
+              <main class="dash-main">
+                <div class="dash-greeting">
+                  <div>
+                    <div class="eyebrow-mini">Thursday, May 15</div>
+                    <h3>Good morning, Maya.</h3>
+                  </div>
+                  <div class="dash-streak">
+                    <div class="dash-streak-num">7</div>
+                    <div>
+                      <div class="dash-streak-lab">day reflect streak</div>
+                      <div class="dash-streak-sub">+ 2 entries this week</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dash-grid">
+                  <div class="dash-card dash-card-next">
+                    <div class="dash-card-eye">Next session</div>
+                    <div class="dash-next-row">
+                      <div class="bt-match-avatar tone-peach" style="width: 44px; height: 44px; font-size: 14px;">MR</div>
+                      <div style="flex: 1;">
+                        <div class="dash-next-name">Dr. Maya Robinson <span class="bt-match-row-verified" style="width: 12px; height: 12px;"><Icon name="check" size={8} /></span></div>
+                        <div class="dash-next-when">Thu · 4:30 — 5:20p · Telehealth</div>
+                      </div>
+                    </div>
+                    <div class="dash-next-prep">
+                      <div class="dash-prep-label">Pre-session</div>
+                      <div class="dash-prep-row">
+                        <div class="dash-prep-bar"><div style="width: 66%;"></div></div>
+                        <span>2 of 3 done</span>
+                      </div>
+                    </div>
+                    <div class="dash-next-actions">
+                      <button class="dash-btn primary">Join session</button>
+                      <button class="dash-btn ghost">Reschedule</button>
+                    </div>
+                  </div>
+                  <div class="dash-card dash-reflect">
+                    <div class="dash-card-eye">Today's reflection</div>
+                    <div class="dash-reflect-prompt">"What's a small thing you noticed about yourself this week?"</div>
+                    <div class="dash-mood-row">
+                      <span>Mood</span>
+                      <button class="dash-mood">😞</button>
+                      <button class="dash-mood">😕</button>
+                      <button class="dash-mood">😐</button>
+                      <button class="dash-mood on">🙂</button>
+                      <button class="dash-mood">😊</button>
+                    </div>
+                    <button class="dash-btn ghost full">Open journal →</button>
+                  </div>
+                  <div class="dash-card dash-aria">
+                    <div class="dash-card-eye">Aria · between-session companion</div>
+                    <div class="dash-aria-msg">"I noticed you mentioned the work review again. Want to map out one thing you'd like to bring up Thursday?"</div>
+                    <div class="dash-aria-foot">
+                      <div class="dash-aria-orb"></div>
+                      <span>Available now</span>
+                      <button class="dash-btn primary sm" style="margin-left: auto;">Open Aria</button>
+                    </div>
+                  </div>
+                  <div class="dash-card dash-library">
+                    <div class="dash-card-eye">Picked for you</div>
+                    <ul class="dash-lib-list">
+                      <li><span class="dash-lib-tag p">5 min</span>Grounding when the day feels loud</li>
+                      <li><span class="dash-lib-tag s">audio</span>Body scan with Dr. K · 12 min</li>
+                      <li><span class="dash-lib-tag t">read</span>Anxiety isn't a character flaw</li>
+                    </ul>
+                  </div>
+                  <div class="dash-card dash-cost">
+                    <div class="dash-card-eye">Coverage</div>
+                    <div class="dash-cost-row">
+                      <div>
+                        <div class="dash-cost-num">$25</div>
+                        <div class="dash-cost-lab">your share · this session</div>
+                      </div>
+                      <div class="dash-cost-meta">
+                        <div>BCBS · in-network</div>
+                        <div>Sessions used <b>12 / 26</b></div>
+                      </div>
+                    </div>
+                    <div class="dash-cost-bar"><div style="width: 46%;"></div></div>
+                  </div>
+                </div>
+              </main>
+            </div>
+          </div>
+
+          <!-- Mobile mockup -->
+          <div class="dash-mobile">
+            <div class="dash-mobile-notch"></div>
+            <div class="dash-mobile-body">
+              <div class="dash-mobile-status">
+                <span>9:41</span><span style="opacity: 0.5;">5G</span>
+              </div>
+              <div class="dash-mobile-greet">
+                <div class="eyebrow-mini">Thursday, May 15</div>
+                <div class="dash-mobile-h">Good morning,<br />Maya.</div>
+              </div>
+              <div class="dash-mobile-card next">
+                <div class="dash-card-eye">Next session · in 6 hrs</div>
+                <div class="dash-mobile-next-row">
+                  <div class="bt-match-avatar tone-peach" style="width: 36px; height: 36px; font-size: 12px;">MR</div>
+                  <div>
+                    <div class="dash-mobile-name">Dr. Maya Robinson</div>
+                    <div class="dash-mobile-when">Thu 4:30p · Telehealth</div>
+                  </div>
+                </div>
+                <button class="dash-btn primary full">Join session</button>
+              </div>
+              <div class="dash-mobile-streak">
+                <div class="dash-streak-num">7</div>
+                <div>
+                  <div class="dash-streak-lab">day streak</div>
+                  <div class="dash-streak-sub">2 reflections this week</div>
+                </div>
+              </div>
+              <div class="dash-mobile-card aria">
+                <div class="dash-card-eye">Aria</div>
+                <div class="dash-mobile-aria-msg">"Want to map out one thing for Thursday?"</div>
+                <div class="dash-mobile-aria-foot">
+                  <div class="dash-aria-orb"></div>
+                  <span>Available now</span>
+                </div>
+              </div>
+              <div class="dash-mobile-tabs">
+                <a class="active"><Icon name="spark" size={15} /><span>Home</span></a>
+                <a><Icon name="calendar" size={15} /><span>Sessions</span></a>
+                <a><Icon name="chat" size={15} /><span>Aria</span></a>
+                <a><Icon name="book" size={15} /><span>Reflect</span></a>
+                <a><Icon name="leaf" size={15} /><span>Library</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIAL -->
+    <section class="section cream">
+      <div class="container narrow">
+        <div class="testimonial">
+          <blockquote>
+            I've started therapy six times in my life and quit five. Lily was the first one where I didn't spend session one
+            educating my therapist. We started doing the work.
+          </blockquote>
+          <div class="quoted">
+            <div class="lily-avatar lily-avatar-lg" style="background: radial-gradient(circle at 30% 28%, hsl(165 30% 78%), hsl(165 50% 38%)); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--brand); font-weight: 500;">SP</div>
+            <div>
+              <div class="who">Sam P.</div>
+              <div class="role">Lily member · Brooklyn, NY</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <CTABand
+      client:load
+      title="Your match is closer than you think."
+      sub="Free to start. No credit card. Re-match whenever you need."
+      primaryLabel="Join the member waitlist"
+      primaryHref="/contact"
+    />
+  </main>
+</BaseLayout>

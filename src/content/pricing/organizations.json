@@ -1,0 +1,14 @@
+{
+  "tier": "Organizations",
+  "audience": "Group practices and health systems",
+  "price": "Custom",
+  "description": "Enterprise-grade tools for managing multi-provider practices at scale.",
+  "features": [
+    { "text": "Multi-provider staff management" },
+    { "text": "HIPAA compliance dashboard" },
+    { "text": "Organization-wide analytics" },
+    { "text": "SSO and role-based access" },
+    { "text": "Contract and billing management" },
+    { "text": "Dedicated onboarding support" }
+  ]
+}

@@ -1,0 +1,184 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Orbit from '../components/Orbit.tsx';
+import Btn from '../components/Btn.tsx';
+import CTABand from '../components/CTABand.tsx';
+import Icon from '../components/Icon.tsx';
+---
+
+<BaseLayout
+  title="For Practitioners — Lily Practice | Practice What You Trained For"
+  description="Lily routes the right clients, runs your schedule, drafts your notes, and pays you on time — so you can spend your day in the room, not in the admin."
+  canonical="https://lilycare.co/practitioners"
+>
+  <main>
+    <!-- HERO -->
+    <section class="page-hero sage">
+      <div class="container wide">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-eyebrow"><span class="dot"></span>For practitioners</div>
+            <h1>Practice what you trained for. We'll handle <em>the rest</em>.</h1>
+            <p>
+              Lily routes the right clients, runs your schedule, drafts your notes, and pays you on time —
+              so you can spend your day in the room, not in the admin.
+            </p>
+            <div class="actions">
+              <Btn client:load kind="primary" size="lg" href="/contact" icon="arrow">Apply to Lily</Btn>
+              <Btn client:load kind="ghost" size="lg" href="/pricing">See economics</Btn>
+            </div>
+          </div>
+          <div>
+            <div class="ui-frame">
+              <div class="chrome">
+                <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                <div class="url">practice.lilycare.health</div>
+              </div>
+              <div style="padding: 24px; background: linear-gradient(160deg, hsl(165 26% 95%), hsl(43 30% 96%));">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+                  <div class="stat">
+                    <div class="tile"><Icon name="users" /></div>
+                    <div><div class="num">28</div><div class="lab">Active clients</div></div>
+                  </div>
+                  <div class="stat">
+                    <div class="tile"><Icon name="calendar" /></div>
+                    <div><div class="num">14</div><div class="lab">Sessions this week</div></div>
+                  </div>
+                  <div class="stat">
+                    <div class="tile"><Icon name="chart" /></div>
+                    <div><div class="num">94%</div><div class="lab">Alliance score</div></div>
+                  </div>
+                  <div class="stat">
+                    <div class="tile"><Icon name="cash" /></div>
+                    <div><div class="num">$8.4k</div><div class="lab">Pending payout</div></div>
+                  </div>
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid hsl(145 10% 88%);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+                    <strong style="font-family: var(--brand); font-size: 15px;">Today</strong>
+                    <span class="chip sage">3 sessions</span>
+                  </div>
+                  <div style="display: flex; gap: 12px; padding: 10px 0; font-size: 13px;">
+                    <div style="font-family: var(--brand); font-weight: 500; color: hsl(var(--primary)); width: 80px;">10:00 AM</div>
+                    <div style="flex: 1;">
+                      <div style="font-weight: 600;">Avery C.</div>
+                      <div style="color: hsl(var(--muted-foreground)); font-size: 11.5px;">Telehealth · 50 min</div>
+                    </div>
+                  </div>
+                  <div style="display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid hsl(145 10% 92%); font-size: 13px;">
+                    <div style="font-family: var(--brand); font-weight: 500; color: hsl(var(--primary)); width: 80px;">2:00 PM</div>
+                    <div style="flex: 1;">
+                      <div style="font-weight: 600;">Jordan M. (intro)</div>
+                      <div style="color: hsl(var(--muted-foreground)); font-size: 11.5px;">In-person · 30 min</div>
+                    </div>
+                  </div>
+                  <div style="display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid hsl(145 10% 92%); font-size: 13px;">
+                    <div style="font-family: var(--brand); font-weight: 500; color: hsl(var(--primary)); width: 80px;">4:30 PM</div>
+                    <div style="flex: 1;">
+                      <div style="font-weight: 600;">Sam W.</div>
+                      <div style="color: hsl(var(--muted-foreground)); font-size: 11.5px;">Telehealth · 50 min</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE GRID -->
+    <section class="section">
+      <div class="container wide">
+        <div class="section-head center">
+          <div class="section-eyebrow">What we run for you</div>
+          <h2 class="section-title">The whole practice, on one screen.</h2>
+        </div>
+        <div class="feature-grid">
+          <div class="feature">
+            <div class="feature-icon"><Icon name="spark" size={22} /></div>
+            <h3>Pre-matched referrals</h3>
+            <p>Clients arrive already aligned on identity, modality, and availability — not a cold inquiry.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><Icon name="calendar" size={22} /></div>
+            <h3>Calendar &amp; intake</h3>
+            <p>Set your hours, ranges, and rules once. Lily handles intake forms, reminders, and reschedules.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><Icon name="video" size={22} /></div>
+            <h3>HIPAA telehealth</h3>
+            <p>Built-in video, no zoom-link wrangling. Session room with shared notes &amp; resources.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><Icon name="note" size={22} /></div>
+            <h3>AI-assisted notes</h3>
+            <p>SOAP, DAP, or your template. Draft from session audio. Your voice, your edits, signed by you.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><Icon name="cash" size={22} /></div>
+            <h3>Insurance &amp; payouts</h3>
+            <p>We file claims, handle copays, and pay you out twice a month. Sliding scale supported.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon"><Icon name="chart" size={22} /></div>
+            <h3>Outcomes &amp; alliance</h3>
+            <p>Validated measures (PHQ-9, GAD-7, WAI-SR) on autopilot. Watch fit and progress.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ECONOMICS SHOWCASE -->
+    <section class="section sage">
+      <div class="container wide">
+        <div class="showcase flip">
+          <div>
+            <div class="section-eyebrow">Economics that work for you</div>
+            <h2>Keep <em>up to 88%</em> of every session.</h2>
+            <p>
+              No platform fee. No per-client fee. Lily takes a transparent revenue share that scales with you — and drops as your panel grows.
+              Sliding scale and pro bono slots earn you visibility, not penalties.
+            </p>
+            <ul>
+              <li><Icon name="check" /> 12% rev share at start, drops to 8% past 80 sessions/mo</li>
+              <li><Icon name="check" /> Twice-monthly direct deposit</li>
+              <li><Icon name="check" /> CE library, peer consult groups, supervision tools</li>
+              <li><Icon name="check" /> Liability insurance discounts via partner</li>
+            </ul>
+            <div style="margin-top: 28px;">
+              <Btn client:load kind="primary" href="/pricing">See full pricing</Btn>
+            </div>
+          </div>
+          <div class="testimonial" style="padding: 36px;">
+            <blockquote>
+              I cut my admin hours in half and my no-show rate by two-thirds. The clients Lily sends actually want to be in the room.
+            </blockquote>
+            <div class="quoted">
+              <Orbit
+                client:load
+                size={64}
+                initials="DR"
+                avatarTone="teal"
+                badges={[{ key: "trauma", tone: "trauma", icon: "shield", label: "T", angle: 60 }]}
+              />
+              <div>
+                <div class="who">Dr. Devon Reyes, LCSW</div>
+                <div class="role">2 yrs on Lily · Los Angeles</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <CTABand
+      client:load
+      title="Your practice deserves <em>infrastructure</em>, not duct tape."
+      sub="Apply in 15 minutes. We verify credentials and get you online in days, not weeks."
+      primaryLabel="Apply to Lily"
+      primaryHref="/contact"
+    />
+  </main>
+</BaseLayout>

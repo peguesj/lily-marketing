@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.tsx';
+import Illustration from '../components/Illustration.tsx';
+---
+
+<BaseLayout
+  title="Contact — Lily | Talk to Our Team"
+  description="Tell us who you are. We'll get you to a match, an application, or a demo — whichever fits."
+  canonical="https://lilycare.co/contact"
+>
+  <main>
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="container wide">
+        <div class="page-hero-grid">
+          <div>
+            <div class="hero-eyebrow"><span class="dot"></span>Get in touch</div>
+            <h1>Let's get you to <em>the right thing</em>.</h1>
+            <p>
+              Tell us who you are. We'll get you to a match, an application, or a demo — whichever fits.
+            </p>
+          </div>
+          <div class="page-hero-illust-wrap">
+            <Illustration client:load n={8} size={280} alt="Connection, made easy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT FORM — React island for full interactivity -->
+    <section class="section">
+      <div class="container wide">
+        <ContactForm client:load />
+      </div>
+    </section>
+  </main>
+</BaseLayout>

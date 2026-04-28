@@ -1,0 +1,14 @@
+{
+  "tier": "Practitioners",
+  "audience": "Licensed therapists and counselors",
+  "price": "$49/mo",
+  "description": "Grow your practice with qualified client referrals and powerful tools.",
+  "features": [
+    { "text": "Client matching and referrals" },
+    { "text": "Practice management dashboard" },
+    { "text": "Scheduling and availability" },
+    { "text": "SOAP notes and treatment plans" },
+    { "text": "Telehealth session room" },
+    { "text": "Outcome tracking and analytics" }
+  ]
+}
