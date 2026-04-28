@@ -43,6 +43,20 @@ function HamburgerIcon({ open }: { open: boolean }) {
   );
 }
 
+// Role context derived from URL path
+const ROLE_CONTEXT: Record<string, { label: string; color: string }> = {
+  '/members':       { label: 'for members',       color: 'hsl(20 60% 48%)'  },
+  '/practitioners': { label: 'for practitioners',  color: 'hsl(145 50% 32%)' },
+  '/organizations': { label: 'for organizations',  color: 'hsl(220 45% 45%)' },
+};
+
+function getRoleContext(path: string) {
+  for (const [prefix, ctx] of Object.entries(ROLE_CONTEXT)) {
+    if (path.startsWith(prefix)) return ctx;
+  }
+  return null;
+}
+
 export default function SiteNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activePath, setActivePath] = useState('/');
@@ -56,17 +70,40 @@ export default function SiteNav() {
     return activePath.startsWith(href);
   }
 
+  const roleCtx = getRoleContext(activePath);
+
   return (
     <nav className="site-nav" aria-label="Main navigation">
       <div className="site-nav-inner">
-        {/* Logo */}
-        <a href="/" className="site-logo" aria-label="Lily AI home">
+        {/* Logo — conditionally shows role tagline on role pages */}
+        <a
+          href="/"
+          className="site-logo"
+          aria-label="Lily AI home"
+          style={roleCtx ? { flexDirection: 'column', alignItems: 'flex-start', gap: 0 } : undefined}
+        >
           <img
             src="/assets/lily-wordmark-multi.png"
             alt="Lily"
             className="site-logo-mark"
             style={{ width: 'auto', height: 30, borderRadius: 0 }}
           />
+          {roleCtx && (
+            <span
+              style={{
+                display: 'block',
+                fontSize: 10,
+                fontWeight: 600,
+                letterSpacing: '0.06em',
+                color: roleCtx.color,
+                lineHeight: 1,
+                marginTop: 2,
+                opacity: 0.9,
+              }}
+            >
+              {roleCtx.label}
+            </span>
+          )}
         </a>
 
         {/* Desktop nav links */}
