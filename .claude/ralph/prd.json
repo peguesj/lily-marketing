@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0",
-  "branchName": "main",
-  "description": "Marketing site gap implementation \u2014 design handoff v11 parity",
+  "version": "1.1.0",
+  "branchName": "feat/custom-domains-smtp-relay",
+  "description": "Phase MKT-3: Custom domains (asklily.health + ask-lily.io + lilycare.co) + Gmail SMTP relay + TinaCMS cloud editing",
   "project": "lily-marketing",
   "planeProjectId": "2b6977ee-89fa-4540-9f6c-bdc3d225aadf",
   "createdAt": "2026-04-28",
@@ -160,6 +160,253 @@
         "WAITLIST OPEN badge with pulsing CSS dot animation (1.6s ease-in-out) on all pages",
         "Separator line between logo group and badge cluster",
         "Deployed to lively-plant-0efee6f0f.7.azurestaticapps.net"
+      ]
+    },
+    {
+      "id": "US-MKT-010",
+      "title": "GoDaddy DNS — CNAME + TXT verification for asklily.health → Azure SWA",
+      "wave": 1,
+      "automationType": "browser",
+      "chromeProfile": "jeremiah.pegues@gmail.com",
+      "planeIssueId": "0efb99f7-08be-49da-8e54-1df34e9c5429",
+      "planeSequenceId": 619,
+      "planeName": "LILY-619",
+      "passes": false,
+      "priority": "high",
+      "acceptanceCriteria": [
+        "CNAME record: asklily.health → lively-plant-0efee6f0f.7.azurestaticapps.net",
+        "TXT verification record added as required by Azure SWA custom domain wizard",
+        "Records saved in GoDaddy DNS manager",
+        "TTL set to 600 (10 min) for faster propagation"
+      ]
+    },
+    {
+      "id": "US-MKT-011",
+      "title": "GoDaddy DNS — CNAME + TXT verification for ask-lily.io → Azure SWA",
+      "wave": 1,
+      "automationType": "browser",
+      "chromeProfile": "jeremiah.pegues@gmail.com",
+      "planeIssueId": "96de3458-d56c-4b31-9e48-e5e68686b3f5",
+      "planeSequenceId": 620,
+      "planeName": "LILY-620",
+      "passes": false,
+      "priority": "high",
+      "acceptanceCriteria": [
+        "CNAME record: ask-lily.io → lively-plant-0efee6f0f.7.azurestaticapps.net",
+        "TXT verification record added as required by Azure SWA custom domain wizard",
+        "Records saved in GoDaddy DNS manager",
+        "TTL set to 600 (10 min) for faster propagation"
+      ]
+    },
+    {
+      "id": "US-MKT-012",
+      "title": "Azure SWA — Add custom domain asklily.health (canonical)",
+      "wave": 2,
+      "automationType": "cli",
+      "dependsOn": ["US-MKT-010"],
+      "planeIssueId": "b34fe0e6-bc44-4249-8132-a39ccdb1c9f7",
+      "planeSequenceId": 621,
+      "planeName": "LILY-621",
+      "passes": false,
+      "priority": "high",
+      "acceptanceCriteria": [
+        "az staticwebapp hostname set --name lily-marketing-site --hostname asklily.health succeeds",
+        "Azure portal shows asklily.health with Valid status",
+        "SSL certificate provisioned automatically (Let's Encrypt via Azure)",
+        "https://asklily.health serves lily-marketing content"
+      ]
+    },
+    {
+      "id": "US-MKT-013",
+      "title": "Azure SWA — Add custom domain ask-lily.io (alias with 301 redirect)",
+      "wave": 2,
+      "automationType": "cli",
+      "dependsOn": ["US-MKT-011"],
+      "planeIssueId": "d5f2016f-d356-4824-81ba-13d45a719d41",
+      "planeSequenceId": 622,
+      "planeName": "LILY-622",
+      "passes": false,
+      "priority": "high",
+      "acceptanceCriteria": [
+        "az staticwebapp hostname set --name lily-marketing-site --hostname ask-lily.io succeeds",
+        "Azure portal shows ask-lily.io with Valid status",
+        "SSL certificate provisioned for ask-lily.io",
+        "https://ask-lily.io serves content (redirect handled by staticwebapp.config.json)"
+      ]
+    },
+    {
+      "id": "US-MKT-014",
+      "title": "lily-marketing code — update astro.config.mjs site URL + staticwebapp.config.json",
+      "wave": 2,
+      "automationType": "code",
+      "file": "astro.config.mjs",
+      "planeIssueId": "b8f55b99-dc03-4122-a775-a7387439c037",
+      "planeSequenceId": 623,
+      "planeName": "LILY-623",
+      "passes": true,
+      "priority": "high",
+      "acceptanceCriteria": [
+        "astro.config.mjs: site set to 'https://asklily.health'",
+        "staticwebapp.config.json: 301 redirect rule from ask-lily.io/* → https://asklily.health/{rest}",
+        "Build passes: npx astro build succeeds with no errors",
+        "Deployed to production SWA with updated config"
+      ]
+    },
+    {
+      "id": "US-MKT-015",
+      "title": "Google Workspace Admin — configure SMTP relay service",
+      "wave": 3,
+      "automationType": "browser",
+      "chromeProfile": "Jeremiah SSGT",
+      "planeIssueId": "52544ab4-cbe1-4430-a3cc-c05fef5ab3d4",
+      "planeSequenceId": 624,
+      "planeName": "LILY-624",
+      "passes": false,
+      "priority": "high",
+      "acceptanceCriteria": [
+        "SMTP relay service enabled in Google Workspace Admin > Apps > Google Workspace > Gmail > SMTP relay service",
+        "Allowed senders: any addresses in my domain",
+        "Authentication: require SMTP Auth",
+        "Encryption: require TLS",
+        "SMTP relay host: smtp-relay.gmail.com port 587",
+        "Saved and active"
+      ]
+    },
+    {
+      "id": "US-MKT-016",
+      "title": "GoDaddy DNS — SPF/DKIM/DMARC records for email authentication",
+      "wave": 3,
+      "automationType": "browser",
+      "chromeProfile": "jeremiah.pegues@gmail.com",
+      "dependsOn": ["US-MKT-015"],
+      "planeIssueId": "db6d2089-3131-4200-95f6-e3aaaf839fb8",
+      "planeSequenceId": 625,
+      "planeName": "LILY-625",
+      "passes": false,
+      "priority": "high",
+      "acceptanceCriteria": [
+        "SPF TXT record on safespacegt.com includes include:_spf.google.com",
+        "DKIM CNAME records added (from Google Workspace Admin DKIM setup)",
+        "DMARC TXT record: v=DMARC1; p=none; rua=mailto:admin@safespacegt.com",
+        "All records saved in GoDaddy DNS manager"
+      ]
+    },
+    {
+      "id": "US-MKT-019",
+      "title": "GoDaddy domain forwarding — lilycare.co → asklily.health/members (301)",
+      "wave": 1,
+      "automationType": "browser",
+      "chromeProfile": "jeremiah.pegues@gmail.com",
+      "planeIssueId": "4802ff90-0fb2-4fe3-94f0-825b9ddec371",
+      "planeSequenceId": 628,
+      "planeName": "LILY-628",
+      "passes": false,
+      "priority": "high",
+      "note": "lilycare.co uses GoDaddy domain forwarding (not Azure SWA custom domain) because it redirects to a sub-path (/members) which Azure SWA redirect-type custom domains don't support",
+      "acceptanceCriteria": [
+        "GoDaddy domain forwarding enabled for lilycare.co → https://asklily.health/members (301 permanent)",
+        "Forwarding with masking disabled (clean 301, not iframe)",
+        "https://lilycare.co/anything redirects to https://asklily.health/members",
+        "Setting saved in GoDaddy domain management"
+      ]
+    },
+    {
+      "id": "US-MKT-020",
+      "title": "Azure SWA — Add custom domain ask-lily.io as redirect type (301 → asklily.health)",
+      "wave": 2,
+      "automationType": "cli",
+      "dependsOn": ["US-MKT-011"],
+      "planeIssueId": "ff4668ec-cf60-4f17-83da-ed2368fe4477",
+      "planeSequenceId": 629,
+      "planeName": "LILY-629",
+      "passes": false,
+      "priority": "high",
+      "note": "Azure SWA supports redirect-type custom domains which 301 to the primary domain. ask-lily.io added as redirect type pointing to asklily.health.",
+      "acceptanceCriteria": [
+        "ask-lily.io added as redirect custom domain in Azure SWA portal (Redirect type, not direct)",
+        "Azure portal shows ask-lily.io pointing to asklily.health with redirect",
+        "https://ask-lily.io 301 redirects to https://asklily.health",
+        "SSL certificate valid for ask-lily.io"
+      ]
+    },
+    {
+      "id": "US-MKT-021",
+      "title": "Google Workspace Admin — add and verify all 3 custom domains (asklily.health, ask-lily.io, lilycare.co)",
+      "wave": 3,
+      "automationType": "browser",
+      "chromeProfile": "Jeremiah SSGT",
+      "dependsOn": ["US-MKT-010", "US-MKT-011", "US-MKT-019"],
+      "planeIssueId": "95c6358f-8f8c-43ec-add9-915da6bfb3e7",
+      "planeSequenceId": 630,
+      "planeName": "LILY-630",
+      "passes": false,
+      "priority": "high",
+      "acceptanceCriteria": [
+        "asklily.health added as primary domain in GWS Admin → Domains",
+        "ask-lily.io added as domain alias in GWS Admin",
+        "lilycare.co added as domain alias in GWS Admin",
+        "TXT domain verification records for all 3 added in GoDaddy DNS",
+        "All 3 domains show Verified status in GWS Admin console"
+      ]
+    },
+    {
+      "id": "US-MKT-022",
+      "title": "TinaCMS — configure cloud editing via TINA_CLIENT_ID + TINA_TOKEN in Azure SWA",
+      "wave": 2,
+      "automationType": "code",
+      "file": "tina/config.ts",
+      "dependsOn": ["US-MKT-012"],
+      "planeIssueId": "f841b0df-81d6-4265-9dc5-e9c99ecd2c7a",
+      "planeSequenceId": 631,
+      "planeName": "LILY-631",
+      "passes": false,
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "TINA_CLIENT_ID added to Azure SWA environment variables (lily-marketing-site)",
+        "TINA_TOKEN added to Azure SWA environment variables",
+        "npx astro build passes with TinaCMS cloud config",
+        "https://asklily.health/admin loads TinaCMS editing interface after deployment"
+      ]
+    },
+    {
+      "id": "US-MKT-017",
+      "title": "Verification — all domains resolve, SSL active, redirects work",
+      "wave": 4,
+      "automationType": "browser",
+      "chromeProfile": "alphonso.nathan@safespacegt.com",
+      "dependsOn": ["US-MKT-012", "US-MKT-013", "US-MKT-014", "US-MKT-020"],
+      "planeIssueId": "7ff96554-4890-4b8e-9ae0-dd1afe9d8d61",
+      "planeSequenceId": 626,
+      "planeName": "LILY-626",
+      "passes": false,
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "https://asklily.health loads lily-marketing homepage (200, no SSL warnings)",
+        "https://ask-lily.io redirects 301 to https://asklily.health",
+        "https://lilycare.co redirects 301 to https://asklily.health/members",
+        "SSL certificates valid for all 3 domains",
+        "Lighthouse accessibility score ≥ 90 on asklily.health",
+        "No mixed content warnings in browser console"
+      ]
+    },
+    {
+      "id": "US-MKT-018",
+      "title": "SMTP relay test — send email from alphonso.nathan@safespacegt.com via relay",
+      "wave": 4,
+      "automationType": "browser",
+      "chromeProfile": "alphonso.nathan@safespacegt.com",
+      "dependsOn": ["US-MKT-015", "US-MKT-016"],
+      "planeIssueId": "c253b2c5-e824-47dc-926a-87af7dda6977",
+      "planeSequenceId": 627,
+      "planeName": "LILY-627",
+      "passes": false,
+      "priority": "medium",
+      "acceptanceCriteria": [
+        "Test email sent from alphonso.nathan@safespacegt.com via smtp-relay.gmail.com:587",
+        "Email received with no spam flag",
+        "DKIM signature passes (check email headers)",
+        "SPF passes (check email headers)",
+        "DMARC policy passes"
       ]
     }
   ]

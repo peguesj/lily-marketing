@@ -113,10 +113,38 @@ TOKEN=$(az staticwebapp secrets list --name lily-marketing-site --resource-group
 - [x] **CP-MKT-009**: SiteNav role-specific product logos + ALPHA badge + animated WAITLIST OPEN badge (US-MKT-009) [LILY-611]
 - After CP-MKT-009: All nav badges deployed to production; role-aware logos match Phoenix app reference
 
+### Phase MKT-3: Custom Domains + SMTP Relay + TinaCMS (feat/custom-domains-smtp-relay)
+_Plane: LILY-619..631 | Domains: asklily.health (canonical), ask-lily.io (301→canonical), lilycare.co (301→/members)_
+_Formation: fmt-20260502-mkt3-domains-smtp | Branch: feat/custom-domains-smtp-relay_
+
+#### Wave 1 — GoDaddy DNS records (concurrent, browser: jeremiah.pegues@gmail.com)
+- [ ] **CP-MKT-010**: GoDaddy DNS — CNAME + TXT for asklily.health → Azure SWA (US-MKT-010) [LILY-619]
+- [ ] **CP-MKT-011**: GoDaddy DNS — CNAME + TXT for ask-lily.io → Azure SWA (US-MKT-011) [LILY-620]
+- [ ] **CP-MKT-019**: GoDaddy DNS — CNAME + TXT for lilycare.co → Azure SWA (US-MKT-019) [LILY-628]
+
+#### Wave 2 — Azure SWA + code (concurrent with DNS propagation per G4=B)
+- [ ] **CP-MKT-012**: Azure SWA — custom domain asklily.health, SSL provisioned (US-MKT-012) [LILY-621]
+- [ ] **CP-MKT-013**: Azure SWA — custom domain ask-lily.io, SSL provisioned (US-MKT-013) [LILY-622]
+- [ ] **CP-MKT-020**: Azure SWA — custom domain lilycare.co, SSL provisioned (US-MKT-020) [LILY-629]
+- [ ] **CP-MKT-014**: astro.config.mjs site=asklily.health + staticwebapp.config.json 301 redirects (US-MKT-014) [LILY-623]
+  - ask-lily.io/* → https://asklily.health/{rest}
+  - lilycare.co/* → https://asklily.health/members/{rest}
+- [ ] **CP-MKT-022**: TinaCMS TINA_CLIENT_ID + TINA_TOKEN → Azure SWA env vars (US-MKT-022) [LILY-631]
+
+#### Wave 3 — SMTP relay + GWS domain verification
+- [ ] **CP-MKT-015**: Google Workspace Admin — SMTP relay service enabled (US-MKT-015) [LILY-624] (profile: Jeremiah SSGT)
+- [ ] **CP-MKT-016**: GoDaddy DNS — SPF/DKIM/DMARC records for safespacegt.com (US-MKT-016) [LILY-625] (profile: jeremiah.pegues@gmail.com)
+- [ ] **CP-MKT-021**: Google Workspace Admin — add+verify asklily.health + ask-lily.io + lilycare.co (US-MKT-021) [LILY-630] (profile: Jeremiah SSGT)
+
+#### Wave 4 — Verification (profile: alphonso.nathan@safespacegt.com)
+- [ ] **CP-MKT-017**: Domain verification — asklily.health 200, ask-lily.io 301, lilycare.co→/members 301, SSL valid (US-MKT-017) [LILY-626]
+- [ ] **CP-MKT-018**: SMTP relay test — email delivered, DKIM/SPF/DMARC pass (US-MKT-018) [LILY-627]
+- After CP-MKT-018: All 3 domains live, SMTP relay operational, TinaCMS editing at asklily.health/admin
+
 ## CCEM APM
 
 This project reports to CCEM APM at `http://localhost:3032`.
-- **Session tracking**: Active (formation fmt-20260428-lily-mktg-v2)
+- **Session tracking**: Active (formation fmt-20260502-mkt3-domains-smtp)
 - **Parent project**: lily-ai-phx
 
 ## Attribution Policy
