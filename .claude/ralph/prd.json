@@ -121,6 +121,46 @@
         "Animation is smooth with no jank",
         "Hover state triggers pill expansion on badges only"
       ]
+    },
+    {
+      "id": "US-MKT-008",
+      "title": "MobileAppShowcase glassmorphic phone frames with multi-stop sheen gradient",
+      "file": "src/components/MobileAppShowcase.tsx",
+      "commit": "8c4be7a",
+      "planeIssueId": "14330633-b362-4e9f-a4f4-59265099a257",
+      "planeSequenceId": 610,
+      "planeName": "LILY-610",
+      "passes": true,
+      "priority": "medium",
+      "acceptanceCriteria": [
+        ".app-frame uses multi-stop linear-gradient sheen (8 stops, 165deg)",
+        "backdrop-filter blur(28px) saturate(160%) applied",
+        "Inset highlight shadow on top edge, depth shadow below",
+        "Hover lifts frame with translateY(-6px) and deeper shadow",
+        "Each app caption shows icon + role label + product name",
+        "Deployed to lively-plant-0efee6f0f.7.azurestaticapps.net"
+      ]
+    },
+    {
+      "id": "US-MKT-009",
+      "title": "SiteNav role-specific product logos + ALPHA + animated WAITLIST OPEN badges",
+      "file": "src/components/SiteNav.tsx",
+      "commit": "8c4be7a",
+      "planeIssueId": "703dfb99-65aa-41e9-ac39-d926eddd3d1c",
+      "planeSequenceId": 611,
+      "planeName": "LILY-611",
+      "passes": true,
+      "priority": "high",
+      "acceptanceCriteria": [
+        "Members (/members): lily-icon-multi.png + 'care' subscript inline",
+        "Practitioners (/practitioners): lily-icon-green.png + 'Lily' text + 'practice' subscript",
+        "Organizations (/organizations): lily-icon-fullcolor.png + 'Lily' text + 'admin' subscript",
+        "Homepage (/): lily-wordmark-multi.png (unchanged)",
+        "ALPHA badge (green outlined pill) visible on all pages",
+        "WAITLIST OPEN badge with pulsing CSS dot animation (1.6s ease-in-out) on all pages",
+        "Separator line between logo group and badge cluster",
+        "Deployed to lively-plant-0efee6f0f.7.azurestaticapps.net"
+      ]
     }
   ]
 }

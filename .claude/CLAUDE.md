@@ -1,9 +1,9 @@
 # Lily Marketing Site — Astro 6 + React 19
 
 **Project**: Lily AI Marketing Site
-**Version**: v1.1.0
-**Last Updated**: 2026-04-28
-**Status**: Active Development — Phase MKT-1 shipped (design handoff v11 parity)
+**Version**: v1.2.0
+**Last Updated**: 2026-05-01
+**Status**: Active Development — Phase MKT-2 shipped (glassmorphic frames + nav badges)
 
 ## Project Overview
 
@@ -70,7 +70,29 @@ Design handoff files are in `design-reference/` directory:
 - `src/components/MobileAppShowcase.tsx` — 3 phone-frame mockup section
 - `src/components/SiteFooter.tsx` — Footer with social links
 - `src/components/Icon.tsx` — Icon component (arrow-left, arrow-right, x, building, phone, +more)
+- `src/components/SiteNav.tsx` — Role-aware nav with product logos + ALPHA + WAITLIST OPEN badges
 - `src/pages/index.astro` — Homepage wiring ProductTour + MobileAppShowcase
+
+## Logo Asset Mapping
+
+| Route | Icon Asset | Shows "Lily" Text | Product Name |
+|-------|------------|-------------------|--------------|
+| `/` (homepage) | `lily-wordmark-multi.png` | embedded in image | — |
+| `/members` | `lily-icon-multi.png` | No (icon IS the mark) | "care" |
+| `/practitioners` | `lily-icon-green.png` | Yes (JSX span) | "practice" |
+| `/organizations` | `lily-icon-fullcolor.png` | Yes (JSX span) | "admin" |
+
+## Deploy
+
+```bash
+# Build
+npx astro build   # NOT npm run build (TinaCMS requires credentials)
+
+# Deploy to production (rg-lily-ai-web / lively-plant)
+TOKEN=$(az staticwebapp secrets list --name lily-marketing-site --resource-group rg-lily-ai-web --query 'properties.apiKey' -o tsv | tr -d '[:space:]')
+/tmp/swa-cli/bin/swa deploy /Users/jeremiah/Developer/lily-marketing/dist --deployment-token "$TOKEN" --env production
+# NOTE: Must use swa-cli v1.1.6 at /tmp/swa-cli/bin/swa — v2 rejects Azure tokens
+```
 
 ## Implementation Checkpoints
 
@@ -84,6 +106,12 @@ Design handoff files are in `design-reference/` directory:
 - [x] **CP-MKT-006**: ProductTour reveal opacity fix (remove .reveal class dependency) (US-MKT-006) [LILY-608]
 - [x] **CP-MKT-007**: Orbit badge-ring-only animation (photo stays static) (US-MKT-007) [LILY-609]
 - After CP-MKT-007: All design handoff v11 gaps resolved, homepage sections live
+
+### Phase MKT-2: Glassmorphic Frames + Nav Badges (2026-05-01)
+
+- [x] **CP-MKT-008**: MobileAppShowcase app-frames glassmorphic — multi-stop sheen gradient, blur/saturate, hover lift, icon+text captions (US-MKT-008) [LILY-610]
+- [x] **CP-MKT-009**: SiteNav role-specific product logos + ALPHA badge + animated WAITLIST OPEN badge (US-MKT-009) [LILY-611]
+- After CP-MKT-009: All nav badges deployed to production; role-aware logos match Phoenix app reference
 
 ## CCEM APM
 
