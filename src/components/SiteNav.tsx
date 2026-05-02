@@ -43,19 +43,73 @@ function HamburgerIcon({ open }: { open: boolean }) {
   );
 }
 
+interface RoleContext {
+  label: string;
+  /** Color for product name subscript */
+  color: string;
+  /** Short product descriptor shown as small text below the logo */
+  product: string;
+  /** Icon image path */
+  iconSrc: string;
+  /** Whether to render "Lily" text alongside the icon (logo+wordmark composition) */
+  showWordmark: boolean;
+  /** Color for the "Lily" wordmark text when shown */
+  wordmarkColor: string;
+}
+
 // Role context derived from URL path
-const ROLE_CONTEXT: Record<string, { label: string; color: string }> = {
-  '/members':       { label: 'for members',       color: 'hsl(20 60% 48%)'  },
-  '/practitioners': { label: 'for practitioners',  color: 'hsl(145 50% 32%)' },
-  '/organizations': { label: 'for organizations',  color: 'hsl(220 45% 45%)' },
+// Members  → lily-icon-multi.png alone (the multi-color peach icon IS Lily Care)
+// Others   → role icon + "Lily" text rendered inline (composing logo+wordmark)
+const ROLE_CONTEXT: Record<string, RoleContext> = {
+  '/members': {
+    label: 'for members',
+    color: 'hsl(20 60% 48%)',
+    product: 'care',
+    iconSrc: '/assets/lily-icon-multi.png',
+    showWordmark: false,
+    wordmarkColor: 'hsl(20 55% 30%)',
+  },
+  '/practitioners': {
+    label: 'for practitioners',
+    color: 'hsl(145 50% 32%)',
+    product: 'practice',
+    iconSrc: '/assets/lily-icon-green.png',
+    showWordmark: true,
+    wordmarkColor: 'hsl(145 55% 26%)',
+  },
+  '/organizations': {
+    label: 'for organizations',
+    color: 'hsl(220 45% 45%)',
+    product: 'admin',
+    iconSrc: '/assets/lily-icon-fullcolor.png',
+    showWordmark: true,
+    wordmarkColor: 'hsl(220 50% 38%)',
+  },
 };
 
-function getRoleContext(path: string) {
+function getRoleContext(path: string): RoleContext | null {
   for (const [prefix, ctx] of Object.entries(ROLE_CONTEXT)) {
     if (path.startsWith(prefix)) return ctx;
   }
   return null;
 }
+
+// Inline CSS for badge animations — injected once at mount
+const NAV_BADGE_STYLES = `
+  @keyframes nav-dot-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(0.78); }
+  }
+  .nav-waitlist-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: hsl(145 60% 34%);
+    animation: nav-dot-pulse 1.6s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+`;
 
 export default function SiteNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -74,36 +128,116 @@ export default function SiteNav() {
 
   return (
     <nav className="site-nav" aria-label="Main navigation">
+      <style>{NAV_BADGE_STYLES}</style>
+
       <div className="site-nav-inner">
-        {/* Logo — conditionally shows role tagline on role pages */}
+        {/* Logo group — logo/wordmark + product name + badges */}
         <a
           href="/"
           className="site-logo"
           aria-label="Lily AI home"
-          style={roleCtx ? { flexDirection: 'column', alignItems: 'flex-start', gap: 0 } : undefined}
+          style={{ alignItems: 'center', gap: 8 }}
         >
-          <img
-            src="/assets/lily-wordmark-multi.png"
-            alt="Lily"
-            className="site-logo-mark"
-            style={{ width: 'auto', height: 30, borderRadius: 0 }}
-          />
-          {roleCtx && (
+          {/* Logo mark */}
+          {roleCtx ? (
+            /* Role pages: icon + optional "Lily" text + product name — all inline */
+            <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+              <img
+                src={roleCtx.iconSrc}
+                alt="Lily"
+                style={{ width: 'auto', height: 28, borderRadius: 6 }}
+              />
+              {roleCtx.showWordmark && (
+                <span
+                  style={{
+                    fontFamily: "'Space Grotesk', sans-serif",
+                    fontSize: 20,
+                    fontWeight: 600,
+                    color: roleCtx.wordmarkColor,
+                    lineHeight: 1,
+                    letterSpacing: '-0.01em',
+                  }}
+                >
+                  Lily
+                </span>
+              )}
+              <span
+                style={{
+                  fontSize: 9,
+                  fontWeight: 600,
+                  letterSpacing: '0.08em',
+                  color: roleCtx.color,
+                  lineHeight: 1,
+                  opacity: 0.85,
+                  alignSelf: 'flex-end',
+                  paddingBottom: 1,
+                }}
+              >
+                {roleCtx.product}
+              </span>
+            </span>
+          ) : (
+            /* Homepage: full wordmark image */
+            <img
+              src="/assets/lily-wordmark-multi.png"
+              alt="Lily"
+              className="site-logo-mark"
+              style={{ width: 'auto', height: 30, borderRadius: 0 }}
+            />
+          )}
+
+          {/* Badge cluster — separator + ALPHA + WAITLIST */}
+          <span
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 5,
+              borderLeft: '1px solid hsla(145,15%,60%,0.28)',
+              paddingLeft: 8,
+            }}
+          >
+            {/* ALPHA badge — always visible */}
             <span
               style={{
-                display: 'block',
-                fontSize: 10,
-                fontWeight: 600,
-                letterSpacing: '0.06em',
-                color: roleCtx.color,
-                lineHeight: 1,
-                marginTop: 2,
-                opacity: 0.9,
+                fontSize: 9,
+                fontWeight: 700,
+                letterSpacing: '0.09em',
+                color: 'hsl(145 60% 26%)',
+                background: 'hsl(145 60% 96%)',
+                border: '1px solid hsl(145 55% 72%)',
+                borderRadius: 4,
+                padding: '2px 5px',
+                lineHeight: 1.3,
+                textTransform: 'uppercase',
               }}
             >
-              {roleCtx.label}
+              Alpha
             </span>
-          )}
+
+            {/* WAITLIST OPEN — animated pulsing dot */}
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+                fontSize: 9,
+                fontWeight: 600,
+                letterSpacing: '0.07em',
+                color: 'hsl(145 55% 28%)',
+                background: 'hsl(145 50% 96%)',
+                border: '1px solid hsl(145 45% 76%)',
+                borderRadius: 4,
+                padding: '2px 6px 2px 5px',
+                lineHeight: 1.3,
+                textTransform: 'uppercase',
+                whiteSpace: 'nowrap',
+              }}
+              aria-label="Waitlist is open"
+            >
+              <span className="nav-waitlist-dot" aria-hidden="true" />
+              Waitlist open
+            </span>
+          </span>
         </a>
 
         {/* Desktop nav links */}

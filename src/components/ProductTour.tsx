@@ -13,7 +13,7 @@ interface TourTileProps {
 
 const TourTile = ({ eyebrow, title, sub, screen = 'default', size = 'default', children }: TourTileProps) => (
   <div className={'tile' + (size === 'wide' ? ' wide' : size === 'full' ? ' full' : '')}>
-    <div className="tour-tile reveal">
+    <div className="tour-tile">
       <div className={'tile-screen ' + (screen === 'dark' ? 'dark' : screen === 'peach' ? 'peach' : screen === 'sage' ? 'sage' : '')}>
         {children}
       </div>

@@ -1742,19 +1742,41 @@ p { max-width: none; }
 }
 @media (max-width: 880px) { .app-trio { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; } }
 .app-frame {
-  background: linear-gradient(180deg, hsl(20 30% 14%), hsl(20 25% 8%));
+  /* Liquid glass phone casing — multi-stop sheen simulates curved glass body */
+  background: linear-gradient(
+    165deg,
+    hsla(0,0%,100%,0.28) 0%,
+    hsla(0,0%,100%,0.14) 14%,
+    hsla(0,0%,100%,0.05) 30%,
+    hsla(145,30%,60%,0.06) 48%,
+    hsla(0,0%,100%,0.07) 62%,
+    hsla(0,0%,100%,0.18) 80%,
+    hsla(0,0%,100%,0.08) 100%
+  );
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
   border-radius: 38px;
   padding: 12px;
+  border: 1px solid hsla(0,0%,100%,0.45);
   box-shadow:
-    0 4px 0 hsla(0,0%,100%,0.05) inset,
-    0 30px 60px -20px hsla(145, 40%, 8%, 0.4);
+    0 1px 0 hsla(0,0%,100%,0.65) inset,
+    0 -1px 0 hsla(0,0%,0%,0.06) inset,
+    0 30px 60px -12px hsla(145,40%,12%,0.22),
+    0 8px 20px -8px hsla(145,40%,12%,0.14);
   position: relative;
   width: 100%;
   max-width: 280px;
   margin: 0 auto;
-  transition: transform .35s cubic-bezier(.34,1.2,.52,1);
+  transition: transform .35s cubic-bezier(.34,1.2,.52,1), box-shadow .35s ease;
 }
-.app-frame:hover { transform: translateY(-6px); }
+.app-frame:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 1px 0 hsla(0,0%,100%,0.75) inset,
+    0 -1px 0 hsla(0,0%,0%,0.06) inset,
+    0 38px 70px -10px hsla(145,40%,12%,0.28),
+    0 12px 28px -8px hsla(145,40%,12%,0.18);
+}
 .app-frame .app-screen {
   background: hsl(43 35% 96%);
   border-radius: 28px;
@@ -1805,6 +1827,10 @@ p { max-width: none; }
   color: hsl(var(--foreground) / 0.55);
   text-align: center;
   margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 .app-frame .app-caption strong {
   display: block;

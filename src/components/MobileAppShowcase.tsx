@@ -200,7 +200,7 @@ export default function MobileAppShowcase() {
             <div className="tabicon"><Icon name="users" size={18} /></div>
           </div>
         </div>
-        <div className="app-caption">For members · <strong>Lily Match</strong></div>
+        <div className="app-caption"><Icon name="heart" size={12} /> For members · <strong>Lily Match</strong></div>
       </div>
 
       {/* PRACTITIONER APP */}
@@ -273,7 +273,7 @@ export default function MobileAppShowcase() {
             <div className="tabicon"><Icon name="chart" size={18} /></div>
           </div>
         </div>
-        <div className="app-caption">For practitioners · <strong>Lily Practice</strong></div>
+        <div className="app-caption"><Icon name="calendar" size={12} /> For practitioners · <strong>Lily Practice</strong></div>
       </div>
 
       {/* ORG APP */}
@@ -339,7 +339,7 @@ export default function MobileAppShowcase() {
             <div className="tabicon"><Icon name="shield" size={18} /></div>
           </div>
         </div>
-        <div className="app-caption">For organizations · <strong>Lily Admin</strong></div>
+        <div className="app-caption"><Icon name="building" size={12} /> For organizations · <strong>Lily Admin</strong></div>
       </div>
     </div>
   );
