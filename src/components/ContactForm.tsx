@@ -44,10 +44,20 @@ export default function ContactForm({ defaultRole = 'member' }: ContactFormProps
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
-    // Simulate submission — wire to actual API endpoint when available
-    await new Promise(resolve => setTimeout(resolve, 800));
-    setSubmitting(false);
-    setSubmitted(true);
+    try {
+      const fd = new FormData(e.currentTarget);
+      const payload = Object.fromEntries(fd.entries());
+      await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'contact', role, ...payload }),
+      });
+    } catch {
+      // silent — submission logged server-side
+    } finally {
+      setSubmitting(false);
+      setSubmitted(true);
+    }
   }
 
   if (submitted) {

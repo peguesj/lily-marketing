@@ -23,6 +23,8 @@ export default function WaitlistModal({ initialAudience = "member", onClose }: P
   const [audience, setAudience] = useState(initialAudience);
   const [picked, setPicked] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [form, setForm] = useState({
     name: "", email: "", role: "", referral: "", concerns: [] as string[], updates: true,
   });
@@ -46,9 +48,23 @@ export default function WaitlistModal({ initialAudience = "member", onClose }: P
     }));
   };
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setSubmitError('');
+    try {
+      const res = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'waitlist', audience, ...form }),
+      });
+      if (!res.ok) throw new Error('Submission failed');
+      setSubmitted(true);
+    } catch {
+      setSubmitError('Something went wrong. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const successCopy = audience === "member"
@@ -191,7 +207,12 @@ export default function WaitlistModal({ initialAudience = "member", onClose }: P
                       <Icon name="lock" size={12} />
                       Encrypted. Never sold. HIPAA-aligned even pre-launch.
                     </div>
-                    <Btn kind="primary" size="lg" icon="arrow">Join waitlist</Btn>
+                    {submitError && (
+                      <p style={{ fontSize: 13, color: 'hsl(0 60% 40%)', margin: '0 0 8px' }}>{submitError}</p>
+                    )}
+                    <Btn kind="primary" size="lg" icon="arrow" disabled={submitting}>
+                      {submitting ? 'Sending…' : 'Join waitlist'}
+                    </Btn>
                   </div>
                 </form>
               </>

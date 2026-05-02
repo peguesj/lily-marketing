@@ -1,0 +1,11 @@
+{
+  "name": "lily-marketing-api",
+  "version": "1.0.0",
+  "description": "Azure SWA API — form submission handler",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}

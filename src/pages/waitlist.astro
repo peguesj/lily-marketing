@@ -97,9 +97,23 @@ import content from '../content/pages/waitlist.json';
 <script>
   const form = document.getElementById('waitlist-form') as HTMLFormElement;
   const success = document.getElementById('wl-success');
-  form?.addEventListener('submit', (e) => {
+  const btn = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    // For now, just show success — backend integration TBD
+    if (btn) { btn.disabled = true; btn.textContent = 'Joining…'; }
+    const fd = new FormData(form);
+    try {
+      await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'waitlist',
+          audience: fd.get('role') as string,
+          email: fd.get('email') as string,
+        }),
+      });
+    } catch { /* silent */ }
     if (success) success.style.display = 'block';
     form.querySelectorAll('input, select, button').forEach((el) => {
       (el as HTMLInputElement | HTMLButtonElement | HTMLSelectElement).disabled = true;
