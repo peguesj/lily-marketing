@@ -1,14 +1,14 @@
 // Run after `npx astro build`:
-//   MOCKS_SKIP_BUILD=1 node --test scripts/__tests__/d2-about-contact-waitlist.test.mjs
+//   node --test src/components/v2/sections/waitlist/about-contact-waitlist.test.mjs
 // D2-about-contact-waitlist acceptance: asserts the built /about, /contact and /waitlist pages.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { runChecks, visibleText, parseAttrs } from '../check-pages.mjs';
+import { runChecks, visibleText, parseAttrs } from '../../../../../scripts/check-pages.mjs';
 
-const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
+const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..', '..');
 const dist = join(root, 'dist');
 
 function load(route) {
@@ -33,6 +33,9 @@ test('check-pages passes for /about, /contact, /waitlist', () => {
 
 test('/about: founder narrative, ResearchStat, principles, founders, partnership contact', () => {
   const { main, text } = load('/about');
+  assert.ok(text.includes('the licensing jurisdiction—not self-reported.'), 'principle em dash verbatim');
+  assert.ok(text.includes('support new clinicians—your early interest shapes Lily.'), 'CTA lead em dash verbatim');
+  assert.doesNotMatch(text, /Talk with\s+us/, 'no heading that is in no source');
   assert.match(text, /3,000/);
   assert.match(text, /~\$150\/hr/);
   for (const t of ['Verify at the source', 'Show the rate first', 'Both sides sign', 'Keep notes out']) {
@@ -66,8 +69,8 @@ test('/contact: form island with honeypot, topic preselect, direct lines, respon
   for (const box of ['press@asklily.health', 'trust@asklily.health']) {
     const i = text.indexOf(box);
     assert.ok(i >= 0, box);
-    assert.match(text.slice(i, i + 160), /placeholder until the mailbox exists/i, `${box} is labelled`);
   }
+  assert.ok(text.includes('Placeholders until these mailboxes exist.'), 'SVG chip copy verbatim');
   assert.match(text, /one business day/i);
   assert.match(text, /Philadelphia/);
   assert.match(text, /remote-first/i);
@@ -103,7 +106,23 @@ test('/waitlist: counters, audience switch form, rail, steps, phone preview, pri
   assert.match(text, /fictional/i, 'example peer card labelled fictional');
   assert.match(text, /You(?:'|’|&#39;)re on the list\./);
   assert.match(text, /coming soon/i);
-  assert.match(text, /Licenses are verified but not published; information is never sold\./);
+  for (const t of [
+    'Verification begins after you join.',
+    'License review pending means license confirmed, never publicly published.',
+    'The hours feel less lonely with a clear record.',
+    'Dual-signed weekly hours log', 'One shared record for every supervised hour.',
+    'Supervision agreement', 'A simple agreement before your first session.',
+    'Your supervised path can feel fair.',
+    'Join the graduate waitlist now. We’ll reach out only when local matching is open.',
+    'The Lily app is arriving with the Pennsylvania opening.',
+  ]) assert.ok(text.includes(t), `SVG copy: ${t}`);
+  // No fabricated verification record on the peer card, and no copy that is in no source.
+  for (const bad of [/CW012345/, /Checked against/, /\$120 \/hr/, /information is never sold/, /Ready when your area/, /planned to arrive/, /No date is confirmed/]) {
+    assert.doesNotMatch(text, bad);
+  }
+  const cohort = main.match(/<section\b[^>]*data-cohort[^>]*>[\s\S]*?<\/section>/i)?.[0] ?? '';
+  assert.match(cohort, /data-illustrative/, 'first-cohort block is labelled illustrative');
+  assert.ok(visibleText(`<body>${cohort}</body>`).includes('Illustrative · pending validation'));
   assert.match(main, new RegExp(`href="${APP_WELCOME}"`));
   assert.match(text, /Already invited\? Start in the app/);
   const island = main.match(/<astro-island\b[^>]*WaitlistFormPanel[^>]*>/)?.[0];
