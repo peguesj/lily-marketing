@@ -216,3 +216,13 @@ test('both pages: tables everywhere have captions and th scope', () => {
   checkTables(docs.research);
   checkTables(docs.trust);
 });
+
+test('/trust concern route lands on a contact form that preselects the trust topic from ?topic=', () => {
+  const contact = readFileSync(join(root, 'dist', 'contact', 'index.html'), 'utf8');
+  const island = contact.match(/<astro-island\b[^>]*component-url="[^"]*ContactFormPanel[^"]*"[^>]*>/)?.[0];
+  assert.ok(island, '/contact hydrates ContactFormPanel, the island that reads ?topic=');
+  const panel = readFileSync(join(root, 'src/components/v2/sections/contact/ContactFormPanel.tsx'), 'utf8');
+  assert.match(panel, /topicFromSearch\(window\.location\.search\)/, 'panel applies the query-string topic on mount');
+  const topics = readFileSync(join(root, 'src/components/v2/forms/validate.ts'), 'utf8');
+  assert.match(topics, /\{\s*id:\s*'trust'/, '"trust" is a valid contact topic id');
+});
