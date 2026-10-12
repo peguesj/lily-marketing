@@ -1,0 +1,17 @@
+---
+import Eyebrow from '../../ui/Eyebrow.astro';
+import Chip from '../../ui/Chip.astro';
+---
+<section class="office" aria-labelledby="office-title">
+  <Eyebrow>Our office</Eyebrow>
+  <h2 id="office-title" class="office__title">Philadelphia, Pennsylvania</h2>
+  <p class="office__body">Remote-first. We meet supervisors and programs over video, and in person around Philadelphia.</p>
+  <Chip variant="teal">Pilot launching in Pennsylvania: LPC and LCSW first.</Chip>
+</section>
+
+<style>
+  .office { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; padding: 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .office__title { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.5rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+  .office__body { margin: 0; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 1rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .office :global(.v2-chip) { white-space: normal; }
+</style>

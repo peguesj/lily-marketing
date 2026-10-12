@@ -1,39 +1,70 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactForm from '../components/v2/forms/ContactForm.tsx';
-import Illustration from '../components/Illustration.tsx';
+import Section from '../components/v2/ui/Section.astro';
+import SectionHead from '../components/v2/ui/SectionHead.astro';
+import CTABand from '../components/v2/ui/CTABand.astro';
+import Button from '../components/v2/ui/Button.astro';
+import Blob from '../components/v2/ui/Blob.astro';
+import FormCard from '../components/v2/sections/contact/FormCard.astro';
+import DirectLines from '../components/v2/sections/contact/DirectLines.astro';
+import ResponseTiles from '../components/v2/sections/contact/ResponseTiles.astro';
+import OfficeCard from '../components/v2/sections/contact/OfficeCard.astro';
+import { appLinks } from '../config/app';
 ---
 
 <BaseLayout
-  title="Contact — Lily | Talk to Our Team"
-  description="Tell us who you are. We'll get you to a match, an application, or a demo — whichever fits."
+  title="Contact Lily | Talk to a person"
+  description="Program inquiries, supervisor and graduate questions, press, and trust reports all start here. Pick a topic and we route it to the right person. Reply within one business day."
   canonical="https://www.asklily.health/contact"
-  keywords="contact Lily, demo request, therapist application, mental health platform support"
+  keywords="contact Lily, sponsor a cohort, supervisor question, graduate question, press inquiries"
 >
   <main>
-    <!-- HERO -->
-    <section class="page-hero">
-      <div class="container wide">
-        <div class="page-hero-grid">
-          <div>
-            <div class="hero-eyebrow"><span class="dot"></span>Get in touch</div>
-            <h1>Let's get you to <em>the right thing</em>.</h1>
-            <p>
-              Tell us who you are. We'll get you to a match, an application, or a demo — whichever fits.
-            </p>
-          </div>
-          <div class="page-hero-illust-wrap">
-            <Illustration client:load n={8} size={280} alt="Connection, made easy" />
-          </div>
+    <Section tone="canvas" class="contact-hero">
+      <Blob color="teal" top="-6rem" right="-8rem" />
+      <div class="contact-hero__inner">
+        <SectionHead
+          level={1}
+          eyebrow="Contact"
+          title="Talk to a"
+          lead="Program inquiries, supervisor and graduate questions, press, and trust reports all start here. Pick a topic and we route it to the right person. Cohort inquiries go straight to the founders."
+        >
+          <Fragment slot="accent">person.</Fragment>
+        </SectionHead>
+      </div>
+    </Section>
+
+    <Section tone="canvas" class="contact-main">
+      <div class="contact-grid">
+        <FormCard />
+        <div class="contact-side">
+          <DirectLines />
+          <ResponseTiles />
         </div>
       </div>
-    </section>
+    </Section>
 
-    <!-- CONTACT FORM — v2 island; posts to /api/submit (no simulated success) -->
-    <section class="section">
-      <div class="container wide">
-        <ContactForm client:visible />
-      </div>
-    </section>
+    <Section tone="surface">
+      <OfficeCard />
+    </Section>
+
+    <Section tone="canvas">
+      <CTABand headline="Rather start with the" lead="Get a push the day your local roster is ready. Pennsylvania first.">
+        <Fragment slot="accent">waitlist?</Fragment>
+        <Button href="/waitlist" variant="inverse">Join the waitlist</Button>
+        <Button href={appLinks.supervisorSignup} variant="inverse" class="contact-ghost">Join as a supervisor</Button>
+      </CTABand>
+    </Section>
   </main>
 </BaseLayout>
+
+<style>
+  .contact-hero { overflow: hidden; padding-bottom: 32px; }
+  .contact-hero__inner { position: relative; z-index: 1; }
+  .contact-hero :global(.v2-sectionhead) { margin-bottom: 0; }
+  .contact-main { padding-top: 32px; }
+  .contact-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
+  .contact-side { display: flex; flex-direction: column; gap: 2rem; }
+  :global(.contact-ghost.v2-btn--inverse) { background: transparent; color: var(--lily-canvas, #F5F1E9); border-color: var(--lily-canvas, #F5F1E9); box-shadow: none; }
+  :global(.contact-ghost.v2-btn--inverse:hover:not([disabled])) { background: color-mix(in srgb, var(--lily-canvas, #F5F1E9) 14%, transparent); }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: minmax(0, 1fr); } }
+</style>

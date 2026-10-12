@@ -1,0 +1,21 @@
+---
+import StatTile from '../../ui/StatTile.astro';
+---
+<section class="resp" aria-labelledby="resp-title">
+  <h2 id="resp-title" class="resp__title">We answer within <em>one business day.</em></h2>
+  <p class="resp__lead">A real person reads every message. Program and press notes go to the founders, Alphonso and Jeremiah, the same day.</p>
+  <div class="resp__tiles">
+    <StatTile value="1 day" caption="Reply time, weekdays" />
+    <StatTile value="Founders" caption="Read cohort inquiries" />
+    <StatTile value="9 to 5 ET" caption="Mon to Fri office hours" />
+  </div>
+</section>
+
+<style>
+  .resp__title { margin: 0 0 0.75rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.75rem; font-weight: 600; line-height: 1.2; color: var(--lily-forest, #14522E); }
+  .resp__title em { font-style: italic; font-weight: 500; color: var(--lily-primary, #1B6B3E); }
+  .resp__lead { margin: 0 0 1.5rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 1rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .resp__tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .resp__tiles :global(.v2-stat__value) { font-size: 1.5rem; }
+  @media (max-width: 560px) { .resp__tiles { grid-template-columns: minmax(0, 1fr); } }
+</style>

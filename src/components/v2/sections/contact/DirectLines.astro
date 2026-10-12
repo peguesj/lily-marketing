@@ -1,0 +1,42 @@
+---
+import Chip from '../../ui/Chip.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+
+interface Line { address: string; blurb: string; live: boolean }
+const lines: Line[] = [
+  { address: 'hello@asklily.health', blurb: 'General questions from supervisors and graduates.', live: true },
+  { address: 'programs@asklily.health', blurb: 'Cohort sponsorship for colleges and centers. Reaches the founders directly.', live: true },
+  { address: 'press@asklily.health', blurb: 'Interviews, data requests, and brand assets.', live: false },
+  { address: 'trust@asklily.health', blurb: 'Report a license, safety, or conduct concern.', live: false },
+];
+---
+<section class="lines" aria-labelledby="lines-title">
+  <p class="lines__eyebrow" id="lines-title">Direct lines</p>
+  <ul class="lines__list">
+    {lines.map((l) => (
+      <li class="line">
+        {l.live ? (
+          <a class="line__addr" href={`mailto:${l.address}`}>{l.address}</a>
+        ) : (
+          <span class="line__addr line__addr--placeholder">{l.address}</span>
+        )}
+        <p class="line__blurb">{l.blurb}</p>
+        {!l.live && <Chip variant="peach">Placeholder until the mailbox exists</Chip>}
+      </li>
+    ))}
+  </ul>
+  <IllustrativeNotice>
+    <p>press@ and trust@ are placeholders until these mailboxes exist. Until then, use the contact form and choose Press or Trust report.</p>
+  </IllustrativeNotice>
+</section>
+
+<style>
+  .lines { display: flex; flex-direction: column; gap: 1rem; padding: 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .lines__eyebrow { margin: 0; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .lines__list { display: flex; flex-direction: column; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+  .line { display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--lily-border, #D5DFD9); }
+  .line:last-child { border-bottom: 0; padding-bottom: 0; }
+  .line__addr { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 1.0625rem; font-weight: 600; color: var(--lily-primary, #1B6B3E); text-underline-offset: 3px; overflow-wrap: anywhere; }
+  .line__addr--placeholder { color: var(--lily-forest, #14522E); }
+  .line__blurb { margin: 0 0 0.25rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.875rem; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
+</style>
