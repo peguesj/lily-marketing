@@ -1,7 +1,7 @@
 ---
 /**
  * Design-system preview for the v2 site primitives.
- * noindex, excluded from the sitemap (see src/components/v2/ui/kit-route.mjs).
+ * noindex; mounted and excluded from the sitemap by src/config/preview-routes.mjs (shell).
  * Standalone on purpose: it does not depend on the v2 shell/layout.
  */
 import Button from '../components/v2/ui/Button.astro';
@@ -112,11 +112,13 @@ const chips = ['Race and ethnicity', 'Language', 'Faith', 'First-generation'];
         <StepCard number={2} title="Match and agree" connector><p>Both sides pick. Nobody is assigned.</p></StepCard>
         <StepCard number={3} title="Log weekly"><p>Hours are logged and signed twice.</p></StepCard>
       </div>
+      <IllustrativeNotice class="kit-gap"><p>License review and hour-signing steps are proposed and pending validation.</p></IllustrativeNotice>
     </Section>
 
     <Section tone="canvas" ariaLabelledby="kit-faq">
       <h2 id="kit-faq" class="kit-h2">FAQ</h2>
       <FAQ items={faq} openFirst />
+      <IllustrativeNotice class="kit-gap"><p>Answers describe proposed behaviour. Review rules, rates and agreement terms are pending validation.</p></IllustrativeNotice>
     </Section>
 
     <Section tone="muted" ariaLabelledby="kit-trust">
@@ -139,6 +141,7 @@ const chips = ['Race and ethnicity', 'Language', 'Faith', 'First-generation'];
           <Button variant="inverse" href="/waitlist" dataAction="cta-waitlist">Join the waitlist</Button>
           <Button variant="inverse" small href="/how">How it works</Button>
         </CTABand>
+        <IllustrativeNotice class="kit-gap"><p>County thresholds and match counts are placeholders pending validation.</p></IllustrativeNotice>
       </Container>
     </Section>
   </body>
