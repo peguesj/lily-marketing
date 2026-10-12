@@ -88,29 +88,36 @@ test('off-screen text honeypot (tabindex=-1) is accepted', () => {
   }
 });
 
+// Pending-route behaviour is exercised with an injected pending set: wave D2 shipped every route,
+// so PENDING_ROUTES itself is empty.
+const PENDING = ['/supervisors', '/graduates', '/programs', '/how-it-works'];
+
+test('every sitemap route has shipped: PENDING_ROUTES is empty', () => {
+  assert.deepEqual(PENDING_ROUTES, []);
+  assert.deepEqual(SHIPPED_ROUTES, ROUTES);
+});
+
 test('pending route missing is a notice by default, not a failure', () => {
-  assert.ok(PENDING_ROUTES.includes('/supervisors'));
-  const r = runChecks({ dist: join(FIX, 'good'), only: ['/supervisors'], appUrl: APP_URL });
+  const r = runChecks({ dist: join(FIX, 'good'), only: ['/supervisors'], appUrl: APP_URL, pending: PENDING });
   assert.ok(!rules(r).includes('exists'), JSON.stringify(r.failures));
   assert.ok(r.pending.some((p) => p.route === '/supervisors'));
 });
 
 test('pending route missing fails in strict mode (launch gate)', () => {
-  const r = runChecks({ dist: join(FIX, 'good'), only: ['/supervisors'], appUrl: APP_URL, strict: true });
+  const r = runChecks({ dist: join(FIX, 'good'), only: ['/supervisors'], appUrl: APP_URL, strict: true, pending: PENDING });
   assert.ok(rules(r).includes('exists'));
 });
 
 test('shipped route missing always fails', () => {
-  assert.ok(!PENDING_ROUTES.includes('/pricing'));
-  const r = runChecks({ dist: join(FIX, 'good'), only: ['/pricing'], appUrl: APP_URL });
+  const r = runChecks({ dist: join(FIX, 'good'), only: ['/pricing'], appUrl: APP_URL, pending: PENDING });
   assert.ok(rules(r).includes('exists'));
 });
 
 test('redirect to a pending route is a notice by default and a failure in strict mode', () => {
-  const lax = runChecks({ dist: join(FIX, 'good'), only: ['/'], appUrl: APP_URL });
+  const lax = runChecks({ dist: join(FIX, 'good'), only: ['/'], appUrl: APP_URL, pending: PENDING });
   assert.ok(!rules(lax).includes('redirect-target'), JSON.stringify(lax.failures));
   assert.ok(lax.pending.some((p) => p.rule === 'redirect-target' && p.route === '/how'));
-  const strict = runChecks({ dist: join(FIX, 'good'), only: ['/'], appUrl: APP_URL, strict: true });
+  const strict = runChecks({ dist: join(FIX, 'good'), only: ['/'], appUrl: APP_URL, strict: true, pending: PENDING });
   assert.ok(rules(strict).includes('redirect-target'));
 });
 
