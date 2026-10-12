@@ -31,6 +31,7 @@ const {
   buildWaitlistPayload,
   buildContactPayload,
   buildCohortPayload,
+  CONTACT_TOPICS,
   firstName,
 } = await load('src/components/v2/forms/validate.ts');
 const submitMod = await load('src/lib/submit.ts');
@@ -180,6 +181,35 @@ test('cohort proposal validates in two steps and posts contact/cohort', () => {
   assert.equal(p.organization, 'Penn CMHC');
   assert.equal(p.coveredLives, 9);
   assert.match(p.message, /9/);
+});
+
+// The Phoenix SubmitController persists only role, coveredLives, licenseType, states,
+// firstName, lastName (+ organization, email, message) for type=contact, and the notifier
+// builds the subject from role. Routing data must ride on those fields.
+const PERSISTED_CONTACT_FIELDS = ['role', 'coveredLives', 'licenseType', 'states', 'firstName', 'lastName', 'organization', 'email', 'message'];
+
+test('contact topic reaches the backend through the persisted role field', () => {
+  for (const topic of ['sponsor', 'supervisor', 'graduate', 'press', 'trust', 'other']) {
+    const p = buildContactPayload({ topic, name: 'Sam Lee', email: 'sam@example.com', organization: '', message: 'Hi.' }, '');
+    const label = CONTACT_TOPICS.find((t) => t.id === topic).label;
+    assert.equal(p.role, `Contact topic: ${label}`);
+    const persisted = Object.fromEntries(PERSISTED_CONTACT_FIELDS.map((k) => [k, p[k]]));
+    assert.match(JSON.stringify(persisted), new RegExp(label));
+  }
+});
+
+test('cohort proposal keeps size, state, topic and consent in persisted fields', () => {
+  const org = { organization: 'Penn CMHC', role: 'Clinical director', cohortSize: '9', state: 'PA' };
+  const p = buildCohortPayload(org, { name: 'Ana Ruiz', email: 'ana@example.com', consent: true }, '');
+  assert.equal(p.coveredLives, 9);
+  assert.equal(p.states, 'PA');
+  assert.equal(p.role, 'Clinical director');
+  assert.match(p.message, /^Cohort proposal request/);
+  assert.match(p.message, /Consent to contact: yes/);
+  for (const k of ['cohortSize', 'state', 'topic', 'consentToContact']) {
+    // non-persisted mirrors are allowed, but every one must also be recoverable from persisted fields
+    if (k in p) assert.ok(PERSISTED_CONTACT_FIELDS.some((f) => String(p[f] ?? '').includes(String(p[k] === true ? 'yes' : p[k] === 'cohort' ? 'Cohort' : p[k]))), `${k} not recoverable`);
+  }
 });
 
 test('firstName helper', () => {
