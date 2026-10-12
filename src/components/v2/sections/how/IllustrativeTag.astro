@@ -1,0 +1,21 @@
+---
+/** Small visible validation label. Reads exactly "Illustrative · pending validation". */
+interface Props { class?: string }
+const { class: extra } = Astro.props;
+---
+<p class:list={['how-tag', extra]} data-illustrative>Illustrative · pending validation</p>
+
+<style>
+  .how-tag {
+    align-self: flex-start;
+    margin: 0;
+    padding: 0.125rem 0.625rem;
+    border-radius: var(--radius-chip, 9999px);
+    background: color-mix(in srgb, var(--lily-peach, #F0B882) 38%, var(--lily-canvas, #F5F1E9));
+    color: var(--lily-forest, #14522E);
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+</style>

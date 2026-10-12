@@ -1,0 +1,29 @@
+---
+import Container from '../../ui/Container.astro';
+import Eyebrow from '../../ui/Eyebrow.astro';
+import Timeline from '../../mocks/Timeline.astro';
+/** "The whole journey": six lotus-petal nodes, destination filled. */
+const steps = [
+  { label: 'Join', sub: 'One screen, one push' },
+  { label: 'Verify', sub: 'Licensing check' },
+  { label: 'Match', sub: 'Both say yes' },
+  { label: 'Agree', sub: 'Dual signature' },
+  { label: 'Log', sub: 'Signed by the other' },
+  { label: 'Grow', sub: 'Past the license' },
+];
+---
+<section class="journey" aria-labelledby="how-journey-title">
+  <Container>
+    <div class="journey__head">
+      <Eyebrow>The whole journey</Eyebrow>
+      <h2 id="how-journey-title" class="journey__title">One account from sign-up to <em>caseload.</em></h2>
+    </div>
+    <Timeline steps={steps} />
+  </Container>
+</section>
+
+<style>
+  .journey { padding-block: 64px; }
+  .journey__head { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2.5rem; }
+  .journey__title { margin: 0; font-size: clamp(1.875rem, 3.6vw, 2.5rem); font-weight: 600; line-height: 1.15; }
+</style>

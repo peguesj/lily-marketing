@@ -1,0 +1,20 @@
+---
+/** Surface card that frames a product fragment beside a step's copy. */
+interface Props { class?: string; label?: string }
+const { class: extra, label } = Astro.props;
+---
+<div class:list={['how-panel', extra]} role={label ? 'group' : undefined} aria-label={label}><slot /></div>
+
+<style>
+  .how-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: var(--card-padding, 32px);
+    border-radius: var(--radius-card, 1.25rem);
+    background: var(--lily-surface, #F8F5EF);
+    box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+  }
+  .how-panel :global([data-mock]) { max-width: 100%; }
+  @media (max-width: 600px) { .how-panel { padding: 20px; } }
+</style>

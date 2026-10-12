@@ -1,0 +1,31 @@
+---
+import PhoneFrame from '../../mocks/PhoneFrame.astro';
+/** One-screen graduate sign-up inside a phone. Fictional person; every field is static. */
+interface Props { name?: string; track?: string; county?: string; format?: string }
+const {
+  name = 'Maya Okafor',
+  track = 'LCSW track',
+  county = 'Montgomery County, PA',
+  format = 'Individual · up to $110/hr',
+} = Astro.props;
+const fields = [name, track, county, format];
+---
+<PhoneFrame label="Example graduate sign-up screen: name, license track, county and format on one screen">
+  <div class="join" data-mock="JoinPhone">
+    <p class="join__word">Lily</p>
+    <p class="join__eyebrow">One screen, once</p>
+    <ul class="join__fields">
+      {fields.map((f) => <li>{f}</li>)}
+    </ul>
+    <p class="join__cta">Join and wait</p>
+  </div>
+</PhoneFrame>
+
+<style>
+  .join { display: flex; flex-direction: column; gap: 0.5rem; padding: 2.5rem 0.875rem 1rem; height: 100%; box-sizing: border-box; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); }
+  .join__word { margin: 0; font-family: var(--font-wordmark, Jost, sans-serif); font-weight: 300; font-size: 1.375rem; color: var(--lily-wordmark, #2E5F55); }
+  .join__eyebrow { margin: 0 0 0.25rem; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .join__fields { display: flex; flex-direction: column; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+  .join__fields li { padding: 0.5rem 0.75rem; border: 1px solid var(--lily-border, #D5DFD9); border-radius: var(--radius-field, 9999px); background: var(--lily-canvas, #F5F1E9); font-size: 11px; color: var(--lily-forest, #14522E); }
+  .join__cta { margin: auto 0 0.5rem; padding: 0.625rem; border-radius: var(--radius-chip, 9999px); background: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9); font-size: 12px; font-weight: 600; text-align: center; }
+</style>

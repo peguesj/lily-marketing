@@ -1,0 +1,36 @@
+---
+import IllustrativeTag from './IllustrativeTag.astro';
+/**
+ * Push threshold meter. Cleared state: the count is past the threshold, so the bar is full and the
+ * marker sits at the threshold. Example figures only.
+ */
+interface Props { count?: number; threshold?: number; county?: string; clearedOn?: string }
+const { count = 14, threshold = 12, county = 'Montgomery County', clearedOn = '2 Oct 2026' } = Astro.props;
+const markerPct = Math.min(100, Math.round((threshold / Math.max(count, threshold)) * 100));
+---
+<div class="meter" data-threshold>
+  <p class="meter__eyebrow">The threshold <span class="meter__ex">Example</span></p>
+  <div class="meter__track" role="img" aria-label={`${count} of ${threshold} verified supervisors needed in ${county}: threshold cleared`}>
+    <span class="meter__fill"></span>
+    <span class="meter__marker" style={`left:${markerPct}%`}></span>
+    <span class="meter__mark-label" style={`left:${markerPct}%`} aria-hidden="true">{threshold}</span>
+  </div>
+  <p class="meter__count">{count} of {threshold} verified supervisors in {county}</p>
+  <p class="meter__sub">Cleared {clearedOn} · one push sent, nothing since</p>
+  <p class="meter__quiet">Until then Lily sends nothing. No feed, no drip.</p>
+  <IllustrativeTag />
+</div>
+
+<style>
+  .meter { display: flex; flex-direction: column; gap: 0.5rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); }
+  .meter p { margin: 0; }
+  .meter__eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .meter__ex { margin-left: 0.5rem; padding: 0.0625rem 0.5rem; border-radius: 9999px; background: var(--lily-surface-muted, #ECE8DF); letter-spacing: 0.04em; text-transform: none; color: var(--lily-forest, #14522E); }
+  .meter__track { position: relative; height: 0.75rem; margin: 0.5rem 0 1.25rem; border-radius: 9999px; background: var(--lily-surface-muted, #ECE8DF); }
+  .meter__fill { position: absolute; inset: 0; border-radius: inherit; background: var(--lily-success, #28874F); }
+  .meter__marker { position: absolute; top: -0.375rem; bottom: -0.375rem; width: 2px; background: var(--lily-forest, #14522E); transform: translateX(-1px); }
+  .meter__mark-label { position: absolute; top: 1.25rem; font-size: 11px; color: var(--lily-text-muted-aa, #4E6B5A); transform: translateX(-50%); }
+  .meter__count { font-size: 0.875rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .meter__sub { font-size: 0.875rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .meter__quiet { margin-top: 0.5rem; font-size: 0.8125rem; font-style: italic; color: var(--lily-text-muted-aa, #4E6B5A); }
+</style>
