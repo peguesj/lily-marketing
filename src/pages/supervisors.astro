@@ -1,0 +1,88 @@
+---
+/**
+ * /supervisors: the supply-side landing page (spec: site-supervisors). Twelve sections in
+ * spec order; the thirteenth, the footer, comes from BaseLayout. Everything about licensure,
+ * eligibility, verification, fees and thresholds is illustrative pending validation.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/v2/sections/supervisors/Hero.astro';
+import WhyNow from '../components/v2/sections/supervisors/WhyNow.astro';
+import WhatLilyDoes from '../components/v2/sections/supervisors/WhatLilyDoes.astro';
+import Verification from '../components/v2/sections/supervisors/Verification.astro';
+import AppScreens from '../components/v2/sections/supervisors/AppScreens.astro';
+import Group from '../components/v2/sections/supervisors/Group.astro';
+import Reciprocity from '../components/v2/sections/supervisors/Reciprocity.astro';
+import Earnings from '../components/v2/sections/supervisors/Earnings.astro';
+import Eligibility from '../components/v2/sections/supervisors/Eligibility.astro';
+import Faq from '../components/v2/sections/supervisors/Faq.astro';
+import Waitlist from '../components/v2/sections/supervisors/Waitlist.astro';
+import RosterBand from '../components/v2/sections/supervisors/RosterBand.astro';
+---
+<BaseLayout
+  title="For supervisors | Lily"
+  description="Paid, scheduled supervisees who already fit your license path. Lily matches both ways, drafts the agreement and keeps a dual-signed hours log. No fee at launch. Pennsylvania pilot."
+  canonical="https://www.asklily.health/supervisors"
+>
+  <Hero />
+  <WhyNow />
+  <WhatLilyDoes />
+  <Verification />
+  <AppScreens />
+  <Group />
+  <Reciprocity />
+  <Earnings />
+  <Eligibility />
+  <Faq />
+  <Waitlist />
+  <RosterBand />
+</BaseLayout>
+
+<style is:global>
+  /*
+   * The shell styles every [data-illustrative] as a small dashed tag (lily-v2-tokens.css), but the
+   * v2 mocks, StatTile and IllustrativeNotice also put the attribute on their container roots, so
+   * the tag look (inline-flex, 11px uppercase, dashed pill) leaks into them and, inside the phone
+   * mocks, wraps the small italic tag lines into tall pills. Neutralise it on container roots and
+   * on leaf tags inside mocks. Specificity is (0,1,1): above the shell's (0,1,0), below the
+   * components' own scoped rules (0,2,0), so anything a component sets for itself still wins.
+   * Leaf tags outside mocks keep the shell look.
+   */
+  :is(section, article, aside, div, p, span):where([data-mock], .v2-stat, .v2-illustrative, .sup-plain)[data-illustrative],
+  :where([data-mock]) :is(p, span)[data-illustrative] {
+    display: revert;
+    align-items: normal;
+    gap: normal;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+    color: inherit;
+  }
+  :where([data-mock]) :is(p, span)[data-illustrative] { font-size: inherit; }
+
+  /*
+   * Legacy lily-glass.css defines a global `.badge` (an absolutely positioned, rotated orbit
+   * chip). PractitionerCard and VerificationRows use the same class name for a plain block
+   * wrapper, so reset the legacy box inside mocks.
+   */
+  body [data-mock] .badge,
+  body [data-mock] .badge:hover,
+  body [data-mock] .badge:focus-within {
+    position: static;
+    left: auto;
+    top: auto;
+    width: auto;
+    height: auto;
+    display: block;
+    border-radius: 0;
+    overflow: visible;
+    white-space: normal;
+    box-shadow: none;
+    transform: none;
+    transition: none;
+    cursor: auto;
+  }
+</style>
