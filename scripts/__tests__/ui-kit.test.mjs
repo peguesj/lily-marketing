@@ -17,6 +17,13 @@ const html = existsSync(kitPath) ? readFileSync(kitPath, 'utf8') : '';
 const hasClass = (cls) => new RegExp(`class="[^"]*\\b${cls}\\b[^"]*"`).test(html);
 const count = (re) => (html.match(re) ?? []).length;
 
+// Astro may inline or externalise component CSS; read both.
+const linkedCss = [...html.matchAll(/<link[^>]*rel="stylesheet"[^>]*href="([^"]+)"/g)]
+  .map((m) => join(root, 'dist', m[1]))
+  .filter(existsSync)
+  .map((f) => readFileSync(f, 'utf8'));
+const css = [...[...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]), ...linkedCss].join('\n');
+
 test('page is noindex and excluded from sitemap', () => {
   assert.match(html, /<meta name="robots" content="noindex[^"]*"/);
   for (const f of readdirSync(join(root, 'dist')).filter((n) => /^sitemap.*\.xml$/.test(n))) {
@@ -102,7 +109,7 @@ test('PetalMark has 3/4/5 petal variants and is decorative', () => {
 
 test('Blob is decorative and uses 18% opacity', () => {
   assert.match(html, /class="[^"]*v2-blob[^"]*"[^>]*aria-hidden="true"/);
-  assert.match(html, /prefers-reduced-motion/);
+  assert.match(css, /prefers-reduced-motion/);
 });
 
 test('Section / Container render with tone', () => {
@@ -117,7 +124,7 @@ test('no inline white-on-peach styles', () => {
     assert.ok(!(white && peach), `white-on-peach inline style: ${s}`);
   }
   // Chip peach variant must not use a white foreground in the shipped CSS either.
-  const css = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]).join('\n');
+  assert.match(css, /\.v2-chip--peach/, 'peach chip CSS shipped');
   for (const rule of css.matchAll(/\.v2-chip--peach[^{]*\{([^}]*)\}/g)) {
     assert.ok(!/(^|;)\s*color\s*:\s*(#fff(fff)?\b|white\b)/i.test(rule[1]), 'peach chip has white text');
   }
