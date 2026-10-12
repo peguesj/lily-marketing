@@ -6,7 +6,7 @@ import { cpSync, mkdtempSync, copyFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { runChecks } from './check-pages.mjs';
+import { runChecks, ROUTES, PENDING_ROUTES, SHIPPED_ROUTES } from './check-pages.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const FIX = join(here, '__fixtures__');
@@ -37,6 +37,8 @@ const VIOLATIONS = [
   ['empty-href.html', 'dead-href'],
   ['two-h1.html', 'h1'],
   ['no-h1.html', 'h1'],
+  ['illustrative-footer-only.html', 'illustrative'],
+  ['honeypot-visible-text.html', 'honeypot'],
 ];
 
 for (const [file, rule] of VIOLATIONS) {
@@ -62,7 +64,57 @@ test('missing redirect fails', () => {
   }
 });
 
-test('page that does not exist fails by design', () => {
+test('footer marker does not cover a claim in <main>', () => {
+  const dir = withBad('illustrative-footer-only.html');
+  try {
+    const r = runChecks({ dist: dir, only: ['/'], appUrl: APP_URL });
+    const f = r.failures.find((x) => x.rule === 'illustrative');
+    assert.ok(f, 'expected illustrative failure');
+    assert.match(f.message, /main/);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('off-screen text honeypot (tabindex=-1) is accepted', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'check-pages-'));
+  try {
+    cpSync(join(FIX, 'good'), dir, { recursive: true });
+    copyFileSync(join(FIX, 'variants', 'honeypot-text-offscreen.html'), join(dir, 'index.html'));
+    const r = runChecks({ dist: dir, only: ['/'], appUrl: APP_URL });
+    assert.deepEqual(r.failures, []);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('pending route missing is a notice by default, not a failure', () => {
+  assert.ok(PENDING_ROUTES.includes('/supervisors'));
   const r = runChecks({ dist: join(FIX, 'good'), only: ['/supervisors'], appUrl: APP_URL });
+  assert.ok(!rules(r).includes('exists'), JSON.stringify(r.failures));
+  assert.ok(r.pending.some((p) => p.route === '/supervisors'));
+});
+
+test('pending route missing fails in strict mode (launch gate)', () => {
+  const r = runChecks({ dist: join(FIX, 'good'), only: ['/supervisors'], appUrl: APP_URL, strict: true });
   assert.ok(rules(r).includes('exists'));
+});
+
+test('shipped route missing always fails', () => {
+  assert.ok(!PENDING_ROUTES.includes('/pricing'));
+  const r = runChecks({ dist: join(FIX, 'good'), only: ['/pricing'], appUrl: APP_URL });
+  assert.ok(rules(r).includes('exists'));
+});
+
+test('redirect to a pending route is a notice by default and a failure in strict mode', () => {
+  const lax = runChecks({ dist: join(FIX, 'good'), only: ['/'], appUrl: APP_URL });
+  assert.ok(!rules(lax).includes('redirect-target'), JSON.stringify(lax.failures));
+  assert.ok(lax.pending.some((p) => p.rule === 'redirect-target' && p.route === '/how'));
+  const strict = runChecks({ dist: join(FIX, 'good'), only: ['/'], appUrl: APP_URL, strict: true });
+  assert.ok(rules(strict).includes('redirect-target'));
+});
+
+test('default route set is shipped routes only', () => {
+  for (const r of PENDING_ROUTES) assert.ok(ROUTES.includes(r), `${r} is in the full sitemap`);
+  assert.deepEqual(SHIPPED_ROUTES, ROUTES.filter((r) => !PENDING_ROUTES.includes(r)));
 });
