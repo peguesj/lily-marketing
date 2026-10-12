@@ -186,3 +186,26 @@ test('/programs proposal form, CTA band and app inquiry link', () => {
   const inquiry = anchors(prog).find((a) => a.attrs.href === `${APP}/beta/join?audience=sponsor`);
   assert.ok(inquiry, 'secondary programInquiry link');
 });
+
+test('/graduates hero labels the two-year timeline and $150 rate as a persona scenario', () => {
+  const lead = gradText.indexOf('Two more years. Supervision that can cost $150 an hour.');
+  assert.ok(lead >= 0, 'hero lead present');
+  const hero = grad.slice(grad.indexOf('grad-hero-title'), grad.indexOf('grad-hero__visual'));
+  const tags = [...hero.matchAll(/<p\b[^>]*\sdata-illustrative[^>]*>([\s\S]*?)<\/p>/gi)].map((m) => visibleText(`<body>${m[1]}</body>`));
+  assert.ok(tags.some((t) => /persona scenario/i.test(t) && t.includes('Illustrative · pending validation')), 'persona-scenario tag in the hero copy column');
+});
+
+test('/graduates waitlist lead asks for the ZIP code the form collects, not a county', () => {
+  const sec = grad.slice(grad.indexOf('grad-waitlist-title') - 400, grad.indexOf('grad-waitlist__form'));
+  const t = tidy(visibleText(`<body>${sec}</body>`));
+  assert.ok(t.includes('Tell us your ZIP code. We will email when local matching becomes available. No booking or payment today.'));
+  assert.doesNotMatch(t, /your county/i);
+});
+
+test('spec CTA labels are verbatim, with no added trailing arrow', () => {
+  for (const [html, label] of [[prog, 'Talk to us about a cohort'], [prog, 'Talk to Lily'], [grad, 'Explore programs']]) {
+    const a = anchors(html).find((x) => x.text.replace(/\s*→\s*$/, '').trim() === label);
+    assert.ok(a, `${label} link present`);
+    assert.equal(a.text.trim(), label, `${label} must not carry an arrow`);
+  }
+});
