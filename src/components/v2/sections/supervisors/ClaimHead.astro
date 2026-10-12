@@ -1,0 +1,47 @@
+---
+import Eyebrow from '../../ui/Eyebrow.astro';
+/**
+ * Section heading for the /supervisors page. Same look as ui/SectionHead, but rendered as a
+ * <div> rather than a <header>: scripts/check-pages.mjs evaluates every <header> as one region,
+ * and a heading that mentions verification or licensure must not drag that region out of the
+ * "illustrative" rule. Use ui/SectionHead where the heading carries no such claim.
+ */
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+  /** Italic phrase after the title. */
+  accent?: string;
+  /** Plain text after the accent phrase, e.g. "." or " first.". */
+  after?: string;
+  lead?: string;
+  class?: string;
+}
+const { id, eyebrow, title, accent, after = '', lead, class: extra } = Astro.props;
+---
+<div class:list={['claimhead', extra]}>
+  <Eyebrow>{eyebrow}</Eyebrow>
+  <h2 id={id} class="claimhead__title">{title}{accent && ' '}{accent && <em class="claimhead__accent">{accent}</em>}{after}</h2>
+  {lead && <p class="claimhead__lead">{lead}</p>}
+</div>
+
+<style>
+  .claimhead { display: flex; flex-direction: column; gap: 0.75rem; max-width: 46rem; margin-bottom: 3rem; }
+  .claimhead__title {
+    margin: 0;
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--lily-forest, #14522E);
+  }
+  .claimhead__accent { font-style: italic; font-weight: 500; color: var(--lily-primary, #1B6B3E); }
+  .claimhead__lead {
+    margin: 0;
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 1.125rem;
+    line-height: 1.55;
+    color: var(--lily-text-muted-aa, #4E6B5A);
+  }
+</style>

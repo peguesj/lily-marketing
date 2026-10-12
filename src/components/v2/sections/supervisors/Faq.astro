@@ -1,0 +1,47 @@
+---
+import Section from '../../ui/Section.astro';
+import ClaimHead from './ClaimHead.astro';
+import FAQ from '../../ui/FAQ.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+
+const items = [
+  {
+    q: 'What does Lily cost me?',
+    a: 'Nothing at launch. You keep your full rate and the graduate pays you directly. When we add a per-session share, you get it in writing at least one billing cycle before it applies, and it never touches agreements already signed.',
+  },
+  {
+    q: 'How do you verify?',
+    a: 'Proposed: you enter the number printed on your license, and the proposed license-review source confirms type, status and issue date before your profile is published. If the lookup is unavailable, a person reviews it. The source and the rules are pending validation.',
+  },
+  {
+    q: 'What happens before the threshold?',
+    a: 'You can join and set your rates, but nothing is published to graduates until the Pennsylvania roster reaches its threshold (an illustrative 25 supervisors). Then "Lily is ready" goes out to every graduate waiting.',
+  },
+  {
+    q: 'Can I run a group?',
+    a: 'Yes. A group of four meets in a proposed recurring slot, each supervisee is billed and signs separately, and hours are logged for each person. Boards differ on how many group hours count, and we show each supervisee what still counts for them.',
+  },
+  {
+    q: 'What if a graduate disputes hours?',
+    a: 'Hours are logged by one of you and signed by the other. A disputed week is flagged to both of you and stays unsigned until it is resolved, and the original entry stays visible in the log.',
+  },
+  {
+    q: 'Psychology Today vs Lily',
+    a: 'A directory lists you and graduates message out of the blue. Lily matches both ways: a ranked inbox, a real booked slot, a pre-filled agreement and a dual-signed hours log. Keeping a directory listing alongside Lily is up to you.',
+  },
+];
+---
+<div data-section="faq" id="faq" class="sup-anchor">
+  <Section tone="surface" ariaLabelledby="sup-faq-title">
+    <ClaimHead id="sup-faq-title" eyebrow="Questions" title="Things supervisors" accent="ask" after=" us." />
+    <FAQ items={items} openFirst />
+    <IllustrativeNotice class="sup-faq__note">
+      <p>Answers describe proposed behavior. License review, the roster threshold, group-hour rules and any later fee are pending validation.</p>
+    </IllustrativeNotice>
+  </Section>
+</div>
+
+<style>
+  .sup-anchor { scroll-margin-top: 80px; }
+  :global(.sup-faq__note) { margin-top: 2rem; }
+</style>

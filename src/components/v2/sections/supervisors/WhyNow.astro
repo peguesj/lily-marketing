@@ -1,0 +1,33 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import StatTile from '../../ui/StatTile.astro';
+
+// Figures are illustrative: each tile carries the StatTile "Illustrative · pending validation" flag.
+const tiles = [
+  { value: 'DM', title: 'Requests arrive cold', body: 'Graduates find you on Psychology Today and message out of the blue. You do the screening alone.', icon: 'M4 5h16v11H8l-4 4V5Z' },
+  { value: '1 in 4', title: 'First calls that never happen', body: 'One in four intro calls is a no-show. Lily books a real slot, like Thu 7:00pm, before you ever talk.', icon: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 5v4l3 2' },
+  { value: '3 hrs', title: 'Unpaid admin, every week', body: 'Agreements, hours logs, signatures, board paperwork. We draft and track all of it for you.', icon: 'M7 4h10v16H7V4Zm3 4h4M10 12h4M10 16h2' },
+  { value: '$0', title: 'No fee at launch', body: 'Keep your full rate. A per-session share comes only once matching is working, and we tell you first.', icon: 'M12 3v18M16 7.5c0-1.7-1.8-3-4-3s-4 1.3-4 3 1.8 2.8 4 3.5 4 1.8 4 3.5-1.8 3-4 3-4-1.3-4-3' },
+];
+---
+<div data-section="why-now">
+  <Section tone="surface">
+    <SectionHead eyebrow="Why now" title="Requests arrive by DM. Vetting is">
+      <Fragment slot="accent">tedious.</Fragment>
+    </SectionHead>
+    <div class="sup-why__grid">
+      {tiles.map((t) => (
+        <StatTile value={t.value} caption={`${t.title}. ${t.body}`} illustrative>
+          <svg slot="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d={t.icon} /></svg>
+        </StatTile>
+      ))}
+    </div>
+  </Section>
+</div>
+
+<style>
+  .sup-why__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
+  @media (max-width: 1000px) { .sup-why__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .sup-why__grid { grid-template-columns: 1fr; } }
+</style>

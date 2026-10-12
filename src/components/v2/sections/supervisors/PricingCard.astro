@@ -1,0 +1,36 @@
+---
+/** Rate card for the earnings section. Figures are illustrative; the section carries the notice. */
+interface Props {
+  eyebrow: string;
+  /** Large figure, e.g. "$120". */
+  price: string;
+  /** Text after the figure, e.g. "/hr, you set it". */
+  unit: string;
+  bullets: string[];
+}
+const { eyebrow, price, unit, bullets } = Astro.props;
+---
+<article class="pc" data-pricing-card>
+  <p class="pc__eyebrow">{eyebrow}</p>
+  <p class="pc__price"><strong>{price}</strong> <span>{unit}</span></p>
+  <ul class="pc__list">
+    {bullets.map((b) => (
+      <li>
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="8" fill="var(--lily-success, #28874F)" /><path d="m4.6 8.3 2.3 2.3 4.5-4.8" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        <span>{b}</span>
+      </li>
+    ))}
+  </ul>
+</article>
+
+<style>
+  .pc { box-sizing: border-box; display: grid; gap: 1.25rem; align-content: start; padding: 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); border: 1px solid var(--lily-border, #D5DFD9); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  p { margin: 0; }
+  .pc__eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; color: var(--lily-text-muted-strong, #4F7060); }
+  .pc__price { color: var(--lily-forest, #14522E); }
+  .pc__price strong { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 3rem; font-weight: 500; line-height: 1; }
+  .pc__price span { font-size: 1rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .pc__list { display: grid; gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
+  .pc__list li { display: flex; gap: 0.625rem; align-items: flex-start; font-size: 0.9375rem; line-height: 1.5; color: var(--lily-forest, #14522E); }
+  .pc__list svg { flex: none; margin-top: 0.15rem; }
+</style>

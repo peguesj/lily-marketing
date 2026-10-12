@@ -1,0 +1,52 @@
+---
+import PhoneFrame from '../../mocks/PhoneFrame.astro';
+/** Phone 3: weekly sign-off. Fictional supervisees; static imagery. */
+const sessions = [
+  { when: 'Mon 6:00pm · Marcus Reed', what: 'Individual · 1.0 hr · Virtual', state: 'Signed by Marcus, Mon 7:04pm' },
+  { when: 'Thu 7:00pm · Group of four', what: 'Group · 1.5 hr · Priya, Jordan, Marcus', state: '3 of 3 signed' },
+];
+---
+<PhoneFrame label="Example weekly sign-off screen listing two sessions and 2.5 hours to sign">
+  <div class="so">
+    <p class="so__eyebrow">WEEK OF OCT 5, 2026</p>
+    <h4>Sign off <em>2.5 hours</em>.</h4>
+    <ul class="so__list">
+      {sessions.map((s) => (
+        <li>
+          <strong>{s.when}</strong>
+          <span>{s.what}</span>
+          <span class="so__ok"><i aria-hidden="true"></i>{s.state}</span>
+        </li>
+      ))}
+      <li>
+        <strong>Marcus Reed, hours to date</strong>
+        <span>1,240 of 3,000 · LCSW path</span>
+        <span class="so__bar"><b style="width:41%"></b></span>
+        <span class="so__pct">41%</span>
+      </li>
+    </ul>
+    <p class="so__pill">Sign off this week</p>
+    <p class="so__foot">Dual-signed. Exportable for the board.</p>
+    <p class="so__tag" data-illustrative>Illustrative · pending validation</p>
+  </div>
+</PhoneFrame>
+
+<style>
+  .so { box-sizing: border-box; padding: 0 14px; color: var(--lily-text, #14522E); }
+  p, h4, ul { margin: 0; }
+  .so__eyebrow { font-size: 8.5px; font-weight: 600; letter-spacing: 0.12em; color: var(--lily-text-muted-strong, #4F7060); }
+  h4 { margin: 4px 0 10px; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 21px; font-weight: 500; line-height: 1.15; }
+  h4 em { font-style: italic; color: var(--lily-primary, #1B6B3E); }
+  .so__list { display: grid; gap: 7px; padding: 0; list-style: none; }
+  .so__list li { position: relative; display: grid; gap: 1px; padding: 8px 10px; border: 1px solid var(--lily-border, #D5DFD9); border-radius: 12px; background: var(--lily-surface, #F8F5EF); }
+  .so__list strong { font-size: 11px; font-weight: 600; }
+  .so__list span { font-size: 9.5px; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .so__ok { display: inline-flex; align-items: center; gap: 4px; color: #1F6E40 !important; }
+  .so__ok i { width: 7px; height: 7px; border-radius: 50%; background: var(--lily-success, #28874F); }
+  .so__bar { display: block; height: 5px; margin-top: 3px; margin-right: 26px; border-radius: 9999px; background: var(--lily-surface-muted, #ECE8DF); overflow: hidden; }
+  .so__bar b { display: block; height: 100%; border-radius: inherit; background: var(--lily-forest, #14522E); }
+  .so__pct { position: absolute; right: 10px; bottom: 6px; font-weight: 600; }
+  .so__pill { margin-top: 9px; padding: 8px; border-radius: 9999px; background: var(--lily-forest, #14522E); color: var(--lily-canvas, #F5F1E9); font-size: 12px; font-weight: 600; text-align: center; box-shadow: var(--shadow-cta, 0 8px 9px rgb(49 129 113 / 32%)); }
+  .so__foot { margin-top: 5px; font-size: 9.5px; text-align: center; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .so__tag { margin-top: 3px; font-size: 8.5px; font-style: italic; text-align: center; color: var(--lily-text-muted-aa, #4E6B5A); }
+</style>

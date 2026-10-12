@@ -1,0 +1,51 @@
+---
+import Section from '../../ui/Section.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+import PractitionerCard from '../../mocks/PractitionerCard.astro';
+import VerificationRows from '../../mocks/VerificationRows.astro';
+import ClaimHead from './ClaimHead.astro';
+import AgreementPoints from './AgreementPoints.astro';
+
+const points = [
+  { title: 'The license-status badge concept', body: 'A small shield next to your name that would say your license, your years and your state were checked by us, not typed in by you. It is the first thing a graduate looks for.' },
+  { title: 'How the board check works', body: 'You enter the number printed on your license. We look it up with the proposed license-review source, confirm status and issue date, and re-check it every six months.' },
+  { title: 'What graduates see', body: 'Your badge, your rates, your format and your open seats. Never your email or phone until you accept a match.' },
+];
+const rows = [
+  { text: 'LCSW CW012345 · active (example)', state: 'pass' as const },
+  { text: 'Licensed since 2012 · 14 years', state: 'pass' as const },
+  { text: 'No discipline on record (example)', state: 'pass' as const },
+  { text: 'Badge issued Oct 3, 2026 (example)', state: 'pass' as const },
+];
+---
+<div id="verification" data-section="verification" class="sup-anchor">
+  <Section tone="surface" ariaLabelledby="sup-verify-title">
+    <div class="sup-verify">
+      <div class="sup-verify__copy">
+        <ClaimHead id="sup-verify-title" eyebrow="Verification as a credential" title="A badge that means" accent="something." />
+        <AgreementPoints points={points} />
+        <IllustrativeNotice class="sup-verify__note">
+          <p>The proposed license-review source is pending validation. The badge, the checks and the six-month re-check are a concept; no supervisor shown here has been verified.</p>
+        </IllustrativeNotice>
+      </div>
+      <div class="sup-verify__demo">
+        <PractitionerCard
+          variant="supervisor"
+          name="Danielle Okafor, LCSW"
+          initials="DO"
+          meta="Philadelphia, PA · Since 2012 · 14 years"
+          chips={['Virtual', 'In person', 'Trauma-informed', '2 open seats']}
+        />
+        <VerificationRows rows={rows} />
+      </div>
+    </div>
+  </Section>
+</div>
+
+<style>
+  .sup-anchor { scroll-margin-top: 80px; }
+  .sup-verify { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 4rem; align-items: start; }
+  .sup-verify__demo { display: grid; gap: 1.5rem; justify-items: start; }
+  :global(.sup-verify__note) { margin-top: 2rem; max-width: 34rem; }
+  @media (max-width: 960px) { .sup-verify { grid-template-columns: 1fr; gap: 2.5rem; } }
+</style>

@@ -1,0 +1,31 @@
+---
+import Section from '../../ui/Section.astro';
+import Container from '../../ui/Container.astro';
+import CTABand from '../../ui/CTABand.astro';
+import Button from '../../ui/Button.astro';
+import { appLinks } from '../../../../config/app';
+---
+<div data-section="cta">
+  <Section tone="canvas" bleed>
+    <Container>
+      <CTABand
+        headline="Twenty-five supervisors start"
+        lead="Join the first cohort. No fee, no listing until your license clears, no supervisee you did not choose."
+        progress={{ value: 17, max: 25, label: '17 of 25 signed' }}
+      >
+        <Fragment slot="accent">Pennsylvania.</Fragment>
+        <div class="roster">
+          <Button variant="inverse" href={appLinks.supervisorSignup} dataAction="supervisors-band-join">Join as a supervisor</Button>
+          <p class="roster__line">Eight more and "Lily is ready" goes out to every graduate waiting.</p>
+          <p class="roster__flag sup-plain" data-illustrative><strong>Illustrative · pending validation.</strong> Example counter, not live.</p>
+        </div>
+      </CTABand>
+    </Container>
+  </Section>
+</div>
+
+<style>
+  .roster { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .roster p { margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--lily-canvas, #F5F1E9); }
+  .roster__flag { font-size: 0.8125rem !important; opacity: 0.9; }
+</style>

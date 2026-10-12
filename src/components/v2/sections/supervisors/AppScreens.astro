@@ -1,0 +1,43 @@
+---
+import Section from '../../ui/Section.astro';
+import SignupPhonePreview from '../../mocks/SignupPhonePreview.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+import ClaimHead from './ClaimHead.astro';
+import ReadyPhone from './ReadyPhone.astro';
+import SignoffPhone from './SignoffPhone.astro';
+---
+<div data-section="app">
+  <Section tone="canvas" ariaLabelledby="sup-app-title">
+    <ClaimHead
+      id="sup-app-title"
+      eyebrow="The one-screen app"
+      title="One screen."
+      accent="One notification."
+      lead="Sign up once on your phone. We tell you when the Pennsylvania roster clears its threshold, then you sign off hours weekly."
+    />
+    <div class="sup-phones">
+      <figure class="sup-phone">
+        <SignupPhonePreview name="Danielle Okafor" licenseNumber="CW012345" since="2012" rate="$120 / hr" selected="LCSW" />
+        <figcaption>1. Sign up in one screen</figcaption>
+      </figure>
+      <figure class="sup-phone">
+        <ReadyPhone />
+        <figcaption>2. "Lily is ready" when the roster clears</figcaption>
+      </figure>
+      <figure class="sup-phone">
+        <SignoffPhone />
+        <figcaption>3. Weekly sign-off in a minute</figcaption>
+      </figure>
+    </div>
+    <IllustrativeNotice class="sup-phones__note">
+      <p>Screens are static imagery with fictional people. The sign-up fields, the license-review result, the roster threshold and the hours shown are proposed and pending validation.</p>
+    </IllustrativeNotice>
+  </Section>
+</div>
+
+<style>
+  .sup-phones { display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem 4rem; }
+  .sup-phone { display: grid; justify-items: center; gap: 1.25rem; margin: 0; }
+  figcaption { max-width: 16rem; text-align: center; font-size: 0.9375rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+  :global(.sup-phones__note) { margin: 3rem auto 0; max-width: 46rem; }
+</style>
