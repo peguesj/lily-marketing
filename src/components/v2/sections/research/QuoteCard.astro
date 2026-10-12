@@ -1,0 +1,37 @@
+---
+import Chip from '../../ui/Chip.astro';
+/** Graduate quote. Always labelled so it cannot be mistaken for an attributed testimonial. */
+interface Props {
+  theme: string;
+  quote: string;
+  who: string;
+}
+const { theme, quote, who } = Astro.props;
+---
+<figure class="qc" data-quote-card>
+  <Chip variant="teal">{theme}</Chip>
+  <blockquote class="qc__quote"><p>“{quote}”</p></blockquote>
+  <figcaption class="qc__who">{who}</figcaption>
+  <p class="qc__label">Community post · illustrative paraphrase</p>
+</figure>
+
+<style>
+  .qc {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    height: 100%;
+    margin: 0;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    border-radius: var(--radius-card, 1.25rem);
+    background: var(--lily-surface, #F8F5EF);
+    box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+    color: var(--lily-forest, #14522E);
+  }
+  .qc__quote { margin: 0; }
+  .qc__quote p { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.125rem; line-height: 1.5; }
+  .qc__who { margin-top: auto; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.875rem; font-weight: 600; }
+  .qc__label { margin: 0; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.75rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+</style>

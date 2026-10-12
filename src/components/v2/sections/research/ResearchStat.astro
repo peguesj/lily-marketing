@@ -1,0 +1,49 @@
+---
+/**
+ * Key-finding stat tile with a citation slot. `inverted` renders the forest-filled variant
+ * (used for the fifth stat). Figures are illustrative until the study data is validated.
+ */
+interface Props {
+  value: string;
+  label: string;
+  citation: string;
+  inverted?: boolean;
+}
+const { value, label, citation, inverted = false } = Astro.props;
+---
+<article class:list={['rs', inverted && 'rs--inverted']} data-research-stat data-inverted={inverted ? 'true' : undefined}>
+  <p class="rs__value" data-stat-value>{value}</p>
+  <p class="rs__label">{label}</p>
+  <p class="rs__cite" data-stat-cite>{citation}</p>
+</article>
+
+<style>
+  .rs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-card, 1.25rem);
+    background: var(--lily-surface, #F8F5EF);
+    color: var(--lily-forest, #14522E);
+    box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+  }
+  .rs--inverted { background: var(--lily-forest, #14522E); color: var(--lily-canvas, #F5F1E9); }
+  .rs p { margin: 0; }
+  .rs__value {
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+    font-size: 2.25rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .rs__label { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.9375rem; line-height: 1.4; }
+  .rs__cite {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--lily-text-muted-aa, #4E6B5A);
+  }
+  .rs--inverted .rs__cite { color: var(--lily-footer-text, #C9D6CC); }
+</style>

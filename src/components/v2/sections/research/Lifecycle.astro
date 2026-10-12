@@ -1,0 +1,53 @@
+---
+/**
+ * Licensure-path diagram as an ordered list: nodes, Lily intervention pills (teal) and
+ * stall callouts (amber). Colour is never the only signal: pills and stalls carry text labels.
+ */
+interface Stage {
+  title: string;
+  sub: string;
+  pill: string;
+  stall?: { title: string; body: string };
+}
+interface Props { stages: Stage[] }
+const { stages } = Astro.props;
+---
+<div class="lc" data-lifecycle>
+  <ol class="lc__list">
+    {stages.map((s, i) => (
+      <li class="lc__stage">
+        <div class="lc__node">
+          <span class="lc__idx" aria-hidden="true">{i + 1}</span>
+          <p class="lc__title">{s.title}</p>
+          <p class="lc__sub">{s.sub}</p>
+        </div>
+        {s.stall && (
+          <div class="lc__stall">
+            <p class="lc__stall-title">{s.stall.title}</p>
+            <p class="lc__stall-body">{s.stall.body}</p>
+          </div>
+        )}
+        <p class="lc__pill" data-lily-pill><span class="lc__pill-k">Lily steps in:</span> {s.pill}</p>
+      </li>
+    ))}
+  </ol>
+  <p class="lc__legend">Teal = where Lily steps in. Amber = where graduates stall.</p>
+</div>
+
+<style>
+  .lc__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
+  .lc__stage { display: flex; flex-direction: column; gap: 0.75rem; }
+  .lc__node { padding: 1.25rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); color: var(--lily-forest, #14522E); }
+  .lc__node p, .lc__stall p, .lc__pill, .lc__legend { margin: 0; }
+  .lc__idx { display: inline-grid; place-items: center; width: 1.75rem; height: 1.75rem; margin-bottom: 0.5rem; border-radius: 50%; background: var(--lily-forest, #14522E); color: var(--lily-canvas, #F5F1E9); font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.8125rem; font-weight: 600; }
+  .lc__title { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.25rem; font-weight: 600; }
+  .lc__sub { margin-top: 0.25rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.875rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .lc__stall { padding: 0.875rem 1rem; border: 1px solid var(--lily-warning, #F2A922); border-left-width: 4px; border-radius: var(--radius-card-sm, 0.875rem); background: color-mix(in srgb, var(--lily-warning, #F2A922) 14%, var(--lily-canvas, #F5F1E9)); color: var(--lily-forest, #14522E); font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); }
+  .lc__stall-title { font-size: 0.8125rem; font-weight: 700; }
+  .lc__stall-body { margin-top: 0.25rem; font-size: 0.8125rem; line-height: 1.45; }
+  .lc__pill { margin-top: auto; padding: 0.5rem 0.875rem; border-radius: var(--radius-chip, 9999px); background: color-mix(in srgb, var(--lily-teal, #318171) 16%, var(--lily-canvas, #F5F1E9)); border: 1px solid color-mix(in srgb, var(--lily-teal, #318171) 40%, transparent); color: var(--lily-forest, #14522E); font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.8125rem; font-weight: 500; }
+  .lc__pill-k { font-weight: 700; }
+  .lc__legend { margin-top: 1.25rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  @media (max-width: 900px) { .lc__list { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .lc__list { grid-template-columns: 1fr; } }
+</style>

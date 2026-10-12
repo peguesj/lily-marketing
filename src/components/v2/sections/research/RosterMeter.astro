@@ -1,0 +1,32 @@
+---
+/** Roster progress toward a county launch threshold. Illustrative until real roster data exists. */
+interface Props {
+  value: number;
+  max: number;
+  place: string;
+}
+const { value, max, place } = Astro.props;
+const pct = Math.max(0, Math.min(100, Math.round((value / max) * 100)));
+---
+<div class="rm">
+  <p class="rm__eyebrow">{place} roster</p>
+  <p class="rm__figure"><span class="rm__num">{value} of {max}</span> <span class="rm__unit">supervisors in review</span></p>
+  <div class="rm__bar" role="meter" aria-valuemin={0} aria-valuemax={max} aria-valuenow={value} aria-valuetext={`${value} of ${max} supervisors toward the ${max}-supervisor threshold (illustrative)`} aria-label={`${place} roster progress`}>
+    <span class="rm__fill" style={`width:${pct}%`}></span>
+    <span class="rm__mark" aria-hidden="true"></span>
+  </div>
+  <p class="rm__threshold">threshold: {max}</p>
+</div>
+
+<style>
+  .rm { padding: 1.75rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); color: var(--lily-forest, #14522E); }
+  .rm p { margin: 0; }
+  .rm__eyebrow { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .rm__figure { margin-top: 0.5rem; }
+  .rm__num { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 2.5rem; font-weight: 600; }
+  .rm__unit { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.9375rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .rm__bar { position: relative; height: 0.875rem; margin-top: 1rem; border-radius: 9999px; background: var(--lily-surface-muted, #ECE8DF); overflow: visible; }
+  .rm__fill { display: block; height: 100%; border-radius: inherit; background: var(--lily-primary, #1B6B3E); }
+  .rm__mark { position: absolute; top: -0.375rem; right: 0; width: 3px; height: 1.625rem; border-radius: 2px; background: var(--lily-forest, #14522E); }
+  .rm__threshold { margin-top: 0.5rem; text-align: right; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+</style>
