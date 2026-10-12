@@ -11,6 +11,9 @@ import { runChecks, regions, ROUTES, PENDING_ROUTES, SHIPPED_ROUTES } from './ch
 const here = dirname(fileURLToPath(import.meta.url));
 const FIX = join(here, '__fixtures__');
 const APP_URL = 'https://app.asklily.health';
+// The fixture dist holds the home page only, so the audience pages (and the redirect targets that
+// point at them) are injected as pending. Wave D2 shipped every route: PENDING_ROUTES itself is empty.
+const PENDING = ['/supervisors', '/graduates', '/programs', '/how-it-works'];
 
 function withBad(name) {
   const dir = mkdtempSync(join(tmpdir(), 'check-pages-'));
@@ -24,7 +27,7 @@ function rules(result) {
 }
 
 test('good fixture passes', () => {
-  const r = runChecks({ dist: join(FIX, 'good'), only: ['/'], appUrl: APP_URL });
+  const r = runChecks({ dist: join(FIX, 'good'), only: ['/'], appUrl: APP_URL, pending: PENDING });
   assert.deepEqual(r.failures, []);
 });
 
@@ -45,7 +48,7 @@ for (const [file, rule] of VIOLATIONS) {
   test(`${file} fails rule ${rule}`, () => {
     const dir = withBad(file);
     try {
-      const r = runChecks({ dist: dir, only: ['/'], appUrl: APP_URL });
+      const r = runChecks({ dist: dir, only: ['/'], appUrl: APP_URL, pending: PENDING });
       assert.ok(rules(r).includes(rule), `expected ${rule}, got ${JSON.stringify(r.failures)}`);
     } finally {
       rmSync(dir, { recursive: true, force: true });
@@ -57,7 +60,7 @@ test('missing redirect fails', () => {
   const dir = withBad('../good/index.html');
   try {
     rmSync(join(dir, 'how'), { recursive: true });
-    const r = runChecks({ dist: dir, only: ['/'], appUrl: APP_URL });
+    const r = runChecks({ dist: dir, only: ['/'], appUrl: APP_URL, pending: PENDING });
     assert.ok(rules(r).includes('redirect'));
   } finally {
     rmSync(dir, { recursive: true, force: true });
@@ -67,7 +70,7 @@ test('missing redirect fails', () => {
 test('footer marker does not cover a claim in <main>', () => {
   const dir = withBad('illustrative-footer-only.html');
   try {
-    const r = runChecks({ dist: dir, only: ['/'], appUrl: APP_URL });
+    const r = runChecks({ dist: dir, only: ['/'], appUrl: APP_URL, pending: PENDING });
     const f = r.failures.find((x) => x.rule === 'illustrative');
     assert.ok(f, 'expected illustrative failure');
     assert.match(f.message, /main/);
@@ -81,16 +84,13 @@ test('off-screen text honeypot (tabindex=-1) is accepted', () => {
   try {
     cpSync(join(FIX, 'good'), dir, { recursive: true });
     copyFileSync(join(FIX, 'variants', 'honeypot-text-offscreen.html'), join(dir, 'index.html'));
-    const r = runChecks({ dist: dir, only: ['/'], appUrl: APP_URL });
+    const r = runChecks({ dist: dir, only: ['/'], appUrl: APP_URL, pending: PENDING });
     assert.deepEqual(r.failures, []);
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
 });
 
-// Pending-route behaviour is exercised with an injected pending set: wave D2 shipped every route,
-// so PENDING_ROUTES itself is empty.
-const PENDING = ['/supervisors', '/graduates', '/programs', '/how-it-works'];
 
 test('every sitemap route has shipped: PENDING_ROUTES is empty', () => {
   assert.deepEqual(PENDING_ROUTES, []);
@@ -131,7 +131,7 @@ function runVariant(name) {
   try {
     cpSync(join(FIX, 'good'), dir, { recursive: true });
     copyFileSync(join(FIX, 'variants', name), join(dir, 'index.html'));
-    return runChecks({ dist: dir, only: ['/'], appUrl: APP_URL });
+    return runChecks({ dist: dir, only: ['/'], appUrl: APP_URL, pending: PENDING });
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -144,7 +144,7 @@ test('commercial "eligible" terms and the not-a-provider disclaimer do not trigg
 test('supervisor eligibility copy still triggers next to an exempt phrase', () => {
   const dir = withBad('missing-illustrative.html');
   try {
-    const r = runChecks({ dist: dir, only: ['/'], appUrl: APP_URL });
+    const r = runChecks({ dist: dir, only: ['/'], appUrl: APP_URL, pending: PENDING });
     assert.ok(rules(r).includes('illustrative'));
   } finally {
     rmSync(dir, { recursive: true, force: true });

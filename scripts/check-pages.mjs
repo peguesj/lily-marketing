@@ -6,10 +6,10 @@
 //   node scripts/check-pages.mjs --only=/,/pricing     # only these routes (redirects always checked)
 //   node scripts/check-pages.mjs --dist=path --app-url=https://app.example
 //
-// PENDING_ROUTES are delivered by a later wave (the v2 audience/content pages). Until they
-// ship, a missing pending route or a redirect pointing at one is reported as a notice in the
-// default run and as a failure under --strict (or CHECK_PAGES_STRICT=1). Remove a route from
-// PENDING_ROUTES in the same change that ships it.
+// PENDING_ROUTES lists sitemap routes a later wave still has to deliver. A missing pending route,
+// or a redirect pointing at one, is a notice in the default run and a failure under --strict (or
+// CHECK_PAGES_STRICT=1). Wave D2 shipped every route, so the list is empty; add a route here only
+// while it is genuinely unbuilt, and remove it in the change that ships it.
 //
 // Dependency: /contact and /waitlist pass form-action/honeypot only once the v1 forms there
 // (which fake a success state client-side) are replaced by the v2 conversion forms from
@@ -53,7 +53,7 @@ export const ROUTES = [
 ];
 
 // Routes from ROUTES that a later wave delivers. See header comment.
-export const PENDING_ROUTES = ['/supervisors', '/graduates', '/programs', '/how-it-works', '/research'];
+export const PENDING_ROUTES = [];
 
 export const SHIPPED_ROUTES = ROUTES.filter((r) => !PENDING_ROUTES.includes(r));
 
@@ -218,7 +218,7 @@ export function checkPage(html, route, ctx) {
   return failures;
 }
 
-export function checkRedirects(dist, { strict = false } = {}) {
+export function checkRedirects(dist, { strict = false, pending: pendingRoutes = PENDING_ROUTES } = {}) {
   const failures = [];
   const pending = [];
   for (const [from, to] of Object.entries(REDIRECTS)) {
@@ -235,18 +235,18 @@ export function checkRedirects(dist, { strict = false } = {}) {
     }
     if (!existsSync(routeFile(dist, to))) {
       const item = { route: from, rule: 'redirect-target', message: `redirect ${from} -> ${to} points at a page that is not built yet` };
-      if (!strict && PENDING_ROUTES.includes(to)) pending.push(item);
+      if (!strict && pendingRoutes.includes(to)) pending.push(item);
       else failures.push(item);
     }
   }
   return { failures, pending };
 }
 
-export function runChecks({ dist, only, appUrl = DEFAULT_APP_URL, strict = false }) {
+export function runChecks({ dist, only, appUrl = DEFAULT_APP_URL, strict = false, pending: pendingRoutes = PENDING_ROUTES }) {
   const root = resolve(dist);
   const failures = [];
   const pending = [];
-  const routes = only && only.length ? only : strict ? ROUTES : SHIPPED_ROUTES;
+  const routes = only && only.length ? only : strict ? ROUTES : ROUTES.filter((r) => !pendingRoutes.includes(r));
   const checked = [];
   if (!existsSync(root) || !statSync(root).isDirectory()) {
     return { checked, pending, failures: [{ route: '*', rule: 'exists', message: `dist directory not found: ${root} (run astro build first)` }] };
@@ -255,14 +255,14 @@ export function runChecks({ dist, only, appUrl = DEFAULT_APP_URL, strict = false
     const file = routeFile(root, route);
     if (!existsSync(file)) {
       const item = { route, rule: 'exists', message: `missing ${file}` };
-      if (!strict && PENDING_ROUTES.includes(route)) pending.push(item);
+      if (!strict && pendingRoutes.includes(route)) pending.push(item);
       else failures.push(item);
       continue;
     }
     checked.push(route);
     failures.push(...checkPage(readFileSync(file, 'utf8'), route, { dist: root, appUrl }));
   }
-  const redirects = checkRedirects(root, { strict });
+  const redirects = checkRedirects(root, { strict, pending: pendingRoutes });
   failures.push(...redirects.failures);
   pending.push(...redirects.pending);
   return { checked, failures, pending };
