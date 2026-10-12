@@ -18,7 +18,7 @@ const tiles = [
     </SectionHead>
     <div class="sup-why__grid">
       {tiles.map((t) => (
-        <StatTile value={t.value} caption={`${t.title}. ${t.body}`} illustrative>
+        <StatTile value={t.value} caption={t.title} citation={t.body} illustrative>
           <svg slot="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d={t.icon} /></svg>
         </StatTile>
       ))}
@@ -27,6 +27,9 @@ const tiles = [
 </div>
 
 <style>
+  /* Spec: 16/600 tile title, then body copy; StatTile carries them as caption and supporting line. */
+  .sup-why__grid :global(.v2-stat__caption) { font-size: 1rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+  .sup-why__grid :global(.v2-stat__cite) { font-size: 0.875rem; font-style: normal; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
   .sup-why__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
   @media (max-width: 1000px) { .sup-why__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 560px) { .sup-why__grid { grid-template-columns: 1fr; } }
