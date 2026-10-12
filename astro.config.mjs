@@ -1,6 +1,8 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import { fileURLToPath } from 'node:url';
+import { previewRoutes, excludePreviewsFromSitemap } from './src/config/preview-routes.mjs';
 
 export default defineConfig({
   site: 'https://www.asklily.health',
@@ -11,7 +13,11 @@ export default defineConfig({
     '/practitioners': '/supervisors',
     '/organizations': '/programs',
   },
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap({ filter: excludePreviewsFromSitemap }),
+    previewRoutes({ root: fileURLToPath(new URL('.', import.meta.url)) }),
+  ],
   vite: {
     css: {
       transformer: 'lightningcss',

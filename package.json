@@ -12,7 +12,10 @@
     "astro": "astro",
     "check": "astro check",
     "check:pages": "node scripts/check-pages.mjs",
-    "test:check-pages": "node --test scripts/check-pages.test.mjs"
+    "check:pages:strict": "node scripts/check-pages.mjs --strict",
+    "test:check-pages": "node --test scripts/check-pages.test.mjs",
+    "test:unit": "node --test scripts/check-pages.test.mjs scripts/preview-routes.test.mjs",
+    "test": "npm run test:unit"
   },
   "keywords": [],
   "author": "",
