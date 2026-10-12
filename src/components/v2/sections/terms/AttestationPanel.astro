@@ -1,0 +1,33 @@
+---
+/**
+ * Dark-forest quote panel for an attestation statement. The text is passed in from
+ * src/content/legal/attestations.json (single source shared with the Phoenix app), never typed here.
+ */
+interface Props {
+  statementKey: string;
+  text: string;
+  label: string;
+  /** Mono footer line, e.g. an example running total. */
+  footer?: string;
+  tone?: 'dark' | 'light';
+}
+const { statementKey, text, label, footer, tone = 'dark' } = Astro.props;
+---
+<figure class:list={['att', `att--${tone}`]}>
+  <figcaption class="att__label">{label}</figcaption>
+  <blockquote class="att__quote" data-attestation={statementKey}>{text}</blockquote>
+  {footer && <p class="att__footer">{footer}</p>}
+</figure>
+
+<style>
+  .att { display: flex; flex-direction: column; gap: 1rem; margin: 0; padding: 2rem; border-radius: var(--radius-card, 1.25rem); }
+  .att--dark { background: var(--lily-forest, #14522E); color: var(--lily-canvas, #F5F1E9); }
+  .att--light { background: var(--lily-surface, #F8F5EF); color: var(--lily-forest, #14522E); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .att__label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+  .att--dark .att__label { color: var(--lily-peach, #F0B882); }
+  .att--light .att__label { color: var(--lily-text-muted-aa, #4E6B5A); }
+  .att__quote { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: clamp(1.25rem, 2.4vw, 1.625rem); font-weight: 500; line-height: 1.4; }
+  .att--dark .att__quote { color: var(--lily-canvas, #F5F1E9); }
+  .att--light .att__quote { font-size: 1.125rem; color: var(--lily-forest, #14522E); }
+  .att__footer { margin: 0; font-family: var(--font-mono, 'Source Code Pro', Menlo, monospace); font-size: 0.8125rem; letter-spacing: 0.02em; color: color-mix(in srgb, var(--lily-canvas, #F5F1E9) 88%, transparent); }
+</style>

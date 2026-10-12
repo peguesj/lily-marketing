@@ -1,0 +1,48 @@
+---
+/**
+ * The ten numbered supervision-agreement terms in one card. Source: src/content/legal/agreement-terms.json.
+ * Text in {{double braces}} is an example value: it is wrapped in [data-example] and styled as an
+ * example so rates, cadence and notice periods are never read as Lily policy.
+ */
+interface Term { n: number; title: string; text: string }
+interface Props { terms: Term[] }
+const { terms } = Astro.props;
+
+type Seg = { text: string; example: boolean };
+function segments(text: string): Seg[] {
+  return text
+    .split(/(\{\{.+?\}\})/g)
+    .filter(Boolean)
+    .map((s) => (s.startsWith('{{') ? { text: s.slice(2, -2), example: true } : { text: s, example: false }));
+}
+---
+<div class="agreement">
+  <p class="agreement__tag"><span class="agreement__tag-chip">Example</span> Highlighted values are examples, not Lily policy.</p>
+  <ol class="agreement__list">
+    {terms.map((t) => (
+      <li class="agreement__row" data-agreement-term={t.n}>
+        <span class="agreement__num" aria-hidden="true">{t.n}</span>
+        <div class="agreement__body">
+          <h3 class="agreement__title"><span class="agreement__sr">Term {t.n}: </span>{t.title}</h3>
+          <p class="agreement__text">{segments(t.text).map((s) => (s.example ? <span class="agreement__example" data-example>{s.text}</span> : s.text))}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</div>
+
+<style>
+  .agreement { padding: 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .agreement__tag { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 1rem; font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .agreement__tag-chip { padding: 0.125rem 0.625rem; border-radius: var(--radius-chip, 9999px); background: color-mix(in srgb, var(--lily-peach, #F0B882) 38%, var(--lily-canvas, #F5F1E9)); color: var(--lily-forest, #14522E); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .agreement__list { margin: 0; padding: 0; list-style: none; }
+  .agreement__row { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 1.25rem; padding: 1.125rem 0; border-top: 1px solid var(--lily-border, #D5DFD9); }
+  .agreement__row:first-child { border-top: 0; }
+  .agreement__num { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9); font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.0625rem; font-weight: 600; }
+  .agreement__body { display: flex; flex-direction: column; gap: 0.25rem; }
+  .agreement__title { margin: 0; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 1rem; font-weight: 600; line-height: 1.3; letter-spacing: 0; color: var(--lily-forest, #14522E); }
+  .agreement__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .agreement__text { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .agreement__example { padding: 0.0625rem 0.375rem; border-radius: 0.375rem; background: color-mix(in srgb, var(--lily-peach, #F0B882) 32%, var(--lily-canvas, #F5F1E9)); color: var(--lily-forest, #14522E); font-family: var(--font-mono, 'Source Code Pro', Menlo, monospace); font-size: 0.875rem; font-weight: 500; white-space: nowrap; }
+  @media (max-width: 600px) { .agreement { padding: 1.25rem; } .agreement__row { gap: 0.875rem; } }
+</style>

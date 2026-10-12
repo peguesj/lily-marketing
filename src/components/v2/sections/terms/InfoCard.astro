@@ -1,0 +1,23 @@
+---
+/** Plain info card (heading, body, optional chip) used for disputes, state rules and the fine print. */
+interface Props {
+  title: string;
+  /** Heading level; the host page keeps the outline intact. */
+  level?: 3 | 4;
+  class?: string;
+}
+const { title, level = 3, class: extra } = Astro.props;
+const Tag = `h${level}` as 'h3' | 'h4';
+---
+<article class:list={['icard', extra]}>
+  <Tag class="icard__title">{title}</Tag>
+  <div class="icard__body"><slot /></div>
+</article>
+
+<style>
+  .icard { display: flex; flex-direction: column; gap: 0.75rem; padding: 1.75rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .icard__title { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.3125rem; font-weight: 600; line-height: 1.25; color: var(--lily-forest, #14522E); }
+  .icard__body { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; font-size: 0.9375rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .icard__body :global(p) { margin: 0; }
+  .icard__body :global(a) { color: var(--lily-primary, #1B6B3E); font-weight: 600; }
+</style>
