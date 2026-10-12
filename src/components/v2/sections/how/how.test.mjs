@@ -87,14 +87,19 @@ test('step 3: 2 gates + 4 weighted dimensions and an example Renée Castillo car
   assert.match(flat(card), /\$40/);
 });
 
-test('step 4: #agree anchor, agreement rows, two signatures and counsel review pending', () => {
+test('step 4: #agree anchor, agreement rows, two signatures and the spec counsel-review wording, labelled illustrative', () => {
   const s = stepEl(4);
   assert.equal(attr(s, 'id'), 'agree');
   const a = within(s, (n) => attr(n, 'data-mock') === 'AgreementRows')[0];
   assert.ok(a);
   assert.equal(byTag(a, 'dt').length, 5);
   assert.equal(byTag(a, 'time').length, 2);
-  assert.match(norm(flat(s)), /counsel review pending/i);
+  const t = norm(flat(s));
+  assert.ok(t.includes('Board attestation language · counsel-reviewed Sep 2026'), 'agreement row matches spec/SVG');
+  assert.ok(t.includes('A Pennsylvania-licensed attorney reviewed the template.'), 'body matches SVG');
+  assert.ok(t.includes('Counsel-reviewed'), 'chip matches SVG');
+  assert.doesNotMatch(t, /counsel review (of that language )?(is )?pending/i);
+  assert.ok(hasTag(s), 'legal-status claim sits beside an Illustrative · pending validation label');
 });
 
 test('step 5: hours log whose export buttons are not links', () => {

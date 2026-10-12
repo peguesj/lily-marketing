@@ -168,3 +168,7 @@ test('single <main> and no AI/legacy v1 copy', () => {
   assert.equal(byTag(page.doc, 'main').length, 1);
   assert.doesNotMatch(flat(main), /per eligible employee|PEPM|free therapy/i);
 });
+
+test('pilot-review disclaimer from the SVG footer line is rendered on /pricing', () => {
+  assert.ok(norm(flat(main)).includes('Pilot design preview · Commercial and policy terms subject to review.'));
+});
