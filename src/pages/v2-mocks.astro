@@ -1,0 +1,7 @@
+---
+// Astro never routes files prefixed with "_" in src/pages, so this thin route renders the
+// owned preview (_v2-mocks.astro) at /v2-mocks. The preview itself is noindex.
+import Preview from './_v2-mocks.astro';
+---
+
+<Preview />
