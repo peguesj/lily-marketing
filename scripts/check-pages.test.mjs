@@ -6,7 +6,7 @@ import { cpSync, mkdtempSync, copyFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { runChecks, ROUTES, PENDING_ROUTES, SHIPPED_ROUTES } from './check-pages.mjs';
+import { runChecks, regions, ROUTES, PENDING_ROUTES, SHIPPED_ROUTES } from './check-pages.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const FIX = join(here, '__fixtures__');
@@ -142,4 +142,14 @@ test('supervisor eligibility copy still triggers next to an exempt phrase', () =
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test('a <header> nested inside <main> (a card header) belongs to main, not the page header region', () => {
+  const body = '<body><header><nav>Lily · Sign in</nav></header><main><article><header><p>Philadelphia, PA · Licensed 2012</p></header></article>'
+    + '<p data-illustrative>Illustrative · pending validation</p></main><footer>with care, Lily</footer></body>';
+  const r = regions(body);
+  assert.doesNotMatch(r.header, /Licensed 2012/);
+  assert.match(r.header, /Sign in/);
+  assert.match(r.main, /Licensed 2012/);
+  assert.match(r.footer, /with care/);
 });
