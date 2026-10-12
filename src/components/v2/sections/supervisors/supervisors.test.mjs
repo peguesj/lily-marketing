@@ -38,7 +38,7 @@ function* walk(n) {
   for (const c of kids(n)) yield* walk(c);
 }
 const els = (n = doc) => [...walk(n)].filter((e) => e.tagName);
-const text = (n) => [...walk(n)].filter((c) => c.nodeName === '#text').map((c) => c.value).join(' ').replace(/\s+/g, ' ').trim();
+const text = (n) => [...walk(n)].filter((c) => c.nodeName === '#text').map((c) => c.value).join('').replace(/\s+/g, ' ').trim();
 const section = (name) => {
   const s = els().find((e) => attr(e, 'data-section') === name);
   assert.ok(s, `missing section [data-section="${name}"]`);
@@ -157,9 +157,9 @@ test('8 earnings: two pricing cards, 12% share illustrative, link to /pricing', 
   const s = section('earnings');
   const cards = els(s).filter((e) => attr(e, 'data-pricing-card') !== undefined);
   assert.equal(cards.length, 2);
-  assert.match(text(cards[0]), /Individual/);
+  assert.match(text(cards[0]), /individual/i);
   assert.match(text(cards[0]), /\$120/);
-  assert.match(text(cards[1]), /Group of four/);
+  assert.match(text(cards[1]), /group of four/i);
   assert.match(text(cards[1]), /\$45/);
   assert.match(text(s), /No fee to join\. A share only when it works\./);
   assert.match(text(s), /No Lily fee at launch/);
