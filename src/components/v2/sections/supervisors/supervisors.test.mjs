@@ -13,7 +13,7 @@ import { parse } from 'parse5';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..', '..');
 const distFile = join(root, 'dist/supervisors/index.html');
-const APP_SIGNUP = 'https://app.asklily.health/app/signup/supervisor';
+const APP_SIGNUP = `${process.env.PUBLIC_LILY_APP_URL ?? 'https://app.asklily.health'}/app/signup/supervisor`;
 const TAG = 'Illustrative · pending validation';
 
 let html;
@@ -93,6 +93,9 @@ test('2 why now: four stat tiles flagged illustrative', () => {
     assert.ok(t.some((x) => x.includes(v) && x.includes(c)), `tile ${v} / ${c}`);
   }
   assert.ok(tiles.every((x) => hasAttr(x, 'data-illustrative')), 'every figure tile is illustrative');
+  // The tile title is its own element (16/600 in the spec), not merged into the body caption.
+  const captions = els(s).filter((e) => (attr(e, 'class') ?? '').split(/\s+/).includes('v2-stat__caption')).map(text);
+  assert.deepEqual(captions, ['Requests arrive cold', 'First calls that never happen', 'Unpaid admin, every week', 'No fee at launch']);
   assert.match(text(s), /Requests arrive by DM\. Vetting is tedious\./);
 });
 
@@ -121,6 +124,10 @@ test('4 verification: anchor, agreement text rows, example card, verification ro
   assert.ok(notice.length >= 1, 'IllustrativeNotice');
   assert.ok(notice.some((n) => /proposed license-review source/.test(text(n)) && /pending validation/.test(text(n))));
   assert.doesNotMatch(text(s), /lookup is unavailable/, 'no manual-review fallback claim: it is in neither the spec nor the SVG');
+  assert.doesNotMatch(text(s), /discipline/i, 'no discipline-record check: it is not in the spec');
+  assert.ok(text(s).includes('PA CW012345 · active (example)'));
+  assert.ok(text(card[0]).includes('Philadelphia, PA · Licensed 2012 · 14 years'));
+  assert.ok(text(s).includes('A small shield next to your name that says your license, your years and your state were checked by us, not typed in by you.'));
 });
 
 test('5 app: three phone frames with the spec captions', () => {
@@ -142,6 +149,8 @@ test('6 group: GroupCard with an illustrative cap line', () => {
   assert.match(text(s), /\$45 \/hr per seat/);
   const cap = els(s).find((e) => hasAttr(e, 'data-illustrative') && /Group hours so far: 18 of 60 allowed/.test(text(e)));
   assert.ok(cap, 'cap line must sit in a data-illustrative element');
+  const seats = els(mocks(s, 'GroupCard')[0]).filter((e) => (attr(e, 'class') ?? '') === 'avatar').map(text);
+  assert.deepEqual(seats, ['MR', 'PN', 'JE']);
   assert.ok(text(s).includes('A proposed recurring slot and reviewed license path; hours logged separately for each person. When a seat opens, the next match in your inbox fills it.'));
   const board = 'Most Pennsylvania boards count group hours toward the total, with a cap. We show each supervisee how many group hours still count for them.';
   const rule = els(s).find((e) => hasAttr(e, 'data-illustrative') && text(e).includes(board));
@@ -157,6 +166,10 @@ test('7 reciprocity: inbox phone and the three bullets', () => {
     assert.ok(text(s).includes(t), t);
   }
   assert.equal(els(s).filter((e) => e.tagName === 'li' && (attr(e, 'class') ?? '').includes('bullet')).length, 3);
+  const inbox = text(mocks(s, 'InboxPreview')[0]);
+  for (const t of ['Marcus Reed', 'LCSW path · Philadelphia', '1,240 of 3,000 · Thursdays, virtual', 'Priya Natarajan', 'LPC path · Norristown', '860 of 3,000 · Mon or Wed evenings', 'Jordan Ellis', '2,110 of 3,000 · any weeknight']) {
+    assert.ok(inbox.includes(t), `inbox: ${t}`);
+  }
 });
 
 test('8 earnings: two pricing cards with the SVG bullets verbatim, no invented share figure, link to /pricing', () => {
@@ -203,11 +216,23 @@ test('10 faq: six native details rows, only the first open', () => {
   const want = ['What does Lily cost me?', 'How do you verify?', 'What happens before the threshold?', 'Can I run a group?', 'What if a graduate disputes hours?', 'Psychology Today vs Lily'];
   want.forEach((q, i) => assert.ok(qs[i].includes(q), `FAQ ${i + 1}: ${q}`));
   assert.match(text(details[0]), /Nothing at launch\. You keep your full rate/);
+  // Answers 2-6 are composed only from sentences the SVG states elsewhere on this page.
+  const sourced = [
+    ['You enter the number printed on your license.', 're-check it every six months.', 'usually within two business days.'],
+    ['We tell you when the Pennsylvania roster clears its threshold, then you sign off hours weekly.', 'Nothing is published until it clears.'],
+    ['Set a per-seat rate. We fill the seats from your matches.', 'Most Pennsylvania boards count group hours toward the total, with a cap.'],
+    ['Each week you confirm the hours from one notification.', 'How a disputed week is resolved is pending validation.'],
+    ['Graduates find you on Psychology Today and message out of the blue.', 'We never auto-assign a supervisee to you.'],
+  ];
+  sourced.forEach((parts, i) => parts.forEach((p) => assert.ok(text(details[i + 1]).includes(p), `FAQ ${i + 2}: ${p}`)));
+  for (const bad of [/lookup is unavailable/, /flagged to both/, /an illustrative 25/, /Boards differ/]) assert.doesNotMatch(text(s), bad);
 });
 
 test('11 waitlist: React island is the supervisor audience and links to the app signup', () => {
   const s = section('waitlist');
   assert.match(text(s), /Tell us your license\. We do the rest\./);
+  assert.ok(text(s).includes('We check this against proposed license-review source. Nothing is published until it clears. No fee to join.'));
+  assert.doesNotMatch(text(s), /waitlist only/, 'no unsourced data-use promise');
   const island = els(s).find((e) => e.tagName === 'astro-island');
   assert.ok(island, 'WaitlistForm island missing');
   assert.match(attr(island, 'component-url') ?? '', /WaitlistForm/);
