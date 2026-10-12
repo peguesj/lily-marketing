@@ -1,0 +1,70 @@
+---
+import Section from '../../ui/Section.astro';
+import Blob from '../../ui/Blob.astro';
+import Eyebrow from '../../ui/Eyebrow.astro';
+import Button from '../../ui/Button.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+import PractitionerCard from '../../mocks/PractitionerCard.astro';
+import MockScope from './MockScope.astro';
+import { appLinks } from '../../../../config/app';
+---
+<Section tone="canvas" ariaLabelledby="grad-hero-title" class="grad-hero">
+  <Blob color="teal" top="-8rem" right="-10rem" opacity={0.14} />
+  <Blob color="peach" width="22rem" height="16rem" bottom="-4rem" left="-8rem" opacity={0.2} />
+  <div class="grad-hero__grid">
+    <div class="grad-hero__copy">
+      <Eyebrow>Pennsylvania pilot · LPC + LCSW</Eyebrow>
+      <h1 id="grad-hero-title" class="grad-hero__title">Your 3,000 hours, <em>counted</em>.</h1>
+      <p class="grad-hero__lead">
+        Two more years. Supervision that can cost $150 an hour. Someone should have explained the gap before graduation.
+      </p>
+      <p class="grad-hero__persona" data-illustrative>Persona scenario, not a quoted market rate · Illustrative · pending validation</p>
+      <p class="grad-hero__lead">Find your supervisor, see your rate, and keep a log you own.</p>
+      <div class="grad-hero__actions">
+        <Button href="#waitlist" dataAction="graduates-hero-find-supervisor">Find a supervisor</Button>
+        <Button variant="text" href={appLinks.graduateSignup} dataAction="graduates-hero-app-invite">Have an invite? Start in the app</Button>
+      </div>
+      <p class="grad-hero__fine">Join the waitlist · No Lily fee for graduates at launch</p>
+      <p class="grad-hero__fine">Hours and timelines vary by license. Supervised experience is not 3,000 paid supervision sessions.</p>
+    </div>
+    <div class="grad-hero__visual">
+      <p class="grad-hero__tag">Illustrative match · not a live listing</p>
+      <MockScope><PractitionerCard
+        variant="compact"
+        name="Maya Okafor, LCSW"
+        initials="MO"
+        meta="Philadelphia · Community mental health"
+        chips={['$75/hr group', 'Thu 7pm']}
+      /></MockScope>
+      <p class="grad-hero__caption">Maya Okafor is a fictional example. Badge concept: license checked through a proposed license-review source.</p>
+    </div>
+  </div>
+  <IllustrativeNotice class="grad-hero__notice">
+    <p>Supervisor eligibility, licensure and verification content on this page describes a proposed pilot. Rules, sources and timelines are pending validation and vary by license.</p>
+  </IllustrativeNotice>
+</Section>
+
+<style>
+  .grad-hero { overflow: hidden; padding-block: 88px 72px; }
+  .grad-hero__grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 3rem; align-items: center; }
+  .grad-hero__copy { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+  .grad-hero__title {
+    margin: 0;
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    color: var(--lily-forest, #14522E);
+  }
+  .grad-hero__title em { font-style: italic; color: var(--lily-primary, #1B6B3E); }
+  .grad-hero__lead { margin: 0; max-width: 34rem; font-size: 1.1875rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .grad-hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; align-items: center; margin-top: 0.5rem; }
+  .grad-hero__persona { margin: -0.25rem 0 0; width: fit-content; }
+  .grad-hero__fine { margin: 0; max-width: 34rem; font-size: 0.8125rem; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .grad-hero__visual { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+  .grad-hero__tag { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-strong, #4F7060); }
+  .grad-hero__caption { margin: 0; max-width: 22rem; font-size: 0.8125rem; line-height: 1.5; text-align: center; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .grad-hero :global(.grad-hero__notice) { position: relative; z-index: 1; margin-top: 3rem; max-width: 46rem; }
+  @media (max-width: 900px) { .grad-hero__grid { grid-template-columns: minmax(0, 1fr); } }
+</style>

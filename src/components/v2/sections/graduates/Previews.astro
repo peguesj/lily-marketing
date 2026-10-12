@@ -1,0 +1,45 @@
+---
+import Section from '../../ui/Section.astro';
+import PhoneFrame from '../../mocks/PhoneFrame.astro';
+import PreferencesScreen from './PreferencesScreen.astro';
+import MatchesScreen from './MatchesScreen.astro';
+import HoursScreen from './HoursScreen.astro';
+---
+<Section tone="canvas" ariaLabelledby="grad-previews-title">
+  <header class="grad-previews__head">
+    <p class="grad-previews__eyebrow">Product preview · illustrative data</p>
+    <h2 id="grad-previews-title" class="grad-previews__title">A little less searching. A little more <em>progress</em>.</h2>
+    <p class="grad-previews__flag" data-illustrative>Illustrative · pending validation</p>
+  </header>
+  <ol class="grad-previews">
+    <li>
+      <PhoneFrame label="Example preferences screen: Pennsylvania LCSW track, budget up to $90 an hour, evenings and group selected"><PreferencesScreen /></PhoneFrame>
+      <h3>Your <em>kind of fit</em>.</h3>
+      <p><strong>1. Say what matters</strong> Your budget, schedule and preferences.</p>
+    </li>
+    <li>
+      <PhoneFrame label="Example match results: two fictional group supervisors under $90 an hour"><MatchesScreen /></PhoneFrame>
+      <h3>Meet your <em>matches</em>.</h3>
+      <p><strong>2. Find your fit</strong> See rates before you reach out.</p>
+    </li>
+    <li>
+      <PhoneFrame label="Example experience log: 1,240 of 3,000 hours, with a pending entry shown separately"><HoursScreen /></PhoneFrame>
+      <h3>Every hour <em>counts</em>.</h3>
+      <p><strong>3. Keep your progress</strong> Separate experience and supervision.</p>
+    </li>
+  </ol>
+</Section>
+
+<style>
+  .grad-previews__head { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 3rem; }
+  .grad-previews__eyebrow { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .grad-previews__title { margin: 0; max-width: 40rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 600; line-height: 1.15; color: var(--lily-forest, #14522E); }
+  .grad-previews__title em { font-style: italic; font-weight: 500; color: var(--lily-primary, #1B6B3E); }
+  .grad-previews__flag { margin: 0; align-self: flex-start; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-forest, #14522E); }
+  .grad-previews { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem 4rem; }
+  .grad-previews li { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; max-width: 16rem; text-align: center; }
+  .grad-previews h3 { margin: 0.5rem 0 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.5rem; font-weight: 500; color: var(--lily-forest, #14522E); }
+  .grad-previews h3 em { font-style: italic; color: var(--lily-primary, #1B6B3E); }
+  .grad-previews p { margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .grad-previews p strong { display: block; color: var(--lily-forest, #14522E); }
+</style>

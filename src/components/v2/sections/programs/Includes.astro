@@ -1,0 +1,48 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+
+const items = [
+  { title: 'Verified supervisors', body: 'Proposed license-review source checks licenses and track-specific eligibility before a match is confirmed.' },
+  { title: 'Rates you agree upfront', body: 'Set a supervision budget and rate cap in your cohort proposal.' },
+  { title: 'A shared agreement', body: 'Responsibilities, frequency and payment terms, recorded before you begin.' },
+  { title: 'Weekly attestations', body: 'Clinicians log their hours. Supervisors review and sign the weekly record.' },
+  { title: 'Your director dashboard', body: 'See matches, completed agreements and sign-offs that need attention.' },
+  { title: 'A report for your board', body: 'Summarize participation, signed hours and spend for program oversight.' },
+];
+---
+<Section tone="canvas" ariaLabelledby="prog-includes-title">
+  <SectionHead
+    eyebrow="A sponsored cohort"
+    title="Everything a director needs,"
+    lead="One clear path from a supervisor match to a signed record of progress."
+  >
+    <Fragment slot="accent">nothing they shouldn't see.</Fragment>
+  </SectionHead>
+  <ul class="prog-includes">
+    {items.map((i, n) => (
+      <li class="prog-includes__item">
+        <span class="prog-includes__n" aria-hidden="true">{n + 1}</span>
+        <div>
+          <h3 class="prog-includes__title">{i.title}</h3>
+          <p class="prog-includes__body">{i.body}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+  <p class="prog-includes__never"><strong>Never session notes.</strong> Your funding buys support, not access to private clinical conversations.</p>
+  <IllustrativeNotice class="prog-includes__notice">
+    <p>License review and eligibility checks are proposed steps. The source and rules are pending validation, and nothing here is a verification result.</p>
+  </IllustrativeNotice>
+</Section>
+
+<style>
+  .prog-includes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 1.25rem; }
+  .prog-includes__item { display: flex; gap: 1rem; padding: 1.5rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); border: 1px solid var(--lily-border, #D5DFD9); }
+  .prog-includes__n { flex: none; display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9); font-weight: 600; font-size: 0.9375rem; }
+  .prog-includes__title { margin: 0 0 0.25rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.25rem; font-weight: 500; color: var(--lily-forest, #14522E); }
+  .prog-includes__body { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .prog-includes__never { margin: 2rem 0 0; padding: 1rem 1.5rem; border-radius: var(--radius-card-sm, 0.875rem); background: color-mix(in srgb, var(--lily-teal, #318171) 14%, var(--lily-canvas, #F5F1E9)); color: var(--lily-forest, #14522E); font-size: 1rem; }
+  :global(.prog-includes__notice) { margin-top: 1.5rem; max-width: 46rem; }
+</style>

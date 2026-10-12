@@ -1,0 +1,27 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import CohortProposalForm from '../../forms/CohortProposalForm.tsx';
+---
+<Section tone="surface" id="proposal" class="prog-proposal-section" ariaLabelledby="prog-proposal-title">
+  <div class="prog-proposal">
+    <div>
+      <SectionHead
+        eyebrow="Cohort proposal"
+        title="Tell us about your"
+        lead="Start with your team, not a commitment. We'll shape a proposal around your budget and local supervisor supply."
+      >
+        <Fragment slot="accent">cohort.</Fragment>
+      </SectionHead>
+    </div>
+    <div class="prog-proposal__form">
+      <CohortProposalForm client:visible />
+    </div>
+  </div>
+</Section>
+
+<style>
+  :global(.prog-proposal-section) { scroll-margin-top: 4rem; }
+  .prog-proposal { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .prog-proposal { grid-template-columns: minmax(0, 1fr); } }
+</style>

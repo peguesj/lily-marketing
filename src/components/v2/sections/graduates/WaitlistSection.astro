@@ -1,0 +1,32 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import WaitlistForm from '../../forms/WaitlistForm.tsx';
+---
+<Section tone="surface" id="waitlist" class="grad-waitlist-section" ariaLabelledby="grad-waitlist-title">
+  <div class="grad-waitlist">
+    <div>
+      <SectionHead
+        eyebrow="Graduate waitlist"
+        title="Your"
+        lead="Tell us your ZIP code. We will email when local matching becomes available. No booking or payment today."
+      >
+        <Fragment slot="accent">next step.</Fragment>
+      </SectionHead>
+      <p class="grad-waitlist__fine">
+        Updates about local availability only. See <a href="/privacy">Privacy</a> for how we handle your information.
+      </p>
+    </div>
+    <div class="grad-waitlist__form">
+      <WaitlistForm client:visible defaultAudience="graduate" />
+    </div>
+  </div>
+</Section>
+
+<style>
+  .grad-waitlist { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 3rem; align-items: start; }
+  :global(.grad-waitlist-section) { scroll-margin-top: 4rem; }
+  .grad-waitlist__fine { margin: -1.5rem 0 0; font-size: 0.8125rem; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .grad-waitlist__fine a { color: var(--lily-primary, #1B6B3E); text-underline-offset: 0.2em; }
+  @media (max-width: 900px) { .grad-waitlist { grid-template-columns: minmax(0, 1fr); } }
+</style>

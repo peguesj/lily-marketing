@@ -1,0 +1,52 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+
+const options = [
+  { title: 'Supervision', body: 'Fund agreed sessions and rate caps.' },
+  { title: 'Platform', body: 'Fund coordination, tracking and reports.' },
+  { title: 'Both', body: 'Cover the full support package you agree.' },
+];
+---
+<Section tone="canvas" ariaLabelledby="prog-pricing-title">
+  <SectionHead
+    eyebrow="A budget you can explain"
+    title="Priced per clinician, per"
+    lead="Choose what you sponsor. We agree the rates with you before your cohort starts. Your proposal separates platform costs from supervisor payments. No hidden blend."
+  >
+    <Fragment slot="accent">month.</Fragment>
+  </SectionHead>
+  <div class="prog-pricing">
+    <div class="prog-pricing__example">
+      <p class="prog-pricing__eyebrow">Example · nine-clinician cohort</p>
+      <p class="prog-pricing__calc">9 clinicians × your monthly rate</p>
+      <p class="prog-pricing__link">Pilot pricing by proposal · <a href="/pricing">See pricing →</a></p>
+    </div>
+    <ul class="prog-pricing__options">
+      {options.map((o) => (
+        <li>
+          <h3>{o.title}</h3>
+          <p>{o.body}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <p class="prog-pricing__fine">No graduate Lily fee at launch. Supervisor rates remain separate.</p>
+</Section>
+
+<style>
+  .prog-pricing { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 2rem; align-items: stretch; }
+  .prog-pricing__example { display: flex; flex-direction: column; justify-content: center; gap: 0.75rem; padding: 2.25rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9); }
+  .prog-pricing__example p { margin: 0; }
+  .prog-pricing__eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+  .prog-pricing__calc { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; }
+  .prog-pricing__link { font-size: 0.9375rem; }
+  .prog-pricing__link a { color: var(--lily-canvas, #F5F1E9); font-weight: 600; text-underline-offset: 0.2em; }
+  .prog-pricing__link a:focus-visible { outline: 2px solid var(--lily-canvas, #F5F1E9); outline-offset: 3px; border-radius: 0.25rem; }
+  .prog-pricing__options { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+  .prog-pricing__options li { padding: 1.25rem 1.5rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); border: 1px solid var(--lily-border, #D5DFD9); }
+  .prog-pricing__options h3 { margin: 0 0 0.25rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.25rem; font-weight: 500; color: var(--lily-forest, #14522E); }
+  .prog-pricing__options p { margin: 0; font-size: 0.9375rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .prog-pricing__fine { margin: 1.5rem 0 0; font-size: 0.875rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  @media (max-width: 900px) { .prog-pricing { grid-template-columns: minmax(0, 1fr); } }
+</style>

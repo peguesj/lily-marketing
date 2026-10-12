@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/v2/ui/Section.astro';
+import Container from '../components/v2/ui/Container.astro';
+import CTABand from '../components/v2/ui/CTABand.astro';
+import Button from '../components/v2/ui/Button.astro';
+import Hero from '../components/v2/sections/programs/Hero.astro';
+import Gap from '../components/v2/sections/programs/Gap.astro';
+import Includes from '../components/v2/sections/programs/Includes.astro';
+import Walkthrough from '../components/v2/sections/programs/Walkthrough.astro';
+import Pricing from '../components/v2/sections/programs/Pricing.astro';
+import Audiences from '../components/v2/sections/programs/Audiences.astro';
+import Pilot from '../components/v2/sections/programs/Pilot.astro';
+import ProposalSection from '../components/v2/sections/programs/ProposalSection.astro';
+import { appLinks } from '../config/app';
+---
+<BaseLayout
+  title="For programs and employers | Lily"
+  description="Keep the clinicians you trained. Sponsor a cohort of early-career LPC and LCSW clinicians with agreed supervision rates, weekly signed logs and a director dashboard. Pennsylvania pilot."
+>
+  <Hero />
+  <Gap />
+  <Includes />
+  <Walkthrough />
+  <Pricing />
+  <Audiences />
+  <Pilot />
+  <ProposalSection />
+  <Section tone="canvas" bleed>
+    <Container>
+      <CTABand headline="Be the first" lead="Help shape a fairer start for Pennsylvania's next clinicians.">
+        <Fragment slot="accent">sponsoring program.</Fragment>
+        <Button variant="inverse" href="#proposal" dataAction="programs-cta-talk">Talk to Lily</Button>
+        <Button variant="inverse" small href={appLinks.programInquiry} dataAction="programs-cta-app-inquiry">Open the sponsor inquiry in the app</Button>
+      </CTABand>
+    </Container>
+  </Section>
+</BaseLayout>
