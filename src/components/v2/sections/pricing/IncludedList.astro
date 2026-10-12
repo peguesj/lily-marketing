@@ -1,0 +1,37 @@
+---
+import Container from '../../ui/Container.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import IllustrativeTag from './IllustrativeTag.astro';
+/** What every plan includes. Board-format acceptance is explicitly not promised. */
+const items = [
+  { title: 'Verification', body: ['License checked against a proposed license-review source.', 'Confirm pathway eligibility too.'] },
+  { title: 'Agreement', body: ['Your supervision terms,', 'signed by both of you.'] },
+  { title: 'Hours log', body: ['Weekly, dual-signed entries.', 'Your progress in one place.'] },
+  { title: 'Export', body: ['Take your record with you.', "Check your board's format."] },
+];
+---
+<section class="inc" data-section="included" aria-labelledby="included-title">
+  <Container>
+    <SectionHead title="The essentials," class="inc__head">
+      <Fragment slot="accent">always included.</Fragment>
+    </SectionHead>
+    <ul class="inc__list">
+      {items.map((i) => (
+        <li><h3>{i.title}</h3><p>{i.body.join(' ')}</p></li>
+      ))}
+    </ul>
+    <p class="inc__note">Lily does not promise that any board accepts an exported format. Check your board's requirements.</p>
+    <IllustrativeTag />
+  </Container>
+</section>
+
+<style>
+  .inc { padding-block: 64px; }
+  .inc :global(.inc__head) { margin-bottom: 1.5rem; }
+  .inc__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; margin: 0; padding: 1.75rem 0 0; border-top: 1px solid var(--lily-border, #D5DFD9); list-style: none; }
+  .inc__list h3 { margin: 0 0 0.5rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 1.0625rem; font-weight: 600; letter-spacing: 0; }
+  .inc__list p { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .inc__note { margin: 1.5rem 0 0.75rem; font-size: 0.875rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  @media (max-width: 900px) { .inc__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 520px) { .inc__list { grid-template-columns: minmax(0, 1fr); } }
+</style>

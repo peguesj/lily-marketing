@@ -1,0 +1,45 @@
+---
+import Container from '../../ui/Container.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import IllustrativeTag from './IllustrativeTag.astro';
+/** Three example ways to pay for the same supervised hours. All figures are examples. */
+const cols = [
+  { eyebrow: 'Individual', title: '$150 / hour example', body: ['You cover the session yourself.', 'Your supervisor sets the actual rate.'] },
+  { eyebrow: 'Group', title: 'About half, in this example', body: ['$45 compared with $95 individual.', "Check your pathway's group limits."] },
+  { eyebrow: 'Sponsored', title: 'Your program contributes', body: ['Full or partial support, by agreement.', 'Confirm what your seat covers.'] },
+];
+---
+<section class="fund" data-section="funding" aria-labelledby="fund-title">
+  <Container>
+    <SectionHead title="Three ways to pay for">
+      <Fragment slot="accent">the same hours.</Fragment>
+    </SectionHead>
+    <div class="fund__band">
+      {cols.map((c) => (
+        <div class="fund__col">
+          <p class="fund__eyebrow">{c.eyebrow}</p>
+          <h3 class="fund__title">{c.title}</h3>
+          <p class="fund__body">{c.body.join(' ')}</p>
+        </div>
+      ))}
+    </div>
+    <p class="fund__caption">Supervised clinical experience hours are not all paid supervision sessions. Requirements differ by license.</p>
+    <IllustrativeTag />
+  </Container>
+</section>
+
+<style>
+  .fund { padding-block: 64px; }
+  .fund__band { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 1.75rem 0; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface-muted, #ECE8DF); }
+  .fund__col { padding: 0 1.75rem; }
+  .fund__col + .fund__col { border-left: 1px solid var(--lily-border, #D5DFD9); }
+  .fund__col p, .fund__col h3 { margin: 0; }
+  .fund__eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .fund__title { margin: 0.75rem 0 0.5rem !important; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 1.5rem; font-weight: 500; letter-spacing: -0.01em; line-height: 1.25; }
+  .fund__body { font-size: 0.9375rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .fund__caption { margin: 1rem 0 0.75rem; font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  @media (max-width: 800px) {
+    .fund__band { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+    .fund__col + .fund__col { border-left: 0; border-top: 1px solid var(--lily-border, #D5DFD9); padding-top: 1.5rem; }
+  }
+</style>

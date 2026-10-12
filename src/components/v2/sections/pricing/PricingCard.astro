@@ -1,0 +1,61 @@
+---
+/**
+ * One audience's pricing card. `emphasized` draws the stronger border (the supervisor card).
+ * Slots: "accent" (italic phrase after the title), default (body copy), "notice" (validation label).
+ * Figures that are proposals (the 12% share) must pass an IllustrativeTag in the notice slot.
+ */
+interface Props {
+  audience: 'graduates' | 'supervisors' | 'programs';
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  ctaLabel: string;
+  ctaHref: string;
+  emphasized?: boolean;
+}
+const { audience, eyebrow, title, subtitle, ctaLabel, ctaHref, emphasized = false } = Astro.props;
+---
+<article class:list={['pcard', emphasized && 'pcard--emphasized']} data-pricing-card={audience} data-emphasis={emphasized ? 'true' : undefined}>
+  <p class="pcard__eyebrow">{eyebrow}</p>
+  <h2 class="pcard__title">{title}{' '}<em><slot name="accent" /></em></h2>
+  <p class="pcard__sub">{subtitle}</p>
+  <div class="pcard__body"><slot /></div>
+  <slot name="notice" />
+  <a class="pcard__cta" href={ctaHref}>
+    <span>{ctaLabel}</span>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+  </a>
+</article>
+
+<style>
+  .pcard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    padding: 1.75rem;
+    border: 1px solid var(--lily-border, #D5DFD9);
+    border-radius: var(--radius-card, 1.25rem);
+    background: var(--lily-surface, #F8F5EF);
+  }
+  .pcard--emphasized { border: 2px solid var(--lily-primary, #1B6B3E); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .pcard__eyebrow { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .pcard__title { margin: 0.25rem 0 0; font-size: clamp(1.875rem, 3vw, 2.25rem); font-weight: 600; line-height: 1.1; }
+  .pcard__sub { margin: 0; font-size: 1rem; font-weight: 600; line-height: 1.4; color: var(--lily-forest, #14522E); }
+  .pcard__body { flex: 1; font-size: 0.9375rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .pcard__body :global(p) { margin: 0; }
+  .pcard__cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.25rem;
+    padding-top: 1.125rem;
+    border-top: 1px solid var(--lily-border, #D5DFD9);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--lily-primary, #1B6B3E);
+    text-decoration: none;
+  }
+  .pcard__cta:hover span { text-decoration: underline; text-underline-offset: 0.2em; }
+  .pcard__cta:focus-visible { outline: 2px solid var(--lily-forest, #14522E); outline-offset: 4px; border-radius: 0.25rem; }
+</style>

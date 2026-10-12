@@ -4,7 +4,7 @@ import { test, before } from 'node:test';
 import assert from 'node:assert/strict';
 import { join } from 'node:path';
 import { runChecks, DEFAULT_APP_URL, APP_PATH_ALLOWLIST } from '../../../../../scripts/check-pages.mjs';
-import { buildOnce, loadRoute, root, TAG, attr, hasAttr, byTag, findAll, flat, mainOf } from '../how/test-dom.mjs';
+import { buildOnce, loadRoute, root, TAG, attr, hasAttr, kids, byTag, findAll, flat, mainOf } from '../how/test-dom.mjs';
 
 let page;
 let main;
@@ -70,13 +70,14 @@ test('card CTAs use the app config links and an in-site fallback never points at
 
 test('every 12% sits in a block that also carries a data-illustrative marker with the validation label', () => {
   const BLOCKS = new Set(['article', 'details', 'li', 'section', 'tr', 'aside', 'div', 'p', 'td', 'dd']);
-  const hits = findAll(main, (n) => n.nodeName === '#text' && /12\s*%/.test(n.value));
+  const hits = findAll(main, (n) => kids(n).some((c) => c.nodeName === '#text' && /12\s*%/.test(c.value)));
   assert.ok(hits.length >= 2, 'the 12% share appears in the card and the FAQ');
-  for (const { n, parents } of hits) {
+  for (const { n, parents: ancestors } of hits) {
+    const parents = [...ancestors, n];
     // Nearest ancestor (or self) that is a data-illustrative element, else the nearest card/details/section/li.
     const owner = [...parents].reverse().find((p) => hasAttr(p, 'data-illustrative') && flat(p).includes(TAG))
       ?? [...parents].reverse().find((p) => ['article', 'details', 'section', 'li', 'tr'].includes(p.nodeName));
-    assert.ok(owner, `owner block for "${n.value.trim()}"`);
+    assert.ok(owner, `owner block for "${flat(n).slice(0, 40)}"`);
     const marked = (hasAttr(owner, 'data-illustrative') && flat(owner).includes(TAG))
       || within(owner, (x) => hasAttr(x, 'data-illustrative') && flat(x).includes(TAG)).length > 0;
     assert.ok(marked, `12% in <${owner.nodeName}> "${flat(owner).slice(0, 60)}" lacks a data-illustrative marker`);
@@ -101,7 +102,7 @@ test('rate transparency: Renée Okafor example at $95 / $45, labelled illustrati
   assert.match(t, /Illustrative profile/i);
   assert.match(t, /not a live listing/i);
   assert.ok(hasAttr(ex, 'data-illustrative') || within(ex, (n) => hasAttr(n, 'data-illustrative')).length > 0);
-  assert.match(norm(flat(main)), /Typical PA(?:\b| )rate ranges? (?:are )?pending source validation|Typical Pennsylvania rate ranges are pending source validation/i);
+  assert.match(norm(flat(main)), /Typical PA ranges are pending source validation/);
   assert.doesNotMatch(norm(flat(main)), /\bmedian (rate|is) \$|average rate/i);
 });
 
