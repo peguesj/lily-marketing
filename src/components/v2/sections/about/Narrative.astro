@@ -1,0 +1,66 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import ResearchStat from './ResearchStat.astro';
+---
+<Section tone="surface">
+  <div class="story">
+    <div class="story__copy">
+      <SectionHead eyebrow="Why this problem" title="Built by a clinician who" class="story__head">
+        <Fragment slot="accent">lived the gap.</Fragment>
+      </SectionHead>
+      <p>The years between graduation and licensure should be about becoming a confident clinician. Instead, too many graduates are left to find, fund, and document supervision alone.</p>
+      <blockquote class="story__quote">
+        <p>&ldquo;I knew the work mattered. Finding support for it should not have been the hardest part.&rdquo;</p>
+        <footer>&mdash; Alphonso Nathan, clinician and Lily co-founder</footer>
+      </blockquote>
+      <p>Lily began with a simple belief: thoughtful care is built through relationships that are clear, supported, and fair.</p>
+    </div>
+    <ResearchStat />
+  </div>
+</Section>
+
+<Section tone="canvas">
+  <div class="changed">
+    <SectionHead eyebrow="What changed" title="We narrowed" class="changed__head">
+      <Fragment slot="accent">on purpose.</Fragment>
+    </SectionHead>
+    <p class="changed__lead">
+      Lily started by exploring client-to-clinician matching. We listened, then found the earlier career moment that shapes every future client relationship: supervised practice.
+    </p>
+    <div class="changed__cards">
+      <article class="changed__card">
+        <p class="changed__label">We learned</p>
+        <h3>Access to care starts with access to a sustainable career.</h3>
+        <p>When new clinicians can find the right supervision, more communities gain skilled, supported providers.</p>
+      </article>
+      <article class="changed__card">
+        <p class="changed__label">What stays</p>
+        <ul>
+          <li>Human-centered matching, not a directory dump</li>
+          <li>Cultural and affinity fit alongside clinical fit</li>
+          <li>A path back to care referrals as Lily grows</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .story { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start; }
+  .story__copy p, .changed p, .changed ul { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 1.0625rem; line-height: 1.65; color: var(--lily-text-muted-aa, #4E6B5A); margin: 0 0 1.25rem; }
+  .story :global(.story__head), .changed :global(.changed__head) { margin-bottom: 1.5rem; }
+  .story__quote { margin: 0 0 1.5rem; padding: 1.5rem 1.75rem; border-left: 4px solid var(--lily-teal, #318171); border-radius: 0 var(--radius-card-sm, 0.875rem) var(--radius-card-sm, 0.875rem) 0; background: var(--lily-canvas, #F5F1E9); }
+  .story__quote p { margin: 0 0 0.75rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-style: italic; font-size: 1.5rem; line-height: 1.35; color: var(--lily-forest, #14522E); }
+  .story__quote footer { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.875rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .changed__lead { max-width: 46rem; }
+  .changed__cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+  .changed__card { padding: 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .changed__card h3 { margin: 0 0 0.75rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.5rem; line-height: 1.25; color: var(--lily-forest, #14522E); }
+  .changed__card ul { margin: 0; padding-left: 1.25rem; }
+  .changed__card li { margin-bottom: 0.5rem; }
+  .changed__label { font-size: 12px !important; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+  @media (max-width: 800px) {
+    .story, .changed__cards { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

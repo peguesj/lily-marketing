@@ -72,7 +72,11 @@ test('/contact: form island with honeypot, topic preselect, direct lines, respon
   assert.match(text, /Philadelphia/);
   assert.match(text, /remote-first/i);
   assert.match(text, /Pennsylvania/);
-  assert.match(main, /URLSearchParams|searchParams/, 'topic query handling');
+  // ?topic= is read by the ContactFormPanel island; SSR default is sponsor
+  const island = main.match(/<astro-island\b[^>]*ContactFormPanel[^>]*>/)?.[0];
+  assert.ok(island, 'ContactFormPanel island');
+  assert.match(island, /defaultTopic[^,]*sponsor/);
+  assert.match(main, /aria-checked="true"[^>]*>Sponsor a cohort/, 'sponsor chip preselected in SSR output');
   assert.match(main, /href="\/waitlist"/);
 });
 
@@ -102,8 +106,9 @@ test('/waitlist: counters, audience switch form, rail, steps, phone preview, pri
   assert.match(text, /Licenses are verified but not published; information is never sold\./);
   assert.match(main, new RegExp(`href="${APP_WELCOME}"`));
   assert.match(text, /Already invited\? Start in the app/);
-  assert.match(main, /URLSearchParams|searchParams/, 'audience query handling');
-  assert.match(main, /href="\/waitlist"|CTA/i);
+  const island = main.match(/<astro-island\b[^>]*WaitlistFormPanel[^>]*>/)?.[0];
+  assert.ok(island, 'WaitlistFormPanel island');
+  assert.match(island, /defaultAudience[^,]*supervisor/);
   for (const step of ['confirmation', 'verification', 'local']) {
     assert.match(text, new RegExp(step, 'i'), `step mentions ${step}`);
   }
