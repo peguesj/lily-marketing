@@ -22,8 +22,17 @@ const decode = (s) =>
     if (e[0] === '#') return String.fromCodePoint(e[1].toLowerCase() === 'x' ? parseInt(e.slice(2), 16) : parseInt(e.slice(1), 10));
     return ENTITIES[e.toLowerCase()] ?? m;
   });
+// Inline tags join their neighbours (so "<em>sign</em>." reads "sign."); every other tag is a break.
+const INLINE = 'em|strong|span|a|i|b|code|time|abbr|mark|small|sup|sub';
 const textOf = (html) =>
-  decode(html.replace(/<(script|style|template)\b[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
+  decode(
+    html
+      .replace(/<(script|style|template)\b[\s\S]*?<\/\1>/gi, ' ')
+      .replace(new RegExp(`</?(?:${INLINE})\\b[^>]*>`, 'gi'), '')
+      .replace(/<[^>]+>/g, ' '),
+  )
+    .replace(/\s+/g, ' ')
+    .trim();
 const count = (html, re) => (html.match(re) ?? []).length;
 
 const pageFile = (route) => join(root, 'dist', route.replace(/^\//, ''), 'index.html');
