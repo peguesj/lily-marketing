@@ -1,0 +1,36 @@
+---
+import PetalMark from '../../ui/PetalMark.astro';
+import Chip from '../../ui/Chip.astro';
+/** Affinity-data trust panel: matching only, never public. */
+---
+<aside class="callout" data-affinity-callout aria-labelledby="affinity-title">
+  <div class="callout__text">
+    <p class="callout__eyebrow">Affinity data</p>
+    <h2 id="affinity-title" class="callout__title">Affinity answers are for matching, <em>never public</em>.</h2>
+    <p class="callout__body">The identity dimensions you choose to share help Lily suggest a supervisor who can support your route. They do not appear on your public profile.</p>
+    <Chip variant="teal">Private by design</Chip>
+  </div>
+  <div class="callout__art" aria-hidden="true"><PetalMark petals={3} size={160} color="var(--lily-teal, #318171)" /></div>
+</aside>
+
+<style>
+  .callout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 2.5rem;
+    border-radius: var(--radius-card, 1.25rem);
+    background: color-mix(in srgb, var(--lily-teal, #318171) 12%, var(--lily-canvas, #F5F1E9));
+    border: 1px solid color-mix(in srgb, var(--lily-teal, #318171) 28%, transparent);
+  }
+  .callout__text { display: flex; flex-direction: column; align-items: flex-start; gap: 0.875rem; max-width: 40rem; }
+  .callout__eyebrow { margin: 0; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .callout__title { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: clamp(1.625rem, 3vw, 2rem); font-weight: 600; line-height: 1.2; color: var(--lily-forest, #14522E); }
+  .callout__title em { font-style: italic; font-weight: 500; color: var(--lily-primary, #1B6B3E); }
+  .callout__body { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  @media (max-width: 700px) {
+    .callout { grid-template-columns: 1fr; padding: 1.75rem; }
+    .callout__art { display: none; }
+  }
+</style>

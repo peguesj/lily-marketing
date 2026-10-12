@@ -1,82 +1,149 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/v2/ui/Section.astro';
+import Button from '../components/v2/ui/Button.astro';
+import CTABand from '../components/v2/ui/CTABand.astro';
+import LegalBanner from '../components/v2/sections/terms/LegalBanner.astro';
+import LegalHead from '../components/v2/sections/terms/LegalHead.astro';
+import PrivacyHero from '../components/v2/sections/privacy/PrivacyHero.astro';
+import SummaryTiles from '../components/v2/sections/privacy/SummaryTiles.astro';
+import RoleCollectionCard from '../components/v2/sections/privacy/RoleCollectionCard.astro';
+import PrivacyCallout from '../components/v2/sections/privacy/PrivacyCallout.astro';
+import DisclosureList from '../components/v2/sections/privacy/DisclosureList.astro';
+import ChoiceCard from '../components/v2/sections/privacy/ChoiceCard.astro';
+import RetentionBand from '../components/v2/sections/privacy/RetentionBand.astro';
+import PolicyRows from '../components/v2/sections/privacy/PolicyRows.astro';
+import { appLinks } from '../config/app';
+
+const PRIVACY_EMAIL = 'privacy@asklily.health';
+
+const roles = [
+  {
+    role: 'graduate',
+    label: 'Graduate',
+    title: 'Your route to 3,000 supervised hours.',
+    lines: ['Identity · licensure track · availability', 'Affinity answers · agreements · hours', 'attestations · direct messages'],
+    notes: ['You control what is visible'],
+  },
+  {
+    role: 'supervisor',
+    label: 'Supervisor',
+    title: 'A credible, clear supervision practice.',
+    lines: ['Identity · active license · rates', 'Availability · practice details · hours', 'attestations · direct messages'],
+    notes: ['Rates are always explicit'],
+  },
+  {
+    role: 'program-admin',
+    label: 'Program admin',
+    title: 'A cohort with clear participation records.',
+    lines: ['Sponsored cohort membership · hours', 'and signature status · aggregated reports'],
+    notes: ['No affinity answers or messages', 'Clinical records never enter Lily'],
+  },
+] as const;
+
+const policyRows = [
+  {
+    key: 'children',
+    title: 'Children and age requirements',
+    paragraphs: [
+      'Lily is for adults. You must be 18 or older to create an account, and we do not knowingly collect personal information from anyone under 18.',
+      `If you believe a child has given us information, email ${PRIVACY_EMAIL} and we will delete it.`,
+    ],
+  },
+  {
+    key: 'cookies',
+    title: 'Cookies and service analytics',
+    paragraphs: [
+      'We use the cookies needed to keep you signed in and remember your choices, and basic service analytics to see which pages and flows work. Analytics never include affinity answers, messages or hours logs.',
+    ],
+    link: { href: '/cookies', label: 'Read the cookie notice' },
+  },
+  {
+    key: 'changes',
+    title: 'Changes to this privacy policy',
+    paragraphs: [
+      'When this policy changes we post the new version with its effective date and tell you in the app before any material change takes effect. Earlier versions are available on request.',
+    ],
+  },
+] as const;
 ---
 
 <BaseLayout
-  title="Privacy Policy — Lily | How We Protect Your Data"
-  description="Lily's privacy policy covers how we collect, use, and protect your personal and health information. HIPAA-compliant, CCPA-aware, and member-first."
+  title="Privacy — Lily | Your data, in plain language"
+  description="Lily's privacy policy for supervised practice: what we collect, why, who sees it, and how long we keep it. Draft for the Pennsylvania pilot, pending counsel review."
   canonical="https://www.asklily.health/privacy"
-  noindex={false}
 >
-  <main>
-    <section class="page-hero" style="padding-bottom: 2rem;">
-      <div class="container narrow">
-        <div class="hero-eyebrow"><span class="dot"></span>Legal</div>
-        <h1>Privacy Policy</h1>
-        <p style="color: hsl(var(--foreground) / 0.6); font-size: 0.9rem;">Effective date: January 1, 2025 · Last updated: January 1, 2025</p>
-      </div>
-    </section>
+  <LegalBanner />
+  <PrivacyHero />
 
-    <section class="section">
-      <div class="container narrow">
-        <div class="legal-body" style="line-height: 1.75; color: hsl(var(--foreground) / 0.82);">
-          <h2>1. About This Policy</h2>
-          <p>Lily AI, Inc. ("Lily," "we," "us," or "our") operates asklily.health and the Lily Care, Lily Practice, and Lily Admin platforms. This Privacy Policy explains how we collect, use, disclose, and protect information about you when you use our services.</p>
+  <Section tone="surface" ariaLabelledby="short-version">
+    <LegalHead id="short-version" eyebrow="The short version" title="What privacy means,">
+      <Fragment slot="accent">here</Fragment>
+    </LegalHead>
+    <SummaryTiles />
+  </Section>
 
-          <h2>2. Information We Collect</h2>
-          <h4>Information you provide</h4>
-          <ul>
-            <li>Account registration data (name, email, role)</li>
-            <li>Profile information (demographics, preferences, identity dimensions you choose to share)</li>
-            <li>Communications with practitioners and support</li>
-            <li>Assessment and quiz responses</li>
-            <li>Payment information (processed by Stripe; we do not store card numbers)</li>
-          </ul>
-          <h4>Information collected automatically</h4>
-          <ul>
-            <li>Usage data (pages visited, features used, session duration)</li>
-            <li>Device and browser information</li>
-            <li>IP address and approximate location</li>
-            <li>Cookies and similar tracking technologies (see our Cookie Policy)</li>
-          </ul>
+  <Section tone="canvas" ariaLabelledby="collect-title">
+    <LegalHead id="collect-title" eyebrow="What we collect" title="Only what helps your practice" lead="Your role changes what you share. We keep the scope narrow.">
+      <Fragment slot="accent">move</Fragment>
+    </LegalHead>
+    <div class="roles">
+      {roles.map((r) => (
+        <RoleCollectionCard role={r.role} label={r.label} title={r.title} lines={[...r.lines]} notes={[...r.notes]} />
+      ))}
+    </div>
+    <div class="callout-gap"><PrivacyCallout /></div>
+  </Section>
 
-          <h2>3. Protected Health Information (PHI)</h2>
-          <p>Lily is a HIPAA-covered entity and business associate. Protected Health Information — including clinical notes, diagnosis data, session records, and assessment results — is handled under our HIPAA compliance program and never used for advertising, sold, or shared with unauthorized parties.</p>
-          <p>PHI is stored in HIPAA-eligible cloud infrastructure in the United States. Access is role-based, logged, and audited. You have rights under HIPAA to access, amend, and receive an accounting of disclosures of your PHI.</p>
+  <Section tone="surface" ariaLabelledby="share-title">
+    <LegalHead id="share-title" eyebrow="How we use and share data" title="Useful with intent. Shared with">
+      <Fragment slot="accent">care</Fragment>
+    </LegalHead>
+    <DisclosureList />
+  </Section>
 
-          <h2>4. How We Use Your Information</h2>
-          <ul>
-            <li>To match you with practitioners using our identity-aware algorithm</li>
-            <li>To facilitate telehealth, scheduling, and secure messaging</li>
-            <li>To generate AI-assisted clinical notes and outcomes analytics (de-identified for organizational reporting)</li>
-            <li>To send transactional emails and, with your consent, product updates</li>
-            <li>To improve our matching model and platform safety</li>
-            <li>To comply with legal obligations</li>
-          </ul>
+  <Section tone="canvas" ariaLabelledby="rights-title">
+    <LegalHead id="rights-title" eyebrow="Your rights and choices" title="You stay" lead="Use your settings or write to us to take any of these actions.">
+      <Fragment slot="accent">in control</Fragment>
+    </LegalHead>
+    <div class="choices">
+      <ChoiceCard
+        title="Export, correct or delete"
+        body="Download your profile, agreements and hours log. Correct facts or request account deletion without losing sight of what remains."
+        actionLabel="Request an export"
+        actionHref={`mailto:${PRIVACY_EMAIL}?subject=${encodeURIComponent('Data export request')}`}
+      />
+      <ChoiceCard
+        title="Control visibility and reminders"
+        body="Choose cohort visibility, notification channels and what appears to potential matches before you agree to connect."
+        actionLabel="Review privacy settings"
+        actionHref={appLinks.signIn}
+      />
+    </div>
+  </Section>
 
-          <h2>5. Information Sharing</h2>
-          <p>We do not sell your personal information. We share information only:</p>
-          <ul>
-            <li>With practitioners you are matched with or engage, with your consent</li>
-            <li>With your sponsoring employer or health plan in de-identified, aggregated form only</li>
-            <li>With service providers under data processing agreements (cloud, email, payments)</li>
-            <li>As required by law, court order, or to protect safety</li>
-          </ul>
+  <RetentionBand askHref={`mailto:${PRIVACY_EMAIL}?subject=${encodeURIComponent('Retention question')}`} />
 
-          <h2>6. Your Rights</h2>
-          <p>Depending on your jurisdiction, you may have rights to access, correct, delete, or port your data. California residents have additional rights under the CCPA. To exercise any rights, email <a href="mailto:privacy@asklily.health">privacy@asklily.health</a>.</p>
+  <Section tone="canvas" ariaLabelledby="policy-title">
+    <LegalHead id="policy-title" eyebrow="The full policy" title="Questions deserve" lead="This policy covers children, cookies, policy changes and how to contact Lily.">
+      <Fragment slot="accent">clear answers</Fragment>
+    </LegalHead>
+    <PolicyRows rows={[...policyRows]} />
+  </Section>
 
-          <h2>7. Data Retention</h2>
-          <p>We retain account data for the life of your account plus 7 years, consistent with healthcare record-keeping requirements. Clinical records are retained per applicable state law (minimum 7 years; 10 years for minor patients).</p>
-
-          <h2>8. Security</h2>
-          <p>We use AES-256 encryption at rest, TLS 1.3 in transit, role-based access controls, and annual third-party security audits (SOC 2 Type II). No system is perfectly secure; we will notify you of any breach affecting your PHI within the timeframes required by law.</p>
-
-          <h2>9. Contact</h2>
-          <p>Privacy Officer: <a href="mailto:privacy@asklily.health">privacy@asklily.health</a><br />
-          Lily AI, Inc. · Philadelphia, PA &amp; New York, NY</p>
-        </div>
-      </div>
-    </section>
-  </main>
+  <Section tone="canvas">
+    <CTABand headline="Privacy should feel" lead={`Email ${PRIVACY_EMAIL} and we will help.`}>
+      <Fragment slot="accent">human.</Fragment>
+      <Button variant="inverse" href="/contact?topic=trust">Contact privacy</Button>
+    </CTABand>
+  </Section>
 </BaseLayout>
+
+<style>
+  .roles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+  .choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+  .callout-gap { margin-top: 3rem; }
+  @media (max-width: 900px) {
+    .roles, .choices { grid-template-columns: 1fr; }
+  }
+</style>
