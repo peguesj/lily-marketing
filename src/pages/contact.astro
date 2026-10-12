@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactForm from '../components/ContactForm.tsx';
+import ContactForm from '../components/v2/forms/ContactForm.tsx';
 import Illustration from '../components/Illustration.tsx';
 ---
 
@@ -29,10 +29,10 @@ import Illustration from '../components/Illustration.tsx';
       </div>
     </section>
 
-    <!-- CONTACT FORM — React island for full interactivity -->
+    <!-- CONTACT FORM — v2 island; posts to /api/submit (no simulated success) -->
     <section class="section">
       <div class="container wide">
-        <ContactForm client:load />
+        <ContactForm client:visible />
       </div>
     </section>
   </main>

@@ -14,8 +14,9 @@
     "check:pages": "node scripts/check-pages.mjs",
     "check:pages:strict": "node scripts/check-pages.mjs --strict",
     "test:check-pages": "node --test scripts/check-pages.test.mjs",
-    "test:unit": "node --test scripts/check-pages.test.mjs scripts/preview-routes.test.mjs",
-    "test": "npm run test:unit"
+    "test:unit": "node --test scripts/check-pages.test.mjs scripts/preview-routes.test.mjs scripts/__tests__/forms.test.mjs",
+    "test:dist": "MOCKS_SKIP_BUILD=1 node --test scripts/__tests__/ui-kit.test.mjs scripts/__tests__/mocks.test.mjs scripts/__tests__/forms-render.test.mjs",
+    "test": "npm run test:unit && npm run build && npm run test:dist && npm run check:pages"
   },
   "keywords": [],
   "author": "",

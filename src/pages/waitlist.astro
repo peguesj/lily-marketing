@@ -2,6 +2,7 @@
 import LegacyCopyNotice from '../components/LegacyCopyNotice.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Illustration from '../components/Illustration.tsx';
+import WaitlistForm from '../components/v2/forms/WaitlistForm.tsx';
 ---
 
 <BaseLayout
@@ -23,36 +24,9 @@ import Illustration from '../components/Illustration.tsx';
               whether you're seeking care, providing it, or paying for it.
             </p>
 
-            <form id="waitlist-form" class="waitlist-form" style="margin-top: 2rem;">
-              <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 440px;">
-                <label for="wl-role" class="sr-only">I am a</label>
-                <select id="wl-role" name="role" required style="padding: 14px 16px; border-radius: 14px; border: 1.5px solid hsla(145, 30%, 60%, 0.35); background: hsla(43, 35%, 97%, 0.85); font-family: var(--sans); font-size: 1rem;">
-                  <option value="">I am a...</option>
-                  <option value="member">Member seeking care</option>
-                  <option value="practitioner">Practitioner / clinician</option>
-                  <option value="organization">Organization / employer</option>
-                </select>
-
-                <label for="wl-email" class="sr-only">Email address</label>
-                <input
-                  id="wl-email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="your@email.com"
-                  style="padding: 14px 16px; border-radius: 14px; border: 1.5px solid hsla(145, 30%, 60%, 0.35); background: hsla(43, 35%, 97%, 0.85); font-family: var(--sans); font-size: 1rem;"
-                />
-
-                <button type="submit" class="btn primary" style="justify-content: center;">
-                  Join the waitlist
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </button>
-              </div>
-
-              <p id="wl-success" style="display: none; margin-top: 1.25rem; color: hsl(145, 60%, 26%); font-weight: 500;">
-                You're on the list! We'll be in touch soon.
-              </p>
-            </form>
+            <div style="margin-top: 2rem; max-width: 520px;">
+              <WaitlistForm client:visible defaultAudience="supervisor" compact />
+            </div>
           </div>
           <div class="page-hero-illust-wrap">
             <Illustration client:load n={3} size={300} alt="Growing together" />
@@ -95,15 +69,3 @@ import Illustration from '../components/Illustration.tsx';
   </main>
 </BaseLayout>
 
-<script>
-  const form = document.getElementById('waitlist-form') as HTMLFormElement;
-  const success = document.getElementById('wl-success');
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // For now, just show success — backend integration TBD
-    if (success) success.style.display = 'block';
-    form.querySelectorAll('input, select, button').forEach((el) => {
-      (el as HTMLInputElement | HTMLButtonElement | HTMLSelectElement).disabled = true;
-    });
-  });
-</script>
