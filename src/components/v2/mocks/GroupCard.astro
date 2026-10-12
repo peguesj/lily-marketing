@@ -1,0 +1,54 @@
+---
+/** Group supervision card: seated avatars plus a dashed open seat. Fictional people. */
+interface Props {
+  title?: string;
+  seats?: string[];
+  openSeats?: number;
+  pricePerSeat?: number;
+  sessionMinutes?: number;
+  hoursSoFar?: number;
+  hoursCap?: number;
+}
+const {
+  title = 'Thursday group · 7:00pm · Virtual',
+  seats = ['MO', 'AC', 'JE'],
+  openSeats = 1,
+  pricePerSeat = 45,
+  sessionMinutes = 60,
+  hoursSoFar = 18,
+  hoursCap = 60,
+} = Astro.props;
+const total = (seats.length + openSeats) * pricePerSeat;
+---
+
+<article class="group" data-mock="GroupCard" data-illustrative>
+  <p class="eyebrow">GROUP OF FOUR <span class="example">Example</span></p>
+  <h3>{title}</h3>
+  <ul class="seats" aria-label={`${seats.length} seats filled, ${openSeats} open`}>
+    {seats.map((s) => <li class="avatar">{s}</li>)}
+    {Array.from({ length: openSeats }).map(() => <li class="avatar open"><span>Open seat</span></li>)}
+  </ul>
+  <p class="price"><strong>${pricePerSeat}</strong> /hr per seat · ${total} per {sessionMinutes === 60 ? '1-hour' : `${sessionMinutes}-minute`} session</p>
+  <p class="cap">Group hours so far: {hoursSoFar} of {hoursCap} allowed per supervisee this cycle</p>
+  <p class="tag" data-illustrative>Illustrative · pending validation</p>
+</article>
+
+<style>
+  .group {
+    box-sizing: border-box; width: 100%; max-width: 360px; padding: 20px;
+    background: var(--lily-surface, #f8f5ef); border: 1px solid var(--lily-border, #d5dfd9);
+    border-radius: var(--radius-card, 1.25rem); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+    color: var(--lily-text, #14522e); font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+  }
+  p, h3 { margin: 0; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; color: var(--lily-text-muted-strong, #4f7060); }
+  .example { margin-left: 6px; font-size: 9.5px; padding: 2px 7px; border-radius: 9999px; background: var(--lily-surface-muted, #ece8df); letter-spacing: 0.08em; }
+  h3 { margin-top: 6px; font-size: 16px; font-weight: 600; }
+  .seats { display: flex; gap: 8px; list-style: none; margin: 14px 0 0; padding: 0; }
+  .avatar { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: rgb(20 82 46 / 10%); font-size: 13px; font-weight: 600; }
+  .avatar.open { border: 1.5px dashed var(--lily-forest, #14522e); background: transparent; font-size: 8.5px; text-align: center; line-height: 1.1; color: var(--lily-text-muted-aa, #4e6b5a); }
+  .price { margin-top: 14px; font-size: 13px; }
+  .price strong { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 24px; font-weight: 500; }
+  .cap { margin-top: 6px; font-size: 12px; color: var(--lily-text-muted-aa, #4e6b5a); }
+  .tag { margin-top: 10px; font-size: 10.5px; font-style: italic; color: var(--lily-text-muted-aa, #4e6b5a); }
+</style>

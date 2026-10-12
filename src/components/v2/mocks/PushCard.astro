@@ -1,0 +1,59 @@
+---
+/** Lock-screen style notification card. Static, zero JS. */
+interface Props {
+  title?: string;
+  body?: string;
+  time?: string;
+}
+const {
+  title = 'Lily is ready',
+  body = '3 graduates in Montgomery County want LCSW supervision.',
+  time = 'now',
+} = Astro.props;
+---
+
+<div class="push" data-mock="PushCard">
+  <span class="tile" aria-hidden="true">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+      <path d="M12 3c2.6 2.4 3.6 5.2 3.6 7.6 0 2-1.4 3.4-3.6 3.4s-3.6-1.4-3.6-3.4C8.4 8.2 9.4 5.4 12 3Z" />
+      <path d="M5 8.5c3 .2 5 2 5.6 4.6M19 8.5c-3 .2-5 2-5.6 4.6" />
+      <path d="M4 14.5c2.4 4.2 5.6 6 8 6s5.6-1.8 8-6c-2.8 1.2-5.4 1.5-8 1.5s-5.2-.3-8-1.5Z" fill="currentColor" fill-opacity=".16" />
+    </svg>
+  </span>
+  <div class="text">
+    <p class="meta"><span>LILY</span> · <span>{time}</span></p>
+    <p class="title">{title}</p>
+    <p class="body">{body}</p>
+  </div>
+</div>
+
+<style>
+  .push {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding: 12px;
+    background: var(--lily-surface, #f8f5ef);
+    border: 1px solid var(--lily-border, #d5dfd9);
+    border-radius: var(--radius-card-sm, 0.875rem);
+    box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    color: var(--lily-text, #14522e);
+    max-width: 320px;
+  }
+  .tile {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--lily-peach, #f0b882);
+    color: var(--lily-forest, #14522e);
+  }
+  .text p { margin: 0; }
+  .meta { font-size: 10.5px; letter-spacing: 0.08em; color: var(--lily-text-muted-aa, #4e6b5a); font-weight: 600; }
+  .title { font-size: 14px; font-weight: 600; margin-top: 2px !important; }
+  .body { font-size: 12.5px; line-height: 1.4; margin-top: 2px !important; color: var(--lily-text-muted-aa, #4e6b5a); }
+</style>

@@ -1,0 +1,67 @@
+---
+import PhoneFrame from './PhoneFrame.astro';
+
+/** The supervisor one-screen sign-up, inside a phone. The License number field is in its focus state. */
+interface Props {
+  name?: string;
+  licenseNumber?: string;
+  since?: string;
+  rate?: string;
+  selected?: string;
+}
+const {
+  name = 'Elena Reyes',
+  licenseNumber = 'CW012345',
+  since = '2012',
+  rate = '$120 / hr',
+  selected = 'LCSW',
+} = Astro.props;
+const types = ['LPC', 'LCSW', 'LMFT', 'Psych.'];
+---
+
+<PhoneFrame label="Example supervisor sign-up screen with a focused license number field">
+  <div class="su" data-mock="SignupPhonePreview" data-illustrative>
+    <p class="status" aria-hidden="true"><span>9:41</span><span>5G</span></p>
+    <p class="wordmark">lily</p>
+    <p class="eyebrow">SUPERVISORS · EXAMPLE</p>
+    <h4>Tell us your <em>license</em>.</h4>
+    <div class="field"><label>Full name</label><span>{name}</span></div>
+    <div class="field focus"><label>License number</label><span>{licenseNumber}<i aria-hidden="true"></i></span></div>
+    <div class="row">
+      <div class="field"><label>Licensed since</label><span>{since}</span></div>
+      <div class="field"><label>Rate</label><span>{rate}</span></div>
+    </div>
+    <ul class="chips" aria-label="License type">
+      {types.map((t) => <li class:list={{ on: t === selected }}>{t}</li>)}
+    </ul>
+    <p class="valid"><span class="dot" aria-hidden="true"></span>Illustrative license profile · eligibility pending validation.</p>
+    <p class="cta">Join as a supervisor</p>
+    <p class="legal">Example only. Nothing here is a verification result.</p>
+    <p class="tag" data-illustrative>Illustrative · pending validation</p>
+  </div>
+</PhoneFrame>
+
+<style>
+  .su { box-sizing: border-box; padding: 0 14px; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); color: var(--lily-text, #14522e); }
+  p, h4 { margin: 0; }
+  .status { display: flex; justify-content: space-between; font-size: 9.5px; font-weight: 600; margin: -20px 6px 8px; }
+  .wordmark { font-family: var(--font-wordmark, Jost, 'Space Grotesk', sans-serif); font-weight: 300; font-size: 22px; color: var(--lily-wordmark, #2e5f55); }
+  .eyebrow { margin-top: 4px; font-size: 8.5px; font-weight: 600; letter-spacing: 0.12em; color: var(--lily-text-muted-strong, #4f7060); }
+  h4 { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-weight: 500; font-size: 20px; line-height: 1.15; margin: 4px 0 10px; }
+  h4 em { font-style: italic; color: var(--lily-primary, #1b6b3e); }
+  .field { position: relative; padding: 5px 12px 4px; margin-bottom: 6px; border: 1px solid var(--lily-border, #d5dfd9); border-radius: 9999px; background: var(--lily-surface, #f8f5ef); }
+  .field label { display: block; font-size: 8.5px; color: var(--lily-text-muted-aa, #4e6b5a); }
+  .field span { font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; gap: 2px; }
+  .field.focus { border: 1.5px solid var(--lily-forest, #14522e); }
+  .field.focus label { color: var(--lily-forest, #14522e); font-weight: 600; }
+  .field i { display: inline-block; width: 1px; height: 12px; background: var(--lily-forest, #14522e); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .chips { list-style: none; display: flex; gap: 4px; padding: 0; margin: 2px 0 8px; }
+  .chips li { padding: 3px 9px; border-radius: 9999px; background: var(--lily-surface-muted, #ece8df); font-size: 10px; }
+  .chips li.on { background: var(--lily-forest, #14522e); color: var(--lily-canvas, #f5f1e9); }
+  .valid { display: flex; gap: 5px; align-items: flex-start; font-size: 9.5px; line-height: 1.3; color: #1f6e40; }
+  .dot { flex: none; width: 8px; height: 8px; margin-top: 2px; border-radius: 50%; background: var(--lily-success, #28874f); }
+  .cta { margin-top: 10px; padding: 9px; text-align: center; border-radius: 9999px; background: var(--lily-forest, #14522e); color: var(--lily-canvas, #f5f1e9); font-size: 12px; font-weight: 600; box-shadow: var(--shadow-cta, 0 8px 9px rgb(49 129 113 / 32%)); }
+  .legal { margin-top: 6px; font-size: 8.5px; text-align: center; color: var(--lily-text-muted-aa, #4e6b5a); }
+  .tag { margin-top: 3px; font-size: 8.5px; font-style: italic; text-align: center; color: var(--lily-text-muted-aa, #4e6b5a); }
+</style>

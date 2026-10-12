@@ -1,0 +1,60 @@
+---
+/** value/total ring. aria-valuenow is the clamped value, the arc is computed from value/total. */
+interface Props {
+  value: number;
+  total: number;
+  size?: number;
+  unit?: string;
+  label?: string;
+}
+const { value, total, size = 96, unit = 'hrs', label = 'Hours counted' } = Astro.props;
+const safeTotal = total > 0 ? total : 1;
+const now = Math.min(Math.max(value, 0), safeTotal);
+const stroke = Math.max(6, Math.round(size / 11));
+const r = (size - stroke) / 2;
+const c = Number((2 * Math.PI * r).toFixed(3));
+const offset = Number((c * (1 - now / safeTotal)).toFixed(3));
+const pct = Math.round((now / safeTotal) * 100);
+const fmt = (n: number) => n.toLocaleString('en-US');
+---
+
+<div
+  class="ring"
+  data-mock="ProgressRing"
+  role="progressbar"
+  aria-label={label}
+  aria-valuemin="0"
+  aria-valuemax={safeTotal}
+  aria-valuenow={now}
+  aria-valuetext={`${fmt(now)} of ${fmt(safeTotal)} ${unit} (${pct}%)`}
+  style={`width:${size}px;height:${size}px`}
+>
+  <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true" focusable="false">
+    <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--lily-surface-muted, #ece8df)" stroke-width={stroke} />
+    <circle
+      data-arc
+      cx={size / 2}
+      cy={size / 2}
+      r={r}
+      fill="none"
+      stroke="var(--lily-primary, #1b6b3e)"
+      stroke-width={stroke}
+      stroke-linecap="round"
+      stroke-dasharray={c}
+      stroke-dashoffset={offset}
+      transform={`rotate(-90 ${size / 2} ${size / 2})`}
+    />
+  </svg>
+  <span class="center">
+    <strong>{fmt(now)}</strong>
+    <small>of {fmt(safeTotal)} {unit}</small>
+  </span>
+</div>
+
+<style>
+  .ring { position: relative; display: inline-block; flex: none; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); color: var(--lily-text, #14522e); }
+  svg { display: block; }
+  .center { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+  strong { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.15em; font-weight: 500; line-height: 1; }
+  small { font-size: 9.5px; color: var(--lily-text-muted-aa, #4e6b5a); margin-top: 2px; }
+</style>

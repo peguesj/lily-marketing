@@ -1,0 +1,57 @@
+---
+/** Lotus-petal timeline. Steps 1..n-1 are outlined, the destination (last) node is filled. */
+interface Step { label: string; sub: string }
+interface Props { steps?: Step[] }
+const {
+  steps = [
+    { label: 'Join', sub: 'One screen' },
+    { label: 'Verify', sub: 'License review' },
+    { label: 'Match', sub: 'Chosen by both' },
+    { label: 'Agree', sub: 'One pass' },
+    { label: 'Log weekly', sub: 'Signed twice' },
+    { label: 'Caseload', sub: 'Your account, kept' },
+  ],
+} = Astro.props;
+---
+
+<ol class="tl" data-mock="Timeline" style={`--n:${steps.length}`}>
+  {steps.map((s, i) => {
+    const filled = i === steps.length - 1;
+    return (
+      <li data-node data-filled={filled ? 'true' : 'false'}>
+        <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+          <path
+            d="M17 4c4.6 4.2 6.6 8.6 6.6 12.6 0 4.2-2.7 7-6.6 7s-6.6-2.8-6.6-7C10.4 12.6 12.4 8.2 17 4Z"
+            fill={filled ? 'var(--lily-forest, #14522e)' : 'var(--lily-canvas, #f5f1e9)'}
+            stroke="var(--lily-forest, #14522e)"
+            stroke-width="1.6"
+            stroke-linejoin="round"
+          />
+          <path d="M6 14c4 .3 7 2.6 8 6.4M28 14c-4 .3-7 2.6-8 6.4" fill="none" stroke="var(--lily-forest, #14522e)" stroke-width="1.4" stroke-linecap="round" />
+          <path d="M8 26c3 1.2 6 1.8 9 1.8s6-.6 9-1.8" fill="none" stroke="var(--lily-forest, #14522e)" stroke-width="1.4" stroke-linecap="round" />
+        </svg>
+        <strong><span class="num">{i + 1}</span> {s.label}</strong>
+        <span class="sub">{s.sub}</span>
+      </li>
+    );
+  })}
+</ol>
+
+<style>
+  .tl {
+    list-style: none; margin: 0; padding: 0; position: relative;
+    display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 8px;
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); color: var(--lily-text, #14522e);
+  }
+  .tl::before { content: ''; position: absolute; top: 17px; left: 4%; right: 4%; height: 1.5px; background: var(--lily-border, #d5dfd9); }
+  li { position: relative; display: grid; justify-items: center; gap: 4px; text-align: center; }
+  svg { background: var(--lily-canvas, #f5f1e9); }
+  strong { font-size: 13px; font-weight: 600; }
+  .num { color: var(--lily-text-muted-aa, #4e6b5a); font-weight: 500; }
+  .sub { font-size: 11.5px; color: var(--lily-text-muted-aa, #4e6b5a); }
+  @media (max-width: 640px) {
+    .tl { grid-template-columns: 1fr; justify-items: start; }
+    .tl::before { display: none; }
+    li { justify-items: start; text-align: left; }
+  }
+</style>
