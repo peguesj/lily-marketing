@@ -7,14 +7,13 @@ import ClaimHead from './ClaimHead.astro';
 import AgreementPoints from './AgreementPoints.astro';
 
 const points = [
-  { title: 'The license-status badge concept', body: 'A small shield next to your name that would say your license, your years and your state were checked by us, not typed in by you. It is the first thing a graduate looks for.' },
+  { title: 'The license-status badge concept', body: 'A small shield next to your name that says your license, your years and your state were checked by us, not typed in by you. It is the first thing a graduate looks for.' },
   { title: 'How the board check works', body: 'You enter the number printed on your license. We look it up with the proposed license-review source, confirm status and issue date, and re-check it every six months.' },
   { title: 'What graduates see', body: 'Your badge, your rates, your format and your open seats. Never your email or phone until you accept a match.' },
 ];
 const rows = [
-  { text: 'LCSW CW012345 · active (example)', state: 'pass' as const },
+  { text: 'PA CW012345 · active (example)', state: 'pass' as const },
   { text: 'Licensed since 2012 · 14 years', state: 'pass' as const },
-  { text: 'No discipline on record (example)', state: 'pass' as const },
   { text: 'Badge issued Oct 3, 2026 (example)', state: 'pass' as const },
 ];
 ---
@@ -33,7 +32,7 @@ const rows = [
           variant="supervisor"
           name="Danielle Okafor, LCSW"
           initials="DO"
-          meta="Philadelphia, PA · Since 2012 · 14 years"
+          meta="Philadelphia, PA · Licensed 2012 · 14 years"
           chips={['Virtual', 'In person', 'Trauma-informed', '2 open seats']}
         />
         <VerificationRows rows={rows} />

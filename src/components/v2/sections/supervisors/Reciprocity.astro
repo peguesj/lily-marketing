@@ -4,6 +4,12 @@ import SectionHead from '../../ui/SectionHead.astro';
 import PhoneFrame from '../../mocks/PhoneFrame.astro';
 import InboxPreview from '../../mocks/InboxPreview.astro';
 
+// Request rows from site-supervisors.svg (fictional people).
+const requests = [
+  { name: 'Marcus Reed', track: 'LCSW path · Philadelphia', line: '1,240 of 3,000 · Thursdays, virtual' },
+  { name: 'Priya Natarajan', track: 'LPC path · Norristown', line: '860 of 3,000 · Mon or Wed evenings' },
+  { name: 'Jordan Ellis', track: 'LCSW path · Philadelphia', line: '2,110 of 3,000 · any weeknight' },
+];
 const bullets = [
   { title: 'Passing is private', body: 'The graduate never sees a decline, only their next ranked match.' },
   { title: 'Affinity cuts both ways', body: 'Eight identity dimensions you can weight, or leave off entirely.' },
@@ -17,7 +23,7 @@ const bullets = [
     </SectionHead>
     <div class="sup-recip">
       <PhoneFrame label="Example supervisor match inbox with three requests">
-        <InboxPreview />
+        <InboxPreview requests={requests} />
       </PhoneFrame>
       <div class="sup-recip__copy">
         <h3>Nobody is matched one-sided.</h3>

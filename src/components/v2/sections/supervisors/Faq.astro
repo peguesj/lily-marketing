@@ -11,23 +11,23 @@ const items = [
   },
   {
     q: 'How do you verify?',
-    a: 'Proposed: you enter the number printed on your license, and the proposed license-review source confirms type, status and issue date before your profile is published. If the lookup is unavailable, a person reviews it. The source and the rules are pending validation.',
+    a: 'You enter the number printed on your license. We look it up with proposed license-review source, confirm status and issue date, and re-check it every six months. Your profile is published only after it clears, usually within two business days.',
   },
   {
     q: 'What happens before the threshold?',
-    a: 'You can join and set your rates, but nothing is published to graduates until the Pennsylvania roster reaches its threshold (an illustrative 25 supervisors). Then "Lily is ready" goes out to every graduate waiting.',
+    a: 'Sign up once on your phone. We tell you when the Pennsylvania roster clears its threshold, then you sign off hours weekly. Nothing is published until it clears.',
   },
   {
     q: 'Can I run a group?',
-    a: 'Yes. A group of four meets in a proposed recurring slot, each supervisee is billed and signs separately, and hours are logged for each person. Boards differ on how many group hours count, and we show each supervisee what still counts for them.',
+    a: 'Set a per-seat rate. We fill the seats from your matches. A proposed recurring slot and reviewed license path; hours logged separately for each person. Most Pennsylvania boards count group hours toward the total, with a cap.',
   },
   {
     q: 'What if a graduate disputes hours?',
-    a: 'Hours are logged by one of you and signed by the other. A disputed week is flagged to both of you and stays unsigned until it is resolved, and the original entry stays visible in the log.',
+    a: 'Each week you confirm the hours from one notification. The log is dual-signed and exportable for the board when it is time. How a disputed week is resolved is pending validation.',
   },
   {
     q: 'Psychology Today vs Lily',
-    a: 'A directory lists you and graduates message out of the blue. Lily matches both ways: a ranked inbox, a real booked slot, a pre-filled agreement and a dual-signed hours log. Keeping a directory listing alongside Lily is up to you.',
+    a: 'Graduates find you on Psychology Today and message out of the blue. You do the screening alone. Lily books a real slot, like Thu 7:00pm, before you ever talk. We never auto-assign a supervisee to you.',
   },
 ];
 ---
@@ -36,7 +36,7 @@ const items = [
     <ClaimHead id="sup-faq-title" eyebrow="Questions" title="Things supervisors" accent="ask" after=" us." />
     <FAQ items={items} openFirst />
     <IllustrativeNotice class="sup-faq__note">
-      <p>Answers describe proposed behavior. License review, the roster threshold, group-hour rules and any later fee are pending validation.</p>
+      <p>Answers are drawn from the page above and describe proposed behavior. License review, the roster threshold, group-hour rules and any later fee are pending validation.</p>
     </IllustrativeNotice>
   </Section>
 </div>
