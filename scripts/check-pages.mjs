@@ -11,6 +11,10 @@
 // default run and as a failure under --strict (or CHECK_PAGES_STRICT=1). Remove a route from
 // PENDING_ROUTES in the same change that ships it.
 //
+// Dependency: /contact and /waitlist pass form-action/honeypot only once the v1 forms there
+// (which fake a success state client-side) are replaced by the v2 conversion forms from
+// D1-site-forms. On this branch alone those four failures are expected.
+//
 // Rules (rule ids are what the unit tests assert on):
 //   exists             route dist/<route>/index.html exists
 //   h1                 exactly one <h1>

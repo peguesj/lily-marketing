@@ -1,0 +1,41 @@
+---
+/**
+ * Page-level validation notice for pages that still carry v1 copy until the v2 content
+ * wave rewrites them. Their verification, licensure, eligibility and compliance statements
+ * are not validated, so the page labels them where they appear (scripts/check-pages.mjs
+ * requires the marker inside <main>, not just the site-wide footer).
+ */
+---
+<aside class="lv2-legacy-notice" data-illustrative>
+  <p class="lv2-legacy-notice__label">Illustrative · pending validation</p>
+  <p class="lv2-legacy-notice__detail">
+    This page still carries earlier copy that is being rewritten. Verification, licensure,
+    eligibility, compliance and outcome statements on it are illustrative and do not
+    establish a credential, certification or guaranteed result.
+  </p>
+</aside>
+
+<style>
+  .lv2-legacy-notice {
+    max-width: 72rem;
+    margin: 1rem auto;
+    padding: 0.75rem 1.25rem;
+    border: 1px dashed color-mix(in srgb, var(--lily-primary, #1B6B3E) 45%, transparent);
+    border-radius: var(--radius-card-sm, 0.875rem);
+    background: var(--lily-surface-muted, #ECE8DF);
+    color: var(--lily-text-muted-aa, #4E6B5A);
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+  }
+  @media (max-width: 76rem) {
+    .lv2-legacy-notice { margin-inline: 1rem; }
+  }
+  .lv2-legacy-notice__label {
+    margin: 0 0 0.25rem;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--lily-forest, #14522E);
+  }
+  .lv2-legacy-notice__detail { margin: 0; font-size: 0.8125rem; line-height: 1.5; }
+</style>
