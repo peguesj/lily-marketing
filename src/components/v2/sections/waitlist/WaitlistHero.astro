@@ -1,0 +1,38 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import StatTile from '../../ui/StatTile.astro';
+import Blob from '../../ui/Blob.astro';
+---
+<Section tone="canvas" class="wl-hero">
+  <Blob color="teal" top="-6rem" right="-8rem" />
+  <div class="wl-hero__grid">
+    <SectionHead
+      level={1}
+      eyebrow="Pennsylvania pilot · 2026"
+      title="Pennsylvania first."
+      lead="A fairer path to supervised hours begins with a local roster you can trust. Tell us where and how you want to participate."
+    >
+      <Fragment slot="accent">Your county next.</Fragment>
+    </SectionHead>
+    <aside class="wl-hero__counters" aria-labelledby="wl-counters-title">
+      <p class="wl-hero__eyebrow" id="wl-counters-title">Pennsylvania waitlist</p>
+      <div class="wl-hero__tiles">
+        <StatTile value="38" caption="supervisors verified" illustrative />
+        <StatTile value="126" caption="graduates waiting" illustrative />
+      </div>
+      <p class="wl-hero__note">Illustrative example counters, not live. We open an area when its first local matches are ready.</p>
+    </aside>
+  </div>
+</Section>
+
+<style>
+  .wl-hero { overflow: hidden; padding-bottom: 48px; }
+  .wl-hero__grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: center; }
+  .wl-hero :global(.v2-sectionhead) { margin-bottom: 0; }
+  .wl-hero__eyebrow { margin: 0 0 0.75rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .wl-hero__tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .wl-hero__note { margin: 0.75rem 0 0; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.875rem; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
+  @media (max-width: 860px) { .wl-hero__grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; } }
+  @media (max-width: 480px) { .wl-hero__tiles { grid-template-columns: minmax(0, 1fr); } }
+</style>

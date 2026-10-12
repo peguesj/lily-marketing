@@ -1,0 +1,16 @@
+---
+import ContactFormPanel from './ContactFormPanel.tsx';
+---
+<section class="fc" aria-labelledby="fc-title">
+  <h2 id="fc-title" class="fc__title">Tell us what you <em>need.</em></h2>
+  <ContactFormPanel client:visible defaultTopic="sponsor" />
+  <p class="fc__note">We never share your details or add you to a list.</p>
+</section>
+
+<style>
+  .fc__title { margin: 0 0 1.25rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.75rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+  .fc__title em { font-style: italic; font-weight: 500; color: var(--lily-primary, #1B6B3E); }
+  .fc__note { margin: 1rem 0 0; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  /* The form's own "Talk to a person." title would repeat the page H1; keep it for the form's accessible name only. */
+  .fc :global(.lv2f-title) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+</style>

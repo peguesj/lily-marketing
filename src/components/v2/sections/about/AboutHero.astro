@@ -1,0 +1,40 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import Button from '../../ui/Button.astro';
+import Blob from '../../ui/Blob.astro';
+import PetalMark from '../../ui/PetalMark.astro';
+---
+<Section tone="canvas" class="about-hero">
+  <Blob color="teal" top="-6rem" right="-8rem" />
+  <div class="about-hero__grid">
+    <div class="about-hero__copy">
+      <SectionHead level={1} eyebrow="About Lily" title="Lily could be anybody." class="about-hero__head">
+        <Fragment slot="accent">That is the point.</Fragment>
+      </SectionHead>
+      <p class="about-hero__lead">
+        A gender-neutral, culturally inclusive name for the people building a clinical career and the people helping them do it well.
+      </p>
+      <div class="about-hero__actions">
+        <Button href="#pilot-roadmap">Read our pilot plan</Button>
+        <Button href="#team" variant="outline">Meet the team <span aria-hidden="true">↓</span></Button>
+      </div>
+    </div>
+    <div class="about-hero__art" aria-hidden="true">
+      <PetalMark petals={5} size={320} />
+    </div>
+  </div>
+</Section>
+
+<style>
+  .about-hero { overflow: hidden; }
+  .about-hero__grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 3rem; align-items: center; }
+  .about-hero :global(.about-hero__head) { margin-bottom: 1.5rem; }
+  .about-hero__lead { margin: 0 0 2rem; max-width: 36rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 1.125rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .about-hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .about-hero__art { display: grid; place-items: center; }
+  @media (max-width: 800px) {
+    .about-hero__grid { grid-template-columns: minmax(0, 1fr); }
+    .about-hero__art { display: none; }
+  }
+</style>

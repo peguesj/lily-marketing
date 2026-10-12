@@ -1,0 +1,48 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+
+/** Founder cards use initials only: no portrait assets exist in public/assets. */
+const people = [
+  {
+    initials: 'A',
+    name: 'Alphonso Nathan',
+    role: 'CEO · clinician',
+    bio: 'Alphonso is a clinician and builder focused on making care more human at every step. He founded Lily to meet the supervision gap with dignity, clarity, and community.',
+  },
+  {
+    initials: 'J',
+    name: 'Jeremiah Pegues',
+    role: 'COO · lead developer',
+    bio: 'Jeremiah builds dependable systems around human work. At Lily, he translates a clear operating vision into tools that make supervision easier to find and safer to manage.',
+  },
+];
+---
+<Section tone="canvas" id="team">
+  <SectionHead eyebrow="The people behind Lily" title="A team that" >
+    <Fragment slot="accent">knows the work.</Fragment>
+  </SectionHead>
+  <div class="team">
+    {people.map((p) => (
+      <article class="person">
+        <span class="person__avatar" aria-hidden="true">{p.initials}</span>
+        <div>
+          <h3>{p.name}</h3>
+          <p class="person__role">{p.role}</p>
+          <p class="person__bio">{p.bio}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</Section>
+
+<style>
+  .team { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+  .person { display: flex; gap: 1.5rem; padding: 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .person__avatar { flex: none; display: grid; place-items: center; width: 4rem; height: 4rem; border-radius: 50%; background: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9); font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.75rem; font-weight: 600; }
+  .person h3 { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.5rem; color: var(--lily-forest, #14522E); }
+  .person p { margin: 0; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); }
+  .person__role { margin: 0.25rem 0 0.75rem !important; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lily-teal, #318171); }
+  .person__bio { font-size: 0.9375rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  @media (max-width: 800px) { .team { grid-template-columns: minmax(0, 1fr); } .person { flex-direction: column; } }
+</style>

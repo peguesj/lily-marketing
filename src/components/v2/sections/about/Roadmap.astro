@@ -1,0 +1,39 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+
+const steps = [
+  { n: '01', title: 'Pennsylvania', body: 'Local roster pilot' },
+  { n: '02', title: 'LPC + LCSW', body: 'First verified network' },
+  { n: '03', title: 'More tracks', body: 'States and disciplines' },
+];
+---
+<Section tone="surface" id="pilot-roadmap">
+  <SectionHead eyebrow="Where we are" title="Starting in Pennsylvania," >
+    <Fragment slot="accent">together.</Fragment>
+  </SectionHead>
+  <p class="roadmap__label">Pilot roadmap</p>
+  <ol class="roadmap">
+    {steps.map((s) => (
+      <li class="roadmap__step">
+        <span class="roadmap__num" aria-hidden="true">{s.n}</span>
+        <h3>{s.title}</h3>
+        <p>{s.body}</p>
+      </li>
+    ))}
+  </ol>
+  <IllustrativeNotice>
+    <p>The roadmap is the current plan, not a commitment. Which tracks open, and when, is illustrative and pending validation.</p>
+  </IllustrativeNotice>
+</Section>
+
+<style>
+  .roadmap__label { margin: 0 0 1rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .roadmap { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin: 0 0 2rem; padding: 0; list-style: none; }
+  .roadmap__step { padding: 1.75rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-canvas, #F5F1E9); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .roadmap__num { display: block; margin-bottom: 0.5rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-style: italic; font-size: 1.75rem; color: var(--lily-teal, #318171); }
+  .roadmap h3 { margin: 0 0 0.25rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.375rem; color: var(--lily-forest, #14522E); }
+  .roadmap p { margin: 0; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); color: var(--lily-text-muted-aa, #4E6B5A); }
+  @media (max-width: 700px) { .roadmap { grid-template-columns: minmax(0, 1fr); } }
+</style>

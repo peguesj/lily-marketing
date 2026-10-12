@@ -1,0 +1,35 @@
+---
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+/**
+ * The licensure-gap evidence panel: supervised-hour requirement and common out-of-pocket rate.
+ * Figures are illustrative until validated, so the panel carries its own notice.
+ */
+---
+<aside class="rstat" aria-labelledby="rstat-title" data-component="ResearchStat">
+  <p id="rstat-title" class="rstat__eyebrow">The licensure gap</p>
+  <div class="rstat__row">
+    <p class="rstat__value">3,000</p>
+    <p class="rstat__caption">supervised clinical hours, typically completed across roughly two years.</p>
+  </div>
+  <div class="rstat__row">
+    <p class="rstat__value">~$150/hr</p>
+    <p class="rstat__caption">is a common out-of-pocket supervision rate. The cost should be transparent from day one.</p>
+  </div>
+  <IllustrativeNotice class="rstat__notice">
+    <p>Both figures are illustrative examples. Hour requirements and rates vary by state and license type and are pending validation.</p>
+  </IllustrativeNotice>
+</aside>
+
+<style>
+  .rstat {
+    display: flex; flex-direction: column; gap: 1.5rem;
+    padding: 2rem; border-radius: var(--radius-card, 1.25rem);
+    background: var(--lily-forest, #14522E); color: var(--lily-canvas, #F5F1E9);
+    box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+  }
+  .rstat p { margin: 0; }
+  .rstat__eyebrow { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-peach, #F0B882); }
+  .rstat__row { display: flex; flex-direction: column; gap: 0.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid color-mix(in srgb, var(--lily-canvas, #F5F1E9) 22%, transparent); }
+  .rstat__value { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 600; line-height: 1.05; }
+  .rstat__caption { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 1rem; line-height: 1.5; }
+</style>
