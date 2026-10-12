@@ -129,3 +129,23 @@ test('no inline white-on-peach styles', () => {
     assert.ok(!/(^|;)\s*color\s*:\s*(#fff(fff)?\b|white\b)/i.test(rule[1]), 'peach chip has white text');
   }
 });
+
+// Every kit section that shows supervisor verification / licensure / eligibility, the
+// threshold, or hours copy must carry its own visible label, not rely on another section's.
+const CLAIM = /verif|licens|eligib|threshold|3,000|\bhours?\b/i;
+const LABEL = 'Illustrative · pending validation';
+const sectionText = (s) => s.replace(/<(style|script)\b[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&middot;|&#183;/g, '·').replace(/\s+/g, ' ');
+
+test('each kit section with claim copy carries its own illustrative label', () => {
+  const sections = [...html.matchAll(/<section\b[\s\S]*?<\/section>/gi)].map((m) => m[0]);
+  assert.ok(sections.length >= 8, `expected the kit sections, found ${sections.length}`);
+  const unlabelled = sections
+    .filter((s) => CLAIM.test(sectionText(s)))
+    .filter((s) => !/\sdata-illustrative(\s|=|>)/.test(s) || !sectionText(s).includes(LABEL))
+    .map((s) => s.match(/aria-labelledby="([^"]+)"/)?.[1] ?? s.slice(0, 80));
+  assert.deepEqual(unlabelled, [], `sections with unlabelled claim copy: ${unlabelled.join(', ')}`);
+});
+
+test('build does not inject routes from component folders', () => {
+  assert.ok(!existsSync(join(root, 'src', 'components', 'v2', 'ui', 'kit-route.mjs')), 'routing belongs to src/config/preview-routes.mjs (shell)');
+});
