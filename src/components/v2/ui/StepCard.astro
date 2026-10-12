@@ -1,0 +1,75 @@
+---
+/** Numbered step card. `connector` draws a line to the next card on wide viewports. */
+interface Props {
+  number: number | string;
+  title: string;
+  connector?: boolean;
+  class?: string;
+}
+const { number, title, connector = false, class: extra } = Astro.props;
+---
+<article class:list={['v2-step', connector && 'v2-step--connector', extra]}>
+  <span class="v2-step__num" aria-hidden="true">{number}</span>
+  <h3 class="v2-step__title"><span class="v2-step__sr">Step {number}: </span>{title}</h3>
+  <div class="v2-step__body"><slot /></div>
+</article>
+
+<style>
+  .v2-step {
+    --_forest: var(--lily-forest, #14522E);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 2rem 1.75rem;
+    border-radius: var(--radius-card, 1.25rem);
+    background: var(--lily-surface, #F8F5EF);
+    box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+  }
+  .v2-step__num {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--lily-primary, #1B6B3E);
+    color: var(--lily-canvas, #F5F1E9);
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  .v2-step__title {
+    margin: 0;
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--_forest);
+  }
+  .v2-step__sr {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .v2-step__body {
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--lily-text-muted-aa, #4E6B5A);
+  }
+  .v2-step__body :global(p) { margin: 0; }
+
+  @media (min-width: 900px) {
+    .v2-step--connector::after {
+      content: '';
+      position: absolute;
+      top: calc(2rem + 1.25rem);
+      left: 100%;
+      /* Spans the grid gap; parents may override --v2-step-gap (default 2rem). */
+      width: var(--v2-step-gap, 2rem);
+      border-top: 2px dashed color-mix(in srgb, var(--lily-teal, #318171) 55%, transparent);
+    }
+  }
+</style>

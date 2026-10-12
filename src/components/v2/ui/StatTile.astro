@@ -1,0 +1,75 @@
+---
+/**
+ * Statistic tile: icon tile (slot "icon"), Playfair number, caption and optional citation.
+ * Set `illustrative` for any figure that is not yet validated; it renders a visible label.
+ */
+interface Props {
+  value: string;
+  caption: string;
+  citation?: string;
+  illustrative?: boolean;
+  class?: string;
+}
+const { value, caption, citation, illustrative = false, class: extra } = Astro.props;
+---
+<article class:list={['v2-stat', extra]} data-illustrative={illustrative ? '' : undefined}>
+  {Astro.slots.has('icon') && <div class="v2-stat__icon" aria-hidden="true"><slot name="icon" /></div>}
+  <p class="v2-stat__value">{value}</p>
+  <p class="v2-stat__caption">{caption}</p>
+  {citation && <p class="v2-stat__cite">{citation}</p>}
+  {illustrative && <p class="v2-stat__flag">Illustrative · pending validation</p>}
+</article>
+
+<style>
+  .v2-stat {
+    --_forest: var(--lily-forest, #14522E);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-card, 1.25rem);
+    background: var(--lily-surface, #F8F5EF);
+    box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+  }
+  .v2-stat__icon {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--lily-teal, #318171) 14%, var(--lily-canvas, #F5F1E9));
+    color: var(--lily-primary, #1B6B3E);
+  }
+  .v2-stat__value, .v2-stat__caption, .v2-stat__cite, .v2-stat__flag { margin: 0; }
+  .v2-stat__value {
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+    font-size: 2.125rem;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--_forest);
+  }
+  .v2-stat__caption {
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--lily-text-muted-aa, #4E6B5A);
+  }
+  .v2-stat__cite {
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 0.75rem;
+    font-style: italic;
+    color: var(--lily-text-muted-aa, #4E6B5A);
+  }
+  .v2-stat__flag {
+    align-self: flex-start;
+    padding: 0.125rem 0.625rem;
+    border-radius: var(--radius-chip, 9999px);
+    background: color-mix(in srgb, var(--lily-peach, #F0B882) 38%, var(--lily-canvas, #F5F1E9));
+    color: var(--_forest);
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+</style>

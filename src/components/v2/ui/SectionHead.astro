@@ -1,0 +1,84 @@
+---
+import Eyebrow from './Eyebrow.astro';
+/**
+ * Section heading. Use the `accent` slot for the italic emphasised phrase:
+ *   <SectionHead eyebrow="The gap" title="The part of the career nobody"><Fragment slot="accent">explains</Fragment></SectionHead>
+ */
+interface Props {
+  eyebrow?: string;
+  /** Text before the accent phrase. */
+  title: string;
+  lead?: string;
+  linkHref?: string;
+  linkLabel?: string;
+  /** Switch to cream text with a peach (#F0B882) accent for forest / gradient backgrounds. */
+  onDark?: boolean;
+  /** Heading level to render. */
+  level?: 1 | 2 | 3;
+  class?: string;
+}
+const { eyebrow, title, lead, linkHref, linkLabel, onDark = false, level = 2, class: extra } = Astro.props;
+const Tag = `h${level}` as 'h1' | 'h2' | 'h3';
+const hasAccent = Astro.slots.has('accent');
+---
+<header class:list={['v2-sectionhead', onDark && 'v2-sectionhead--on-dark', extra]}>
+  <div class="v2-sectionhead__text">
+    {eyebrow && <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow>}
+    <Tag class="v2-sectionhead__title">{title}{hasAccent && ' '}{hasAccent && <em class="v2-accent"><slot name="accent" /></em>}</Tag>
+    {lead && <p class="v2-sectionhead__lead">{lead}</p>}
+  </div>
+  {linkHref && linkLabel && (
+    <a class="v2-sectionhead__link" href={linkHref}>{linkLabel}<span aria-hidden="true"> →</span></a>
+  )}
+</header>
+
+<style>
+  .v2-sectionhead {
+    --_forest: var(--lily-forest, #14522E);
+    --_primary: var(--lily-primary, #1B6B3E);
+    --_peach: var(--lily-peach, #F0B882);
+    --_canvas: var(--lily-canvas, #F5F1E9);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .v2-sectionhead__text { display: flex; flex-direction: column; gap: 0.75rem; max-width: 46rem; }
+  .v2-sectionhead__title {
+    margin: 0;
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--_forest);
+  }
+  .v2-accent { font-style: italic; font-weight: 500; color: var(--_primary); }
+  .v2-sectionhead__lead {
+    margin: 0;
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 1.125rem;
+    line-height: 1.55;
+    color: var(--lily-text-muted-aa, #4E6B5A);
+  }
+  .v2-sectionhead__link {
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--_primary);
+    text-decoration: none;
+    white-space: nowrap;
+    margin-left: auto;
+    text-align: right;
+  }
+  .v2-sectionhead__link:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+  .v2-sectionhead__link:focus-visible { outline: 2px solid var(--_forest); outline-offset: 3px; border-radius: 0.25rem; }
+
+  .v2-sectionhead--on-dark .v2-sectionhead__title { color: var(--_canvas); }
+  .v2-sectionhead--on-dark .v2-accent { color: var(--_peach); }
+  .v2-sectionhead--on-dark .v2-sectionhead__lead { color: color-mix(in srgb, var(--_canvas) 88%, transparent); }
+  .v2-sectionhead--on-dark .v2-sectionhead__link { color: var(--_canvas); }
+  .v2-sectionhead--on-dark .v2-sectionhead__link:focus-visible { outline-color: var(--_canvas); }
+</style>
