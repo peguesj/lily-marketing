@@ -4,7 +4,7 @@ import ProgressRing from '../../mocks/ProgressRing.astro';
 const signed = [{ date: 'Oct 8', kind: 'Supervision', hrs: '1.0 hr', state: 'Signed by both ✓' }];
 const pending = [{ date: 'Oct 9', kind: 'Client experience', hrs: '3.0 hrs', state: 'Awaiting signature' }];
 ---
-<section class="scr" data-illustrative aria-label="Example experience log screen">
+<section class="scr" aria-label="Example experience log screen">
   <p class="eyebrow">Your experience log <span class="ex">Example</span></p>
   <div class="top">
     <ProgressRing value={1240} total={3000} size={84} tagged={false} />
@@ -35,7 +35,7 @@ const pending = [{ date: 'Oct 9', kind: 'Client experience', hrs: '3.0 hrs', sta
   .big { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 26px; font-weight: 500; line-height: 1; }
   .of { margin-top: 2px; font-size: 10px; color: var(--lily-text-muted-aa, #4e6b5a); }
   .delta { margin-top: 4px; font-size: 10px; font-weight: 600; }
-  h4 { margin-top: 10px; font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lily-text-muted-strong, #4f7060); }
+  h4 { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); margin-top: 10px; font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lily-text-muted-strong, #4f7060); }
   ul { list-style: none; padding: 0; margin-top: 6px; }
   li { display: grid; gap: 2px; padding: 8px 10px; border-radius: var(--radius-card-sm, 0.875rem); background: var(--lily-surface, #f8f5ef); font-size: 11px; box-shadow: var(--shadow-subtle, 0 3px 5px rgb(20 82 46 / 7%)); }
   li span { color: var(--lily-text-muted-aa, #4e6b5a); }

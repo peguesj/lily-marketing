@@ -1,0 +1,58 @@
+---
+/**
+ * Wrapper for D1 product mocks. The global `[data-illustrative]` pill rule in
+ * lily-v2-tokens.css (inline-flex, uppercase, dashed border) also matches the root element of
+ * several mocks (PractitionerCard, HoursLogPreview, CohortCard, MatchWeights), which breaks their
+ * layout. D1 components stay unmodified; this wrapper restores block layout and normal text for
+ * mock roots only. The nested `.tag` pills keep the intended illustrative styling.
+ * The legacy orbit `.badge` rule in lily-glass.css (absolute, 34px, rotated) also hits the
+ * `.badge` wrapper in PractitionerCard; it is neutralised here. The same global pill rule
+ * uppercases IllustrativeNotice detail text, so that is reset too.
+ */
+interface Props { class?: string; align?: 'center' | 'start' }
+const { class: extra, align = 'center' } = Astro.props;
+---
+<div class:list={['gp-mock-scope', align === 'start' && 'gp-mock-scope--start', extra]}><slot /></div>
+
+<style is:global>
+  .gp-mock-scope { width: 100%; display: flex; justify-content: center; }
+  .gp-mock-scope--start { justify-content: flex-start; }
+  .gp-mock-scope [data-mock][data-illustrative]:not(.lvb):not(.ring-wrap) {
+    display: block;
+    gap: 0;
+    align-items: normal;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+  .gp-mock-scope .lvb[data-illustrative] {
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 400;
+  }
+  .gp-mock-scope .badge,
+  .gp-mock-scope .badge:hover,
+  .gp-mock-scope .badge:focus-within {
+    position: static;
+    width: auto;
+    height: auto;
+    display: block;
+    overflow: visible;
+    white-space: normal;
+    border-radius: 0;
+    box-shadow: none;
+    transform: none;
+    transition: none;
+    cursor: auto;
+  }
+  .v2-illustrative[data-illustrative] {
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 400;
+    font-size: 1rem;
+  }
+</style>

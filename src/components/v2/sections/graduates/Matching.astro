@@ -2,6 +2,7 @@
 import Section from '../../ui/Section.astro';
 import SectionHead from '../../ui/SectionHead.astro';
 import MatchWeights from '../../mocks/MatchWeights.astro';
+import MockScope from './MockScope.astro';
 
 const dimensions = [
   { n: 1, title: 'Licensure gate', body: 'Your license track comes first. Check credentials and supervision eligibility.' },
@@ -42,7 +43,7 @@ const weights = [
       ))}
     </ol>
     <div class="grad-matching__table">
-      <MatchWeights dimensions={weights} />
+      <MockScope><MatchWeights dimensions={weights} /></MockScope>
       <p class="grad-matching__note">Weights are an example of how ranking could read, not the production formula.</p>
     </div>
   </div>

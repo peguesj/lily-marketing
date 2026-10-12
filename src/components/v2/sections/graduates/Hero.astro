@@ -5,6 +5,7 @@ import Eyebrow from '../../ui/Eyebrow.astro';
 import Button from '../../ui/Button.astro';
 import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
 import PractitionerCard from '../../mocks/PractitionerCard.astro';
+import MockScope from './MockScope.astro';
 import { appLinks } from '../../../../config/app';
 ---
 <Section tone="canvas" ariaLabelledby="grad-hero-title" class="grad-hero">
@@ -27,13 +28,13 @@ import { appLinks } from '../../../../config/app';
     </div>
     <div class="grad-hero__visual">
       <p class="grad-hero__tag">Illustrative match · not a live listing</p>
-      <PractitionerCard
+      <MockScope><PractitionerCard
         variant="compact"
         name="Maya Okafor, LCSW"
         initials="MO"
         meta="Philadelphia · Community mental health"
         chips={['$75/hr group', 'Thu 7pm']}
-      />
+      /></MockScope>
       <p class="grad-hero__caption">Maya Okafor is a fictional example. Badge concept: license checked through a proposed license-review source.</p>
     </div>
   </div>
