@@ -1,0 +1,31 @@
+---
+import Container from '../../ui/Container.astro';
+import PricingCard from './PricingCard.astro';
+import IllustrativeTag from './IllustrativeTag.astro';
+import { appLinks } from '../../../../config/app';
+---
+<section class="pcards" aria-label="Pricing by audience">
+  <Container>
+    <div class="pcards__grid">
+      <PricingCard audience="graduates" eyebrow="Graduates" title="No" subtitle="You pay your supervisor's posted rate." ctaLabel="See my matches" ctaHref={appLinks.graduateSignup}>
+        <Fragment slot="accent">Lily fee.</Fragment>
+        <p>Individual or group, the rate is visible before you reach out. At launch, Lily adds no graduate platform fee.</p>
+      </PricingCard>
+      <PricingCard audience="supervisors" eyebrow="Supervisors" title="Free" subtitle="Then a proposed 12% per session through Lily." ctaLabel="Join as a supervisor" ctaHref={appLinks.supervisorSignup} emphasized>
+        <Fragment slot="accent">to join.</Fragment>
+        <p>The share starts once agreements exist, only on sessions paid through Lily. Direct payments: no Lily share.</p>
+        <IllustrativeTag slot="notice" />
+      </PricingCard>
+      <PricingCard audience="programs" eyebrow="Programs" title="A" subtitle="Per clinician, per month." ctaLabel="Discuss a cohort" ctaHref={appLinks.programInquiry}>
+        <Fragment slot="accent">cohort rate.</Fragment>
+        <p>Give your early-career clinicians a supported path. Talk to us about coverage and the pilot rate, which is set by discussion.</p>
+      </PricingCard>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .pcards { padding-block: 32px 48px; }
+  .pcards__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; align-items: stretch; }
+  @media (max-width: 900px) { .pcards__grid { grid-template-columns: minmax(0, 1fr); } }
+</style>

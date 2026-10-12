@@ -1,0 +1,60 @@
+---
+import Container from '../../ui/Container.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import IllustrativeTag from './IllustrativeTag.astro';
+/**
+ * Workflow comparison. Semantic <table>: caption, column headers (scope=col), row headers (scope=row).
+ * Wording is deliberately non-categorical: competitor and directory policies vary.
+ */
+const columns = ['Lily', 'Email / DM', 'Directory listing'];
+const rows = [
+  { head: 'Graduate cost', cells: ['Posted rate; no launch fee', 'Agreed supervisor rate', 'Rate and fees vary'] },
+  { head: 'Verification', cells: ['Proposed license-review source check', 'Arrange your own check', 'Check listing policy'] },
+  { head: 'Hours log', cells: ['Weekly and dual-signed', 'Separate tool or record', 'Depends on provider'] },
+  { head: 'Admin', cells: ['Agreement, log and export', 'Coordinate it yourself', 'Often separate tools'] },
+];
+---
+<section class="cmp" aria-labelledby="cmp-title">
+  <Container>
+    <SectionHead title="Less chasing." lead="A comparison of workflows. Directory features and fees vary by provider.">
+      <Fragment slot="accent">More clarity.</Fragment>
+    </SectionHead>
+    <div class="cmp__scroll" role="region" aria-label="Workflow comparison table, scrollable" tabindex="0">
+      <table class="cmp__table">
+        <caption class="cmp__caption">How graduate cost, verification, hours logs and admin compare across Lily, email or DM, and directory listings</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="cmp__corner">At a glance</th>
+            {columns.map((c, i) => <th scope="col" class:list={[i === 0 && 'cmp__lily']}>{c}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              <th scope="row">{r.head}</th>
+              {r.cells.map((c, i) => <td class:list={[i === 0 && 'cmp__lily']}>{c}</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <IllustrativeTag class="cmp__tag" />
+  </Container>
+</section>
+
+<style>
+  .cmp { padding-block: 64px; }
+  .cmp__scroll { overflow-x: auto; border: 1px solid var(--lily-border, #D5DFD9); border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); }
+  .cmp__scroll:focus-visible { outline: 2px solid var(--lily-forest, #14522E); outline-offset: 2px; }
+  .cmp__table { width: 100%; min-width: 40rem; border-collapse: collapse; font-size: 0.9375rem; color: var(--lily-forest, #14522E); }
+  .cmp__caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .cmp__table th, .cmp__table td { padding: 1.125rem 1.5rem; text-align: left; vertical-align: middle; border-bottom: 1px solid var(--lily-border, #D5DFD9); }
+  .cmp__table tbody tr:last-child > * { border-bottom: 0; }
+  .cmp__table thead th { font-weight: 600; }
+  .cmp__table .cmp__corner { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .cmp__table tbody th { font-weight: 600; }
+  .cmp__table td { color: var(--lily-text-muted-aa, #4E6B5A); }
+  .cmp__table .cmp__lily { background: var(--lily-surface-muted, #ECE8DF); }
+  .cmp__table td.cmp__lily { color: var(--lily-forest, #14522E); }
+  .cmp :global(.cmp__tag) { margin-top: 1rem; }
+</style>

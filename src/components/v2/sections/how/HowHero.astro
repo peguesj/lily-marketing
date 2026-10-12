@@ -1,0 +1,48 @@
+---
+import Container from '../../ui/Container.astro';
+import Eyebrow from '../../ui/Eyebrow.astro';
+import Button from '../../ui/Button.astro';
+import TrustStrip from '../../ui/TrustStrip.astro';
+import PetalMark from '../../ui/PetalMark.astro';
+import Blob from '../../ui/Blob.astro';
+---
+<section class="how-hero" aria-labelledby="how-hero-title">
+  <Blob color="teal" width="34rem" height="26rem" top="-4rem" right="4rem" opacity={0.18} />
+  <Blob color="peach" width="26rem" height="20rem" bottom="-6rem" right="-4rem" opacity={0.18} />
+  <Container>
+    <div class="how-hero__grid">
+      <div class="how-hero__copy">
+        <Eyebrow>How it works</Eyebrow>
+        <h1 id="how-hero-title" class="how-hero__title">From first open to a signed <em>agreement.</em></h1>
+        <p class="how-hero__lead">Six steps, in the order they happen. Nothing is hidden behind a sign-up, and the trust gate comes before anyone commits to anything.</p>
+        <div class="how-hero__actions">
+          <Button href="/waitlist">Join the waitlist</Button>
+          <Button href="#agree" variant="outline">See a sample agreement</Button>
+        </div>
+        <TrustStrip
+          items={[
+            'License review approach pending jurisdictional validation',
+            'Rates shown before you message',
+            'Pilot: Pennsylvania, LPC and LCSW first',
+          ]}
+        />
+      </div>
+      <div class="how-hero__art" aria-hidden="true"><PetalMark petals={5} size={240} opacity={0.9} /></div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .how-hero { position: relative; overflow: hidden; padding-block: 88px 72px; background: var(--lily-canvas, #F5F1E9); }
+  .how-hero__grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3rem; align-items: center; }
+  .how-hero__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; max-width: 40rem; }
+  .how-hero__title { margin: 0; font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 600; }
+  .how-hero__lead { margin: 0; max-width: 34rem; font-size: 1.125rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .how-hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .how-hero__art { padding-right: 4rem; }
+  @media (max-width: 800px) {
+    .how-hero { padding-block: 56px 48px; }
+    .how-hero__grid { grid-template-columns: minmax(0, 1fr); }
+    .how-hero__art { display: none; }
+  }
+</style>

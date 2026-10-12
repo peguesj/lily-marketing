@@ -1,0 +1,52 @@
+---
+import Container from '../../ui/Container.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import IllustrativeTag from './IllustrativeTag.astro';
+/**
+ * Five FAQs, every answer expanded on load (details open). Native details/summary keeps them keyboard
+ * operable, and there is deliberately no plus/minus glyph because nothing starts collapsed.
+ * Answers that mention the proposed share or pending policy carry their own validation label.
+ */
+interface Item { q: string; a: string; illustrative?: boolean }
+const items: Item[] = [
+  { q: 'When does the share start?', a: 'Once an agreement exists and a session is paid through Lily. Joining and listing your rate do not trigger the proposed 12% share.', illustrative: true },
+  { q: 'Paid directly or through Lily?', a: 'The proposed share applies only to sessions paid through Lily. Direct payments have no Lily share. Payment terms will be disclosed.', illustrative: true },
+  { q: 'Can a program sponsor only part?', a: "Discuss partial support during pilot setup. Your cohort agreement should state the sponsor's contribution and what you still pay." },
+  { q: 'What about refunds and disputes?', a: 'Pilot refund and dispute terms are being finalized. Review the published terms before paying; no refund guarantee is implied here.', illustrative: true },
+  { q: 'What does a sponsored seat cover?', a: 'Your program agreement sets the covered sessions and duration. Verification, an agreement, an hours log and export remain included.' },
+];
+---
+<section class="pfaq" aria-labelledby="pfaq-title">
+  <Container>
+    <SectionHead title="A few">
+      <Fragment slot="accent">plain answers.</Fragment>
+    </SectionHead>
+    <div class="pfaq__list">
+      {items.map((it) => (
+        <details class="pfaq__item" open>
+          <summary class="pfaq__q">{it.q}</summary>
+          <div class="pfaq__a">
+            <p>{it.a}</p>
+            {it.illustrative && <IllustrativeTag />}
+          </div>
+        </details>
+      ))}
+    </div>
+  </Container>
+</section>
+
+<style>
+  .pfaq { padding-block: 64px; }
+  .pfaq__list { border-top: 1px solid var(--lily-border, #D5DFD9); }
+  .pfaq__item { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--lily-border, #D5DFD9); }
+  .pfaq__q { grid-column: 1; list-style: none; cursor: pointer; font-size: 1.0625rem; font-weight: 600; line-height: 1.4; color: var(--lily-forest, #14522E); }
+  .pfaq__q::-webkit-details-marker { display: none; }
+  .pfaq__q:focus-visible { outline: 2px solid var(--lily-forest, #14522E); outline-offset: 4px; border-radius: 0.25rem; }
+  .pfaq__a { grid-column: 2; grid-row: 1; display: flex; flex-direction: column; gap: 0.5rem; max-width: 34rem; }
+  .pfaq__a p { margin: 0; font-size: 0.9375rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  /* If a reader collapses an item, the answer column simply disappears with it. */
+  @media (max-width: 800px) {
+    .pfaq__item { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
+    .pfaq__a { grid-column: 1; grid-row: auto; }
+  }
+</style>

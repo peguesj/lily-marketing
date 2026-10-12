@@ -1,0 +1,76 @@
+---
+/** Surface card that frames a product fragment beside a step's copy. */
+interface Props { class?: string; label?: string }
+const { class: extra, label } = Astro.props;
+---
+<div class:list={['how-panel', extra]} role={label ? 'group' : undefined} aria-label={label}><slot /></div>
+
+<style>
+  .how-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: var(--card-padding, 32px);
+    border-radius: var(--radius-card, 1.25rem);
+    background: var(--lily-surface, #F8F5EF);
+    box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+  }
+  .how-panel :global([data-mock]) { max-width: 100%; }
+  /* Wide mocks (the ranking table) scroll inside the panel instead of overflowing the page on phones. */
+  @media (max-width: 600px) { .how-panel { padding: 20px; overflow-x: auto; } }
+</style>
+
+<!--
+  Compatibility shims for the D1 mocks (owned elsewhere, unmodified), scoped to this page's <main>.
+  1) The shell's global `[data-illustrative]` rule (lily-v2-tokens.css) turns ANY element carrying the
+     attribute into an uppercase inline-flex dashed chip. The mocks put the attribute on their root
+     container, so containers are reset here. Specificity (0,1,2) beats the global rule (0,1,0) but
+     stays below each mock's own scoped rules (0,2,0), which keep control of their layout. (Do not put an
+     attribute selector inside :is(): it would raise the specificity above the mocks' own rules.)
+  2) The legacy v1 `.badge` rule (lily-glass.css) is an absolutely positioned orbit badge; the mocks wrap
+     LilyVerifiedBadge in `div.badge`. Reset it inside panels.
+  3) VerificationRows applies its state class to both the <li> and the dot, so `li.warn` inherits the
+     18px amber-dot rule and the manual-fallback row collapses. Undo the dot styling on the <li> only.
+  Root causes belong in the shell (scope the tag rule to p/span tags; drop the v1 `.badge`), not here.
+-->
+<style is:global>
+  main :is(section, article, aside, ol, div)[data-illustrative] {
+    display: block;
+    align-items: normal;
+    gap: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: normal;
+    text-transform: none;
+    color: inherit;
+  }
+  main .how-panel span[data-mock='LilyVerifiedBadge'][data-illustrative] {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    font-size: inherit;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+  main .how-panel li.warn {
+    flex: 1 1 auto;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+  }
+  main .how-panel .badge {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    transform: none;
+    box-shadow: none;
+    border-radius: 0;
+    transition: none;
+  }
+</style>

@@ -1,0 +1,29 @@
+---
+import Container from '../../ui/Container.astro';
+import Eyebrow from '../../ui/Eyebrow.astro';
+import IllustrativeTag from './IllustrativeTag.astro';
+/** "What Lily is not": states the regulatory boundary plainly. */
+---
+<section class="reg" aria-labelledby="how-reg-title">
+  <Container>
+    <div class="reg__head">
+      <Eyebrow>What Lily is not</Eyebrow>
+      <h2 id="how-reg-title" class="reg__title">We match and record. We don't <em>certify.</em></h2>
+    </div>
+    <div class="reg__note" data-regulatory-note>
+      <p>Lily does not issue licenses, approve supervisors on behalf of any board, or certify that hours satisfy a jurisdiction's rules.</p>
+      <p>The Pennsylvania State Board of Social Workers, Marriage and Family Therapists and Professional Counselors decides what counts.</p>
+      <p>Our log is formatted to make that review easier, not to replace it. Any future status label requires a validated source, policy and timestamp.</p>
+      <IllustrativeTag />
+    </div>
+  </Container>
+</section>
+
+<style>
+  .reg { padding-block: 64px; }
+  .reg__head { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.75rem; }
+  .reg__title { margin: 0; font-size: clamp(1.875rem, 3.6vw, 2.5rem); font-weight: 600; line-height: 1.15; }
+  .reg__note { display: flex; flex-direction: column; gap: 0.5rem; padding: 1.75rem 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface-muted, #ECE8DF); }
+  .reg__note p { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .reg__note :global(.how-tag) { margin-top: 0.5rem; }
+</style>

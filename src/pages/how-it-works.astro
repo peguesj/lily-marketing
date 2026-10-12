@@ -1,0 +1,145 @@
+---
+/**
+ * /how-it-works: the six-step journey, the regulatory boundary and the timeline.
+ * Spec: tmp/lily-design-v2/specs/site-how-it-works.md. Every person, license number, count and rate on
+ * this page is fictional and illustrative pending validation; the mocks and local sections carry the label.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/v2/ui/Button.astro';
+import CTABand from '../components/v2/ui/CTABand.astro';
+import IllustrativeNotice from '../components/v2/ui/IllustrativeNotice.astro';
+import PetalMark from '../components/v2/ui/PetalMark.astro';
+import PushCard from '../components/v2/mocks/PushCard.astro';
+import VerificationRows from '../components/v2/mocks/VerificationRows.astro';
+import MatchWeights from '../components/v2/mocks/MatchWeights.astro';
+import PractitionerCard from '../components/v2/mocks/PractitionerCard.astro';
+import AgreementRows from '../components/v2/mocks/AgreementRows.astro';
+import HoursLogPreview from '../components/v2/mocks/HoursLogPreview.astro';
+import HowHero from '../components/v2/sections/how/HowHero.astro';
+import StepRow from '../components/v2/sections/how/StepRow.astro';
+import Panel from '../components/v2/sections/how/Panel.astro';
+import JoinPhone from '../components/v2/sections/how/JoinPhone.astro';
+import ThresholdMeter from '../components/v2/sections/how/ThresholdMeter.astro';
+import StepGrow from '../components/v2/sections/how/StepGrow.astro';
+import RegulatoryNote from '../components/v2/sections/how/RegulatoryNote.astro';
+import JourneyTimeline from '../components/v2/sections/how/JourneyTimeline.astro';
+
+const agreementRows = [
+  { label: 'Rate', value: '$95 per hour, individual · paid to the supervisor' },
+  { label: 'Cadence', value: 'Weekly · Thu 7:00pm · 60 minutes' },
+  { label: 'Format', value: 'Individual · video or in person, Norristown' },
+  { label: 'Term', value: '1 Oct 2026 to 30 Sep 2028, or 3,000 hours' },
+  { label: 'Board attestation', value: 'Board attestation language · counsel-reviewed Sep 2026' },
+];
+const signatures = [
+  { name: 'Maya Okafor', role: 'Supervisee', at: 'Signed 2 Oct 2026 · 8:14pm' },
+  { name: 'Renée Castillo', role: 'Supervisor', at: 'Signed 2 Oct 2026 · 9:02pm' },
+];
+const weeks = [
+  { label: 'Week of 5 Oct', detail: 'Thu 7:00pm · 1.0 hr individual', status: 'awaiting' as const },
+  { label: 'Week of 28 Sep', detail: 'Thu 7:00pm · 1.0 hr individual', status: 'signed' as const },
+  { label: 'Week of 21 Sep', detail: 'Thu 7:00pm · 0.75 hr individual', status: 'disputed-resolved' as const },
+  { label: 'Week of 14 Sep', detail: 'Sat 10:00am · 1.5 hr group', status: 'signed' as const },
+];
+---
+
+<BaseLayout
+  title="How it works | Lily"
+  description="From first open to a signed agreement in six steps: join once, license review, a ranked match, an agreement, a weekly dual-signed hours log and what comes after licensure. Pennsylvania pilot."
+  canonical="https://www.asklily.health/how-it-works"
+>
+  <HowHero />
+
+  <StepRow n={1} kicker="Join and wait, once" chips={['One screen', 'One push', 'Nothing in between']}>
+    <Fragment slot="title">One notification when your county is</Fragment>
+    <Fragment slot="accent">ready.</Fragment>
+    <p>Sign up on one screen: your name, license track, county and whether you want individual or group supervision. Then put your phone away. When the roster in your county clears the threshold, you get one push. No feed, no reminders, no drip.</p>
+    <Panel slot="visual" label="Example sign-up, push notification and threshold meter">
+      <div class="how-join">
+        <JoinPhone />
+        <div class="how-join__side">
+          <PushCard
+            title="Lily is ready in your county"
+            body="14 verified supervisors, 3 within 20 miles. See my matches"
+            time="Thu 2 Oct, 6:12 PM"
+          />
+          <ThresholdMeter />
+        </div>
+      </div>
+    </Panel>
+  </StepRow>
+
+  <StepRow n={2} kicker="Verify" flip chips={['Proposed license-review source', '5+ years', 'No discipline', 'Manual fallback']}>
+    <Fragment slot="title">We check the license with the</Fragment>
+    <Fragment slot="accent">licensing jurisdiction.</Fragment>
+    <p>Every supervisor's license would be looked up against a proposed license-review source before anyone sees them. We would confirm five or more years licensed and no disciplinary action on record.</p>
+    <p>If the source is down or the record is unclear, a person on our team checks by hand within two business days.</p>
+    <IllustrativeNotice>
+      <p>The proposed license-review source, the five-year minimum and the two-business-day manual review are proposed design assumptions, pending validation with the licensing jurisdiction. The license number shown is fictional and no result on this page is a real verification.</p>
+    </IllustrativeNotice>
+    <Panel slot="visual"><VerificationRows /></Panel>
+  </StepRow>
+
+  <StepRow n={3} kicker="Match" chips={['2 gates', '4 weighted', 'Rates shown first']}>
+    <Fragment slot="title">Ranked by fit, chosen by</Fragment>
+    <Fragment slot="accent">both.</Fragment>
+    <p>Matches are ranked on six dimensions. Two are gates: license track and county. The other four are weighted, and affinity across eight identity dimensions is one of them. You see each supervisor's rate before you write to them, and a match only becomes one when you both say yes.</p>
+    <Panel slot="visual">
+      <MatchWeights />
+      <PractitionerCard
+        variant="compact"
+        name="Renée Castillo, LCSW"
+        initials="RC"
+        meta="9 years · Norristown, PA · $95/hr individual · $40/hr group"
+        chips={['Thu 7:00pm open', '92% fit']}
+      />
+    </Panel>
+  </StepRow>
+
+  <StepRow n={4} id="agree" kicker="Agree" flip tagged chips={['Counsel-reviewed', 'Dual signature', 'Editable before signing']}>
+    <Fragment slot="title">Rate, cadence and format in</Fragment>
+    <Fragment slot="accent">one pass.</Fragment>
+    <p>The agreement is drafted from what you both chose: the rate, the weekly cadence, individual or group, and the attestation language your board expects. A Pennsylvania-licensed attorney reviewed the template. Both of you sign from your phones, and the signed copy lives in both accounts.</p>
+    <Panel slot="visual"><AgreementRows rows={agreementRows} signatures={signatures} /></Panel>
+  </StepRow>
+
+  <StepRow n={5} kicker="Log weekly" tagged chips={['Weekly', 'Dual-signed', 'Disputes with a note', 'PDF export']}>
+    <Fragment slot="title">Hours logged by one, signed by the</Fragment>
+    <Fragment slot="accent">other.</Fragment>
+    <p>After each session the graduate logs the hours. The supervisor gets a push and signs, or disputes with a note and you fix it together. Either of you can export the log as a PDF formatted for your program or the board, any time.</p>
+    <Panel slot="visual"><HoursLogPreview weeks={weeks} /></Panel>
+  </StepRow>
+
+  <StepRow n={6} kicker="Grow" flip chips={['Credentialing', 'CE library', 'Referrals back in']}>
+    <Fragment slot="title">We stay with you</Fragment>
+    <Fragment slot="accent">past the license.</Fragment>
+    <p>When you pass, Lily stays useful. Credentialing paperwork for payers becomes one checklist. A CE library logs against the same account as your supervision hours. And when you open your own caseload, Lily's client side matches people to you on the same six dimensions.</p>
+    <p>These three are on the roadmap, not shipped.</p>
+    <Panel slot="visual"><StepGrow /></Panel>
+  </StepRow>
+
+  <RegulatoryNote />
+  <JourneyTimeline />
+
+  <div class="how-cta">
+    <div class="how-cta__frame">
+      <CTABand headline="Start with" lead="Join the waitlist today. You hear from us once, when your county is ready.">
+        <Fragment slot="accent">one screen.</Fragment>
+        <Button href="/waitlist" variant="inverse">Join the waitlist</Button>
+      </CTABand>
+      <PetalMark class="how-cta__petal" petals={3} size={170} color="var(--lily-canvas, #F5F1E9)" opacity={0.22} />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .how-join { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.75rem; align-items: center; }
+  .how-join__side { display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; }
+  .how-join__side :global(.push) { background: var(--lily-surface-muted, #ECE8DF); box-shadow: none; }
+  @media (max-width: 600px) { .how-join { grid-template-columns: minmax(0, 1fr); justify-items: center; } .how-join__side { width: 100%; } }
+
+  .how-cta { padding-block: 32px 96px; }
+  .how-cta__frame { position: relative; max-width: calc(var(--v2-container-max, 1200px) + 2 * var(--v2-gutter, 1.5rem)); margin-inline: auto; padding-inline: var(--v2-gutter, 1.5rem); }
+  .how-cta__frame :global(.how-cta__petal) { position: absolute; right: 22%; bottom: 0; }
+  @media (max-width: 900px) { .how-cta__frame :global(.how-cta__petal) { display: none; } }
+</style>

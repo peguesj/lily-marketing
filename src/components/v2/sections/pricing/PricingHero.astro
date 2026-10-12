@@ -1,0 +1,43 @@
+---
+import Container from '../../ui/Container.astro';
+import Eyebrow from '../../ui/Eyebrow.astro';
+import Button from '../../ui/Button.astro';
+import PetalMark from '../../ui/PetalMark.astro';
+import Blob from '../../ui/Blob.astro';
+import { appLinks } from '../../../../config/app';
+---
+<section class="p-hero" aria-labelledby="pricing-title">
+  <Blob color="teal" width="30rem" height="24rem" top="-3rem" right="6rem" opacity={0.18} />
+  <Blob color="peach" width="24rem" height="18rem" bottom="-4rem" right="12rem" opacity={0.18} />
+  <Container>
+    <div class="p-hero__grid">
+      <div class="p-hero__copy">
+        <Eyebrow>Pricing · Pennsylvania pilot</Eyebrow>
+        <h1 id="pricing-title" class="p-hero__title">One price, shown <em>before you ask</em>.</h1>
+        <p class="p-hero__lead">Know the rate. Know who pays. Get back to your practice.<br />No Lily fee for graduates at launch. No fee to join as a supervisor.</p>
+        <div class="p-hero__actions">
+          <Button href={appLinks.supervisorSignup}>Join as a supervisor</Button>
+          <Button href={appLinks.graduateSignup} variant="outline">Find a supervisor</Button>
+        </div>
+        <p class="p-hero__note">Pilot preview · LPC and LCSW pathways first · All amounts in USD</p>
+      </div>
+      <div class="p-hero__art" aria-hidden="true"><PetalMark petals={5} size={260} opacity={0.9} /></div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .p-hero { position: relative; overflow: hidden; padding-block: 80px 64px; background: var(--lily-canvas, #F5F1E9); }
+  .p-hero__grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3rem; align-items: center; }
+  .p-hero__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; max-width: 40rem; }
+  .p-hero__title { margin: 0; font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 600; }
+  .p-hero__lead { margin: 0; font-size: 1.125rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .p-hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .p-hero__note { margin: 0; font-size: 0.875rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .p-hero__art { padding-right: 4rem; }
+  @media (max-width: 800px) {
+    .p-hero { padding-block: 56px 40px; }
+    .p-hero__grid { grid-template-columns: minmax(0, 1fr); }
+    .p-hero__art { display: none; }
+  }
+</style>

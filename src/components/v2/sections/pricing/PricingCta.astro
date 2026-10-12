@@ -1,0 +1,25 @@
+---
+import Container from '../../ui/Container.astro';
+import CTABand from '../../ui/CTABand.astro';
+import Button from '../../ui/Button.astro';
+import { appLinks } from '../../../../config/app';
+---
+<section class="pcta" aria-label="Get started">
+  <Container>
+    <div class="pcta__wrap">
+      <CTABand headline="Nothing to pay until it" lead="Join free. Your supervisor share applies only to sessions paid through Lily.">
+        <Fragment slot="accent">works.</Fragment>
+        <Button href={appLinks.supervisorSignup} variant="inverse">Join as a supervisor</Button>
+        <Button href={appLinks.graduateSignup} variant="outline" class="pcta__outline">Find a supervisor</Button>
+      </CTABand>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .pcta { padding-block: 32px 96px; }
+  /* Cream outline pill: the default outline (forest on forest) would fail contrast on the gradient. */
+  .pcta__wrap :global(a.v2-btn--outline.pcta__outline) { color: var(--lily-canvas, #F5F1E9); border-color: var(--lily-canvas, #F5F1E9); }
+  .pcta__wrap :global(a.v2-btn--outline.pcta__outline:hover) { background: color-mix(in srgb, var(--lily-canvas, #F5F1E9) 14%, transparent); }
+  .pcta__wrap :global(a.v2-btn--outline.pcta__outline:focus-visible) { outline-color: var(--lily-canvas, #F5F1E9); }
+</style>
