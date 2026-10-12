@@ -1,0 +1,48 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import Chip from '../../ui/Chip.astro';
+import PhoneFrame from '../../mocks/PhoneFrame.astro';
+---
+<Section tone="surface">
+  <div class="phone-sec">
+    <div class="phone-sec__copy">
+      <SectionHead eyebrow="Lily on your phone" title="Prefer your phone?" class="phone-sec__head">
+        <Fragment slot="accent">Same screen, one tap.</Fragment>
+      </SectionHead>
+      <p>The Lily app is planned to arrive with the Pennsylvania opening. No date is confirmed.</p>
+      <Chip variant="peach">Coming soon on the App Store</Chip>
+    </div>
+    <PhoneFrame label="Example confirmation screen: You’re on the list, PA waitlist, local opening alerts">
+      <div class="conf" data-mock="WaitlistConfirmation">
+        <p class="conf__mark" aria-hidden="true">lily</p>
+        <span class="conf__check" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+        </span>
+        <h3>You’re on the <em>list.</em></h3>
+        <ul class="conf__chips">
+          <li>PA waitlist</li>
+          <li>Local opening alerts</li>
+        </ul>
+        <p class="conf__eg">Example screen</p>
+      </div>
+    </PhoneFrame>
+  </div>
+</Section>
+
+<style>
+  .phone-sec { display: grid; grid-template-columns: minmax(0, 1.2fr) auto; gap: 3rem; align-items: center; justify-items: start; }
+  .phone-sec__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .phone-sec__copy p { margin: 0; max-width: 32rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 1.0625rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .phone-sec :global(.phone-sec__head) { margin-bottom: 0.5rem; }
+  .conf { display: flex; flex-direction: column; align-items: center; gap: 0.875rem; padding: 2.5rem 1.25rem 1rem; text-align: center; }
+  .conf p { margin: 0; }
+  .conf__mark { font-family: var(--font-wordmark, Jost, sans-serif); font-weight: 300; font-size: 1.5rem; color: var(--lily-wordmark, #2E5F55); }
+  .conf__check { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9); }
+  .conf h3 { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.5rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+  .conf h3 em { font-style: italic; font-weight: 500; color: var(--lily-primary, #1B6B3E); }
+  .conf__chips { display: flex; flex-direction: column; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+  .conf__chips li { padding: 0.375rem 0.875rem; border-radius: var(--radius-chip, 9999px); background: var(--lily-surface-muted, #ECE8DF); font-size: 0.8125rem; font-weight: 500; color: var(--lily-forest, #14522E); }
+  .conf__eg { margin-top: 0.5rem !important; font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  @media (max-width: 760px) { .phone-sec { grid-template-columns: minmax(0, 1fr); } }
+</style>

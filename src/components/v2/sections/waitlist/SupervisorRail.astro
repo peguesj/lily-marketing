@@ -1,0 +1,45 @@
+---
+import TrustStrip from '../../ui/TrustStrip.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+import Eyebrow from '../../ui/Eyebrow.astro';
+import LilyVerifiedBadge from '../../mocks/LilyVerifiedBadge.astro';
+import PractitionerCard from '../../mocks/PractitionerCard.astro';
+
+const benefits = [
+  'Your rate stays yours. No Lily fee at launch, and your price is visible.',
+  'Only verified clinicians. We confirm active state licensure before matching.',
+  'A better fit, from the start. Experience, format, identity, and location matter.',
+];
+---
+<aside class="rail" aria-labelledby="rail-title">
+  <Eyebrow>Why join first</Eyebrow>
+  <h2 id="rail-title" class="rail__title">You set the <em>standard.</em></h2>
+  <TrustStrip items={benefits} class="rail__trust" />
+  <LilyVerifiedBadge />
+  <div class="rail__peer">
+    <p class="rail__label">You’re joining other Pennsylvania supervisors.</p>
+    <PractitionerCard variant="supervisor" name="Jordan Wells, LCSW" initials="JW" meta="Philadelphia, PA · LCSW since 2017" chips={['Individual', 'Group', 'Virtual']} />
+    <p class="rail__fiction">Example peer card. Jordan Wells is a fictional person.</p>
+  </div>
+  <blockquote class="rail__quote">
+    <p>“I can see exactly what I need next.”</p>
+    <footer>Elena M., pre-licensed clinician, Allegheny County (fictional example)</footer>
+  </blockquote>
+  <IllustrativeNotice>
+    <p>Fees, rates and how licenses are reviewed are illustrative and pending validation.</p>
+  </IllustrativeNotice>
+</aside>
+
+<style>
+  .rail { display: flex; flex-direction: column; align-items: flex-start; gap: 1.25rem; padding: 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface-muted, #ECE8DF); }
+  .rail__title { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.75rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+  .rail__title em { font-style: italic; font-weight: 500; color: var(--lily-primary, #1B6B3E); }
+  .rail :global(.rail__trust) { flex-direction: column; flex-wrap: nowrap; }
+  .rail__peer { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; }
+  .rail__label, .rail__fiction { margin: 0; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.875rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .rail__fiction { font-size: 0.75rem; font-style: italic; }
+  .rail__quote { margin: 0; padding-left: 1rem; border-left: 3px solid var(--lily-teal, #318171); }
+  .rail__quote p { margin: 0 0 0.25rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-style: italic; font-size: 1.25rem; color: var(--lily-forest, #14522E); }
+  .rail__quote footer { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .rail :global(.v2-illustrative) { width: 100%; box-sizing: border-box; }
+</style>

@@ -1,0 +1,24 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import StepCard from '../../ui/StepCard.astro';
+---
+<Section tone="canvas">
+  <SectionHead eyebrow="What happens next" title="One email now. One notification when we’re ready." />
+  <div class="steps">
+    <StepCard number={1} title="A clear confirmation email" connector>
+      <p>We save your place and explain what Lily will do next.</p>
+    </StepCard>
+    <StepCard number={2} title="Supervisor verification" connector>
+      <p>For supervisors, Lily confirms your active license before matching begins.</p>
+    </StepCard>
+    <StepCard number={3} title="One local-opening notification">
+      <p>When enough local matches are ready, your area opens in Lily.</p>
+    </StepCard>
+  </div>
+</Section>
+
+<style>
+  .steps { --v2-step-gap: 2rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--v2-step-gap); }
+  @media (max-width: 899px) { .steps { grid-template-columns: minmax(0, 1fr); } }
+</style>
