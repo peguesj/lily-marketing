@@ -19,12 +19,9 @@ const TAG = 'Illustrative · pending validation';
 
 let doc;
 
+// Mounted at /_v2-mocks by the shell's src/config/preview-routes.mjs.
 function pageCandidates() {
-  return [
-    join(root, 'dist/_v2-mocks/index.html'),
-    join(root, 'dist/_v2-mocks.html'),
-    join(root, 'dist/v2-mocks/index.html'),
-  ];
+  return [join(root, 'dist/_v2-mocks/index.html')];
 }
 
 before(() => {
@@ -50,6 +47,7 @@ const ownText = (n) => kids(n).filter((c) => c.nodeName === '#text').map((c) => 
 const allText = (n) => [...walk(n)].filter((c) => c.nodeName === '#text').map((c) => c.value).join(' ').replace(/\s+/g, ' ');
 const mockRoots = () => elements().filter((e) => hasAttr(e, 'data-mock'));
 const rootOf = (name) => mockRoots().filter((e) => attr(e, 'data-mock') === name);
+const progressbarOf = (n) => [...walk(n)].find((c) => c.tagName && attr(c, 'role') === 'progressbar');
 
 /** self, ancestor, or sibling (of self/ancestor) carries data-illustrative; climb stops at the nearest data-mock root. */
 function illustrativeNear(el) {
@@ -94,6 +92,38 @@ test('mocks that show verification/license/eligibility/rate/hours claims carry t
   }
 });
 
+test('ProgressRing hours claims carry the tag, on the ring or on the mock that embeds it', () => {
+  const rings = rootOf('ProgressRing');
+  assert.ok(rings.length >= 3, 'expected the standalone rings and the one inside HoursLogPreview');
+  for (const r of rings) {
+    let holder = r;
+    if (!allText(r).includes(TAG)) {
+      for (let n = r.parentNode; n && n.tagName; n = n.parentNode) {
+        if (hasAttr(n, 'data-mock')) { holder = n; break; }
+      }
+    }
+    assert.ok(allText(holder).includes(TAG), `ProgressRing "${attr(progressbarOf(r), 'aria-valuetext')}" has no visible "${TAG}"`);
+    assert.ok(hasAttr(holder, 'data-illustrative') || [...walk(holder)].some((n) => n.tagName && hasAttr(n, 'data-illustrative')));
+  }
+});
+
+test('no invented hour caps or quotas (site-graduates.md: no unverified hour quotas)', () => {
+  const t = allText(doc);
+  assert.doesNotMatch(t, /allowed per supervisee|hours? (cap|quota|limit)|\bof \d+ allowed\b/i);
+  const src = readFileSync(join(mocksDir, 'GroupCard.astro'), 'utf8');
+  assert.doesNotMatch(src, /hoursCap|allowed per supervisee/);
+});
+
+test('preview is only at /_v2-mocks and is excluded from the sitemap', () => {
+  assert.ok(!existsSync(join(root, 'src/pages/v2-mocks.astro')), 'remove the src/pages/v2-mocks.astro wrapper route');
+  assert.ok(!existsSync(join(root, 'dist/v2-mocks/index.html')), '/v2-mocks should not be emitted');
+  const maps = readdirSync(join(root, 'dist')).filter((f) => /^sitemap.*\.xml$/.test(f));
+  assert.ok(maps.length >= 1, 'sitemap not generated');
+  for (const f of maps) {
+    assert.doesNotMatch(readFileSync(join(root, 'dist', f), 'utf8'), /v2-mocks/, `${f} lists the mocks preview`);
+  }
+});
+
 test('LilyVerifiedBadge label is "License review pending" and is followed by the tag', () => {
   for (const b of rootOf('LilyVerifiedBadge')) {
     const t = allText(b);
@@ -120,8 +150,9 @@ test('MatchWeights renders a semantic table with th scope', () => {
 test('ProgressRing computes aria-valuenow/max and the arc matches', () => {
   const rings = rootOf('ProgressRing');
   assert.ok(rings.length >= 1);
-  for (const r of rings) {
-    assert.equal(attr(r, 'role'), 'progressbar');
+  for (const root of rings) {
+    const r = progressbarOf(root);
+    assert.ok(r, 'ProgressRing has no role=progressbar element');
     const now = Number(attr(r, 'aria-valuenow'));
     const max = Number(attr(r, 'aria-valuemax'));
     assert.ok(Number.isFinite(now) && Number.isFinite(max) && max > 0 && now <= max);
@@ -132,7 +163,7 @@ test('ProgressRing computes aria-valuenow/max and the arc matches', () => {
     const off = Number(attr(arc, 'stroke-dashoffset'));
     assert.ok(Math.abs((len - off) / len - now / max) < 0.002, 'arc does not match value/total');
   }
-  const hero = rings.find((r) => attr(r, 'aria-valuenow') === '1240');
+  const hero = rings.map(progressbarOf).find((r) => attr(r, 'aria-valuenow') === '1240');
   assert.ok(hero, 'expected a 1,240 of 3,000 ring');
   assert.equal(attr(hero, 'aria-valuemax'), '3000');
 });
