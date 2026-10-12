@@ -1,6 +1,6 @@
 ---
 /** Closed-by-default policy rows built on native details/summary (keyboard and screen-reader accessible, zero JS). */
-interface Row { key: string; title: string; paragraphs: string[]; link?: { href: string; label: string } }
+interface Row { key: string; title: string; paragraphs: string[]; link?: { href: string; label: string }; unsourced?: boolean }
 interface Props { rows: Row[] }
 const { rows } = Astro.props;
 ---
@@ -14,6 +14,7 @@ const { rows } = Astro.props;
       <div class="policy__a">
         {r.paragraphs.map((p) => <p>{p}</p>)}
         {r.link && <p><a href={r.link.href}>{r.link.label}</a></p>}
+        {r.unsourced && <p class="policy__draft" data-illustrative data-unsourced>Unsourced draft pending counsel review · Illustrative · pending validation</p>}
       </div>
     </details>
   ))}
@@ -35,4 +36,5 @@ const { rows } = Astro.props;
   .policy__a :global(p) { margin: 0; }
   .policy__a :global(a) { color: var(--lily-primary, #1B6B3E); font-weight: 600; }
   @media (prefers-reduced-motion: reduce) { .policy__glyph::before, .policy__glyph::after { transition: none; } }
+  .policy__draft { width: fit-content; margin-top: 0.5rem; }
 </style>

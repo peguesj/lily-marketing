@@ -81,11 +81,17 @@ const weeklyAttestation = attestations.weekly_signoff_v1;
     <LegalHead id="attestation-title" eyebrow="Attestation language" title="What a weekly sign-off">
       <Fragment slot="accent">says</Fragment>
     </LegalHead>
+    {/*
+      Deliberate deviation from site-terms.svg: the SVG labels this block "Exact text, shown at every
+      sign-off" but drafts a longer statement. The page renders the statement the app actually records
+      (LilyAi.Supervision.Attestations weekly_signoff_v1, via attestations.json), so the label stays true.
+      Adopting the SVG wording needs a counsel decision and a new _v2 key in both Phoenix and the JSON.
+    */}
     <AttestationPanel
       statementKey="weekly_signoff_v1"
       label="Exact text, shown at every sign-off"
       text={weeklyAttestation.text}
-      footer="Example entry: 1.5 hours · Running: 1,240 of 3,000 hours"
+      footer="Total this entry: 1.5 hours · Running: 1,240 of 3,000 hours"
     />
     <div class="pair">
       <InfoCard title="If you disagree">

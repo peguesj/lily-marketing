@@ -41,9 +41,11 @@ const roles = [
   },
 ] as const;
 
-const policyRows: { key: string; title: string; paragraphs: string[]; link?: { href: string; label: string } }[] = [
+// None of these rows is in specs/site-privacy.md or the SVG: each renders an unsourced-draft label.
+const policyRows: { key: string; title: string; paragraphs: string[]; link?: { href: string; label: string }; unsourced?: boolean }[] = [
   {
     key: 'children',
+    unsourced: true,
     title: 'Children and age requirements',
     paragraphs: [
       'Lily is for adults. You must be 18 or older to create an account, and we do not knowingly collect personal information from anyone under 18.',
@@ -52,6 +54,7 @@ const policyRows: { key: string; title: string; paragraphs: string[]; link?: { h
   },
   {
     key: 'cookies',
+    unsourced: true,
     title: 'Cookies and service analytics',
     paragraphs: [
       'We use the cookies needed to keep you signed in and remember your choices, and basic service analytics to see which pages and flows work. Analytics never include affinity answers, messages or hours logs.',
@@ -60,6 +63,7 @@ const policyRows: { key: string; title: string; paragraphs: string[]; link?: { h
   },
   {
     key: 'changes',
+    unsourced: true,
     title: 'Changes to this privacy policy',
     paragraphs: [
       'When this policy changes we post the new version with its effective date and tell you in the app before any material change takes effect. Earlier versions are available on request.',

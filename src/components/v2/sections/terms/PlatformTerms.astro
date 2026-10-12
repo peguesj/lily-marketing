@@ -4,7 +4,7 @@ import Chip from '../../ui/Chip.astro';
  * Platform-terms accordion on native details/summary (keyboard accessible, zero JS).
  * The first row is open; the rest start closed.
  */
-interface Part { key: string; title: string; paragraphs: string[]; chip?: string }
+interface Part { key: string; title: string; paragraphs: string[]; chip?: string; unsourced?: boolean }
 interface Props { parts: Part[] }
 const { parts } = Astro.props;
 ---
@@ -18,6 +18,7 @@ const { parts } = Astro.props;
       <div class="pterms__a">
         {p.paragraphs.map((t) => <p>{t}</p>)}
         {p.chip && <div><Chip variant="peach">{p.chip}</Chip></div>}
+        {p.unsourced && <p class="pterms__draft" data-illustrative data-unsourced>Unsourced draft pending counsel review · Illustrative · pending validation</p>}
       </div>
     </details>
   ))}
@@ -38,4 +39,5 @@ const { parts } = Astro.props;
   .pterms__a { display: flex; flex-direction: column; gap: 0.75rem; padding: 0 1.25rem 1.25rem; font-size: 0.9375rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
   .pterms__a :global(p) { margin: 0; }
   @media (prefers-reduced-motion: reduce) { .pterms__glyph::before, .pterms__glyph::after { transition: none; } }
+  .pterms__draft { width: fit-content; margin-top: 0.5rem; }
 </style>
