@@ -135,6 +135,7 @@ const weeks = [
 <style>
   .how-join { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.75rem; align-items: center; }
   .how-join__side { display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; }
+  .how-join__side :global(.push) { background: var(--lily-surface-muted, #ECE8DF); box-shadow: none; }
   @media (max-width: 600px) { .how-join { grid-template-columns: minmax(0, 1fr); justify-items: center; } .how-join__side { width: 100%; } }
 
   .how-cta { padding-block: 32px 96px; }

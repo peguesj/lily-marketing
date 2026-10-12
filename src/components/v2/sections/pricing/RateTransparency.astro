@@ -48,13 +48,15 @@ import IllustrativeTag from './IllustrativeTag.astro';
   .rate__context { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; max-width: 28rem; font-size: 0.9375rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
   .rate__context p { margin: 0; }
   .rate__context-label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
-  .rate__card { display: flex; flex-direction: column; gap: 1.25rem; padding: 1.75rem; border: 1px solid var(--lily-border, #D5DFD9); border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); }
+  /* The shell's global [data-illustrative] chip rule (uppercase, centred) also hits this container, so undo it here. */
+  .rate__card { display: flex; flex-direction: column; align-items: stretch; gap: 1.25rem; padding: 1.75rem; font-size: inherit; font-weight: inherit; letter-spacing: normal; text-transform: none; color: var(--lily-forest, #14522E); border: 1px solid var(--lily-border, #D5DFD9); border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); }
   .rate__card p, .rate__card h3 { margin: 0; }
   .rate__card-label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
   .rate__prices { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 0; padding-bottom: 1.25rem; border-bottom: 1px solid var(--lily-border, #D5DFD9); }
   .rate__prices dt { order: 2; font-size: 0.9375rem; color: var(--lily-forest, #14522E); }
   .rate__prices div { display: flex; flex-direction: column; }
   .rate__prices dd { order: 1; margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 2.5rem; font-weight: 600; line-height: 1.1; color: var(--lily-forest, #14522E); }
+  .rate__card :global(span[data-mock='LilyVerifiedBadge']) { align-self: flex-start; padding: 0; border: 0; border-radius: 0; font-size: inherit; letter-spacing: normal; text-transform: none; }
   .rate__who { display: flex; align-items: center; gap: 1rem; }
   .rate__avatar { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%; background: var(--lily-surface-muted, #ECE8DF); font-size: 0.875rem; font-weight: 600; color: var(--lily-forest, #14522E); }
   .rate__name { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 1.0625rem; font-weight: 600; letter-spacing: 0; }

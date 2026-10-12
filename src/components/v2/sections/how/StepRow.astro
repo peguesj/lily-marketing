@@ -21,45 +21,45 @@ interface Props {
   tagged?: boolean;
 }
 const { n, kicker, chips = [], flip = false, id, tagged = false } = Astro.props;
-const titleId = `how-step-${n}-title`;
+const titleId = `hiw-step-${n}-title`;
 ---
-<section class="how-step" data-step={n} id={id} aria-labelledby={titleId}>
+<section class="hiw-step" data-step={n} id={id} aria-labelledby={titleId}>
   <Container>
-    <div class:list={['how-step__grid', flip && 'how-step__grid--flip']}>
-      <div class="how-step__copy">
-        <header class="how-step__head">
+    <div class:list={['hiw-step__grid', flip && 'hiw-step__grid--flip']}>
+      <div class="hiw-step__copy">
+        <header class="hiw-step__head">
           <Eyebrow>Step {n} · {kicker}</Eyebrow>
-          <h2 id={titleId} class="how-step__title"><slot name="title" />{' '}<em><slot name="accent" /></em></h2>
+          <h2 id={titleId} class="hiw-step__title"><slot name="title" />{' '}<em><slot name="accent" /></em></h2>
           {tagged && <IllustrativeTag />}
         </header>
-        <div class="how-step__lead"><slot /></div>
+        <div class="hiw-step__lead"><slot /></div>
         {chips.length > 0 && (
-          <ul class="how-step__chips" aria-label="Step highlights">
+          <ul class="hiw-step__chips" aria-label="Step highlights">
             {chips.map((c) => <li><Chip variant="muted">{c}</Chip></li>)}
           </ul>
         )}
       </div>
-      <div class="how-step__visual"><slot name="visual" /></div>
+      <div class="hiw-step__visual"><slot name="visual" /></div>
     </div>
   </Container>
 </section>
 
 <style>
-  .how-step { padding-block: 48px; scroll-margin-top: 5rem; }
-  .how-step__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 4rem; align-items: center; }
-  .how-step__grid--flip .how-step__copy { order: 2; }
-  .how-step__grid--flip .how-step__visual { order: 1; }
-  .how-step__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; }
-  .how-step__head { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-  .how-step__title { margin: 0; font-size: clamp(1.875rem, 3.6vw, 2.5rem); font-weight: 600; line-height: 1.15; }
-  .how-step__lead { max-width: 32rem; font-size: 1.0625rem; line-height: 1.65; color: var(--lily-text-muted-aa, #4E6B5A); }
-  .how-step__lead :global(p) { margin: 0 0 0.75rem; }
-  .how-step__lead :global(p:last-child) { margin-bottom: 0; }
-  .how-step__chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0 0; padding: 0; list-style: none; }
-  .how-step__visual { min-width: 0; }
+  .hiw-step { padding-block: 48px; scroll-margin-top: 5rem; }
+  .hiw-step__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 4rem; align-items: center; }
+  .hiw-step__grid--flip .hiw-step__copy { order: 2; }
+  .hiw-step__grid--flip .hiw-step__visual { order: 1; }
+  .hiw-step__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .hiw-step__head { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .hiw-step__title { margin: 0; font-size: clamp(1.875rem, 3.6vw, 2.5rem); font-weight: 600; line-height: 1.15; }
+  .hiw-step__lead { max-width: 32rem; font-size: 1.0625rem; line-height: 1.65; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .hiw-step__lead :global(p) { margin: 0 0 0.75rem; }
+  .hiw-step__lead :global(p:last-child) { margin-bottom: 0; }
+  .hiw-step__chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0 0; padding: 0; list-style: none; }
+  .hiw-step__visual { min-width: 0; }
   @media (max-width: 900px) {
-    .how-step { padding-block: 32px; }
-    .how-step__grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
-    .how-step__grid--flip .how-step__copy, .how-step__grid--flip .how-step__visual { order: 0; }
+    .hiw-step { padding-block: 32px; }
+    .hiw-step__grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+    .hiw-step__grid--flip .hiw-step__copy, .hiw-step__grid--flip .hiw-step__visual { order: 0; }
   }
 </style>
