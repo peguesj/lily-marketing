@@ -22,6 +22,7 @@ function* walk(n) {
 }
 const els = (d, tag) => [...walk(d)].filter((n) => n.tagName && (!tag || n.tagName === tag));
 const text = (n) => [...walk(n)].filter((c) => c.nodeName === '#text').map((c) => c.value).join(' ').replace(/\s+/g, ' ').trim();
+const htext = (n) => [...walk(n)].filter((c) => c.nodeName === '#text').map((c) => c.value).join('').replace(/\s+/g, ' ').trim();
 const anchors = (d) => els(d, 'a').map((a) => ({ href: attr(a, 'href'), rel: attr(a, 'rel') ?? '', label: text(a), node: a }));
 
 before(() => {
@@ -52,7 +53,7 @@ test('/research: single h1 with the hero copy, method card and published date', 
   const d = docs.research;
   const h1 = els(d, 'h1');
   assert.equal(h1.length, 1);
-  assert.equal(text(h1[0]), 'The two-year gap, measured.');
+  assert.equal(htext(h1[0]), 'The two-year gap, measured.');
   const t = text(d);
   assert.match(t, /METHOD/i);
   assert.match(t, /Oct 11, 2026/);
@@ -118,9 +119,9 @@ test('/research: PDF button is disabled "coming soon" with no fake file', () => 
 
 test('/research: closing CTA goes to /waitlist', () => {
   const d = docs.research;
-  const cta = els(d, 'h2').find((h) => /Help us close the gap in/.test(text(h)));
+  const cta = els(d, 'h2').find((h) => /Help us close the gap in/.test(htext(h)));
   assert.ok(cta, 'CTA headline missing');
-  assert.equal(text(cta), 'Help us close the gap in your county.');
+  assert.equal(htext(cta), 'Help us close the gap in your county.');
   assert.ok(anchors(d).some((a) => a.href === '/waitlist' && /Join the waitlist/.test(a.label) && !a.node.parentNode.attrs?.some?.((x) => x.name === 'hidden')));
 });
 
@@ -128,7 +129,7 @@ test('/trust: hero, example supervisor and illustrative labelling', () => {
   const d = docs.trust;
   const h1 = els(d, 'h1');
   assert.equal(h1.length, 1);
-  assert.equal(text(h1[0]), 'What License review pending means.');
+  assert.equal(htext(h1[0]), 'What License review pending means.');
   const t = text(d);
   assert.match(t, /Rosalind Okafor, LCSW/);
   assert.match(t, /Checked Oct 3, 2026/);
@@ -147,7 +148,7 @@ test('/trust: seven checks table with caption and th scope', () => {
 
 test('/trust: sections, hours log preview and data lists', () => {
   const d = docs.trust;
-  const heads = els(d, 'h2').map(text);
+  const heads = els(d, 'h2').map(htext);
   for (const h of [
     'Seven things we check, every time',
     "We don't copy directories.",
