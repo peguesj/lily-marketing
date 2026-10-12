@@ -117,7 +117,7 @@ test('/waitlist: counters, audience switch form, rail, steps, phone preview, pri
     'The Lily app is arriving with the Pennsylvania opening.',
   ]) assert.ok(text.includes(t), `SVG copy: ${t}`);
   // No fabricated verification record on the peer card, and no copy that is in no source.
-  for (const bad of [/CW012345/, /Checked against/, /\$120 \/hr/, /information is never sold/, /Ready when your area/, /planned to arrive/, /No date is confirmed/]) {
+  for (const bad of [/CW012345/, /Checked against/, /\$120 \/hr/, /Licenses are verified but not published; information/, /Ready when your area/, /planned to arrive/, /No date is confirmed/]) {
     assert.doesNotMatch(text, bad);
   }
   const cohort = main.match(/<section\b[^>]*data-cohort[^>]*>[\s\S]*?<\/section>/i)?.[0] ?? '';
