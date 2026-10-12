@@ -1,8 +1,27 @@
-// Run: node --test scripts/__tests__/forms.test.mjs   (Node >= 22.18 strips TS types natively)
+// Run: node --test scripts/__tests__/forms.test.mjs   (transpiles the TS sources with the repo's typescript devDependency)
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join, dirname } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import ts from 'typescript';
 
-import {
+// The package is "type": "commonjs", so node cannot load .ts as ESM directly.
+// Transpile the two dependency-free modules under test into a temp dir (no new deps).
+const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
+const out = mkdtempSync(join(tmpdir(), 'forms-test-'));
+async function load(rel) {
+  const src = readFileSync(join(root, rel), 'utf8');
+  const { outputText } = ts.transpileModule(src, {
+    compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
+  });
+  const file = join(out, rel.replace(/[\\/]/g, '_').replace(/\.ts$/, '.mjs'));
+  writeFileSync(file, outputText);
+  return import(pathToFileURL(file).href);
+}
+
+const {
   validateSupervisor,
   validateGraduate,
   validateProgram,
@@ -13,8 +32,9 @@ import {
   buildContactPayload,
   buildCohortPayload,
   firstName,
-} from '../../src/components/v2/forms/validate.ts';
-import { postSubmission } from '../../src/lib/submit.ts';
+} = await load('src/components/v2/forms/validate.ts');
+const submitMod = await load('src/lib/submit.ts');
+const { postSubmission } = submitMod;
 
 const NOW = new Date('2026-10-12T12:00:00Z');
 
@@ -223,6 +243,6 @@ test('postSubmission maps an aborted fetch and a thrown fetch to network', async
 });
 
 test('postSubmission default timeout is 10 seconds', async () => {
-  const { SUBMIT_TIMEOUT_MS } = await import('../../src/lib/submit.ts');
+  const { SUBMIT_TIMEOUT_MS } = submitMod;
   assert.equal(SUBMIT_TIMEOUT_MS, 10_000);
 });
