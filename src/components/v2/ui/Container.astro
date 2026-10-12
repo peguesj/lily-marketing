@@ -1,0 +1,17 @@
+---
+/** 1200px content column with fluid gutters. */
+interface Props { as?: 'div' | 'section' | 'article' | 'header' | 'footer' | 'main'; class?: string }
+const props: Props = Astro.props;
+const { as: Tag = 'div', class: extra } = props;
+---
+<Tag class:list={['v2-container', extra]}><slot /></Tag>
+
+<style>
+  .v2-container {
+    width: 100%;
+    max-width: calc(var(--v2-container-max, 1200px) + 2 * var(--v2-gutter, 1.5rem));
+    margin-inline: auto;
+    padding-inline: var(--v2-gutter, 1.5rem);
+    box-sizing: border-box;
+  }
+</style>
