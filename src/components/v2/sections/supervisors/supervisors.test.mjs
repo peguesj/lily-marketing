@@ -103,6 +103,7 @@ test('3 what Lily does: four step cards', () => {
   const titles = ['State-board check', 'Ranked matches, hours to date', 'Agreement in one pass', 'Weekly sign-off in a minute'];
   titles.forEach((t, i) => assert.ok(text(steps[i]).includes(t), `step ${i + 1} ${t}`));
   assert.match(text(s), /We verify, you choose\./);
+  assert.ok(text(s).includes('We confirm your license type and years with proposed license-review source.'));
 });
 
 test('4 verification: anchor, agreement text rows, example card, verification rows, notice', () => {
@@ -119,6 +120,7 @@ test('4 verification: anchor, agreement text rows, example card, verification ro
   const notice = els(s).filter((e) => e.tagName === 'aside' && hasAttr(e, 'data-illustrative'));
   assert.ok(notice.length >= 1, 'IllustrativeNotice');
   assert.ok(notice.some((n) => /proposed license-review source/.test(text(n)) && /pending validation/.test(text(n))));
+  assert.doesNotMatch(text(s), /lookup is unavailable/, 'no manual-review fallback claim: it is in neither the spec nor the SVG');
 });
 
 test('5 app: three phone frames with the spec captions', () => {
@@ -140,6 +142,10 @@ test('6 group: GroupCard with an illustrative cap line', () => {
   assert.match(text(s), /\$45 \/hr per seat/);
   const cap = els(s).find((e) => hasAttr(e, 'data-illustrative') && /Group hours so far: 18 of 60 allowed/.test(text(e)));
   assert.ok(cap, 'cap line must sit in a data-illustrative element');
+  assert.ok(text(s).includes('A proposed recurring slot and reviewed license path; hours logged separately for each person. When a seat opens, the next match in your inbox fills it.'));
+  const board = 'Most Pennsylvania boards count group hours toward the total, with a cap. We show each supervisee how many group hours still count for them.';
+  const rule = els(s).find((e) => hasAttr(e, 'data-illustrative') && text(e).includes(board));
+  assert.ok(rule, 'board group-hours claim is verbatim and sits in a data-illustrative element');
 });
 
 test('7 reciprocity: inbox phone and the three bullets', () => {
@@ -153,7 +159,7 @@ test('7 reciprocity: inbox phone and the three bullets', () => {
   assert.equal(els(s).filter((e) => e.tagName === 'li' && (attr(e, 'class') ?? '').includes('bullet')).length, 3);
 });
 
-test('8 earnings: two pricing cards, 12% share illustrative, link to /pricing', () => {
+test('8 earnings: two pricing cards with the SVG bullets verbatim, no invented share figure, link to /pricing', () => {
   const s = section('earnings');
   const cards = els(s).filter((e) => attr(e, 'data-pricing-card') !== undefined);
   assert.equal(cards.length, 2);
@@ -164,9 +170,17 @@ test('8 earnings: two pricing cards, 12% share illustrative, link to /pricing', 
   assert.match(text(s), /No fee to join\. A share only when it works\./);
   assert.match(text(s), /No Lily fee at launch/);
   assert.match(text(s), /Later, a per-session share, disclosed in writing before it starts/);
-  assert.match(text(s), /12%/);
-  const share = els(s).find((e) => hasAttr(e, 'data-illustrative') && /12%/.test(text(e)));
-  assert.ok(share, '12% must sit in a data-illustrative element');
+  for (const t of [
+    'The graduate pays you directly, weekly, after sign-off',
+    'Change your rate any time for new agreements',
+    'Four seats at $45 is $180 an hour, more than most 1:1 rates',
+    'We fill empty seats from your inbox',
+    'Each supervisee is billed and signs separately',
+    'Sponsored cohorts pay per clinician per month, on time',
+  ]) assert.ok(text(s).includes(t), t);
+  assert.doesNotMatch(text(s), /\d+\s*%/, 'no share percentage: the SVG and spec state none');
+  assert.doesNotMatch(text(s), /advance written notice/);
+  assert.ok(els(s).some((e) => hasAttr(e, 'data-illustrative')), 'rates and timing labelled illustrative');
   const pricing = links(s).find((a) => /See pricing/.test(text(a)));
   assert.equal(attr(pricing, 'href'), '/pricing');
 });
