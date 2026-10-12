@@ -1,20 +1,28 @@
-// Run after `npx astro build`: node --test scripts/__tests__/legal-pages.test.mjs
+// Run after `npx astro build`: node --test src/components/v2/sections/terms/legal-pages.test.mjs
 // Asserts the built /privacy and /terms pages (D2-legal) meet their contract:
 //   - the draft banner + IllustrativeNotice is present on both pages
 //   - the three attestation strings on /terms are byte-for-byte the strings in
 //     src/content/legal/attestations.json, and #agreement / #attestation anchors exist
 //     (the app's "What this means" sheet deep-links to them)
 //   - attestations.json matches LilyAi.Supervision.Attestations in the Phoenix app. The Elixir
-//     source is looked up via LILY_ATTESTATIONS_EX, or ../lib/lily_ai/supervision/attestations.ex
-//     relative to this repo (monorepo layout); the parity test is skipped when neither exists.
+//     source is looked up via LILY_ATTESTATIONS_EX, then the monorepo layouts (submodule in the
+//     Phoenix tree, a .claude/worktrees/<name> worktree, or its sibling v2-integration worktree).
+//     When none exists the test skips with a reason; LILY_REQUIRE_PHX_PARITY=1 (CI) makes it fail.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
+const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..', '..');
 const read = (p) => readFileSync(join(root, p), 'utf8');
+const EX = 'lib/lily_ai/supervision/attestations.ex';
+export const phoenixAttestations = () => [
+  process.env.LILY_ATTESTATIONS_EX,
+  resolve(root, '..', EX),
+  resolve(root, '..', '..', '..', EX),
+  resolve(root, '..', 'v2-integration', EX),
+].filter(Boolean).find(existsSync);
 
 const ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', middot: '·' };
 const decode = (s) =>
@@ -74,9 +82,11 @@ test('legal sources are present and well-formed', () => {
 });
 
 test('attestations.json matches LilyAi.Supervision.Attestations (Phoenix)', (ctx) => {
-  const candidates = [process.env.LILY_ATTESTATIONS_EX, resolve(root, '..', 'lib/lily_ai/supervision/attestations.ex')].filter(Boolean);
-  const ex = candidates.find(existsSync);
-  if (!ex) return ctx.skip('Phoenix attestations.ex not found (set LILY_ATTESTATIONS_EX)');
+  const ex = phoenixAttestations();
+  if (!ex) {
+    if (process.env.LILY_REQUIRE_PHX_PARITY === '1') assert.fail('Phoenix attestations.ex not found and LILY_REQUIRE_PHX_PARITY=1');
+    return ctx.skip('Phoenix attestations.ex not found (set LILY_ATTESTATIONS_EX)');
+  }
   const src = readFileSync(ex, 'utf8');
   const a = JSON.parse(read('src/content/legal/attestations.json'));
   for (const [key, entry] of Object.entries(a)) {
@@ -166,4 +176,36 @@ test('/privacy: role cards, affinity callout, disclosure, choices, retention, po
 
 test('/privacy: clinical records are explicitly excluded', () => {
   assert.match(textOf(privacy), /We do not collect your clinical records or therapy notes\./);
+});
+
+test('Phoenix attestations source is found from a .claude/worktrees layout', () => {
+  if (!/[\\/]\.claude[\\/]worktrees[\\/]/.test(root) || process.env.LILY_ATTESTATIONS_EX) return;
+  if (!existsSync(resolve(root, '..', 'v2-integration', EX)) && !existsSync(resolve(root, '..', '..', '..', EX))) return;
+  assert.ok(phoenixAttestations(), 'parity source resolves without LILY_ATTESTATIONS_EX');
+});
+
+const UNSOURCED = 'Unsourced draft pending counsel review';
+const block = (html, attrName, key) =>
+  html.match(new RegExp(`<details\\b[^>]*${attrName}="${key}"[^>]*>[\\s\\S]*?</details>`, 'i'))?.[0] ?? '';
+
+test('/privacy: policy rows not in the spec or SVG carry a visible unsourced-draft label', () => {
+  for (const key of ['children', 'cookies', 'changes']) {
+    const row = block(privacy, 'data-policy-row', key);
+    assert.ok(row, `policy row ${key}`);
+    assert.match(row, /data-unsourced/, `${key} marked unsourced`);
+    assert.ok(textOf(row).includes(UNSOURCED) && textOf(row).includes('Illustrative · pending validation'), `${key} label text`);
+  }
+});
+
+test('/terms: platform-term bodies beyond the first carry the unsourced-draft label; the first does not', () => {
+  assert.doesNotMatch(block(terms, 'data-platform-term', 'accounts'), /data-unsourced/);
+  for (const key of ['verification', 'payments', 'sponsorship', 'acceptable-use']) {
+    const row = block(terms, 'data-platform-term', key);
+    assert.ok(row, `platform term ${key}`);
+    assert.ok(textOf(row).includes(UNSOURCED), `${key} labelled unsourced`);
+  }
+});
+
+test('/terms: weekly sign-off footer matches the SVG running-total line', () => {
+  assert.ok(textOf(terms).includes('Total this entry: 1.5 hours · Running: 1,240 of 3,000 hours'));
 });
