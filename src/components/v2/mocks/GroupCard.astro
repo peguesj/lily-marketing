@@ -7,7 +7,6 @@ interface Props {
   pricePerSeat?: number;
   sessionMinutes?: number;
   hoursSoFar?: number;
-  hoursCap?: number;
 }
 const {
   title = 'Thursday group · 7:00pm · Virtual',
@@ -16,7 +15,6 @@ const {
   pricePerSeat = 45,
   sessionMinutes = 60,
   hoursSoFar = 18,
-  hoursCap = 60,
 } = Astro.props;
 const total = (seats.length + openSeats) * pricePerSeat;
 ---
@@ -29,7 +27,7 @@ const total = (seats.length + openSeats) * pricePerSeat;
     {Array.from({ length: openSeats }).map(() => <li class="avatar open"><span>Open seat</span></li>)}
   </ul>
   <p class="price"><strong>${pricePerSeat}</strong> /hr per seat · ${total} per {sessionMinutes === 60 ? '1-hour' : `${sessionMinutes}-minute`} session</p>
-  <p class="cap">Group hours so far: {hoursSoFar} of {hoursCap} allowed per supervisee this cycle</p>
+  <p class="cap">Group hours logged so far: {hoursSoFar}. How many count toward licensure depends on your board.</p>
   <p class="tag" data-illustrative>Illustrative · pending validation</p>
 </article>
 

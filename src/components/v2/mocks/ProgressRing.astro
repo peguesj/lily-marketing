@@ -1,13 +1,18 @@
 ---
-/** value/total ring. aria-valuenow is the clamped value, the arc is computed from value/total. */
+/**
+ * value/total ring. aria-valuenow is the clamped value, the arc is computed from value/total.
+ * Hours toward licensure are a claim, so the ring carries the illustrative tag unless it is
+ * embedded in a mock that already shows one (pass tagged={false} there).
+ */
 interface Props {
   value: number;
   total: number;
   size?: number;
   unit?: string;
   label?: string;
+  tagged?: boolean;
 }
-const { value, total, size = 96, unit = 'hrs', label = 'Hours counted' } = Astro.props;
+const { value, total, size = 96, unit = 'hrs', label = 'Hours counted', tagged = true } = Astro.props;
 const safeTotal = total > 0 ? total : 1;
 const now = Math.min(Math.max(value, 0), safeTotal);
 const stroke = Math.max(6, Math.round(size / 11));
@@ -18,9 +23,9 @@ const pct = Math.round((now / safeTotal) * 100);
 const fmt = (n: number) => n.toLocaleString('en-US');
 ---
 
+<div class="ring-wrap" data-mock="ProgressRing" data-illustrative={tagged ? '' : undefined}>
 <div
   class="ring"
-  data-mock="ProgressRing"
   role="progressbar"
   aria-label={label}
   aria-valuemin="0"
@@ -50,8 +55,12 @@ const fmt = (n: number) => n.toLocaleString('en-US');
     <small>of {fmt(safeTotal)} {unit}</small>
   </span>
 </div>
+{tagged && <p class="tag">Illustrative · pending validation</p>}
+</div>
 
 <style>
+  .ring-wrap { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; flex: none; }
+  .tag { margin: 0; font-size: 10.5px; font-style: italic; color: var(--lily-text-muted-aa, #4e6b5a); font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); }
   .ring { position: relative; display: inline-block; flex: none; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); color: var(--lily-text, #14522e); }
   svg { display: block; }
   .center { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
