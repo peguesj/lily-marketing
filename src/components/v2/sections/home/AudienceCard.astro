@@ -1,0 +1,39 @@
+---
+import Eyebrow from '../../ui/Eyebrow.astro';
+/**
+ * Audience card: eyebrow, h3 with an italic accent (slot "accent"), body (default slot),
+ * actions (slot "actions"), optional validation note (slot "note") and an optional right-hand
+ * panel (slot "aside") for the wide programs variant.
+ */
+interface Props { eyebrow: string; headline: string; id?: string; wide?: boolean; class?: string }
+const { eyebrow, headline, id, wide = false, class: extra } = Astro.props;
+---
+<article class:list={['home-aud', wide && 'home-aud--wide', extra]} aria-labelledby={id}>
+  <div class="home-aud__main">
+    <Eyebrow>{eyebrow}</Eyebrow>
+    <h3 id={id} class="home-aud__title">{headline} <em><slot name="accent" /></em></h3>
+    <div class="home-aud__body"><slot /></div>
+    <slot name="note" />
+    <div class="home-aud__actions"><slot name="actions" /></div>
+  </div>
+  {Astro.slots.has('aside') && <div class="home-aud__aside"><slot name="aside" /></div>}
+</article>
+
+<style>
+  .home-aud {
+    display: flex; gap: 2rem; align-items: center; height: 100%; box-sizing: border-box;
+    padding: 2.5rem; border-radius: var(--radius-card, 1.25rem);
+    background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+  }
+  .home-aud__main { display: flex; flex: 1; flex-direction: column; align-items: flex-start; gap: 0.75rem; min-width: 0; }
+  .home-aud__title { margin: 0; font-size: clamp(1.75rem, 3vw, 2rem); font-weight: 600; line-height: 1.2; color: var(--lily-forest, #14522E); }
+  .home-aud__body { max-width: 36rem; font-size: 1rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .home-aud__body :global(p) { margin: 0; }
+  .home-aud__actions { margin-top: 0.75rem; }
+  .home-aud__aside { flex: none; width: min(22rem, 100%); }
+  .home-aud--wide .home-aud__body { max-width: 34rem; }
+  @media (max-width: 900px) {
+    .home-aud { flex-direction: column; align-items: stretch; padding: 1.75rem 1.5rem; }
+    .home-aud__aside { width: 100%; }
+  }
+</style>

@@ -1,0 +1,18 @@
+---
+/**
+ * Compact validation-boundary tag. Satisfies the check-pages "illustrative" rule (a
+ * [data-illustrative] element reading "Illustrative · pending validation") and sits beside a
+ * claim. `tone="dark"` is for the forest gradient band.
+ */
+interface Props { tone?: 'light' | 'dark'; class?: string }
+const { tone = 'light', class: extra } = Astro.props;
+---
+<p class:list={['home-tag', tone === 'dark' && 'home-tag--dark', extra]} data-illustrative>Illustrative · pending validation</p>
+
+<style>
+  .home-tag { margin: 0; width: fit-content; }
+  .home-tag--dark {
+    color: var(--lily-canvas, #F5F1E9);
+    border-color: color-mix(in srgb, var(--lily-canvas, #F5F1E9) 70%, transparent);
+  }
+</style>

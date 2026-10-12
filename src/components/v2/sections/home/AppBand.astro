@@ -1,0 +1,61 @@
+---
+import HomeSection from './HomeSection.astro';
+import Eyebrow from '../../ui/Eyebrow.astro';
+import SignupPhonePreview from '../../mocks/SignupPhonePreview.astro';
+import PushCard from '../../mocks/PushCard.astro';
+import IllustrativeTag from './IllustrativeTag.astro';
+---
+<HomeSection id="app" labelledby="home-app-title">
+  <div class="home-app">
+    <div class="home-app__phone">
+      <SignupPhonePreview name="Maya Okafor, LCSW" licenseNumber="CW021847" since="2011" rate="$95 / hr" selected="LCSW" />
+    </div>
+    <div class="home-app__copy">
+      <Eyebrow>The app</Eyebrow>
+      <h2 id="home-app-title" class="home-app__title">One screen <em>today.</em> One notification when it's time.</h2>
+      <p class="home-app__lead">Supervisors sign up in under two minutes. There is nothing to browse yet. When your county's roster clears the threshold, Lily sends one push:</p>
+      <div class="home-app__push"><PushCard title="Lily is ready" body="3 graduates in Montgomery County want LCSW supervision." time="now" /></div>
+      <IllustrativeTag />
+      <div class="home-app__store">
+        <span class="home-app__badge" aria-label="Download on the App Store">
+          <span class="home-app__badge-top">Download on the</span>
+          <span class="home-app__badge-main">App Store</span>
+        </span>
+        <span class="home-app__soon">Coming soon</span>
+      </div>
+      <p class="home-app__note">Graduates get the same app a few weeks later, once the roster is live.</p>
+    </div>
+  </div>
+</HomeSection>
+
+<style>
+  .home-app { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 5rem; }
+  .home-app__phone { display: flex; justify-content: center; }
+  .home-app__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .home-app__title { margin: 0; max-width: 40rem; font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 600; line-height: 1.2; color: var(--lily-forest, #14522E); }
+  .home-app__lead { margin: 0; max-width: 36rem; font-size: 1.0625rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .home-app__push { width: 100%; max-width: 27.5rem; margin-block: 0.5rem; }
+  .home-app__store { display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem; }
+  .home-app__badge {
+    display: inline-flex; flex-direction: column; justify-content: center; min-height: 2.875rem; padding: 0.375rem 1.5rem;
+    border-radius: 0.625rem; background: var(--lily-forest, #14522E); color: var(--lily-canvas, #F5F1E9); line-height: 1.1;
+  }
+  .home-app__badge-top { font-size: 0.625rem; }
+  .home-app__badge-main { font-size: 1.125rem; font-weight: 500; }
+  .home-app__soon {
+    padding: 0.375rem 1rem; border-radius: var(--radius-chip, 9999px); background: var(--lily-surface-muted, #ECE8DF);
+    font-size: 0.8125rem; font-weight: 600; color: var(--lily-forest, #14522E);
+  }
+  .home-app__note { margin: 0; font-size: 0.9375rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  /* The shared [data-illustrative] pill style lands on the phone-screen wrapper; restore plain layout. */
+  .home-app__phone :global([data-mock="SignupPhonePreview"]) {
+    display: block; border: 0; border-radius: 0; gap: 0; text-transform: none; letter-spacing: normal; font-size: 1rem; font-weight: 400;
+  }
+  .home-app__phone :global([data-mock="SignupPhonePreview"] .tag) {
+    display: block; border: 0; border-radius: 0; padding: 0; text-transform: none; letter-spacing: normal; font-weight: 400;
+  }
+  @media (max-width: 900px) {
+    .home-app { grid-template-columns: 1fr; gap: 2.5rem; }
+    .home-app__phone { justify-content: flex-start; }
+  }
+</style>

@@ -1,0 +1,30 @@
+---
+import HomeSection from './HomeSection.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import StepCard from '../../ui/StepCard.astro';
+import IllustrativeTag from './IllustrativeTag.astro';
+---
+<HomeSection id="how">
+  <SectionHead eyebrow="How it works" title="Matched, agreed and counted in" linkHref="/how-it-works" linkLabel="See the full flow">
+    <Fragment slot="accent">three steps.</Fragment>
+  </SectionHead>
+  <div class="home-steps">
+    <StepCard number={1} title="Verify" connector>
+      <p>Supervisors share a license number. Lily checks it with the licensing jurisdiction and shows the rate before anyone asks.</p>
+    </StepCard>
+    <StepCard number={2} title="Match and agree" connector>
+      <p>Graduates pick from verified matches. Lily writes the supervision agreement; you both sign it in the app.</p>
+    </StepCard>
+    <StepCard number={3} title="Log weekly, signed twice">
+      <p>Every week you log the hours. Your supervisor signs. You sign. 1,240 of 3,000 counted, never disputed.</p>
+    </StepCard>
+  </div>
+  <IllustrativeTag class="home-steps__tag" />
+</HomeSection>
+
+<style>
+  .home-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .home-steps :global(.v2-step__body p) { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .home-steps ~ :global(.home-steps__tag) { margin-top: 1.5rem; }
+  @media (max-width: 900px) { .home-steps { grid-template-columns: 1fr; } }
+</style>

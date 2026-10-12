@@ -1,0 +1,46 @@
+---
+import HomeSection from './HomeSection.astro';
+import HomeIcon from './HomeIcon.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import StatTile from '../../ui/StatTile.astro';
+
+const stats = [
+  { icon: 'clock', value: '~3,000', caption: 'supervised hours before licensure' },
+  { icon: 'calendar', value: '~2 years', caption: 'of supervision, start to finish' },
+  { icon: 'dollar', value: '~$150 / hr', caption: 'out of pocket, the going rate' },
+  { icon: 'shield', value: '5+ years', caption: 'licensed before you can supervise' },
+] as const;
+---
+<HomeSection id="gap">
+  <SectionHead eyebrow="The gap in numbers" title="The part of the career nobody" linkHref="/research" linkLabel="Read the research">
+    <Fragment slot="accent">explains.</Fragment>
+  </SectionHead>
+  <div class="home-stats">
+    {stats.map((s) => (
+      <StatTile value={s.value} caption={s.caption} illustrative>
+        <HomeIcon slot="icon" name={s.icon} />
+      </StatTile>
+    ))}
+  </div>
+</HomeSection>
+
+<style>
+  .home-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  /* The global [data-illustrative] pill style also lands on the tile itself; keep the tag
+     look on the inner flag only and let the tile read as a normal card. */
+  .home-stats :global(.v2-stat[data-illustrative]) {
+    border: 0;
+    border-radius: var(--radius-card, 1.25rem);
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 400;
+    font-size: inherit;
+    padding: 1.5rem;
+    gap: 0.5rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+  }
+  @media (max-width: 1000px) { .home-stats { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .home-stats { grid-template-columns: 1fr; } }
+</style>
