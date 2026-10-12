@@ -9,8 +9,8 @@ import GroupCard from '../../mocks/GroupCard.astro';
     <ClaimHead id="sup-group-title" eyebrow="Group supervision" title="Run a group of four at a" accent="fair" after=" rate." lead="Set a per-seat rate. We fill the seats from your matches." />
     <div class="sup-group">
       <div class="sup-group__copy">
-        <p>A proposed recurring slot and a reviewed license path; hours are logged separately for each person. When a seat opens, the next match in your inbox fills it.</p>
-        <p>Boards differ on whether group hours count toward the total, and many set a cap. We show each supervisee how many group hours still count for them, once the rules are validated.</p>
+        <p>A proposed recurring slot and reviewed license path; hours logged separately for each person. When a seat opens, the next match in your inbox fills it.</p>
+        <p class="sup-plain" data-illustrative>Most Pennsylvania boards count group hours toward the total, with a cap. We show each supervisee how many group hours still count for them. <span class="sup-group__flag">Illustrative · pending validation</span></p>
         <Button variant="text" href="#faq" dataAction="supervisors-group-faq">See how group hours count →</Button>
       </div>
       <div class="sup-group__demo">
@@ -27,6 +27,6 @@ import GroupCard from '../../mocks/GroupCard.astro';
   .sup-group__copy p { margin: 0; max-width: 34rem; font-size: 1rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
   .sup-group__demo { display: grid; gap: 0.75rem; justify-items: start; }
   .sup-group__cap { margin: 0; max-width: 360px; font-size: 0.8125rem; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
-  .sup-group__cap span { font-style: italic; }
+  .sup-group__cap span, .sup-group__flag { font-style: italic; }
   @media (max-width: 900px) { .sup-group { grid-template-columns: 1fr; gap: 2.5rem; } }
 </style>

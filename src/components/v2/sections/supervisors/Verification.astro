@@ -37,7 +37,6 @@ const rows = [
           chips={['Virtual', 'In person', 'Trauma-informed', '2 open seats']}
         />
         <VerificationRows rows={rows} />
-        <p class="sup-verify__fallback">If the lookup is unavailable, a person reviews it within two business days (proposed).</p>
       </div>
     </div>
   </Section>
@@ -47,7 +46,6 @@ const rows = [
   .sup-anchor { scroll-margin-top: 80px; }
   .sup-verify { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 4rem; align-items: start; }
   .sup-verify__demo { display: grid; gap: 1.5rem; justify-items: start; }
-  .sup-verify__fallback { margin: 0; max-width: 440px; font-size: 0.8125rem; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
   :global(.sup-verify__note) { margin-top: 2rem; max-width: 34rem; }
   @media (max-width: 960px) { .sup-verify { grid-template-columns: 1fr; gap: 2.5rem; } }
 </style>
