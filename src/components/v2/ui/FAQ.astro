@@ -1,0 +1,87 @@
+---
+/** Accordion built on native details/summary: keyboard accessible, zero JS. */
+interface Item { q: string; a: string }
+interface Props {
+  items: Item[];
+  /** Open the first item by default. */
+  openFirst?: boolean;
+  class?: string;
+}
+const { items, openFirst = false, class: extra } = Astro.props;
+---
+<div class:list={['v2-faq', extra]}>
+  {items.map((item, i) => (
+    <details class="v2-faq__item" open={openFirst && i === 0}>
+      <summary class="v2-faq__q">
+        <span>{item.q}</span>
+        <span class="v2-faq__glyph" aria-hidden="true"></span>
+      </summary>
+      <div class="v2-faq__a"><p>{item.a}</p></div>
+    </details>
+  ))}
+</div>
+
+<style>
+  .v2-faq {
+    --_forest: var(--lily-forest, #14522E);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 48rem;
+  }
+  .v2-faq__item {
+    border: 1px solid var(--lily-border, #D5DFD9);
+    border-radius: var(--radius-card-sm, 0.875rem);
+    background: var(--lily-surface, #F8F5EF);
+  }
+  .v2-faq__item[open] { box-shadow: var(--shadow-subtle, 0 3px 5px rgb(20 82 46 / 7%)); }
+  .v2-faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.125rem 1.25rem;
+    border-radius: inherit;
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--_forest);
+  }
+  .v2-faq__q::-webkit-details-marker { display: none; }
+  .v2-faq__q:focus-visible { outline: 2px solid var(--_forest); outline-offset: 2px; }
+  /* Plus / minus glyph drawn with two bars; the vertical bar collapses when open. */
+  .v2-faq__glyph {
+    position: relative;
+    flex: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--lily-teal, #318171) 14%, var(--lily-canvas, #F5F1E9));
+  }
+  .v2-faq__glyph::before, .v2-faq__glyph::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    background: var(--lily-primary, #1B6B3E);
+    border-radius: 1px;
+    transform: translate(-50%, -50%);
+    transition: transform var(--motion-standard, 220ms) var(--motion-ease, ease);
+  }
+  .v2-faq__glyph::before { width: 0.625rem; height: 2px; }
+  .v2-faq__glyph::after { width: 2px; height: 0.625rem; }
+  .v2-faq__item[open] .v2-faq__glyph::after { transform: translate(-50%, -50%) scaleY(0); }
+  .v2-faq__a { padding: 0 1.25rem 1.25rem; }
+  .v2-faq__a p {
+    margin: 0;
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--lily-text-muted-aa, #4E6B5A);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .v2-faq__glyph::before, .v2-faq__glyph::after { transition: none; }
+  }
+</style>
