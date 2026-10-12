@@ -188,6 +188,10 @@ test('programs: card, sponsor CTA and example cohort', () => {
   assert.ok(t.includes('Keep the clinicians you trained.'));
   assert.ok(t.includes('Community mental-health centers and training programs sponsor a cohort. Priced per clinician per month. Chestnut Hill College is first in line.'));
   assert.equal(anchors(s).find((x) => x.label === 'Sponsor a cohort')?.href, '/programs#proposal');
+  // The named-institution claim carries its own validation tag in the card body, not only the mock aside.
+  const claimAt = t.indexOf('Chestnut Hill College is first in line.');
+  const tagAt = t.indexOf('Illustrative · pending validation', claimAt);
+  assert.ok(tagAt > claimAt && tagAt < t.indexOf('Sponsor a cohort'), 'institution claim tagged illustrative before the CTA');
   assert.match(s, /data-mock="CohortCard"/);
   assert.ok(t.includes('FALL 2026 COHORT'));
   assert.ok(t.includes('12 clinicians'));
@@ -216,6 +220,8 @@ test('teasers: labelled community-research quote and pricing rows', () => {
   assert.ok(t.includes('We asked the groups where graduates already talk.'));
   assert.ok(t.includes('“I found out in my last semester.”'));
   assert.ok(t.includes('MSW graduate, Philadelphia · Reddit r/socialwork, March 2026'));
+  const by = textOf(s.match(/<figcaption\b[\s\S]*?<\/figcaption>/i)?.[0] ?? '');
+  assert.match(by, /^Illustrative composite/, 'quote attribution marked inline as an illustrative composite');
   assert.ok(/community[- ]research summary/i.test(t), 'labelled as a community-research summary');
   assert.match(s, /data-illustrative/);
   assert.ok(t.includes('One price, shown before you ask.'));
