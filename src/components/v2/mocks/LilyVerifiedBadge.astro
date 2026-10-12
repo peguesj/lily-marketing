@@ -1,0 +1,50 @@
+---
+/**
+ * Shield + check badge. The label is always "License review pending" and is
+ * always followed by the illustrative tag: nothing here is a verification claim.
+ */
+interface Props {
+  size?: 'sm' | 'lg';
+}
+const { size = 'sm' } = Astro.props;
+const px = size === 'lg' ? 56 : 18;
+---
+
+<span class:list={['lvb', size]} data-mock="LilyVerifiedBadge" data-illustrative>
+  <span class="chip">
+    <svg width={px} height={px} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 2.5 4.5 5.4v5.7c0 4.7 3.1 8.5 7.5 10.4 4.4-1.9 7.5-5.7 7.5-10.4V5.4L12 2.5Z" fill="var(--lily-primary, #1b6b3e)" />
+      <path d="m8.4 12.1 2.5 2.5 4.8-5" fill="none" stroke="var(--lily-canvas, #f5f1e9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <span class="label">License review pending</span>
+  </span>
+  <span class="tag" data-illustrative>Illustrative · pending validation</span>
+</span>
+
+<style>
+  .lvb {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px 3px 6px;
+    border-radius: var(--radius-chip, 9999px);
+    background: rgb(20 82 46 / 10%);
+    color: var(--lily-forest, #14522e);
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+  .lg { flex-direction: column; text-align: center; }
+  .lg .chip { flex-direction: column; padding: 10px 16px; border-radius: 20px; font-size: 13px; }
+  .tag {
+    font-size: 10.5px;
+    font-style: italic;
+    color: var(--lily-text-muted-aa, #4e6b5a);
+  }
+</style>

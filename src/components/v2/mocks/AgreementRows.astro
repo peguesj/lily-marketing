@@ -1,0 +1,63 @@
+---
+/** Supervision agreement summary: label/value rows plus two script signatures with mono timestamps. */
+interface Row { label: string; value: string }
+interface Signature { name: string; role: string; at: string }
+interface Props {
+  rows?: Row[];
+  signatures?: Signature[];
+}
+const {
+  rows = [
+    { label: 'Rate', value: '$95 /hr individual' },
+    { label: 'Cadence', value: 'Weekly, Thu 7:00pm, 60 min' },
+    { label: 'Format', value: 'Virtual, individual' },
+    { label: 'Term', value: '1 Oct 2026 – 30 Sep 2028, or 3,000 hours' },
+    { label: 'Board attestation', value: 'Counsel-reviewed Sep 2026 (illustrative)' },
+  ],
+  signatures = [
+    { name: 'Maya Okafor', role: 'Supervisee', at: '2026-10-02 18:41 EDT' },
+    { name: 'Elena Reyes', role: 'Supervisor', at: '2026-10-02 19:05 EDT' },
+  ],
+} = Astro.props;
+---
+
+<section class="agreement" data-mock="AgreementRows" data-illustrative aria-label="Example supervision agreement">
+  <p class="eyebrow">AGREEMENT <span class="example">Example</span></p>
+  <dl class="rows">
+    {rows.map((r) => (
+      <div class="row"><dt>{r.label}</dt><dd>{r.value}</dd></div>
+    ))}
+  </dl>
+  <ul class="sigs">
+    {signatures.map((s) => (
+      <li>
+        <span class="script">{s.name}</span>
+        <span class="role">{s.role}</span>
+        <time class="mono">{s.at}</time>
+      </li>
+    ))}
+  </ul>
+  <p class="tag" data-illustrative>Illustrative · pending validation</p>
+</section>
+
+<style>
+  .agreement {
+    box-sizing: border-box; width: 100%; max-width: 440px; padding: 20px;
+    background: var(--lily-surface, #f8f5ef); border: 1px solid var(--lily-border, #d5dfd9);
+    border-radius: var(--radius-card, 1.25rem); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+    color: var(--lily-text, #14522e); font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+  }
+  p { margin: 0; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; color: var(--lily-text-muted-strong, #4f7060); }
+  .example { margin-left: 6px; font-size: 9.5px; padding: 2px 7px; border-radius: 9999px; background: var(--lily-surface-muted, #ece8df); letter-spacing: 0.08em; }
+  .rows { margin: 10px 0 0; }
+  .row { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--lily-border, #d5dfd9); font-size: 13px; }
+  dt { color: var(--lily-text-muted-aa, #4e6b5a); }
+  dd { margin: 0; font-weight: 600; text-align: right; }
+  .sigs { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .sigs li { display: grid; gap: 2px; padding-top: 6px; border-top: 1.5px solid var(--lily-forest, #14522e); }
+  .script { font-family: Caveat, 'Bradley Hand', 'Segoe Script', cursive; font-size: 26px; line-height: 1.1; color: var(--lily-primary, #1b6b3e); }
+  .role { font-size: 11px; color: var(--lily-text-muted-aa, #4e6b5a); }
+  .mono { font-family: var(--font-mono, 'Source Code Pro', Menlo, monospace); font-size: 10.5px; color: var(--lily-text-muted-aa, #4e6b5a); }
+  .tag { margin-top: 12px; font-size: 10.5px; font-style: italic; color: var(--lily-text-muted-aa, #4e6b5a); }
+</style>

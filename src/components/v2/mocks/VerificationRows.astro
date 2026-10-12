@@ -1,0 +1,54 @@
+---
+import LilyVerifiedBadge from './LilyVerifiedBadge.astro';
+
+/** Check rows for a (fictional) license review. A "warn" row is the manual-fallback path. */
+interface Row { text: string; state: 'pass' | 'warn' }
+interface Props { rows?: Row[] }
+const {
+  rows = [
+    { text: 'LCSW CW019274 · active (example)', state: 'pass' },
+    { text: 'Licensed since 14 Mar 2017 · 9y 6m', state: 'pass' },
+    { text: 'No discipline on record', state: 'pass' },
+    { text: 'Badge issued 2 Oct 2026', state: 'pass' },
+    { text: 'If the lookup is unavailable, a person reviews it within 2 business days', state: 'warn' },
+  ],
+} = Astro.props;
+---
+
+<section class="vr" data-mock="VerificationRows" data-illustrative aria-label="Example verification checklist">
+  <p class="eyebrow">VERIFICATION <span class="example">Example</span></p>
+  <div class="badge"><LilyVerifiedBadge /></div>
+  <ul>
+    {rows.map((r) => (
+      <li class={r.state}>
+        {r.state === 'pass' ? (
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="9" fill="var(--lily-success, #28874f)" /><path d="m5 9.2 2.6 2.6L13 6.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        ) : (
+          <span class="warn" aria-hidden="true"></span>
+        )}
+        <span class="sr">{r.state === 'pass' ? 'Passed: ' : 'Fallback: '}</span>
+        <span>{r.text}</span>
+      </li>
+    ))}
+  </ul>
+  <p class="tag" data-illustrative>Illustrative · pending validation</p>
+</section>
+
+<style>
+  .vr {
+    box-sizing: border-box; width: 100%; max-width: 440px; padding: 20px;
+    background: var(--lily-surface, #f8f5ef); border: 1px solid var(--lily-border, #d5dfd9);
+    border-radius: var(--radius-card, 1.25rem); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+    color: var(--lily-text, #14522e); font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+  }
+  p { margin: 0; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; color: var(--lily-text-muted-strong, #4f7060); }
+  .example { margin-left: 6px; font-size: 9.5px; padding: 2px 7px; border-radius: 9999px; background: var(--lily-surface-muted, #ece8df); letter-spacing: 0.08em; }
+  .badge { margin: 10px 0 4px; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--lily-border, #d5dfd9); font-size: 13px; }
+  li:last-child { border-bottom: 0; }
+  .warn { flex: none; width: 18px; height: 18px; border-radius: 50%; background: var(--lily-warning, #f2a922); box-shadow: inset 0 0 0 5px var(--lily-warning, #f2a922), inset 0 0 0 9px #fff6df; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tag { margin-top: 10px; font-size: 10.5px; font-style: italic; color: var(--lily-text-muted-aa, #4e6b5a); }
+</style>

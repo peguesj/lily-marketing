@@ -1,0 +1,67 @@
+---
+/** How matches are ranked: hard gates, then weighted dimensions. Semantic table. */
+interface Dim { name: string; kind: 'gate' | 'weight'; rule?: string; weight?: number }
+interface Props { dimensions?: Dim[] }
+const {
+  dimensions = [
+    { name: 'License track', kind: 'gate', rule: 'Must match' },
+    { name: 'County / distance', kind: 'gate', rule: 'Within 25 miles' },
+    { name: 'Format', kind: 'weight', weight: 30 },
+    { name: 'Availability', kind: 'weight', weight: 25 },
+    { name: 'Affinity (8 identity dimensions)', kind: 'weight', weight: 25 },
+    { name: 'Clinical focus', kind: 'weight', weight: 20 },
+  ],
+} = Astro.props;
+---
+
+<section class="mw" data-mock="MatchWeights" data-illustrative>
+  <table>
+    <caption>How Lily ranks matches <span class="example">Example</span></caption>
+    <thead>
+      <tr>
+        <th scope="col">Dimension</th>
+        <th scope="col">Type</th>
+        <th scope="col">Rule or weight</th>
+        <th scope="col">Share</th>
+      </tr>
+    </thead>
+    <tbody>
+      {dimensions.map((d) => (
+        <tr>
+          <th scope="row">{d.name}</th>
+          <td>{d.kind === 'gate' ? 'Gate' : 'Weighted'}</td>
+          <td>{d.kind === 'gate' ? d.rule : `${d.weight}%`}</td>
+          <td>
+            {d.kind === 'weight' ? (
+              <span class="track" aria-hidden="true"><span class="fill" style={`width:${Math.min(100, (d.weight ?? 0) * 2.5)}%`}></span></span>
+            ) : (
+              <span class="gate" aria-hidden="true">Pass / fail</span>
+            )}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="note">Affinity weights matches, it never filters anyone out.</p>
+  <p class="tag" data-illustrative>Illustrative · pending validation</p>
+</section>
+
+<style>
+  .mw {
+    box-sizing: border-box; width: 100%; max-width: 560px; padding: 20px;
+    background: var(--lily-surface, #f8f5ef); border: 1px solid var(--lily-border, #d5dfd9);
+    border-radius: var(--radius-card, 1.25rem); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+    color: var(--lily-text, #14522e); font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  caption { text-align: left; font-weight: 600; font-size: 15px; padding-bottom: 10px; }
+  .example { margin-left: 6px; font-size: 9.5px; padding: 2px 7px; border-radius: 9999px; background: var(--lily-surface-muted, #ece8df); letter-spacing: 0.08em; text-transform: uppercase; }
+  thead th { text-align: left; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-strong, #4f7060); padding: 6px 8px; border-bottom: 1.5px solid var(--lily-forest, #14522e); }
+  tbody th { text-align: left; font-weight: 600; }
+  th, td { padding: 9px 8px; border-bottom: 1px solid var(--lily-border, #d5dfd9); vertical-align: middle; }
+  .track { display: block; width: 100%; min-width: 80px; height: 8px; border-radius: 9999px; background: var(--lily-surface-muted, #ece8df); overflow: hidden; }
+  .fill { display: block; height: 100%; background: var(--lily-primary, #1b6b3e); border-radius: 9999px; }
+  .gate { font-size: 11px; color: var(--lily-text-muted-aa, #4e6b5a); }
+  .note { margin: 12px 0 0; font-size: 12px; color: var(--lily-text-muted-aa, #4e6b5a); }
+  .tag { margin: 6px 0 0; font-size: 10.5px; font-style: italic; color: var(--lily-text-muted-aa, #4e6b5a); }
+</style>

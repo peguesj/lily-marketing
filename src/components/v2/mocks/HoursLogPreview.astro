@@ -1,0 +1,94 @@
+---
+import ProgressRing from './ProgressRing.astro';
+
+type Status = 'signed' | 'awaiting' | 'disputed-resolved';
+interface Week { label: string; detail: string; status: Status }
+interface Props {
+  value?: number;
+  total?: number;
+  weeks?: Week[];
+  /** When an href is given the button renders as a link; otherwise as a non-link element. */
+  exportProgramHref?: string;
+  exportBoardHref?: string;
+  showExports?: boolean;
+}
+const {
+  value = 1240,
+  total = 3000,
+  weeks = [
+    { label: 'Week of Oct 5', detail: 'Individual · 1.0 hr', status: 'awaiting' },
+    { label: 'Week of Sep 28', detail: 'Group · 1.5 hr', status: 'signed' },
+    { label: 'Week of Sep 21', detail: 'Individual · 1.0 hr', status: 'disputed-resolved' },
+    { label: 'Week of Sep 14', detail: 'Individual · 1.0 hr', status: 'signed' },
+  ],
+  exportProgramHref,
+  exportBoardHref,
+  showExports = true,
+} = Astro.props;
+const statusLabel: Record<Status, string> = {
+  signed: 'Signed',
+  awaiting: 'Awaiting signature',
+  'disputed-resolved': 'Disputed, resolved',
+};
+const exports = [
+  { label: 'Export for my program', href: exportProgramHref },
+  { label: 'Export for the board', href: exportBoardHref },
+];
+---
+
+<section class="log" data-mock="HoursLogPreview" data-illustrative aria-label="Example hours log">
+  <header class="top">
+    <ProgressRing value={value} total={total} tagged={false} />
+    <div>
+      <p class="eyebrow">HOURS LOG <span class="example">Example</span></p>
+      <p class="who">Maya Okafor, MSW</p>
+      <p class="sub">Each week is logged by one of you and signed by the other.</p>
+    </div>
+  </header>
+  <ul class="weeks">
+    {weeks.map((w) => (
+      <li>
+        <div><strong>{w.label}</strong><span>{w.detail}</span></div>
+        <span class:list={['status', w.status]}><i aria-hidden="true"></i>{statusLabel[w.status]}</span>
+      </li>
+    ))}
+  </ul>
+  {showExports && (
+    <div class="exports">
+      {exports.map((e) =>
+        e.href ? (
+          <a class="btn" data-export href={e.href}>{e.label}</a>
+        ) : (
+          <span class="btn" data-export>{e.label}</span>
+        ),
+      )}
+    </div>
+  )}
+  <p class="tag" data-illustrative>Illustrative · pending validation</p>
+</section>
+
+<style>
+  .log {
+    box-sizing: border-box; width: 100%; max-width: 420px; padding: 20px;
+    background: var(--lily-surface, #f8f5ef); border: 1px solid var(--lily-border, #d5dfd9);
+    border-radius: var(--radius-card, 1.25rem); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+    color: var(--lily-text, #14522e); font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+  }
+  .top { display: flex; gap: 16px; align-items: center; }
+  p { margin: 0; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; color: var(--lily-text-muted-strong, #4f7060); }
+  .example { margin-left: 6px; font-size: 9.5px; padding: 2px 7px; border-radius: 9999px; background: var(--lily-surface-muted, #ece8df); letter-spacing: 0.08em; }
+  .who { font-size: 16px; font-weight: 600; margin-top: 4px; }
+  .sub { font-size: 12px; color: var(--lily-text-muted-aa, #4e6b5a); margin-top: 2px; }
+  .weeks { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 8px; }
+  .weeks li { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 12px; background: var(--lily-canvas, #f5f1e9); border-radius: var(--radius-card-sm, 0.875rem); }
+  .weeks li div { display: grid; font-size: 13px; }
+  .weeks li div span { font-size: 11.5px; color: var(--lily-text-muted-aa, #4e6b5a); }
+  .status { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600; background: var(--lily-surface-muted, #ece8df); white-space: nowrap; }
+  .status i { width: 7px; height: 7px; border-radius: 50%; background: var(--lily-success, #28874f); }
+  .awaiting i { background: var(--lily-warning, #f2a922); }
+  .disputed-resolved i { background: #3a86c8; }
+  .exports { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .btn { display: inline-block; padding: 7px 14px; border: 1.5px solid var(--lily-forest, #14522e); border-radius: 9999px; font-size: 12px; font-weight: 600; color: var(--lily-forest, #14522e); text-decoration: none; }
+  .tag { margin-top: 12px; font-size: 10.5px; font-style: italic; color: var(--lily-text-muted-aa, #4e6b5a); }
+</style>

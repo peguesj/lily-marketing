@@ -1,0 +1,46 @@
+---
+/** Program cohort summary with an n/m progress bar. Fictional cohort. */
+interface Props {
+  eyebrow?: string;
+  count?: number;
+  matched?: number;
+  due?: string;
+}
+const {
+  eyebrow = 'FALL 2026 COHORT',
+  count = 12,
+  matched = 9,
+  due = 'Next agreement due Thu 7:00pm · 3 awaiting a supervisor',
+} = Astro.props;
+const pct = count > 0 ? Math.round((matched / count) * 100) : 0;
+---
+
+<article class="cohort" data-mock="CohortCard" data-illustrative>
+  <p class="eyebrow">{eyebrow} <span class="example">Example</span></p>
+  <p class="count"><strong>{count}</strong> clinicians</p>
+  <div class="bar" role="progressbar" aria-label="Clinicians matched" aria-valuemin="0" aria-valuemax={count} aria-valuenow={matched} aria-valuetext={`${matched} of ${count} matched`}>
+    <span style={`width:${pct}%`}></span>
+  </div>
+  <p class="nm">{matched}/{count} matched</p>
+  <p class="due">{due}</p>
+  <p class="tag" data-illustrative>Illustrative · pending validation</p>
+</article>
+
+<style>
+  .cohort {
+    box-sizing: border-box; width: 100%; max-width: 340px; padding: 20px;
+    background: var(--lily-surface, #f8f5ef); border: 1px solid var(--lily-border, #d5dfd9);
+    border-radius: var(--radius-card, 1.25rem); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+    color: var(--lily-text, #14522e); font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+  }
+  p { margin: 0; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; color: var(--lily-text-muted-strong, #4f7060); }
+  .example { margin-left: 6px; font-size: 9.5px; padding: 2px 7px; border-radius: 9999px; background: var(--lily-surface-muted, #ece8df); letter-spacing: 0.08em; }
+  .count { margin-top: 6px; font-size: 14px; }
+  .count strong { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 34px; font-weight: 500; }
+  .bar { height: 8px; margin-top: 10px; background: var(--lily-surface-muted, #ece8df); border-radius: 9999px; overflow: hidden; }
+  .bar span { display: block; height: 100%; background: var(--lily-primary, #1b6b3e); border-radius: 9999px; }
+  .nm { margin-top: 6px; font-size: 12px; font-weight: 600; }
+  .due { margin-top: 4px; font-size: 12px; color: var(--lily-text-muted-aa, #4e6b5a); }
+  .tag { margin-top: 10px; font-size: 10.5px; font-style: italic; color: var(--lily-text-muted-aa, #4e6b5a); }
+</style>

@@ -1,0 +1,139 @@
+---
+/**
+ * Internal, noindex preview of the D1 product mocks. Every name is fictional.
+ * Anything about licensure, eligibility, rates or hours is illustrative pending validation.
+ */
+import '../styles/global.css';
+import PhoneFrame from '../components/v2/mocks/PhoneFrame.astro';
+import PushCard from '../components/v2/mocks/PushCard.astro';
+import PractitionerCard from '../components/v2/mocks/PractitionerCard.astro';
+import LilyVerifiedBadge from '../components/v2/mocks/LilyVerifiedBadge.astro';
+import HoursLogPreview from '../components/v2/mocks/HoursLogPreview.astro';
+import ProgressRing from '../components/v2/mocks/ProgressRing.astro';
+import CohortCard from '../components/v2/mocks/CohortCard.astro';
+import AgreementRows from '../components/v2/mocks/AgreementRows.astro';
+import MatchWeights from '../components/v2/mocks/MatchWeights.astro';
+import GroupCard from '../components/v2/mocks/GroupCard.astro';
+import InboxPreview from '../components/v2/mocks/InboxPreview.astro';
+import SignupPhonePreview from '../components/v2/mocks/SignupPhonePreview.astro';
+import VerificationRows from '../components/v2/mocks/VerificationRows.astro';
+import Timeline from '../components/v2/mocks/Timeline.astro';
+
+const sections = [
+  'PhoneFrame', 'PushCard', 'PractitionerCard', 'LilyVerifiedBadge', 'HoursLogPreview', 'ProgressRing',
+  'CohortCard', 'AgreementRows', 'MatchWeights', 'GroupCard', 'InboxPreview', 'SignupPhonePreview',
+  'VerificationRows', 'Timeline',
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Lily v2 product mocks (internal preview)</title>
+  </head>
+  <body>
+    <main class="preview">
+      <header>
+        <p class="eyebrow">INTERNAL PREVIEW · NOT FOR INDEXING</p>
+        <h1>Product <em>mocks</em></h1>
+        <p class="lead" data-illustrative>
+          Static imagery of the app. All people are fictional and marked Example. Verification, license,
+          eligibility, rate and hours content is illustrative pending validation.
+        </p>
+      </header>
+
+      <section aria-labelledby="s-phone">
+        <h2 id="s-phone">PhoneFrame + PushCard</h2>
+        <div class="row">
+          <PhoneFrame label="Example empty phone screen">
+            <div style="padding:20px 14px;font-size:12px;color:#4e6b5a">Slot content goes here.</div>
+          </PhoneFrame>
+          <PushCard />
+          <PushCard title="Weekly sign-off" body="Thursday's session with Maya is ready for your signature." />
+        </div>
+      </section>
+
+      <section aria-labelledby="s-prac">
+        <h2 id="s-prac">PractitionerCard + LilyVerifiedBadge</h2>
+        <div class="row">
+          <PractitionerCard variant="supervisor" />
+          <PractitionerCard variant="candidate" />
+          <PractitionerCard variant="compact" />
+          <div class="col">
+            <LilyVerifiedBadge />
+            <LilyVerifiedBadge size="lg" />
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="s-hours">
+        <h2 id="s-hours">HoursLogPreview + ProgressRing</h2>
+        <div class="row">
+          <HoursLogPreview />
+          <div class="col">
+            <ProgressRing value={1240} total={3000} />
+            <ProgressRing value={612} total={3000} size={72} />
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="s-cohort">
+        <h2 id="s-cohort">CohortCard + GroupCard</h2>
+        <div class="row">
+          <CohortCard />
+          <GroupCard />
+        </div>
+      </section>
+
+      <section aria-labelledby="s-agree">
+        <h2 id="s-agree">AgreementRows + MatchWeights + VerificationRows</h2>
+        <div class="row">
+          <AgreementRows />
+          <MatchWeights />
+          <VerificationRows />
+        </div>
+      </section>
+
+      <section aria-labelledby="s-phones">
+        <h2 id="s-phones">InboxPreview + SignupPhonePreview</h2>
+        <div class="row">
+          <PhoneFrame label="Example supervisor match inbox with three requests">
+            <InboxPreview />
+          </PhoneFrame>
+          <SignupPhonePreview />
+        </div>
+      </section>
+
+      <section aria-labelledby="s-tl">
+        <h2 id="s-tl">Timeline</h2>
+        <Timeline />
+      </section>
+
+      <nav aria-label="Mocks on this page">
+        <ul>
+          {sections.map((s) => <li>{s}</li>)}
+        </ul>
+      </nav>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  body { margin: 0; background: var(--lily-canvas, #f5f1e9); color: var(--lily-text, #14522e); font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); }
+</style>
+<style>
+  .preview { max-width: 1200px; margin: 0 auto; padding: 48px 24px 96px; display: grid; gap: 64px; }
+  header p { margin: 0; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; color: var(--lily-text-muted-strong, #4f7060); }
+  h1 { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-weight: 500; font-size: 48px; margin: 8px 0; }
+  h1 em { font-style: italic; color: var(--lily-primary, #1b6b3e); }
+  h2 { font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-strong, #4f7060); margin: 0 0 20px; }
+  .lead { max-width: 640px; font-size: 16px; color: var(--lily-text-muted-aa, #4e6b5a); }
+  .row { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; }
+  .col { display: grid; gap: 16px; justify-items: start; }
+  nav ul { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; font-size: 12px; }
+  nav li { padding: 3px 10px; border-radius: 9999px; background: var(--lily-surface-muted, #ece8df); }
+</style>
