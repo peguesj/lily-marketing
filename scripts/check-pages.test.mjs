@@ -118,3 +118,28 @@ test('default route set is shipped routes only', () => {
   for (const r of PENDING_ROUTES) assert.ok(ROUTES.includes(r), `${r} is in the full sitemap`);
   assert.deepEqual(SHIPPED_ROUTES, ROUTES.filter((r) => !PENDING_ROUTES.includes(r)));
 });
+
+function runVariant(name) {
+  const dir = mkdtempSync(join(tmpdir(), 'check-pages-'));
+  try {
+    cpSync(join(FIX, 'good'), dir, { recursive: true });
+    copyFileSync(join(FIX, 'variants', name), join(dir, 'index.html'));
+    return runChecks({ dist: dir, only: ['/'], appUrl: APP_URL });
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+test('commercial "eligible" terms and the not-a-provider disclaimer do not trigger the illustrative rule', () => {
+  assert.deepEqual(runVariant('commercial-eligible-terms.html').failures, []);
+});
+
+test('supervisor eligibility copy still triggers next to an exempt phrase', () => {
+  const dir = withBad('missing-illustrative.html');
+  try {
+    const r = runChecks({ dist: dir, only: ['/'], appUrl: APP_URL });
+    assert.ok(rules(r).includes('illustrative'));
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
