@@ -1,0 +1,33 @@
+---
+/** Graduate preferences screen content (sits inside a PhoneFrame). Static, fictional. */
+---
+<section class="scr" data-illustrative aria-label="Example preferences screen">
+  <p class="eyebrow">Your preferences <span class="ex">Example</span></p>
+  <dl class="rows">
+    <div><dt>Your track</dt><dd>Pennsylvania · LCSW</dd></div>
+    <div><dt>Your budget</dt><dd>Up to $90 per hour</dd></div>
+  </dl>
+  <ul class="chips" aria-label="Selected preferences">
+    <li class="on">Evenings ✓</li>
+    <li class="on">Group ✓</li>
+  </ul>
+  <p class="hint">Affinity is optional. You choose.</p>
+  <p class="cta">See my matches</p>
+  <p class="tag">Illustrative · pending validation</p>
+</section>
+
+<style>
+  .scr { box-sizing: border-box; padding: 12px 14px; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); color: var(--lily-text, #14522e); }
+  p, dl, dd, dt, ul { margin: 0; }
+  .eyebrow { font-size: 9.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-strong, #4f7060); }
+  .ex { margin-left: 4px; font-size: 8.5px; padding: 1px 6px; border-radius: 9999px; background: var(--lily-surface-muted, #ece8df); letter-spacing: 0.06em; text-transform: none; }
+  .rows { display: grid; gap: 8px; margin-top: 14px; }
+  .rows div { padding: 10px 12px; border-radius: var(--radius-card-sm, 0.875rem); background: var(--lily-surface, #f8f5ef); box-shadow: var(--shadow-subtle, 0 3px 5px rgb(20 82 46 / 7%)); }
+  dt { font-size: 10px; color: var(--lily-text-muted-aa, #4e6b5a); }
+  dd { margin-top: 2px; font-size: 14px; font-weight: 600; }
+  .chips { display: flex; gap: 6px; list-style: none; padding: 0; margin-top: 14px; }
+  .chips li { padding: 5px 12px; border-radius: 9999px; font-size: 11px; font-weight: 600; background: var(--lily-primary, #1b6b3e); color: var(--lily-canvas, #f5f1e9); }
+  .hint { margin-top: 14px; font-size: 11px; color: var(--lily-text-muted-aa, #4e6b5a); }
+  .cta { margin-top: 18px; padding: 10px 0; border-radius: 9999px; text-align: center; font-size: 12.5px; font-weight: 600; background: var(--lily-forest, #14522e); color: var(--lily-canvas, #f5f1e9); }
+  .tag { margin-top: 12px; font-size: 10px; font-style: italic; color: var(--lily-text-muted-aa, #4e6b5a); }
+</style>

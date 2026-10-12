@@ -1,0 +1,47 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+
+const benefits = [
+  { icon: 'check', title: 'Verified roster', body: 'License checks through the proposed license-review source, with eligibility for your specific track.' },
+  { icon: 'dollar', title: 'Rates up front', body: 'Know the session price before the first introductory message.' },
+  { icon: 'format', title: 'Your format', body: 'Individual or group. Choose what works for you and your track.' },
+  { icon: 'affinity', title: 'Affinity matters', body: 'Eight dimensions. You decide what to share and prioritize.' },
+  { icon: 'log', title: 'Your hours, yours', body: 'An agreement and log. Weekly entries signed by both of you.' },
+];
+---
+<Section tone="canvas" ariaLabelledby="grad-benefits-title">
+  <SectionHead eyebrow="Designed for your next chapter" title="Supervision that treats you like a">
+    <Fragment slot="accent">colleague.</Fragment>
+  </SectionHead>
+  <ul class="grad-benefits">
+    {benefits.map((b) => (
+      <li class="grad-benefit">
+        <span class="grad-benefit__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+            {b.icon === 'check' && <path d="m5 12.5 4.5 4.5L19 7.5" />}
+            {b.icon === 'dollar' && <><path d="M12 3v18" /><path d="M16.5 7.5c-.8-1.2-2.4-1.8-4.5-1.8-2.4 0-4 1.1-4 2.8 0 4 9 1.8 9 6 0 1.8-1.7 2.9-4.5 2.9-2.1 0-3.8-.7-4.7-2" /></>}
+            {b.icon === 'format' && <><circle cx="8" cy="9" r="3" /><circle cx="16.5" cy="10" r="2.5" /><path d="M3 19c.5-3 2.5-4.5 5-4.5s4.5 1.5 5 4.5M14 15c2.5-.3 5 .8 6 3.5" /></>}
+            {b.icon === 'affinity' && <><circle cx="12" cy="12" r="2.5" /><circle cx="12" cy="4.5" r="1.5" /><circle cx="12" cy="19.5" r="1.5" /><circle cx="4.5" cy="12" r="1.5" /><circle cx="19.5" cy="12" r="1.5" /></>}
+            {b.icon === 'log' && <><rect x="5" y="3.5" width="14" height="17" rx="2" /><path d="M8.5 9h7M8.5 13h7M8.5 17h4" /></>}
+          </svg>
+        </span>
+        <h3 class="grad-benefit__title">{b.title}</h3>
+        <p class="grad-benefit__body">{b.body}</p>
+      </li>
+    ))}
+  </ul>
+  <IllustrativeNotice class="grad-benefits__notice">
+    <p>License review and eligibility checks are a proposed step. The source, rules and timelines are pending validation, and nothing here is a verification result.</p>
+  </IllustrativeNotice>
+</Section>
+
+<style>
+  .grad-benefits { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1.25rem; }
+  .grad-benefit { padding: 1.5rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); border: 1px solid var(--lily-border, #D5DFD9); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); display: flex; flex-direction: column; gap: 0.625rem; }
+  .grad-benefit__icon { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: color-mix(in srgb, var(--lily-teal, #318171) 14%, var(--lily-canvas, #F5F1E9)); color: var(--lily-primary, #1B6B3E); }
+  .grad-benefit__title { margin: 0.25rem 0 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.25rem; font-weight: 500; color: var(--lily-forest, #14522E); }
+  .grad-benefit__body { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  :global(.grad-benefits__notice) { margin-top: 2rem; max-width: 46rem; }
+</style>

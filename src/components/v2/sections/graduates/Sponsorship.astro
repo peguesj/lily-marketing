@@ -1,0 +1,59 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import Button from '../../ui/Button.astro';
+---
+<Section tone="canvas" ariaLabelledby="grad-sponsor-title">
+  <SectionHead
+    eyebrow="Sponsorship"
+    title="Your program may already"
+    lead="Ask your clinical director about your supervision benefit. Lily is developing sponsored cohorts for employers and training programs."
+  >
+    <Fragment slot="accent">pay.</Fragment>
+  </SectionHead>
+  <div class="grad-sponsor">
+    <div class="grad-sponsor__actions">
+      <details class="grad-ask" id="ask-your-director">
+        <summary class="grad-ask__summary">Ask your director</summary>
+        <div class="grad-ask__panel">
+          <h3 class="grad-ask__title">What you could ask</h3>
+          <p>
+            Some employers and training programs pay for part or all of a clinician's supervision. A sponsored
+            cohort would mean your program agrees rates with Lily and covers the cost for the clinicians it enrolls.
+            Lily is still developing this, so treat the points below as questions, not an offer.
+          </p>
+          <ol>
+            <li>Does our program offer a supervision benefit or reimbursement?</li>
+            <li>Would it cover group sessions, individual sessions, or both, and up to what rate?</li>
+            <li>What written terms or commitments would apply before I book?</li>
+          </ol>
+          <p class="grad-ask__safe">
+            This panel is only an explanation. Lily does not send anything to your director, and nothing is emailed or
+            submitted when you open it. Copy any of it into your own message if you choose.
+          </p>
+        </div>
+      </details>
+      <Button variant="outline" href="/programs" dataAction="graduates-explore-programs">Explore programs →</Button>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .grad-sponsor { margin-top: -1rem; }
+  .grad-sponsor__actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start; }
+  .grad-ask { max-width: 40rem; }
+  .grad-ask__summary {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0.75rem 1.75rem;
+    border-radius: var(--radius-chip, 9999px); background: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9);
+    font-size: 0.9375rem; font-weight: 600; cursor: pointer; list-style: none; box-shadow: var(--shadow-cta, 0 8px 9px rgb(49 129 113 / 32%));
+  }
+  .grad-ask__summary::-webkit-details-marker { display: none; }
+  .grad-ask__summary:hover { background: var(--lily-forest, #14522E); }
+  .grad-ask__summary:focus-visible { outline: 2px solid var(--lily-forest, #14522E); outline-offset: 3px; }
+  .grad-ask[open] .grad-ask__summary { background: var(--lily-forest, #14522E); }
+  .grad-ask__panel { margin-top: 1rem; padding: 1.5rem 1.75rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); border: 1px solid var(--lily-border, #D5DFD9); color: var(--lily-text-muted-aa, #4E6B5A); font-size: 0.9375rem; line-height: 1.6; }
+  .grad-ask__panel p, .grad-ask__panel ol { margin: 0 0 0.75rem; }
+  .grad-ask__panel ol { padding-left: 1.25rem; }
+  .grad-ask__title { margin: 0 0 0.5rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.25rem; font-weight: 500; color: var(--lily-forest, #14522E); }
+  .grad-ask__safe { margin-bottom: 0 !important; font-size: 0.8125rem; }
+</style>

@@ -1,0 +1,45 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+
+const tiles = [
+  { eyebrow: 'Individual example', rate: '$150', unit: '/ session', total: '$600 for four sessions', note: 'One-to-one time with your supervisor.', tone: 'plain' },
+  { eyebrow: 'Group example · half the rate', rate: '$75', unit: '/ person / session', total: '$300 for four sessions', note: 'Shared learning, subject to track limits.', tone: 'accent' },
+  { eyebrow: 'Fully sponsored example', rate: '$0', unit: 'out of pocket', total: 'If your program covers the full cost', note: 'Confirm coverage before booking.', tone: 'plain' },
+];
+---
+<Section tone="surface" ariaLabelledby="grad-cost-title">
+  <SectionHead eyebrow="Cost comparison" title="Fair rates," lead="Illustrative costs for four one-hour sessions. Actual rates and group eligibility vary.">
+    <Fragment slot="accent">shown first.</Fragment>
+  </SectionHead>
+  <ul class="grad-cost">
+    {tiles.map((t) => (
+      <li class:list={['grad-cost__tile', t.tone === 'accent' && 'grad-cost__tile--accent']}>
+        <p class="grad-cost__eyebrow">{t.eyebrow}</p>
+        <p class="grad-cost__rate"><span class="grad-cost__amt">{t.rate}</span> <span class="grad-cost__unit">{t.unit}</span></p>
+        <p class="grad-cost__total">{t.total}</p>
+        <p class="grad-cost__note">{t.note}</p>
+      </li>
+    ))}
+  </ul>
+  <IllustrativeNotice class="grad-cost__notice">
+    <p>These figures are examples, not booked offers or approved pricing. A sponsored $0 applies only if your program pays in full. Group eligibility is subject to your license track and board rules, which are pending validation.</p>
+  </IllustrativeNotice>
+</Section>
+
+<style>
+  .grad-cost { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.5rem; }
+  .grad-cost__tile { padding: 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-canvas, #F5F1E9); border: 1px solid var(--lily-border, #D5DFD9); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); display: flex; flex-direction: column; gap: 0.5rem; }
+  .grad-cost__tile--accent { background: var(--lily-primary, #1B6B3E); border-color: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9); }
+  .grad-cost__tile p { margin: 0; }
+  .grad-cost__eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .grad-cost__tile--accent .grad-cost__eyebrow, .grad-cost__tile--accent .grad-cost__note { color: var(--lily-canvas, #F5F1E9); }
+  .grad-cost__amt { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 3rem; font-weight: 500; line-height: 1; color: var(--lily-forest, #14522E); }
+  .grad-cost__tile--accent .grad-cost__amt { color: var(--lily-canvas, #F5F1E9); }
+  .grad-cost__unit { font-size: 0.9375rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .grad-cost__tile--accent .grad-cost__unit { color: var(--lily-canvas, #F5F1E9); }
+  .grad-cost__total { margin-top: 0.5rem !important; font-size: 1.0625rem; font-weight: 600; }
+  .grad-cost__note { font-size: 0.9375rem; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
+  :global(.grad-cost__notice) { margin-top: 2rem; max-width: 46rem; }
+</style>

@@ -1,0 +1,45 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+
+const cards = [
+  { eyebrow: 'Price transparency', title: 'The rate should come first.', stat: '239', body: 'Pricing transparency appeared in 239 posts in the research summary.' },
+  { eyebrow: 'Finding the right person', title: 'A name is not enough.', stat: '183', body: 'Finding a specialist was a pain point in 183 posts. Fit needs more detail.' },
+  { eyebrow: 'Where people look today', title: 'Your community fills the gap.', stat: '17 groups', body: 'Therapist groups already act as a manual matching network.' },
+];
+---
+<Section tone="surface" ariaLabelledby="grad-evidence-title">
+  <SectionHead
+    eyebrow="The gap between degree and license"
+    title="“One email quoting $150 an hour” is not a"
+    lead="A scenario from our graduate persona. The community research points to the same friction."
+  >
+    <Fragment slot="accent">plan.</Fragment>
+  </SectionHead>
+  <p class="grad-scenario">Persona scenario · illustrative. Not a quotation from a real graduate.</p>
+  <ul class="grad-evidence">
+    {cards.map((c) => (
+      <li class="grad-evidence__card">
+        <p class="grad-evidence__eyebrow">{c.eyebrow}</p>
+        <p class="grad-evidence__stat">{c.stat}</p>
+        <h3 class="grad-evidence__title">{c.title}</h3>
+        <p class="grad-evidence__body">{c.body}</p>
+      </li>
+    ))}
+  </ul>
+  <p class="grad-evidence__source">
+    Source: Lily March 2026 community-research summary · 17 groups, 5,869 posts. These are summary findings, not interviews.
+    Not a graduate-only study; no verbatim testimonials used. Illustrative until validated.
+  </p>
+</Section>
+
+<style>
+  .grad-scenario { margin: -1.5rem 0 2.5rem; font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .grad-evidence { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.5rem; }
+  .grad-evidence__card { padding: 1.75rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-canvas, #F5F1E9); border: 1px solid var(--lily-border, #D5DFD9); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); display: flex; flex-direction: column; gap: 0.5rem; }
+  .grad-evidence__eyebrow { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-strong, #4F7060); }
+  .grad-evidence__stat { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 2.75rem; font-weight: 500; line-height: 1; color: var(--lily-primary, #1B6B3E); }
+  .grad-evidence__title { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.375rem; font-weight: 500; color: var(--lily-forest, #14522E); }
+  .grad-evidence__body { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .grad-evidence__source { margin: 1.5rem 0 0; max-width: 52rem; font-size: 0.8125rem; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
+</style>

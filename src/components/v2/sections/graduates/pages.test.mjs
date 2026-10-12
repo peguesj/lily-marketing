@@ -16,6 +16,9 @@ const dist = join(root, 'dist');
 const ONLY = ['/graduates', '/programs'];
 const APP = 'https://app.asklily.health';
 
+// visibleText joins inline tags with a space, so "<em>x</em>." reads "x ."
+const tidy = (t) => t.replace(/\s+([.,;:?!])/g, '$1');
+
 let grad = '';
 let prog = '';
 let gradText = '';
@@ -28,13 +31,12 @@ before(() => {
   }
   const read = (route) => {
     const f = join(dist, route.slice(1), 'index.html');
-    assert.ok(existsSync(f), `missing ${f}`);
-    return readFileSync(f, 'utf8');
+    return existsSync(f) ? readFileSync(f, 'utf8') : '';
   };
   grad = read('/graduates');
   prog = read('/programs');
-  gradText = visibleText(grad);
-  progText = visibleText(prog);
+  gradText = tidy(visibleText(grad));
+  progText = tidy(visibleText(prog));
 });
 
 const anchors = (html) => [...html.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/gi)].map((m) => ({

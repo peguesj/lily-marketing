@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/v2/ui/Section.astro';
+import Container from '../components/v2/ui/Container.astro';
+import SectionHead from '../components/v2/ui/SectionHead.astro';
+import FAQ from '../components/v2/ui/FAQ.astro';
+import CTABand from '../components/v2/ui/CTABand.astro';
+import Button from '../components/v2/ui/Button.astro';
+import IllustrativeNotice from '../components/v2/ui/IllustrativeNotice.astro';
+import Hero from '../components/v2/sections/graduates/Hero.astro';
+import Evidence from '../components/v2/sections/graduates/Evidence.astro';
+import Benefits from '../components/v2/sections/graduates/Benefits.astro';
+import Matching from '../components/v2/sections/graduates/Matching.astro';
+import Previews from '../components/v2/sections/graduates/Previews.astro';
+import CostComparison from '../components/v2/sections/graduates/CostComparison.astro';
+import Sponsorship from '../components/v2/sections/graduates/Sponsorship.astro';
+import WaitlistSection from '../components/v2/sections/graduates/WaitlistSection.astro';
+
+const faq = [
+  { q: 'Does Lily charge me?', a: 'No Lily fee for graduates at launch. You pay your supervisor. Supervisors also pay no Lily fee at launch.' },
+  { q: 'Which states?', a: 'Pennsylvania is the planned pilot, for LPC and LCSW tracks. Join the waitlist to hear when matching opens near you.' },
+  { q: 'How many hours does my license require?', a: 'Requirements depend on your license, degree and experience. Check current PA board rules with your supervisor.' },
+  { q: 'Will the board accept my log?', a: 'Lily is not the licensing board. Keep required board forms too. A dual-signed log does not guarantee board acceptance.' },
+  { q: 'Can my employer pay?', a: 'Ask about sponsored supervision or reimbursement. Coverage and any commitment terms need written agreement.' },
+  { q: 'Can I choose group supervision?', a: 'Yes, where your license rules allow it. Group limits vary. Confirm eligible hours and group size before committing.' },
+];
+---
+<BaseLayout
+  title="For graduates | Lily"
+  description="Find a fairly priced supervisor, see the rate first, and keep a dual-signed hours log you own. Pennsylvania LPC and LCSW pilot. Join the waitlist."
+>
+  <Hero />
+  <Evidence />
+  <Benefits />
+  <Matching />
+  <Previews />
+  <CostComparison />
+  <Sponsorship />
+  <Section tone="canvas" ariaLabelledby="grad-faq-title">
+    <SectionHead eyebrow="FAQ" title="Your questions, answered">
+      <Fragment slot="accent">plainly.</Fragment>
+    </SectionHead>
+    <FAQ items={faq} openFirst />
+    <IllustrativeNotice class="grad-faq-notice">
+      <p>Answers describe the proposed Pennsylvania pilot. Licensure rules, eligible hours and group limits vary by track and are pending validation.</p>
+    </IllustrativeNotice>
+  </Section>
+  <WaitlistSection />
+  <Section tone="canvas" bleed>
+    <Container>
+      <CTABand headline="Join the waitlist for your" lead="A supervisor who fits. A path you can see.">
+        <Fragment slot="accent">county.</Fragment>
+        <Button variant="inverse" href="#waitlist" dataAction="graduates-cta-find-supervisor">Find a supervisor</Button>
+      </CTABand>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  :global(.grad-faq-notice) { margin-top: 2rem; max-width: 46rem; }
+</style>

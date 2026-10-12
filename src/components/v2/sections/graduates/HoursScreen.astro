@@ -1,0 +1,45 @@
+---
+import ProgressRing from '../../mocks/ProgressRing.astro';
+/** Graduate experience-log screen content (sits inside a PhoneFrame). Pending entries are separated. */
+const signed = [{ date: 'Oct 8', kind: 'Supervision', hrs: '1.0 hr', state: 'Signed by both ✓' }];
+const pending = [{ date: 'Oct 9', kind: 'Client experience', hrs: '3.0 hrs', state: 'Awaiting signature' }];
+---
+<section class="scr" data-illustrative aria-label="Example experience log screen">
+  <p class="eyebrow">Your experience log <span class="ex">Example</span></p>
+  <div class="top">
+    <ProgressRing value={1240} total={3000} size={84} tagged={false} />
+    <div>
+      <p class="big">1,240</p>
+      <p class="of">of 3,000 hours · Example</p>
+      <p class="delta">1,236 last week · +4 signed</p>
+    </div>
+  </div>
+  <h4>Signed</h4>
+  <ul>
+    {signed.map((e) => <li><strong>{e.date} · {e.kind}</strong><span>{e.hrs} · {e.state}</span></li>)}
+  </ul>
+  <h4>Pending</h4>
+  <ul class="pending">
+    {pending.map((e) => <li><strong>{e.date} · {e.kind}</strong><span>{e.hrs} · {e.state}</span></li>)}
+  </ul>
+  <p class="cta">Add my hours</p>
+  <p class="tag">Illustrative · pending validation</p>
+</section>
+
+<style>
+  .scr { box-sizing: border-box; padding: 12px 14px; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); color: var(--lily-text, #14522e); }
+  p, ul, h4 { margin: 0; }
+  .eyebrow { font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lily-text-muted-strong, #4f7060); }
+  .ex { margin-left: 4px; font-size: 8.5px; padding: 1px 6px; border-radius: 9999px; background: var(--lily-surface-muted, #ece8df); letter-spacing: 0.06em; text-transform: none; }
+  .top { display: flex; gap: 10px; align-items: center; margin: 10px 0 12px; }
+  .big { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 26px; font-weight: 500; line-height: 1; }
+  .of { margin-top: 2px; font-size: 10px; color: var(--lily-text-muted-aa, #4e6b5a); }
+  .delta { margin-top: 4px; font-size: 10px; font-weight: 600; }
+  h4 { margin-top: 10px; font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lily-text-muted-strong, #4f7060); }
+  ul { list-style: none; padding: 0; margin-top: 6px; }
+  li { display: grid; gap: 2px; padding: 8px 10px; border-radius: var(--radius-card-sm, 0.875rem); background: var(--lily-surface, #f8f5ef); font-size: 11px; box-shadow: var(--shadow-subtle, 0 3px 5px rgb(20 82 46 / 7%)); }
+  li span { color: var(--lily-text-muted-aa, #4e6b5a); }
+  .pending li { background: transparent; border: 1.5px dashed var(--lily-border, #d5dfd9); box-shadow: none; }
+  .cta { margin-top: 12px; padding: 9px 0; border-radius: 9999px; text-align: center; font-size: 12px; font-weight: 600; background: var(--lily-forest, #14522e); color: var(--lily-canvas, #f5f1e9); }
+  .tag { margin-top: 8px; font-size: 10px; font-style: italic; color: var(--lily-text-muted-aa, #4e6b5a); }
+</style>

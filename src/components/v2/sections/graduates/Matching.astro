@@ -1,0 +1,62 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import MatchWeights from '../../mocks/MatchWeights.astro';
+
+const dimensions = [
+  { n: 1, title: 'Licensure gate', body: 'Your license track comes first. Check credentials and supervision eligibility.' },
+  { n: 2, title: 'Rate and format', body: 'Set your budget and choose 1:1 or group. See the price per person, per session.' },
+  { n: 3, title: 'Schedule', body: 'Evenings, weekends, online or in person. Look for a rhythm you can sustain.' },
+  { n: 4, title: 'Practice', body: 'Setting, population and approach. Bring the work you want to grow into.' },
+  { n: 5, title: 'Affinity', body: 'Eight optional identity dimensions. Choose what matters; skip what does not.' },
+  { n: 6, title: 'Reciprocity', body: 'A good match works for both of you. Agree on goals before you begin.' },
+];
+// Illustrative weights for the example table only; the production formula is not defined here.
+const weights = [
+  { name: 'Licensure gate', kind: 'gate' as const, rule: 'Must match' },
+  { name: 'Rate and format', kind: 'weight' as const, weight: 30 },
+  { name: 'Schedule', kind: 'weight' as const, weight: 25 },
+  { name: 'Practice', kind: 'weight' as const, weight: 20 },
+  { name: 'Affinity (optional)', kind: 'weight' as const, weight: 15 },
+  { name: 'Reciprocity', kind: 'weight' as const, weight: 10 },
+];
+---
+<Section tone="surface" ariaLabelledby="grad-matching-title">
+  <SectionHead
+    eyebrow="How matching works"
+    title="Fit is more than"
+    lead="Start with eligibility. Then make room for the things a directory cannot tell you."
+  >
+    <Fragment slot="accent">availability.</Fragment>
+  </SectionHead>
+  <div class="grad-matching">
+    <ol class="grad-matching__list">
+      {dimensions.map((d) => (
+        <li class="grad-dim">
+          <span class="grad-dim__n" aria-hidden="true">{d.n}</span>
+          <div>
+            <h3 class="grad-dim__title">{d.title}</h3>
+            <p class="grad-dim__body">{d.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+    <div class="grad-matching__table">
+      <MatchWeights dimensions={weights} />
+      <p class="grad-matching__note">Weights are an example of how ranking could read, not the production formula.</p>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .grad-matching { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
+  .grad-matching__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+  .grad-dim { display: flex; gap: 0.875rem; padding: 1.25rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-canvas, #F5F1E9); border: 1px solid var(--lily-border, #D5DFD9); }
+  .grad-dim__n { flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9); font-size: 0.875rem; font-weight: 600; }
+  .grad-dim__title { margin: 0 0 0.25rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.125rem; font-weight: 500; color: var(--lily-forest, #14522E); }
+  .grad-dim__body { margin: 0; font-size: 0.875rem; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .grad-matching__table { display: flex; flex-direction: column; gap: 0.75rem; }
+  .grad-matching__note { margin: 0; font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  @media (max-width: 1000px) { .grad-matching { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 560px) { .grad-matching__list { grid-template-columns: minmax(0, 1fr); } }
+</style>
