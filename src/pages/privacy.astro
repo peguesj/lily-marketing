@@ -41,7 +41,7 @@ const roles = [
   },
 ] as const;
 
-const policyRows = [
+const policyRows: { key: string; title: string; paragraphs: string[]; link?: { href: string; label: string } }[] = [
   {
     key: 'children',
     title: 'Children and age requirements',
@@ -65,7 +65,7 @@ const policyRows = [
       'When this policy changes we post the new version with its effective date and tell you in the app before any material change takes effect. Earlier versions are available on request.',
     ],
   },
-] as const;
+];
 ---
 
 <BaseLayout
@@ -128,7 +128,7 @@ const policyRows = [
     <LegalHead id="policy-title" eyebrow="The full policy" title="Questions deserve" lead="This policy covers children, cookies, policy changes and how to contact Lily.">
       <Fragment slot="accent">clear answers</Fragment>
     </LegalHead>
-    <PolicyRows rows={[...policyRows]} />
+    <PolicyRows rows={policyRows} />
   </Section>
 
   <Section tone="canvas">

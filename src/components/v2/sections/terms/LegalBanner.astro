@@ -25,6 +25,8 @@ import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
      small tags; reset it here so the notice reads as a banner. */
   .legal-banner :global([data-illustrative]) {
     display: flex;
+    align-items: flex-start;
+    text-align: left;
     max-width: 100%;
     padding: 0.75rem 1.25rem;
     border: 1px dashed color-mix(in srgb, var(--lily-primary, #1B6B3E) 45%, transparent);
