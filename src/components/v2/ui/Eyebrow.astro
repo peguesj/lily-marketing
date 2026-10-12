@@ -1,0 +1,23 @@
+---
+interface Props {
+  /** Switch to the peach tint for use on forest / gradient backgrounds. */
+  onDark?: boolean;
+  class?: string;
+}
+const { onDark = false, class: extra } = Astro.props;
+---
+<span class:list={['v2-eyebrow', onDark && 'v2-eyebrow--on-dark', extra]}><slot /></span>
+
+<style>
+  .v2-eyebrow {
+    display: inline-block;
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: var(--lily-text-muted-aa, #4E6B5A);
+  }
+  .v2-eyebrow--on-dark { color: var(--lily-peach, #F0B882); }
+</style>

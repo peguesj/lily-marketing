@@ -1,0 +1,50 @@
+---
+/**
+ * Soft blurred ellipse for backgrounds. Decorative; sits behind content.
+ * Drift animation only runs when the user has not asked for reduced motion.
+ */
+interface Props {
+  color?: 'teal' | 'primary' | 'peach';
+  /** CSS width / height. */
+  width?: string;
+  height?: string;
+  /** Absolute offsets inside a positioned parent. */
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+  /** Defaults to 0.18 (18%). */
+  opacity?: number;
+  class?: string;
+}
+const { color = 'teal', width = '28rem', height = '20rem', top, right, bottom, left, opacity = 0.18, class: extra } = Astro.props;
+const pos = [
+  `width:${width}`, `height:${height}`, `opacity:${opacity}`,
+  top && `top:${top}`, right && `right:${right}`, bottom && `bottom:${bottom}`, left && `left:${left}`,
+].filter(Boolean).join(';');
+---
+<div class:list={['v2-blob', `v2-blob--${color}`, extra]} style={pos} aria-hidden="true"></div>
+
+<style>
+  .v2-blob {
+    position: absolute;
+    z-index: 0;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+  }
+  .v2-blob--teal { background: var(--lily-teal, #318171); }
+  .v2-blob--primary { background: var(--lily-primary, #1B6B3E); }
+  .v2-blob--peach { background: var(--lily-peach, #F0B882); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .v2-blob { animation: v2-blob-drift 18s ease-in-out infinite alternate; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .v2-blob { animation: none; }
+  }
+  @keyframes v2-blob-drift {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(1.5rem, -1rem, 0) scale(1.06); }
+  }
+</style>

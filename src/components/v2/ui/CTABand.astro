@@ -1,0 +1,79 @@
+---
+/**
+ * Forest-to-teal gradient call-to-action band.
+ * Slots: "accent" (peach italic phrase after the headline), default (buttons).
+ * The gradient ends in a teal darkened enough to keep cream text >= 4.5:1.
+ */
+interface Progress { value: number; max: number; label?: string }
+interface Props {
+  headline: string;
+  lead?: string;
+  progress?: Progress;
+  class?: string;
+}
+const { headline, lead, progress, class: extra } = Astro.props;
+const pct = progress ? Math.max(0, Math.min(100, Math.round((progress.value / progress.max) * 100))) : 0;
+---
+<section class:list={['v2-cta', extra]}>
+  <div class="v2-cta__inner">
+    <h2 class="v2-cta__headline">{headline}{Astro.slots.has('accent') && ' '}{Astro.slots.has('accent') && <em class="v2-cta__accent"><slot name="accent" /></em>}</h2>
+    {lead && <p class="v2-cta__lead">{lead}</p>}
+    {progress && (
+      <div class="v2-cta__progress">
+        <div
+          class="v2-cta__bar"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={progress.max}
+          aria-valuenow={progress.value}
+          aria-label={progress.label ?? 'Progress'}
+        ><span class="v2-cta__fill" style={`width:${pct}%`}></span></div>
+        {progress.label && <span class="v2-cta__progress-label">{progress.label}</span>}
+      </div>
+    )}
+    <div class="v2-cta__actions"><slot /></div>
+  </div>
+</section>
+
+<style>
+  .v2-cta {
+    --_forest: var(--lily-forest, #14522E);
+    --_primary: var(--lily-primary, #1B6B3E);
+    --_peach: var(--lily-peach, #F0B882);
+    --_canvas: var(--lily-canvas, #F5F1E9);
+    --_teal-deep: color-mix(in srgb, var(--lily-teal, #318171) 70%, var(--_forest));
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-card, 1.25rem);
+    padding: 4rem 2.5rem;
+    background: linear-gradient(120deg, var(--_forest) 0%, var(--_primary) 55%, var(--_teal-deep) 100%);
+    color: var(--_canvas);
+  }
+  .v2-cta__inner { position: relative; display: flex; flex-direction: column; gap: 1.25rem; max-width: 44rem; }
+  .v2-cta__headline {
+    margin: 0;
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--_canvas);
+  }
+  .v2-cta__accent { font-style: italic; font-weight: 500; color: var(--_peach); }
+  .v2-cta__lead {
+    margin: 0;
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 1.125rem;
+    line-height: 1.55;
+    color: var(--_canvas);
+  }
+  .v2-cta__progress { display: flex; flex-direction: column; gap: 0.5rem; max-width: 22rem; }
+  .v2-cta__bar { height: 0.5rem; border-radius: 9999px; background: color-mix(in srgb, var(--_canvas) 25%, transparent); overflow: hidden; }
+  .v2-cta__fill { display: block; height: 100%; border-radius: inherit; background: var(--_peach); }
+  .v2-cta__progress-label {
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 0.8125rem;
+    color: var(--_canvas);
+  }
+  .v2-cta__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
+  @media (max-width: 600px) { .v2-cta { padding: 3rem 1.5rem; } }
+</style>

@@ -1,0 +1,40 @@
+---
+/**
+ * Outlined lotus mark with 3, 4 or 5 petals. Purely decorative (aria-hidden).
+ * Each petal is a pointed teardrop rotated around the centre.
+ */
+interface Props {
+  petals?: 3 | 4 | 5;
+  size?: number | string;
+  /** Any CSS colour; defaults to the primary green. */
+  color?: string;
+  opacity?: number;
+  strokeWidth?: number;
+  class?: string;
+}
+const { petals = 5, size = 240, color = 'var(--lily-primary, #1B6B3E)', opacity = 1, strokeWidth = 1.5, class: extra } = Astro.props;
+const spread = petals === 3 ? 80 : petals === 4 ? 60 : 48;
+const angles = Array.from({ length: petals }, (_, i) => (i - (petals - 1) / 2) * spread);
+const dim = typeof size === 'number' ? `${size}px` : size;
+---
+<svg
+  class:list={['v2-petal', `v2-petal--${petals}`, extra]}
+  viewBox="0 0 200 200"
+  width={dim}
+  height={dim}
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+  style={`opacity:${opacity}`}
+>
+  <g stroke={color} stroke-width={strokeWidth} stroke-linejoin="round" stroke-linecap="round" transform="translate(100 168)">
+    {angles.map((a) => (
+      <path d="M0 0C-26 -34 -26 -86 0 -140C26 -86 26 -34 0 0Z" transform={`rotate(${a})`} />
+    ))}
+    <path d="M-34 6C-12 14 12 14 34 6" />
+  </g>
+</svg>
+
+<style>
+  .v2-petal { display: block; flex: none; pointer-events: none; }
+</style>

@@ -1,0 +1,103 @@
+---
+/**
+ * Zero-JS button/link primitive.
+ * Renders <a> when `href` is set, otherwise <button>.
+ */
+interface Props {
+  variant?: 'primary' | 'outline' | 'inverse' | 'text';
+  small?: boolean;
+  href?: string;
+  /** Opens in a new tab with rel="noopener noreferrer". */
+  external?: boolean;
+  /** Emitted as data-action for analytics / delegated handlers. */
+  dataAction?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  ariaLabel?: string;
+  class?: string;
+}
+const {
+  variant = 'primary',
+  small = false,
+  href,
+  external = false,
+  dataAction,
+  type = 'button',
+  disabled = false,
+  ariaLabel,
+  class: extra,
+} = Astro.props;
+const cls = ['v2-btn', `v2-btn--${variant}`, small && 'v2-btn--sm', extra].filter(Boolean).join(' ');
+---
+{href ? (
+  <a
+    class={cls}
+    href={href}
+    data-action={dataAction}
+    aria-label={ariaLabel}
+    target={external ? '_blank' : undefined}
+    rel={external ? 'noopener noreferrer' : undefined}
+  ><slot /></a>
+) : (
+  <button class={cls} type={type} disabled={disabled} data-action={dataAction} aria-label={ariaLabel}><slot /></button>
+)}
+
+<style>
+  .v2-btn {
+    --_primary: var(--lily-primary, #1B6B3E);
+    --_forest: var(--lily-forest, #14522E);
+    --_canvas: var(--lily-canvas, #F5F1E9);
+    --_shadow: var(--shadow-cta, 0 8px 9px rgb(49 129 113 / 32%));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.75rem;
+    border: 1.5px solid transparent;
+    border-radius: var(--radius-chip, 9999px);
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      background-color var(--motion-fast, 160ms) var(--motion-ease, ease),
+      box-shadow var(--motion-fast, 160ms) var(--motion-ease, ease),
+      transform var(--motion-fast, 160ms) var(--motion-ease, ease);
+  }
+  .v2-btn:focus-visible {
+    outline: 2px solid var(--_forest);
+    outline-offset: 3px;
+  }
+  .v2-btn[disabled] { opacity: 0.55; cursor: not-allowed; box-shadow: none; }
+
+  .v2-btn--primary { background: var(--_primary); color: var(--_canvas); box-shadow: var(--_shadow); }
+  .v2-btn--primary:hover:not([disabled]) { background: var(--_forest); transform: translateY(-1px); }
+
+  .v2-btn--outline { background: transparent; color: var(--_primary); border-color: var(--_primary); }
+  .v2-btn--outline:hover:not([disabled]) { background: color-mix(in srgb, var(--_primary) 8%, transparent); }
+
+  /* Cream pill for use on the forest-to-teal gradient. */
+  .v2-btn--inverse { background: var(--_canvas); color: var(--_forest); box-shadow: 0 6px 14px rgb(0 0 0 / 18%); }
+  .v2-btn--inverse:hover:not([disabled]) { background: #fff; transform: translateY(-1px); }
+  .v2-btn--inverse:focus-visible { outline-color: var(--_canvas); }
+
+  .v2-btn--text {
+    min-height: 0;
+    padding: 0.25rem 0;
+    border-radius: 0.25rem;
+    background: transparent;
+    color: var(--_primary);
+  }
+  .v2-btn--text:hover:not([disabled]) { text-decoration: underline; text-underline-offset: 0.2em; }
+
+  .v2-btn--sm { min-height: 2.25rem; padding: 0.4375rem 1.125rem; font-size: 0.8125rem; }
+  .v2-btn--text.v2-btn--sm { min-height: 0; padding: 0.125rem 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .v2-btn, .v2-btn:hover { transition: none; transform: none; }
+  }
+</style>

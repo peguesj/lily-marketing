@@ -1,0 +1,31 @@
+---
+import Container from './Container.astro';
+/** Full-bleed band with 96px vertical rhythm wrapping a Container. */
+interface Props {
+  tone?: 'canvas' | 'surface' | 'muted' | 'dark';
+  id?: string;
+  as?: 'section' | 'div' | 'article' | 'aside' | 'header' | 'footer' | 'main';
+  /** Skip the inner Container (for edge-to-edge content). */
+  bleed?: boolean;
+  ariaLabelledby?: string;
+  class?: string;
+}
+const props: Props = Astro.props;
+const { tone = 'canvas', id, as: Tag = 'section', bleed = false, ariaLabelledby, class: extra } = props;
+---
+<Tag id={id} aria-labelledby={ariaLabelledby} class:list={['v2-section', `v2-section--${tone}`, extra]}>
+  {bleed ? <slot /> : <Container><slot /></Container>}
+</Tag>
+
+<style>
+  .v2-section {
+    position: relative;
+    padding-block: var(--v2-section-pad, 96px);
+    background: var(--lily-canvas, #F5F1E9);
+    color: var(--lily-text, #14522E);
+  }
+  .v2-section--surface { background: var(--lily-surface, #F8F5EF); }
+  .v2-section--muted { background: var(--lily-surface-muted, #ECE8DF); }
+  .v2-section--dark { background: var(--lily-forest, #14522E); color: var(--lily-canvas, #F5F1E9); }
+  @media (max-width: 700px) { .v2-section { padding-block: 64px; } }
+</style>

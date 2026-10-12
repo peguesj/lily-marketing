@@ -1,0 +1,166 @@
+---
+/**
+ * Design-system preview for the v2 site primitives.
+ * noindex; mounted and excluded from the sitemap by src/config/preview-routes.mjs (shell).
+ * Standalone on purpose: it does not depend on the v2 shell/layout.
+ */
+import Button from '../components/v2/ui/Button.astro';
+import Chip from '../components/v2/ui/Chip.astro';
+import Eyebrow from '../components/v2/ui/Eyebrow.astro';
+import SectionHead from '../components/v2/ui/SectionHead.astro';
+import StatTile from '../components/v2/ui/StatTile.astro';
+import StepCard from '../components/v2/ui/StepCard.astro';
+import FAQ from '../components/v2/ui/FAQ.astro';
+import CTABand from '../components/v2/ui/CTABand.astro';
+import TrustStrip from '../components/v2/ui/TrustStrip.astro';
+import IllustrativeNotice from '../components/v2/ui/IllustrativeNotice.astro';
+import PetalMark from '../components/v2/ui/PetalMark.astro';
+import Blob from '../components/v2/ui/Blob.astro';
+import Section from '../components/v2/ui/Section.astro';
+import Container from '../components/v2/ui/Container.astro';
+
+const faq = [
+  { q: 'How are supervisors reviewed?', a: 'Illustrative copy: license review is a proposed step and its source and rules are pending validation.' },
+  { q: 'What does a session cost?', a: 'Illustrative copy: rates are set by each supervisor; the figures shown here are placeholders.' },
+  { q: 'Can I switch supervisors?', a: 'Illustrative copy: both sides pick each other, and either can end an agreement. Terms are pending validation.' },
+];
+const chips = ['Race and ethnicity', 'Language', 'Faith', 'First-generation'];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Lily v2 UI kit (internal preview)</title>
+  </head>
+  <body>
+    <Section tone="canvas" ariaLabelledby="kit-title">
+      <Blob color="teal" top="-6rem" right="-8rem" />
+      <Blob color="peach" width="20rem" height="14rem" bottom="0" left="-6rem" />
+      <div class="kit-relative">
+        <Eyebrow>Internal preview</Eyebrow>
+        <h1 id="kit-title" class="kit-h1">v2 site primitives</h1>
+        <p class="kit-lead">Not indexed. Not linked. Every variant of each zero-JS primitive.</p>
+        <div class="kit-petals">
+          <PetalMark petals={3} size={96} />
+          <PetalMark petals={4} size={96} />
+          <PetalMark petals={5} size={96} color="var(--lily-teal, #318171)" opacity={0.9} />
+        </div>
+      </div>
+    </Section>
+
+    <Section tone="surface" ariaLabelledby="kit-buttons">
+      <h2 id="kit-buttons" class="kit-h2">Button</h2>
+      <div class="kit-row">
+        <Button href="/waitlist" dataAction="join-supervisor">Join as a supervisor</Button>
+        <Button variant="outline" href="/how">Find a supervisor</Button>
+        <Button small href="/pricing">Small pill</Button>
+        <Button variant="text" href="/trust">Text link →</Button>
+        <Button external href="https://www.asklily.health" dataAction="external-demo">External</Button>
+        <Button type="submit" dataAction="submit-demo">As button</Button>
+        <Button disabled>Disabled</Button>
+      </div>
+      <div class="kit-row kit-on-gradient">
+        <Button variant="inverse" href="/waitlist">Join the waitlist</Button>
+        <Button variant="inverse" small href="/waitlist">Small inverse</Button>
+      </div>
+    </Section>
+
+    <Section tone="canvas" ariaLabelledby="kit-chips">
+      <h2 id="kit-chips" class="kit-h2">Chip</h2>
+      <div class="kit-row">
+        <Chip>Default</Chip>
+        <Chip variant="selected">Selected</Chip>
+        <Chip variant="teal">Teal</Chip>
+        <Chip variant="peach">Peach tint</Chip>
+        <Chip variant="muted">Muted</Chip>
+        <Chip variant="status" status="success">Active</Chip>
+        <Chip variant="status" status="warning">Pending</Chip>
+        <Chip variant="status" status="danger">Blocked</Chip>
+        {chips.map((c, i) => <Chip variant={i === 1 ? 'selected' : 'default'}>{c}</Chip>)}
+      </div>
+    </Section>
+
+    <Section tone="muted" ariaLabelledby="kit-heads">
+      <h2 id="kit-heads" class="kit-h2">Eyebrow and SectionHead</h2>
+      <SectionHead eyebrow="The gap in numbers" title="The part of the career nobody" lead="Illustrative lead copy for a section." linkHref="/research" linkLabel="Read the research">
+        <Fragment slot="accent">explains</Fragment>
+      </SectionHead>
+      <div class="kit-dark">
+        <SectionHead onDark eyebrow="On dark" title="Matched, agreed and counted in" lead="Peach accent on forest." linkHref="/how" linkLabel="How it works">
+          <Fragment slot="accent">three steps</Fragment>
+        </SectionHead>
+      </div>
+    </Section>
+
+    <Section tone="canvas" ariaLabelledby="kit-stats">
+      <h2 id="kit-stats" class="kit-h2">StatTile</h2>
+      <div class="kit-grid">
+        <StatTile value="~3,000" caption="supervised hours before licensure" citation="Source pending validation" illustrative>
+          <svg slot="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+        </StatTile>
+        <StatTile value="~2 years" caption="of supervision, start to finish" illustrative />
+        <StatTile value="5+" caption="years licensed before you can supervise" citation="Varies by jurisdiction" illustrative />
+      </div>
+    </Section>
+
+    <Section tone="surface" ariaLabelledby="kit-steps">
+      <h2 id="kit-steps" class="kit-h2">StepCard</h2>
+      <div class="kit-grid kit-steps">
+        <StepCard number={1} title="Verify" connector><p>Illustrative: license review is pending validation.</p></StepCard>
+        <StepCard number={2} title="Match and agree" connector><p>Both sides pick. Nobody is assigned.</p></StepCard>
+        <StepCard number={3} title="Log weekly"><p>Hours are logged and signed twice.</p></StepCard>
+      </div>
+      <IllustrativeNotice class="kit-gap"><p>License review and hour-signing steps are proposed and pending validation.</p></IllustrativeNotice>
+    </Section>
+
+    <Section tone="canvas" ariaLabelledby="kit-faq">
+      <h2 id="kit-faq" class="kit-h2">FAQ</h2>
+      <FAQ items={faq} openFirst />
+      <IllustrativeNotice class="kit-gap"><p>Answers describe proposed behaviour. Review rules, rates and agreement terms are pending validation.</p></IllustrativeNotice>
+    </Section>
+
+    <Section tone="muted" ariaLabelledby="kit-trust">
+      <h2 id="kit-trust" class="kit-h2">TrustStrip and IllustrativeNotice</h2>
+      <TrustStrip items={['Pennsylvania pilot', 'LPC and LCSW first', 'License review pending']} />
+      <div class="kit-dark kit-gap">
+        <TrustStrip onDark items={['On dark', 'Cream disc', 'Forest check']} />
+      </div>
+      <div class="kit-gap">
+        <IllustrativeNotice />
+        <IllustrativeNotice class="kit-gap"><p>Custom detail: eligibility and licensure rules are pending validation.</p></IllustrativeNotice>
+      </div>
+    </Section>
+
+    <Section tone="canvas" ariaLabelledby="kit-cta" bleed>
+      <Container>
+        <h2 id="kit-cta" class="kit-h2">CTABand</h2>
+        <CTABand headline="Pennsylvania first. Your county" lead="Join the waitlist and we will tell you the week your county clears the threshold." progress={{ value: 9, max: 12, label: '9 of 12 matched (illustrative)' }}>
+          <Fragment slot="accent">next</Fragment>
+          <Button variant="inverse" href="/waitlist" dataAction="cta-waitlist">Join the waitlist</Button>
+          <Button variant="inverse" small href="/how">How it works</Button>
+        </CTABand>
+        <IllustrativeNotice class="kit-gap"><p>County thresholds and match counts are placeholders pending validation.</p></IllustrativeNotice>
+      </Container>
+    </Section>
+  </body>
+</html>
+
+<style is:global>
+  @font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 400 900; font-display: swap; src: url('/fonts/PlayfairDisplay-Variable.woff2') format('woff2'); }
+  @font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 400 900; font-display: swap; src: url('/fonts/PlayfairDisplay-Italic-Variable.woff2') format('woff2'); }
+  @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 300 700; font-display: swap; src: url('/fonts/SpaceGrotesk-Variable.woff2') format('woff2'); }
+  body { margin: 0; background: #F5F1E9; font-family: 'Space Grotesk', system-ui, sans-serif; }
+  .kit-relative { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0.75rem; }
+  .kit-h1, .kit-h2 { margin: 0 0 1.5rem; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; color: #14522E; }
+  .kit-h1 { font-size: 3rem; margin-bottom: 0; }
+  .kit-h2 { font-size: 1.75rem; }
+  .kit-lead { margin: 0; color: #4E6B5A; font-size: 1.125rem; }
+  .kit-petals { display: flex; gap: 2rem; margin-top: 1rem; }
+  .kit-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .kit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 2rem; --v2-step-gap: 2rem; }
+  .kit-on-gradient { margin-top: 1.5rem; padding: 1.5rem; border-radius: 1.25rem; background: linear-gradient(120deg, #14522E, #1B6B3E 55%, #28735D); }
+  .kit-dark { margin-top: 2rem; padding: 2rem; border-radius: 1.25rem; background: #14522E; }
+  .kit-gap { margin-top: 1.5rem; }
+</style>
