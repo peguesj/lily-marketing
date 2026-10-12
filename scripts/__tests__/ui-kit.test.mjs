@@ -137,7 +137,11 @@ const LABEL = 'Illustrative · pending validation';
 const sectionText = (s) => s.replace(/<(style|script)\b[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&middot;|&#183;/g, '·').replace(/\s+/g, ' ');
 
 test('each kit section with claim copy carries its own illustrative label', () => {
-  const sections = [...html.matchAll(/<section\b[\s\S]*?<\/section>/gi)].map((m) => m[0]);
+  // Kit sections are the top-level <section aria-labelledby="kit-*">; components such as
+  // CTABand render nested <section>s, so slice between kit-section starts instead.
+  const body = html.slice(0, html.lastIndexOf('</body>'));
+  const starts = [...body.matchAll(/<section\b[^>]*aria-labelledby="kit-[^"]+"/g)].map((m) => m.index);
+  const sections = starts.map((start, i) => body.slice(start, starts[i + 1] ?? body.length));
   assert.ok(sections.length >= 8, `expected the kit sections, found ${sections.length}`);
   const unlabelled = sections
     .filter((s) => CLAIM.test(sectionText(s)))
