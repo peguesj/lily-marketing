@@ -1,3 +1,4 @@
+import { SUBMIT_ENDPOINT } from '../../../lib/submit.ts';
 import { useEffect, useId, useMemo, useRef, useState, type FormEvent } from 'react';
 import {
   ChipGroup,
@@ -79,7 +80,8 @@ export default function ContactForm({ defaultTopic, compact = false }: ContactFo
           <p>Your message is in. {topic ? topic.hint.replace('Founders read these first. ', '') : 'We reply within one business day.'}</p>
         </div>
       ) : (
-        <form noValidate onSubmit={onSubmit} aria-labelledby={titleId} aria-busy={submitting}>
+        <form action={SUBMIT_ENDPOINT} method="post" noValidate onSubmit={onSubmit} aria-labelledby={titleId} aria-busy={submitting}>
+          <input type="hidden" name="type" value="contact" />
           <h3 id={titleId} className="lv2f-title">
             Talk to a <em>person.</em>
           </h3>

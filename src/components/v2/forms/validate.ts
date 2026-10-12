@@ -329,10 +329,19 @@ export function buildWaitlistPayload(
   };
 }
 
+/**
+ * The Phoenix SubmitController persists only role / coveredLives / licenseType / states /
+ * firstName / lastName (+ organization, email, message) for type=contact, and the internal
+ * notifier builds its subject from `role`. Topic routing therefore rides on `role`
+ * ("Contact topic: Press") until a topic-specific inbox exists server-side; `topic` is kept
+ * as a mirror for that future backend.
+ */
 export function buildContactPayload(v: ContactValues, honeypot: string): Payload {
+  const topic = CONTACT_TOPICS.find((t) => t.id === v.topic);
   return {
     type: 'contact',
     topic: v.topic,
+    role: topic ? `Contact topic: ${topic.label}` : undefined,
     _h: honeypot,
     name: str(v.name),
     ...splitName(v.name),
@@ -358,6 +367,8 @@ export function buildCohortPayload(org: CohortOrgValues, contact: CohortContactV
     state: org.state,
     states: org.state,
     consentToContact: contact.consent === true,
-    message: `Cohort proposal request: ${str(org.organization)} (${str(org.role)}), cohort of ${size} in ${org.state}.`,
+    message:
+      `Cohort proposal request: ${str(org.organization)} (${str(org.role)}), cohort of ${size} in ${org.state}. ` +
+      `Consent to contact: ${contact.consent === true ? 'yes' : 'no'}.`,
   };
 }

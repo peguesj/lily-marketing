@@ -1,3 +1,4 @@
+import { SUBMIT_ENDPOINT } from '../../../lib/submit.ts';
 import { useEffect, useId, useMemo, useRef, useState, type FormEvent } from 'react';
 import {
   CheckField,
@@ -189,7 +190,8 @@ export default function WaitlistForm({ defaultAudience, compact = false, appHref
           </div>
         </div>
       ) : (
-        <form noValidate onSubmit={onSubmit} aria-labelledby={titleId} aria-busy={submitting}>
+        <form action={SUBMIT_ENDPOINT} method="post" noValidate onSubmit={onSubmit} aria-labelledby={titleId} aria-busy={submitting}>
+          <input type="hidden" name="type" value="waitlist" />
           <h3 id={titleId} className="lv2f-title">
             Join the <em>waitlist</em>
           </h3>

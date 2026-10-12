@@ -1,3 +1,4 @@
+import { SUBMIT_ENDPOINT } from '../../../lib/submit.ts';
 import { useEffect, useId, useMemo, useRef, useState, type FormEvent } from 'react';
 import {
   CheckField,
@@ -106,7 +107,8 @@ export default function CohortProposalForm({ compact = false }: CohortProposalFo
           </p>
         </div>
       ) : (
-        <form noValidate onSubmit={onSubmit} aria-labelledby={titleId} aria-busy={submitting}>
+        <form action={SUBMIT_ENDPOINT} method="post" noValidate onSubmit={onSubmit} aria-labelledby={titleId} aria-busy={submitting}>
+          <input type="hidden" name="type" value="contact" />
           <p className="lv2f-step">Step {step} of 2</p>
           <h3 id={titleId} className="lv2f-title">
             Request a cohort <em>proposal</em>
