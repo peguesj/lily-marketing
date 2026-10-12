@@ -1,13 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Section from '../components/v2/ui/Section.astro';
-import CTABand from '../components/v2/ui/CTABand.astro';
-import Button from '../components/v2/ui/Button.astro';
 import WaitlistHero from '../components/v2/sections/waitlist/WaitlistHero.astro';
 import FormSection from '../components/v2/sections/waitlist/FormSection.astro';
 import NextSteps from '../components/v2/sections/waitlist/NextSteps.astro';
 import PhoneSection from '../components/v2/sections/waitlist/PhoneSection.astro';
-import { appLinks } from '../config/app';
 ---
 
 <BaseLayout
@@ -21,17 +17,6 @@ import { appLinks } from '../config/app';
     <FormSection />
     <NextSteps />
     <PhoneSection />
-    <Section tone="canvas">
-      <CTABand headline="Ready when your area" lead="Join the list, or if you were already invited, start in the app.">
-        <Fragment slot="accent">opens.</Fragment>
-        <Button href="#join" variant="inverse">Join the waitlist</Button>
-        <Button href={appLinks.welcome} variant="inverse" class="wl-ghost">Start in the app</Button>
-      </CTABand>
-    </Section>
   </main>
 </BaseLayout>
 
-<style>
-  :global(.wl-ghost.v2-btn--inverse) { background: transparent; color: var(--lily-canvas, #F5F1E9); border-color: var(--lily-canvas, #F5F1E9); box-shadow: none; }
-  :global(.wl-ghost.v2-btn--inverse:hover:not([disabled])) { background: color-mix(in srgb, var(--lily-canvas, #F5F1E9) 14%, transparent); }
-</style>

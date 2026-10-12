@@ -3,7 +3,6 @@ import TrustStrip from '../../ui/TrustStrip.astro';
 import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
 import Eyebrow from '../../ui/Eyebrow.astro';
 import LilyVerifiedBadge from '../../mocks/LilyVerifiedBadge.astro';
-import PractitionerCard from '../../mocks/PractitionerCard.astro';
 
 const benefits = [
   'Your rate stays yours. No Lily fee at launch, and your price is visible.',
@@ -18,13 +17,28 @@ const benefits = [
   <LilyVerifiedBadge />
   <div class="rail__peer">
     <p class="rail__label">You’re joining other Pennsylvania supervisors.</p>
-    <PractitionerCard variant="supervisor" name="Jordan Wells, LCSW" initials="JW" meta="Philadelphia, PA · LCSW since 2017" chips={['Individual', 'Group', 'Virtual']} />
+    <div class="rail__card">
+      <span class="rail__avatar" aria-hidden="true">JW</span>
+      <div>
+        <p class="rail__name">Jordan Wells, LCSW</p>
+        <p class="rail__meta">Philadelphia · Individual + group · $135 / hour</p>
+      </div>
+    </div>
     <p class="rail__fiction">Example peer card. Jordan Wells is a fictional person.</p>
   </div>
-  <blockquote class="rail__quote">
-    <p>“I can see exactly what I need next.”</p>
-    <footer>Elena M., pre-licensed clinician, Allegheny County (fictional example)</footer>
-  </blockquote>
+  <section class="rail__cohort" data-cohort aria-labelledby="rail-cohort-title">
+    <Eyebrow>From the first cohort</Eyebrow>
+    <h3 id="rail-cohort-title" class="rail__cohort-title">The hours feel less <em>lonely with a clear record.</em></h3>
+    <ul class="rail__cohort-list">
+      <li><strong>Dual-signed weekly hours log</strong><span>One shared record for every supervised hour.</span></li>
+      <li><strong>Supervision agreement</strong><span>A simple agreement before your first session.</span></li>
+    </ul>
+    <blockquote class="rail__quote">
+      <p>“I can see exactly what I need next.”</p>
+      <footer>Elena M. · pre-licensed clinician, Allegheny County (fictional example)</footer>
+    </blockquote>
+    <p class="rail__cohort-tag" data-illustrative>No cohort has started yet · Illustrative · pending validation</p>
+  </section>
   <IllustrativeNotice>
     <p>Fees, rates and how licenses are reviewed are illustrative and pending validation.</p>
   </IllustrativeNotice>
@@ -41,5 +55,15 @@ const benefits = [
   .rail__quote { margin: 0; padding-left: 1rem; border-left: 3px solid var(--lily-teal, #318171); }
   .rail__quote p { margin: 0 0 0.25rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-style: italic; font-size: 1.25rem; color: var(--lily-forest, #14522E); }
   .rail__quote footer { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .rail__card { display: flex; gap: 0.75rem; align-items: center; padding: 1rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); }
+  .rail__avatar { display: grid; place-items: center; flex: none; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9); font-weight: 600; font-size: 0.875rem; }
+  .rail__name { margin: 0; font-weight: 600; color: var(--lily-forest, #14522E); }
+  .rail__meta { margin: 0.125rem 0 0; font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .rail__cohort { display: flex; flex-direction: column; gap: 0.75rem; width: 100%; }
+  .rail__cohort-title { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.375rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+  .rail__cohort-title em { font-style: italic; font-weight: 500; color: var(--lily-primary, #1B6B3E); }
+  .rail__cohort-list { display: grid; gap: 0.5rem; margin: 0; padding: 0; list-style: none; font-size: 0.875rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .rail__cohort-list strong { display: block; color: var(--lily-forest, #14522E); }
+  .rail__cohort-tag { margin: 0; width: fit-content; }
   .rail :global(.v2-illustrative) { width: 100%; box-sizing: border-box; }
 </style>

@@ -23,9 +23,17 @@ const appHrefs = {
     <div class="join__form">
       <WaitlistFormPanel client:visible defaultAudience="supervisor" appHrefs={appHrefs} />
       <p class="join__privacy">
-        Licenses are verified but not published; information is never sold.
+        <span>Verification begins after you join.</span>
+        <span>License review pending means license confirmed, never publicly published.</span>
         <span class="join__tag" data-illustrative>Illustrative · pending validation</span>
       </p>
+      <section class="join__grad" aria-labelledby="join-grad-title">
+        <p class="join__grad-eyebrow">Earning your hours?</p>
+        <h3 id="join-grad-title" class="join__grad-title">Your supervised path can feel <em>fair.</em></h3>
+        <p>Join the graduate waitlist now. We’ll reach out only when local matching is open.</p>
+        <p class="join__grad-fine">No fee at launch. You pay your supervisor directly.</p>
+        <a class="join__grad-link" href="/graduates#waitlist">Join the waitlist</a>
+      </section>
       <p class="join__app">
         <a href={appLinks.welcome}>Already invited? Start in the app <span aria-hidden="true">→</span></a>
       </p>
@@ -38,6 +46,13 @@ const appHrefs = {
   .join { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
   .join__privacy { margin: 1rem 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.875rem; color: var(--lily-text-muted-aa, #4E6B5A); }
   .join__tag { padding: 0.125rem 0.625rem; border-radius: var(--radius-chip, 9999px); background: color-mix(in srgb, var(--lily-peach, #F0B882) 38%, var(--lily-canvas, #F5F1E9)); color: var(--lily-forest, #14522E); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  .join__grad { margin-top: 1.5rem; padding: 1.5rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-canvas, #F5F1E9); font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); color: var(--lily-text-muted-aa, #4E6B5A); }
+  .join__grad p { margin: 0.5rem 0 0; font-size: 0.9375rem; line-height: 1.5; }
+  .join__grad .join__grad-eyebrow { margin: 0; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+  .join__grad-title { margin: 0.5rem 0 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.5rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+  .join__grad-title em { font-style: italic; font-weight: 500; color: var(--lily-primary, #1B6B3E); }
+  .join__grad .join__grad-fine { font-size: 0.8125rem; }
+  .join__grad-link { display: inline-block; margin-top: 0.75rem; font-weight: 600; color: var(--lily-primary, #1B6B3E); text-underline-offset: 3px; }
   .join__app { margin: 0.75rem 0 0; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.9375rem; font-weight: 600; }
   .join__app a { color: var(--lily-primary, #1B6B3E); text-underline-offset: 3px; }
   @media (max-width: 900px) { .join { grid-template-columns: minmax(0, 1fr); } }
