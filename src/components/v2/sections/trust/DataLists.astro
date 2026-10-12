@@ -1,0 +1,32 @@
+---
+/** Two lists: what Lily stores (licensure and scheduling data) and what it never asks for. */
+interface Props { store: string[]; never: string[] }
+const { store, never } = Astro.props;
+---
+<div class="dl">
+  <section class="dl__col" aria-labelledby="dl-store">
+    <h3 id="dl-store" class="dl__h">What we store</h3>
+    <ul class="dl__list">
+      {store.map((t) => <li><span class="dl__mark dl__mark--yes" aria-hidden="true">+</span><span class="dl__sr">Stored: </span>{t}</li>)}
+    </ul>
+  </section>
+  <section class="dl__col" aria-labelledby="dl-never">
+    <h3 id="dl-never" class="dl__h">What we never ask for</h3>
+    <ul class="dl__list">
+      {never.map((t) => <li><span class="dl__mark dl__mark--no" aria-hidden="true">×</span><span class="dl__sr">Never asked for: </span>{t}</li>)}
+    </ul>
+  </section>
+</div>
+
+<style>
+  .dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+  .dl__col { padding: 1.75rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); color: var(--lily-forest, #14522E); }
+  .dl__h { margin: 0 0 1rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.375rem; font-weight: 600; }
+  .dl__list { display: flex; flex-direction: column; gap: 0.75rem; margin: 0; padding: 0; list-style: none; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.9375rem; line-height: 1.45; }
+  .dl__list li { display: flex; gap: 0.75rem; align-items: baseline; }
+  .dl__mark { display: inline-grid; place-items: center; flex: none; width: 1.375rem; height: 1.375rem; border-radius: 50%; font-weight: 700; line-height: 1; }
+  .dl__mark--yes { background: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9); }
+  .dl__mark--no { background: var(--lily-surface-muted, #ECE8DF); border: 1px solid var(--lily-forest, #14522E); color: var(--lily-forest, #14522E); }
+  .dl__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  @media (max-width: 760px) { .dl { grid-template-columns: 1fr; } }
+</style>

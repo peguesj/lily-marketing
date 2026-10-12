@@ -1,0 +1,46 @@
+---
+/** Roles x data types. Each cell is plain text, so no state depends on colour alone. */
+interface Row { type: string; graduate: string; supervisor: string; sponsor: string; admin: string }
+interface Props { rows: Row[] }
+const { rows } = Astro.props;
+const cell = (v: string) => v.toLowerCase().replace(/[^a-z]+/g, '-');
+---
+<div class="pt" role="region" aria-label="Who can see what table (scrollable)" tabindex="0">
+  <table class="pt__table">
+    <caption class="pt__caption">Who can see what: four roles across seven data types (illustrative, pending validation)</caption>
+    <thead>
+      <tr>
+        <th scope="col">Data type</th>
+        <th scope="col">Graduate</th>
+        <th scope="col">Supervisor</th>
+        <th scope="col">Sponsor</th>
+        <th scope="col">Lily admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>
+          <th scope="row">{r.type}</th>
+          {[r.graduate, r.supervisor, r.sponsor, r.admin].map((v) => (
+            <td><span class={`pt__v pt__v--${cell(v)}`}>{v}</span></td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .pt { overflow-x: auto; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .pt:focus-visible { outline: 2px solid var(--lily-forest, #14522E); outline-offset: 2px; }
+  .pt__table { width: 100%; min-width: 42rem; border-collapse: collapse; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); color: var(--lily-forest, #14522E); }
+  .pt__caption { padding: 1rem 1.5rem 0.5rem; text-align: left; font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); caption-side: top; }
+  thead th { padding: 0.75rem 1rem; text-align: left; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); border-bottom: 1px solid var(--lily-border, #D5DFD9); }
+  thead th:first-child, tbody th { padding-left: 1.5rem; }
+  tbody th, tbody td { padding: 0.875rem 1rem; text-align: left; font-size: 0.9375rem; border-bottom: 1px solid var(--lily-border, #D5DFD9); }
+  tbody th { font-weight: 600; }
+  tbody tr:last-child > * { border-bottom: 0; }
+  .pt__v { display: inline-block; padding: 0.125rem 0.75rem; border-radius: var(--radius-chip, 9999px); font-size: 0.8125rem; font-weight: 500; background: var(--lily-surface-muted, #ECE8DF); color: var(--lily-forest, #14522E); }
+  .pt__v--yes, .pt__v--own { background: color-mix(in srgb, var(--lily-teal, #318171) 16%, var(--lily-canvas, #F5F1E9)); }
+  .pt__v--no { background: transparent; border: 1px solid var(--lily-border, #D5DFD9); color: var(--lily-text-muted-aa, #4E6B5A); }
+</style>
