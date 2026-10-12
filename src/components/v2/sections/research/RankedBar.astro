@@ -1,0 +1,31 @@
+---
+/** One row of the help ranking. Bar length encodes rank order only (decorative). */
+interface Props {
+  rank: number;
+  title: string;
+  detail: string;
+  /** 0-100, decorative width. */
+  width: number;
+}
+const { rank, title, detail, width } = Astro.props;
+const w = Math.max(0, Math.min(100, width));
+---
+<li class="rb" data-ranked-bar>
+  <span class="rb__rank" aria-hidden="true">{rank}</span>
+  <div class="rb__body">
+    <p class="rb__title">{title}</p>
+    <p class="rb__detail">{detail}</p>
+    <div class="rb__track" aria-hidden="true"><span class="rb__fill" style={`width:${w}%`}></span></div>
+  </div>
+</li>
+
+<style>
+  .rb { display: flex; gap: 1.25rem; align-items: flex-start; padding: 1.25rem 1.5rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-subtle, 0 3px 5px rgb(20 82 46 / 7%)); list-style: none; }
+  .rb__rank { display: grid; place-items: center; flex: none; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9); font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.125rem; font-weight: 600; }
+  .rb__body { flex: 1; min-width: 0; }
+  .rb__body p { margin: 0; }
+  .rb__title { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.25rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+  .rb__detail { margin-top: 0.125rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.875rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .rb__track { height: 0.5rem; margin-top: 0.75rem; border-radius: 9999px; background: var(--lily-surface-muted, #ECE8DF); overflow: hidden; }
+  .rb__fill { display: block; height: 100%; border-radius: inherit; background: var(--lily-primary, #1B6B3E); }
+</style>

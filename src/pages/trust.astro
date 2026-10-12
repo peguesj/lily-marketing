@@ -1,126 +1,224 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CTABand from '../components/CTABand.tsx';
-import Illustration from '../components/Illustration.tsx';
+import Section from '../components/v2/ui/Section.astro';
+import SectionHead from '../components/v2/ui/SectionHead.astro';
+import Eyebrow from '../components/v2/ui/Eyebrow.astro';
+import IllustrativeNotice from '../components/v2/ui/IllustrativeNotice.astro';
+import StepCard from '../components/v2/ui/StepCard.astro';
+import TrustStrip from '../components/v2/ui/TrustStrip.astro';
+import Button from '../components/v2/ui/Button.astro';
+import CTABand from '../components/v2/ui/CTABand.astro';
+import LilyVerifiedBadge from '../components/v2/mocks/LilyVerifiedBadge.astro';
+import HoursLogPreview from '../components/v2/mocks/HoursLogPreview.astro';
+import ChecksTable from '../components/v2/sections/trust/ChecksTable.astro';
+import PermissionsTable from '../components/v2/sections/trust/PermissionsTable.astro';
+import PricingCard from '../components/v2/sections/trust/PricingCard.astro';
+import DataLists from '../components/v2/sections/trust/DataLists.astro';
+import { appLinks } from '../config/app';
+
+const src = 'proposed license-review source';
+const checks = [
+  { check: 'License type', confirm: 'LPC, LMFT, LCSW, psychologist or psychiatrist. Nothing else qualifies.', source: `PA State Board, via ${src}` },
+  { check: 'Active status', confirm: 'License is active today, not lapsed, inactive or expired.', source: `${src} lookup` },
+  { check: 'Issued 5+ years', confirm: 'License-history criteria are pending jurisdiction-specific validation.', source: `${src} issue date` },
+  { check: 'Public discipline', confirm: 'No public disciplinary action on the board record.', source: `${src} board actions` },
+  { check: 'Source: licensing jurisdiction', confirm: 'We read the board record. A directory listing never counts.', source: `${src} only` },
+  { check: 'Manual fallback', confirm: `If the ${src} is down or a name is ambiguous, staff check the board record by hand.`, source: 'Reviewed by Lily staff' },
+  { check: 'Re-checked annually', confirm: 'Badge renews each year on your license anniversary, or sooner on a board alert.', source: 'Automated plus staff review' },
+];
+
+const roles = [
+  { type: 'License status and badge', graduate: 'Yes', supervisor: 'Own', sponsor: 'Yes', admin: 'Yes' },
+  { type: 'Rate and availability', graduate: 'Yes', supervisor: 'Own', sponsor: 'Yes', admin: 'Yes' },
+  { type: 'Agreement', graduate: 'Own', supervisor: 'Own', sponsor: 'Status only', admin: 'Yes' },
+  { type: 'Weekly hours log', graduate: 'Own', supervisor: 'Own', sponsor: 'Totals', admin: 'Audit only' },
+  { type: 'Session dates', graduate: 'Own', supervisor: 'Own', sponsor: 'Count', admin: 'Audit only' },
+  { type: 'Payment status', graduate: 'Own', supervisor: 'Own', sponsor: 'No', admin: 'Yes' },
+  { type: 'Identity and affinity answers', graduate: 'Own', supervisor: 'If matched', sponsor: 'No', admin: 'Support only' },
+];
+
+const protections = [
+  { title: 'Two-factor sign-in', body: 'Authenticator app or text code for every supervisor account.' },
+  { title: 'Magic links', body: 'No passwords for graduates. Links expire in 15 minutes.' },
+  { title: 'Encrypted at rest', body: 'AES-256 on stored data, TLS 1.2+ in transit.' },
+  { title: 'Named vendors', body: 'Supabase (database), Postmark (email), Apple (push). Payments vendor named before the share begins.' },
+  { title: 'Export anytime', body: 'Download your agreement and hours log as PDF or CSV.' },
+  { title: 'Delete on request', body: 'Account and data removed within 30 days, minus records a board requires.' },
+];
 ---
 
 <BaseLayout
-  title="Trust & Safety — Lily | Your Safety, Full Stop"
-  description="HIPAA-compliant. SOC 2 Type II audited. Encrypted at rest and in transit. We never sell your data, and we never train AI on identifiable session content."
+  title="Trust and verification | Lily"
+  description="What License review pending means, the seven things Lily checks, who can see each kind of data, and the limits of what Lily claims. Illustrative copy, pending validation."
   canonical="https://www.asklily.health/trust"
-  keywords="HIPAA compliant therapy, SOC 2 telehealth, encrypted therapy platform, mental health data privacy, BAA therapy, crisis support 988"
 >
-  <main>
-    <!-- HERO -->
-    <section class="page-hero">
-      <div class="container wide">
-        <div class="page-hero-grid">
-          <div>
-            <div class="hero-eyebrow"><span class="dot"></span>Trust &amp; security</div>
-            <h1>Care is sacred. We treat your data like it is.</h1>
-            <p>
-              HIPAA-compliant. SOC 2 Type II audited. Encrypted at rest and in transit.
-              We never sell your data, and we never train AI on identifiable session content.
-            </p>
-          </div>
-          <div class="page-hero-illust-wrap">
-            <Illustration client:load n={4} size={300} alt="Listening, attentively" />
-          </div>
+  <Section tone="canvas" as="div">
+    <header class="hero">
+      <div class="hero__text">
+        <Eyebrow>Trust and verification</Eyebrow>
+        <h1 class="hero__title">What <em>License review pending</em> means.</h1>
+        <p class="hero__lead">Every supervisor on Lily has a license we checked against the Pennsylvania licensing jurisdiction, not a profile they typed in. Here is exactly what the badge covers, who sees what, and what we do not claim.</p>
+        <div class="hero__actions">
+          <Button href={appLinks.supervisorSignup} dataAction="trust-join-supervisor">Join as a supervisor</Button>
+          <Button variant="outline" href="#checks">See how we check</Button>
         </div>
       </div>
-    </section>
-
-    <!-- TRUST MATRIX -->
-    <section class="section">
-      <div class="container wide">
-        <div class="trust-matrix">
-          <div class="trust-cell">
-            <span class="t-badge">HIPAA</span>
-            <h4>HIPAA-compliant by design</h4>
-            <p>End-to-end encrypted messaging. Audit logs on every PHI access. Minimum-necessary by default.</p>
-          </div>
-          <div class="trust-cell">
-            <span class="t-badge">SOC 2</span>
-            <h4>SOC 2 Type II</h4>
-            <p>Audited annually by an independent third party. Reports available under NDA.</p>
-          </div>
-          <div class="trust-cell">
-            <span class="t-badge">BAA</span>
-            <h4>BAA on request</h4>
-            <p>Standard BAA available for orgs and self-employed practitioners. We've signed hundreds.</p>
-          </div>
-          <div class="trust-cell">
-            <span class="t-badge">AES-256</span>
-            <h4>Encryption everywhere</h4>
-            <p>AES-256 at rest, TLS 1.3 in transit. Customer-managed keys for enterprise plans.</p>
-          </div>
-          <div class="trust-cell">
-            <span class="t-badge">US-only</span>
-            <h4>US data residency</h4>
-            <p>All PHI stored and processed in US-based, HIPAA-eligible cloud regions. EU residency on roadmap.</p>
-          </div>
-          <div class="trust-cell">
-            <span class="t-badge">AI policy</span>
-            <h4>AI you can audit</h4>
-            <p>Lily Coach uses HIPAA-eligible LLM endpoints. We never train on identifiable session content. Members can opt out.</p>
-          </div>
-          <div class="trust-cell">
-            <span class="t-badge">RBAC</span>
-            <h4>Role-based access</h4>
-            <p>Granular roles for org admins, billing, comms. Just-in-time clinician access. Full audit log.</p>
-          </div>
-          <div class="trust-cell">
-            <span class="t-badge">Privacy</span>
-            <h4>Privacy as default</h4>
-            <p>Members opt in to share, not out. De-identified by default in all org-side analytics.</p>
-          </div>
-          <div class="trust-cell">
-            <span class="t-badge">Crisis</span>
-            <h4>Crisis safety net</h4>
-            <p>988 routing always one tap away. Lily Coach detects risk and escalates to human support 24/7.</p>
-          </div>
-        </div>
+      <div class="hero__card" aria-label="Example verified supervisor">
+        <p class="hero__card-eyebrow">Lily verified · example</p>
+        <LilyVerifiedBadge size="lg" />
+        <p class="hero__card-name">Rosalind Okafor, LCSW</p>
+        <p class="hero__card-meta">Licensed 2014 · Pittsburgh, PA</p>
+        <dl class="hero__dates">
+          <div><dt class="sr">Checked</dt><dd>Checked Oct 3, 2026</dd></div>
+          <div><dt class="sr">Next re-check</dt><dd>Next re-check Oct 2027</dd></div>
+        </dl>
       </div>
-    </section>
+      <IllustrativeNotice class="hero__notice">
+        <p>The supervisor, dates, license details and review source on this page are an example. Supervisor eligibility, licensure and verification rules are illustrative and pending validation; nothing here is a verification outcome.</p>
+      </IllustrativeNotice>
+    </header>
+  </Section>
 
-    <!-- CRISIS RESOURCES -->
-    <section class="section cream">
-      <div class="container narrow">
-        <div class="section-head center">
-          <div class="section-eyebrow">Crisis resources</div>
-          <h2 class="section-title">Help is always one tap away.</h2>
-          <p class="section-sub">Lily's crisis routing is free, on every plan, for every user — no login required.</p>
-        </div>
-        <div class="crisis-resources">
-          <article class="crisis-card" aria-label="988 Suicide and Crisis Lifeline">
-            <div class="crisis-number">988</div>
-            <h3>Suicide &amp; Crisis Lifeline</h3>
-            <p>Call or text 988 (US). Available 24/7 in English and Spanish. Chat at 988lifeline.org.</p>
-            <a href="tel:988" class="crisis-cta">Call 988</a>
-          </article>
-          <article class="crisis-card" aria-label="Crisis Text Line">
-            <div class="crisis-number">741741</div>
-            <h3>Crisis Text Line</h3>
-            <p>Text HOME to 741741 to connect with a trained crisis counselor. Free, 24/7, confidential.</p>
-            <a href="sms:741741?body=HOME" class="crisis-cta">Text HOME</a>
-          </article>
-          <article class="crisis-card" aria-label="Emergency services">
-            <div class="crisis-number">911</div>
-            <h3>Emergency services</h3>
-            <p>For immediate danger to yourself or others. Lily coordinates with emergency responders when needed.</p>
-            <a href="tel:911" class="crisis-cta">Call 911</a>
-          </article>
-        </div>
+  <Section tone="surface" id="checks">
+    <SectionHead eyebrow="The check" title="Seven things we check," class="mb">
+      <Fragment slot="accent">every time</Fragment>
+    </SectionHead>
+    <ChecksTable rows={checks} />
+    <div class="strip">
+      <TrustStrip items={['We read the board record', 'A directory listing never counts', 'Staff check by hand when a lookup fails']} />
+    </div>
+    <p class="note">The license-review source is proposed and pending validation. Issue-date criteria are pending jurisdiction-specific validation.</p>
+  </Section>
+
+  <Section tone="canvas">
+    <SectionHead eyebrow="What we don't do" title="We don't copy" lead="Graduates should never wonder where a supervisor's name came from. Lily rosters are built from people who said yes, not from scraped listings." class="mb">
+      <Fragment slot="accent">directories<span class="tail">.</span></Fragment>
+    </SectionHead>
+    <div class="cards3">
+      <StepCard number={1} title="No scraped profiles"><p class="copy">We never pull names, photos or bios from Psychology Today, LinkedIn or practice sites.</p></StepCard>
+      <StepCard number={2} title="Consent on every row"><p class="copy">A supervisor joins the roster only after they confirm their own details and agree to be listed.</p></StepCard>
+      <StepCard number={3} title="Provenance on every row"><p class="copy">Each roster entry records who added it, when, and which consent they gave. Graduates can see the source.</p></StepCard>
+    </div>
+  </Section>
+
+  <Section tone="surface">
+    <div class="split">
+      <div>
+        <SectionHead eyebrow="Hours and attestation" title="Logged by one, signed by the" class="mb">
+          <Fragment slot="accent">other<span class="tail">, never certified by us.</span></Fragment>
+        </SectionHead>
+        <p class="copy copy--lg">A graduate logs each session. The supervisor countersigns within 7 days. Lily keeps the record; your board decides what counts toward licensure.</p>
+        <ul class="facts">
+          <li><strong>Logged by</strong> the graduate</li>
+          <li><strong>Signed by</strong> the supervisor, within 7 days</li>
+          <li><strong>Certified by Lily:</strong> never</li>
+        </ul>
       </div>
-    </section>
+      <HoursLogPreview
+        showExports={false}
+        weeks={[
+          { label: 'Thu 7:00pm', detail: 'Individual · 60 min', status: 'signed' },
+          { label: 'Thu 7:00pm, last week', detail: 'Individual · 60 min', status: 'awaiting' },
+        ]}
+      />
+    </div>
+  </Section>
 
-    <!-- CTA BAND -->
-    <CTABand
-      client:load
-      title="Security questions? <em>We have answers</em>."
-      sub="Our team will share our SOC 2 report, BAA, security questionnaire, and DPA on request."
-      primaryLabel="Request docs"
-      primaryHref="/contact"
+  <Section tone="canvas">
+    <SectionHead eyebrow="Data" title="Licensure and scheduling data, not" class="mb">
+      <Fragment slot="accent">clinical records<span class="tail">.</span></Fragment>
+    </SectionHead>
+    <DataLists
+      store={['Name, contact, license number and status', 'Rates, availability and affinity preferences', 'Agreement terms and weekly hours log', 'Session dates and times, not session content']}
+      never={['Client names, notes or diagnoses', 'Session recordings or transcripts', 'Your own therapy or health history', 'Social Security numbers']}
     />
-  </main>
+  </Section>
+
+  <Section tone="surface">
+    <SectionHead eyebrow="Who can see what" title="Four roles," class="mb">
+      <Fragment slot="accent">clear edges<span class="tail">.</span></Fragment>
+    </SectionHead>
+    <PermissionsTable rows={roles} />
+    <p class="note">Own: only that person's records. Totals, Count and Status only: aggregates, never detail. Audit only and Support only: Lily admin access that is logged. If matched: after both sides accept a match. Illustrative, pending validation.</p>
+  </Section>
+
+  <Section tone="canvas">
+    <SectionHead eyebrow="Payments" title="At launch, you pay your supervisor" class="mb">
+      <Fragment slot="accent">directly<span class="tail">.</span></Fragment>
+    </SectionHead>
+    <PricingCard />
+  </Section>
+
+  <Section tone="surface">
+    <SectionHead eyebrow="Security basics" title="Plain protections," class="mb">
+      <Fragment slot="accent">stated plainly<span class="tail">.</span></Fragment>
+    </SectionHead>
+    <ul class="prot">
+      {protections.map((p) => (
+        <li class="prot__item"><p class="prot__title">{p.title}</p><p class="prot__body">{p.body}</p></li>
+      ))}
+    </ul>
+    <p class="note">Security and policy statements are illustrative until product and legal confirm them.</p>
+  </Section>
+
+  <Section tone="canvas" id="concern">
+    <div class="concern">
+      <SectionHead eyebrow="Report a concern" title="Something look" lead="Use the concern form or write to the site contact. A person reads every report, and we reply within 2 business days.">
+        <Fragment slot="accent">wrong<span class="tail">? Tell us.</span></Fragment>
+      </SectionHead>
+      <div class="concern__actions">
+        <Button href="/contact?topic=trust" dataAction="trust-report-concern">Open the concern form</Button>
+        <p class="concern__note" data-illustrative>Target replies: 2 business days, urgent safety issues the same day · Illustrative · pending validation</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="canvas" as="div" class="cta-wrap">
+    <CTABand headline="Be the supervisor graduates" lead="Join the Pennsylvania roster. LPC and LCSW first, no fee at launch.">
+      <Fragment slot="accent">trust<span class="tail tail--cta">.</span></Fragment>
+      <Button variant="inverse" href={appLinks.supervisorSignup} dataAction="trust-cta-join-supervisor">Join as a supervisor</Button>
+      <a class="cta-link" href="/privacy">Privacy policy</a>
+      <a class="cta-link" href="/terms">Terms</a>
+    </CTABand>
+  </Section>
 </BaseLayout>
+
+<style>
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .hero { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 3rem; align-items: center; }
+  .hero__text { display: flex; flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+  .hero__title { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 600; line-height: 1.08; color: var(--lily-forest, #14522E); }
+  .hero__title em { font-style: italic; font-weight: 500; color: var(--lily-primary, #1B6B3E); }
+  .hero__lead { margin: 0; max-width: 40rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 1.125rem; line-height: 1.6; color: var(--lily-forest, #14522E); }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .hero__card { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); color: var(--lily-forest, #14522E); }
+  .hero__card p, .hero__dates, .hero__dates dd { margin: 0; }
+  .hero__card-eyebrow { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .hero__card-name { margin-top: 0.5rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.5rem; font-weight: 600; }
+  .hero__card-meta, .hero__dates { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.9375rem; }
+  .hero__dates { display: flex; flex-direction: column; gap: 0.125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .hero__notice { grid-column: 1 / -1; }
+  .copy { margin: 0; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.9375rem; line-height: 1.55; color: var(--lily-forest, #14522E); }
+  .copy--lg { font-size: 1.0625rem; line-height: 1.65; }
+  .cards3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+  .split { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 3rem; align-items: center; }
+  .facts { margin: 1.25rem 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.9375rem; color: var(--lily-forest, #14522E); }
+  .strip { margin-top: 1.5rem; }
+  .note { margin: 1.25rem 0 0; max-width: 52rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.8125rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .prot { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
+  .prot__item { padding: 1.5rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-canvas, #F5F1E9); box-shadow: var(--shadow-subtle, 0 3px 5px rgb(20 82 46 / 7%)); color: var(--lily-forest, #14522E); }
+  .prot__item p { margin: 0; }
+  .prot__title { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.25rem; font-weight: 600; }
+  .prot__body { margin-top: 0.375rem; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.9375rem; line-height: 1.55; }
+  .concern { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 2rem; padding: 2.5rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .concern > :global(header) { flex: 1 1 26rem; }
+  .concern__actions { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .concern__note { margin: 0; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .cta-link { align-self: center; color: var(--lily-canvas, #F5F1E9); font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.9375rem; text-underline-offset: 0.2em; }
+  .cta-link:focus-visible { outline: 2px solid var(--lily-canvas, #F5F1E9); outline-offset: 3px; }
+  .tail { font-style: normal; font-weight: 600; color: var(--lily-forest, #14522E); }
+  .tail--cta { color: var(--lily-canvas, #F5F1E9); }
+  :global(.mb) { margin-bottom: 2rem; }
+  @media (max-width: 960px) { .hero, .split { grid-template-columns: 1fr; gap: 2rem; } .cards3, .prot { grid-template-columns: 1fr; } }
+  @media (min-width: 961px) and (max-width: 1100px) { .prot { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>

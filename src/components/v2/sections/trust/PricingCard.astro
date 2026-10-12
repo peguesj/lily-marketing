@@ -1,0 +1,28 @@
+---
+import Chip from '../../ui/Chip.astro';
+/** Direct-to-supervisor launch pricing and the future per-session-share disclosure. */
+---
+<div class="pc">
+  <article class="pc__card pc__card--now">
+    <Chip variant="selected">At launch</Chip>
+    <p class="pc__price">$0 Lily fee</p>
+    <p class="pc__body">Graduates pay the supervisor's posted rate, for example $85 for a 60 minute group seat or $110 individual. Supervisors keep 100%.</p>
+    <p class="pc__flag">Example rates, illustrative only.</p>
+  </article>
+  <article class="pc__card">
+    <Chip variant="peach">Later: per-session share</Chip>
+    <p class="pc__price">Announced 60 days ahead</p>
+    <p class="pc__body">A small share of each session, shown on the rate before you book. Existing agreements keep their terms until renewal.</p>
+  </article>
+</div>
+
+<style>
+  .pc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+  .pc__card { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; padding: 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); color: var(--lily-forest, #14522E); }
+  .pc__card--now { border: 2px solid var(--lily-primary, #1B6B3E); }
+  .pc__card p { margin: 0; }
+  .pc__price { font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 2rem; font-weight: 600; line-height: 1.15; }
+  .pc__body { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.9375rem; line-height: 1.6; }
+  .pc__flag { font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); font-size: 0.75rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  @media (max-width: 760px) { .pc { grid-template-columns: 1fr; } }
+</style>

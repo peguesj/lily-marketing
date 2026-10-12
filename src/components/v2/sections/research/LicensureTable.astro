@@ -1,0 +1,70 @@
+---
+/**
+ * Semantic licensure-by-track table. Rows are an illustrative summary: the PA rules must be
+ * confirmed against board sources before publishing.
+ */
+interface Row {
+  code: string;
+  name: string;
+  experience: string;
+  supervisor: string;
+  board: string;
+}
+interface Props {
+  rows: Row[];
+  boardHref?: string;
+  boardLinkLabel?: string;
+}
+const { rows, boardHref = 'https://www.dos.pa.gov/ProfessionalLicensing', boardLinkLabel = 'dos.pa.gov/ProfessionalLicensing' } = Astro.props;
+---
+<div class="lt" role="region" aria-label="Licensure by track table (scrollable)" tabindex="0">
+  <table class="lt__table">
+    <caption class="lt__caption">Licensure by track in Pennsylvania (illustrative summary, confirm against PA board sources)</caption>
+    <thead>
+      <tr>
+        <th scope="col">License</th>
+        <th scope="col">Supervised experience</th>
+        <th scope="col">Supervisor must be</th>
+        <th scope="col">Pennsylvania board</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>
+          <th scope="row"><span class="lt__code">{r.code}</span><span class="lt__name">{r.name}</span></th>
+          <td>{r.experience}</td>
+          <td>{r.supervisor}</td>
+          <td>
+            <span class="lt__board">{r.board}</span>
+            <a href={boardHref} target="_blank" rel="noopener noreferrer">{boardLinkLabel}<span class="lt__sr"> (opens in a new tab)</span></a>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .lt { overflow-x: auto; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .lt:focus-visible { outline: 2px solid var(--lily-forest, #14522E); outline-offset: 2px; }
+  .lt__table { width: 100%; min-width: 46rem; border-collapse: collapse; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); color: var(--lily-forest, #14522E); }
+  .lt__caption { padding: 1rem 1.5rem 0.5rem; text-align: left; font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); caption-side: top; }
+  thead th {
+    padding: 0.75rem 1.5rem;
+    text-align: left;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--lily-text-muted-aa, #4E6B5A);
+    border-bottom: 1px solid var(--lily-border, #D5DFD9);
+  }
+  tbody th, tbody td { padding: 1rem 1.5rem; text-align: left; vertical-align: top; font-size: 0.9375rem; line-height: 1.45; border-bottom: 1px solid var(--lily-border, #D5DFD9); }
+  tbody tr:last-child > * { border-bottom: 0; }
+  .lt__code { display: block; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.25rem; font-weight: 600; }
+  .lt__name { display: block; font-weight: 400; font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .lt__board { display: block; }
+  a { color: var(--lily-primary, #1B6B3E); font-size: 0.8125rem; text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 2px solid var(--lily-forest, #14522E); outline-offset: 2px; }
+  .lt__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+</style>

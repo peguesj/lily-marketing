@@ -1,0 +1,45 @@
+---
+/**
+ * The seven license-review checks as a semantic table. The review source is a proposal and
+ * every cell is illustrative until the source and its rules are validated.
+ */
+interface Row { check: string; confirm: string; source: string }
+interface Props { rows: Row[] }
+const { rows } = Astro.props;
+---
+<div class="ct" role="region" aria-label="Seven license checks table (scrollable)" tabindex="0">
+  <table class="ct__table">
+    <caption class="ct__caption">Seven things we check for each supervisor (illustrative, source pending validation)</caption>
+    <thead>
+      <tr>
+        <th scope="col">Check</th>
+        <th scope="col">What we confirm</th>
+        <th scope="col">Where it comes from</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>
+          <th scope="row">{r.check}</th>
+          <td>{r.confirm}</td>
+          <td>{r.source}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .ct { overflow-x: auto; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .ct:focus-visible { outline: 2px solid var(--lily-forest, #14522E); outline-offset: 2px; }
+  .ct__table { width: 100%; min-width: 44rem; border-collapse: collapse; font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif); color: var(--lily-forest, #14522E); }
+  .ct__caption { padding: 1rem 1.5rem 0.5rem; text-align: left; font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); caption-side: top; }
+  thead th { padding: 0.75rem 1.5rem; text-align: left; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); border-bottom: 1px solid var(--lily-border, #D5DFD9); }
+  tbody th, tbody td { padding: 0.875rem 1.5rem; text-align: left; vertical-align: top; font-size: 0.9375rem; line-height: 1.45; border-bottom: 1px solid var(--lily-border, #D5DFD9); }
+  tbody th { font-weight: 600; white-space: nowrap; }
+  tbody td:last-child { color: var(--lily-text-muted-aa, #4E6B5A); }
+  tbody tr:last-child > * { border-bottom: 0; }
+  tbody { counter-reset: check; }
+  tbody tr { counter-increment: check; }
+  tbody th::before { content: counter(check); display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; margin-right: 0.75rem; border-radius: 50%; background: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9); font-size: 0.75rem; font-weight: 600; }
+</style>
