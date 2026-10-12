@@ -1,4 +1,4 @@
-// node --test scripts/__tests__/research-trust.test.mjs
+// node --test src/components/v2/sections/research/research-trust.test.mjs
 // Asserts the D2 /research and /trust pages against the built dist/ (builds unless RT_SKIP_BUILD=1).
 import { test, before } from 'node:test';
 import assert from 'node:assert/strict';
@@ -8,7 +8,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'parse5';
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..', '..');
 const TAG = 'Illustrative · pending validation';
 const PLACEHOLDER = 'placeholders, replace with real study data before publishing';
 const docs = {};
@@ -196,6 +196,11 @@ test('/trust: concern link targets /contact?topic=trust and the supervisor CTA g
   assert.ok(a.some((x) => x.href === '/contact?topic=trust' && /Open the concern form/.test(x.label)));
   assert.ok(a.some((x) => /Join as a supervisor/.test(x.label) && /^https:\/\/app\.asklily\.health\/app\/signup\/supervisor$/.test(x.href ?? '')));
   assert.match(text(docs.trust), /2 business days/);
+  // Response-time commitments, including the same-day safety reply, are labelled as unvalidated targets.
+  const sameDay = els(docs.trust).filter((n) => hasAttr(n, 'data-illustrative') && /same day/.test(text(n)) && text(n).includes(TAG));
+  assert.ok(sameDay.length > 0, 'same-day safety reply sits in a data-illustrative element with the validation label');
+  const lead = els(docs.trust, 'p').find((p) => /A person reads every report/.test(text(p)));
+  assert.doesNotMatch(text(lead), /same day/, 'the unlabelled lead no longer states the same-day commitment as fact');
 });
 
 test('both pages: check-pages strict passes for /research and /trust', () => {
