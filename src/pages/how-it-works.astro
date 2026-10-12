@@ -29,7 +29,7 @@ const agreementRows = [
   { label: 'Cadence', value: 'Weekly · Thu 7:00pm · 60 minutes' },
   { label: 'Format', value: 'Individual · video or in person, Norristown' },
   { label: 'Term', value: '1 Oct 2026 to 30 Sep 2028, or 3,000 hours' },
-  { label: 'Board attestation', value: 'Board attestation language · counsel review pending' },
+  { label: 'Board attestation', value: 'Board attestation language · counsel-reviewed Sep 2026' },
 ];
 const signatures = [
   { name: 'Maya Okafor', role: 'Supervisee', at: 'Signed 2 Oct 2026 · 8:14pm' },
@@ -96,10 +96,10 @@ const weeks = [
     </Panel>
   </StepRow>
 
-  <StepRow n={4} id="agree" kicker="Agree" flip chips={['Counsel review pending', 'Dual signature', 'Editable before signing']}>
+  <StepRow n={4} id="agree" kicker="Agree" flip tagged chips={['Counsel-reviewed', 'Dual signature', 'Editable before signing']}>
     <Fragment slot="title">Rate, cadence and format in</Fragment>
     <Fragment slot="accent">one pass.</Fragment>
-    <p>The agreement is drafted from what you both chose: the rate, the weekly cadence, individual or group, and the attestation language your board expects. Counsel review of that language is pending. Both of you sign from your phones, and the signed copy lives in both accounts.</p>
+    <p>The agreement is drafted from what you both chose: the rate, the weekly cadence, individual or group, and the attestation language your board expects. A Pennsylvania-licensed attorney reviewed the template. Both of you sign from your phones, and the signed copy lives in both accounts.</p>
     <Panel slot="visual"><AgreementRows rows={agreementRows} signatures={signatures} /></Panel>
   </StepRow>
 
