@@ -1,0 +1,33 @@
+---
+import Section from '../../ui/Section.astro';
+import StepCard from '../../ui/StepCard.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+import ClaimHead from './ClaimHead.astro';
+
+const steps = [
+  { title: 'State-board check', body: 'We confirm your license type and years with the proposed license-review source. Your profile is published only after it clears, usually within two business days.' },
+  { title: 'Ranked matches, hours to date', body: 'See graduates by license path, city and hours logged, like Marcus, LCSW path, 1,240 of 3,000 hours, Philadelphia, Thursdays.' },
+  { title: 'Agreement in one pass', body: 'Rate, format, cadence and start date pre-filled from both profiles. You each sign once. It takes about four minutes.' },
+  { title: 'Weekly sign-off in a minute', body: 'Each week you confirm the hours from one notification. The log is dual-signed and exportable for the board when it is time.' },
+];
+---
+<div data-section="what-lily-does">
+  <Section tone="canvas" ariaLabelledby="sup-what-title">
+    <ClaimHead id="sup-what-title" eyebrow="What Lily does" title="We verify, you" accent="choose." />
+    <div class="sup-steps">
+      {steps.map((s, i) => (
+        <StepCard number={i + 1} title={s.title} connector={i < steps.length - 1}><p>{s.body}</p></StepCard>
+      ))}
+    </div>
+    <IllustrativeNotice class="sup-steps__note">
+      <p>The license check, the two-business-day window, the hours shown and the four-minute agreement are proposed and pending validation. Names are fictional.</p>
+    </IllustrativeNotice>
+  </Section>
+</div>
+
+<style>
+  .sup-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; --v2-step-gap: 2rem; }
+  :global(.sup-steps__note) { margin-top: 2rem; }
+  @media (max-width: 1000px) { .sup-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .sup-steps { grid-template-columns: 1fr; } }
+</style>

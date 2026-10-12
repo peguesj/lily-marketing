@@ -1,0 +1,24 @@
+---
+/**
+ * Three text rows (title + body) that explain the credential concept. These are the page's own
+ * prose rows; ../../mocks/AgreementRows is a signed-agreement mock and does not fit this role.
+ */
+interface Point { title: string; body: string }
+interface Props { points: Point[] }
+const { points } = Astro.props;
+---
+<dl class="points">
+  {points.map((p) => (
+    <div class="point">
+      <dt>{p.title}</dt>
+      <dd>{p.body}</dd>
+    </div>
+  ))}
+</dl>
+
+<style>
+  .points { display: grid; gap: 1.75rem; margin: 0; }
+  .point { display: grid; gap: 0.375rem; }
+  dt { font-size: 1.125rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+  dd { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); max-width: 34rem; }
+</style>

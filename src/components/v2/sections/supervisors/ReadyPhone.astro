@@ -1,0 +1,36 @@
+---
+import PhoneFrame from '../../mocks/PhoneFrame.astro';
+import PushCard from '../../mocks/PushCard.astro';
+import LilyVerifiedBadge from '../../mocks/LilyVerifiedBadge.astro';
+/** Phone 2: the "Lily is ready" push over the post-review home screen. Static imagery. */
+---
+<PhoneFrame label="Example Lily is ready push notification over a supervisor home screen with a license review pending badge">
+  <div class="rp">
+    <PushCard title="Lily is ready" time="now" body="3 supervisees in Philadelphia fit your license path. Tap to see them." />
+    <div class="rp__body">
+      <LilyVerifiedBadge size="lg" />
+      <h4>You're <em>verified</em>.</h4>
+      <p class="rp__line">License review pending · LCSW · Pennsylvania</p>
+      <p class="rp__line">Checked on Oct 3, 2026</p>
+      <p class="rp__pill rp__pill--primary">See my matches</p>
+      <p class="rp__pill rp__pill--outline">Edit my rates</p>
+    </div>
+  </div>
+</PhoneFrame>
+
+<style>
+  .rp { box-sizing: border-box; padding: 0 12px; color: var(--lily-text, #14522E); }
+  .rp :global(.push) { max-width: none; padding: 9px; gap: 8px; }
+  .rp :global(.push .tile) { width: 30px; height: 30px; border-radius: 8px; }
+  .rp :global(.push .tile svg) { width: 18px; height: 18px; }
+  .rp :global(.push .title) { font-size: 12.5px; }
+  .rp :global(.push .body) { font-size: 11px; }
+  .rp :global(.push .meta) { font-size: 9px; }
+  .rp__body { display: flex; flex-direction: column; align-items: center; gap: 5px; margin-top: 10px; text-align: center; }
+  h4 { margin: 4px 0 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 21px; font-weight: 500; line-height: 1.15; }
+  h4 em { font-style: italic; color: var(--lily-primary, #1B6B3E); }
+  .rp__line { margin: 0; font-size: 10.5px; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .rp__pill { margin: 0; box-sizing: border-box; width: 100%; padding: 8px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+  .rp__pill--primary { margin-top: 8px; background: var(--lily-forest, #14522E); color: var(--lily-canvas, #F5F1E9); }
+  .rp__pill--outline { border: 1.5px solid var(--lily-forest, #14522E); color: var(--lily-forest, #14522E); }
+</style>

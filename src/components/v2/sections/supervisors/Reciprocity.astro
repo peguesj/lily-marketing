@@ -1,0 +1,48 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import PhoneFrame from '../../mocks/PhoneFrame.astro';
+import InboxPreview from '../../mocks/InboxPreview.astro';
+
+const bullets = [
+  { title: 'Passing is private', body: 'The graduate never sees a decline, only their next ranked match.' },
+  { title: 'Affinity cuts both ways', body: 'Eight identity dimensions you can weight, or leave off entirely.' },
+  { title: 'Capacity is yours', body: 'Set 1 to 6 seats. We stop sending requests when you are full.' },
+];
+---
+<div data-section="reciprocity">
+  <Section tone="canvas">
+    <SectionHead eyebrow="Reciprocity" title="You pick">
+      <Fragment slot="accent">too.</Fragment>
+    </SectionHead>
+    <div class="sup-recip">
+      <PhoneFrame label="Example supervisor match inbox with three requests">
+        <InboxPreview />
+      </PhoneFrame>
+      <div class="sup-recip__copy">
+        <h3>Nobody is matched one-sided.</h3>
+        <p>A graduate asks. You see their license path, hours to date, setting, schedule and goals, and you accept or pass. We never auto-assign a supervisee to you.</p>
+        <ul class="sup-recip__list">
+          {bullets.map((b) => (
+            <li class="bullet">
+              <span class="bullet__dot" aria-hidden="true"></span>
+              <div><strong>{b.title}</strong><span>{b.body}</span></div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </Section>
+</div>
+
+<style>
+  .sup-recip { display: flex; flex-wrap: wrap; gap: 3rem 5rem; align-items: center; }
+  .sup-recip__copy { flex: 1 1 22rem; max-width: 36rem; }
+  h3 { margin: 0 0 0.75rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.75rem; font-weight: 500; color: var(--lily-forest, #14522E); }
+  .sup-recip__copy > p { margin: 0 0 2rem; font-size: 1.0625rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .sup-recip__list { display: grid; gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
+  .bullet { display: flex; gap: 0.875rem; align-items: flex-start; }
+  .bullet__dot { flex: none; width: 5px; height: 5px; margin-top: 0.6rem; border-radius: 50%; background: var(--lily-primary, #1B6B3E); }
+  .bullet strong { display: block; font-size: 1.0625rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+  .bullet span { display: block; margin-top: 0.125rem; font-size: 0.9375rem; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
+</style>

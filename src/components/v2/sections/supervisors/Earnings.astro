@@ -1,0 +1,52 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import Button from '../../ui/Button.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+import PricingCard from './PricingCard.astro';
+---
+<div data-section="earnings">
+  <Section tone="surface">
+    <SectionHead eyebrow="Earnings" title="No fee to join. A share only when it">
+      <Fragment slot="accent">works.</Fragment>
+    </SectionHead>
+    <div class="sup-earn">
+      <PricingCard
+        eyebrow="INDIVIDUAL"
+        price="$120"
+        unit="/hr, you set it"
+        bullets={[
+          'The graduate pays you directly, weekly, after sign-off',
+          'No Lily fee at launch',
+          'Later, a per-session share, disclosed in writing before it starts',
+          'Change your rate any time for new agreements',
+        ]}
+      />
+      <PricingCard
+        eyebrow="GROUP OF FOUR"
+        price="$45"
+        unit="/hr per seat, $180 a session"
+        bullets={[
+          'Four seats at $45 is $180 an hour',
+          'We fill empty seats from your inbox',
+          'Each supervisee is billed and signs separately',
+          'No Lily fee at launch; the same advance written notice applies later',
+        ]}
+      />
+    </div>
+    <div class="sup-earn__foot">
+      <Button variant="text" href="/pricing" dataAction="supervisors-earnings-pricing">See pricing →</Button>
+      <span>Graduates pay the supervisor. Lily takes nothing from either side at launch.</span>
+    </div>
+    <IllustrativeNotice class="sup-earn__note">
+      <p>Rates and payout timing are placeholders. The later per-session share (an illustrative 12%) is not a decision: any real share will be disclosed in writing before it starts. All figures are pending validation.</p>
+    </IllustrativeNotice>
+  </Section>
+</div>
+
+<style>
+  .sup-earn { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+  .sup-earn__foot { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; align-items: baseline; margin-top: 2rem; font-size: 0.9375rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  :global(.sup-earn__note) { margin-top: 1.5rem; max-width: 46rem; }
+  @media (max-width: 800px) { .sup-earn { grid-template-columns: 1fr; } }
+</style>

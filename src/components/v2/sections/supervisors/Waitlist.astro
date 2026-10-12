@@ -1,0 +1,23 @@
+---
+import Section from '../../ui/Section.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+import WaitlistForm from '../../forms/WaitlistForm.tsx';
+import ClaimHead from './ClaimHead.astro';
+import { appLinks } from '../../../../config/app';
+---
+<div id="waitlist" data-section="waitlist" class="sup-anchor">
+  <Section tone="canvas" ariaLabelledby="sup-waitlist-title">
+    <ClaimHead id="sup-waitlist-title" eyebrow="Join the waitlist" title="Tell us your license. We do the" accent="rest." />
+    <WaitlistForm client:visible defaultAudience="supervisor" appHref={appLinks.supervisorSignup} />
+    <p class="sup-waitlist__helper">We check this against the proposed license-review source. Nothing is published until it clears. No fee to join.</p>
+    <IllustrativeNotice class="sup-waitlist__note">
+      <p>The license check, the eligibility rules and the publish step are proposed and pending validation. The form collects your details for the waitlist only.</p>
+    </IllustrativeNotice>
+  </Section>
+</div>
+
+<style>
+  .sup-anchor { scroll-margin-top: 80px; }
+  .sup-waitlist__helper { margin: 1.5rem 0 0; max-width: 44rem; font-size: 0.9375rem; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
+  :global(.sup-waitlist__note) { margin-top: 1.5rem; max-width: 44rem; }
+</style>

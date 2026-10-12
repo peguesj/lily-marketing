@@ -1,0 +1,34 @@
+---
+import Section from '../../ui/Section.astro';
+import Chip from '../../ui/Chip.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+import ClaimHead from './ClaimHead.astro';
+
+const types = ['LPC', 'LCSW', 'LMFT', 'Psychology', 'Psychiatry'];
+const first = new Set(['LPC', 'LCSW']);
+---
+<div data-section="eligibility">
+  <Section tone="canvas" ariaLabelledby="sup-elig-title">
+    <ClaimHead id="sup-elig-title" eyebrow="Eligibility" title="Eligibility criteria pending validation." accent="Pennsylvania" after=" first." />
+    <ul class="sup-chips" aria-label="License types">
+      {types.map((t) => <li><Chip variant={first.has(t) ? 'selected' : 'default'}>{t}</Chip></li>)}
+    </ul>
+    <p class="sup-elig__first">LPC and LCSW are matched first in the pilot</p>
+    <div class="sup-elig__copy">
+      <p>Licensed five or more years in good standing, with your license number on file with the proposed license-review source.</p>
+      <p>Availability by jurisdiction is pending validation. Outside Pennsylvania, or under five years? <a href="#waitlist">Join the waitlist</a> for updates.</p>
+    </div>
+    <IllustrativeNotice class="sup-elig__note">
+      <p>The five-year rule, the license types and the Pennsylvania-first scope are proposed criteria, not confirmed requirements.</p>
+    </IllustrativeNotice>
+  </Section>
+</div>
+
+<style>
+  .sup-chips { display: flex; flex-wrap: wrap; gap: 0.625rem; margin: 0; padding: 0; list-style: none; }
+  .sup-elig__first { margin: 1rem 0 0; font-size: 0.9375rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .sup-elig__copy { display: grid; gap: 0.5rem; margin-top: 2rem; max-width: 44rem; }
+  .sup-elig__copy p { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--lily-forest, #14522E); }
+  .sup-elig__copy a { color: var(--lily-primary, #1B6B3E); font-weight: 600; text-underline-offset: 0.2em; }
+  :global(.sup-elig__note) { margin-top: 2rem; max-width: 44rem; }
+</style>
