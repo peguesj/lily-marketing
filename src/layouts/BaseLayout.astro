@@ -4,6 +4,7 @@ import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
 
 interface Props {
+  /** Page title. The suffix " | Lily" is added unless it already contains "Lily". */
   title: string;
   description?: string;
   canonical?: string;
@@ -14,8 +15,8 @@ interface Props {
 }
 
 const {
-  title,
-  description = 'Lily is the behavioral-health platform built for members, practitioners, and organizations. Identity-aware matching, HIPAA telehealth, AI-assisted notes, and outcomes tracking — all in one system.',
+  title: pageTitle,
+  description = 'Lily matches newly graduated clinicians with verified, fairly priced supervisors, writes the agreement, and keeps an hours log you both sign. Pennsylvania pilot.',
   canonical,
   ogImage: ogImageProp,
   jsonLd,
@@ -24,6 +25,7 @@ const {
 } = Astro.props;
 
 const siteUrl = 'https://www.asklily.health';
+const title = /lily/i.test(pageTitle) ? pageTitle : `${pageTitle} | Lily`;
 const canonicalURL = canonical ?? `${siteUrl}${Astro.url.pathname === '/' ? '' : Astro.url.pathname}`;
 const ogImage = ogImageProp ?? `${siteUrl}/assets/lily-icon-fullcolor.png`;
 
@@ -40,7 +42,7 @@ const defaultJsonLd = {
         "url": `${siteUrl}/assets/lily-icon-fullcolor.png`,
       },
       "sameAs": [],
-      "description": "Lily is the behavioral-health platform built for all three sides — members, practitioners, and organizations.",
+      "description": "Lily matches newly graduated clinicians with verified, fairly priced supervisors and keeps a signed hours log.",
     },
     {
       "@type": "WebSite",
@@ -69,7 +71,7 @@ const finalJsonLd = jsonLd ? { ...defaultJsonLd, "@graph": [...defaultJsonLd["@g
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="hsl(145, 60%, 26%)" />
+    <meta name="theme-color" content="#F5F1E9" />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     {keywords && <meta name="keywords" content={keywords} />}
     <meta name="author" content="Lily" />
@@ -96,9 +98,9 @@ const finalJsonLd = jsonLd ? { ...defaultJsonLd, "@graph": [...defaultJsonLd["@g
     <link rel="apple-touch-icon" href="/assets/lily-icon-fullcolor.png" />
 
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify(finalJsonLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(finalJsonLd)} />
 
-    <!-- Font preloads — self-hosted -->
+    <!-- Font preloads — self-hosted (Jost, Caveat, Source Code Pro come from @fontsource via CSS) -->
     <link
       rel="preload"
       as="font"
@@ -120,8 +122,9 @@ const finalJsonLd = jsonLd ? { ...defaultJsonLd, "@graph": [...defaultJsonLd["@g
     <title>{title}</title>
   </head>
   <body>
-    <SiteNav client:load />
-    <main>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <SiteNav client:load currentPath={Astro.url.pathname} />
+    <main id="main" tabindex="-1">
       <slot />
     </main>
     <SiteFooter />
