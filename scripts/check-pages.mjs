@@ -133,11 +133,16 @@ function normalizePath(p) {
 
 // Splits <body> into header / main / footer regions. "main" is everything outside the
 // top-level <header> and <footer> elements (skip links, nav and <main> content).
+// A <header>/<footer> inside <main> (a card or article header) is main content.
 export function regions(body) {
-  const footers = [...body.matchAll(/<footer\b[\s\S]*?<\/footer>/gi)].map((m) => m[0]);
-  const headers = [...body.matchAll(/<header\b[\s\S]*?<\/header>/gi)].map((m) => m[0]);
-  let main = body;
+  const MAIN = '\u0000main\u0000';
+  const mainBlock = body.match(/<main\b[\s\S]*<\/main>/i)?.[0] ?? '';
+  const outside = mainBlock ? body.replace(mainBlock, MAIN) : body;
+  const footers = [...outside.matchAll(/<footer\b[\s\S]*?<\/footer>/gi)].map((m) => m[0]);
+  const headers = [...outside.matchAll(/<header\b[\s\S]*?<\/header>/gi)].map((m) => m[0]);
+  let main = outside;
   for (const chunk of [...footers, ...headers]) main = main.replace(chunk, ' ');
+  main = main.replace(MAIN, () => mainBlock);
   return { header: headers.join('\n'), main, footer: footers.join('\n') };
 }
 
