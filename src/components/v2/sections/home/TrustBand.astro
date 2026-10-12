@@ -1,0 +1,74 @@
+---
+import HomeSection from './HomeSection.astro';
+import Eyebrow from '../../ui/Eyebrow.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+import LilyVerifiedBadge from '../../mocks/LilyVerifiedBadge.astro';
+
+const rows = [
+  'License checked with the licensing jurisdiction (proposed license-review source)',
+  'Licensed 5+ years, by rule',
+  'Rate shown before you ask',
+  'You both pick. Nobody is assigned.',
+];
+---
+<HomeSection id="trust" labelledby="home-trust-title">
+  <div class="home-trust">
+    <div class="home-trust__copy">
+      <Eyebrow>Lily verified</Eyebrow>
+      <h2 id="home-trust-title" class="home-trust__title">Every supervisor is <em>License review pending.</em></h2>
+      <ul class="home-trust__rows">
+        {rows.map((r) => (
+          <li data-check-row>
+            <span class="home-trust__disc" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" focusable="false"><path d="M2.5 6.2 5 8.6l4.5-5.2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </span>
+            <span>{r}</span>
+          </li>
+        ))}
+      </ul>
+      <IllustrativeNotice class="home-trust__notice">
+        <p>The license-review source, the 5+ year rule and the badge wording are proposals pending validation. Nothing on this page is a verification result.</p>
+      </IllustrativeNotice>
+    </div>
+    <figure class="home-trust__badge">
+      <LilyVerifiedBadge size="lg" />
+      <figcaption>
+        <span class="home-trust__example">Example</span>
+        <span class="home-trust__caption">LCSW · PA · licensed since 2011</span>
+      </figcaption>
+    </figure>
+  </div>
+</HomeSection>
+
+<style>
+  .home-trust {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 3rem;
+    padding: 3rem; border-radius: 1.5rem; background: var(--lily-surface-muted, #ECE8DF);
+  }
+  .home-trust__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .home-trust__title { margin: 0; font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 600; line-height: 1.15; color: var(--lily-forest, #14522E); }
+  .home-trust__title em { display: block; }
+  .home-trust__rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem 2rem; margin: 0.5rem 0 0; padding: 0; list-style: none; font-size: 0.9375rem; color: var(--lily-forest, #14522E); }
+  .home-trust__rows li { display: flex; align-items: flex-start; gap: 0.625rem; }
+  .home-trust__disc { display: grid; place-items: center; flex: none; width: 1.25rem; height: 1.25rem; margin-top: 0.125rem; border-radius: 50%; background: var(--lily-primary, #1B6B3E); color: var(--lily-canvas, #F5F1E9); }
+  /* The shared [data-illustrative] pill style also lands on the notice container; restore a plain card. */
+  .home-trust :global(.home-trust__notice) {
+    margin-top: 0.5rem; max-width: 36rem; align-items: flex-start; text-align: left; text-transform: none; letter-spacing: normal;
+    font-size: inherit; font-weight: 400; background: var(--lily-surface, #F8F5EF); border-radius: var(--radius-card-sm, 0.875rem); padding: 1rem 1.25rem;
+  }
+  .home-trust__badge { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin: 0; text-align: center; }
+  .home-trust__badge figcaption { display: flex; flex-direction: column; align-items: center; gap: 0.375rem; }
+  .home-trust__example {
+    padding: 0.125rem 0.625rem; border-radius: var(--radius-chip, 9999px); background: var(--lily-surface, #F8F5EF);
+    font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lily-forest, #14522E);
+  }
+  .home-trust__caption { font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  /* The shared [data-illustrative] pill style lands on the badge wrapper too; keep it a plain stack. */
+  .home-trust__badge :global([data-mock="LilyVerifiedBadge"]) { border: 0; padding: 0; text-transform: none; letter-spacing: normal; }
+  @media (max-width: 900px) {
+    .home-trust { grid-template-columns: 1fr; padding: 2rem 1.5rem; gap: 2rem; }
+    .home-trust__rows { grid-template-columns: 1fr; }
+    .home-trust__badge { align-items: flex-start; text-align: left; }
+    .home-trust__badge figcaption { align-items: flex-start; }
+  }
+</style>

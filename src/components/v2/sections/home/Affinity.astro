@@ -1,0 +1,48 @@
+---
+import HomeSection from './HomeSection.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+import Chip from '../../ui/Chip.astro';
+
+const chips = [
+  { label: 'Race and ethnicity', on: false },
+  { label: 'Gender identity', on: true },
+  { label: 'Sexual orientation', on: false },
+  { label: 'Faith', on: false },
+  { label: 'Language', on: true },
+  { label: 'Disability', on: false },
+  { label: 'Neurodivergence', on: false },
+  { label: 'First-generation', on: true },
+];
+---
+<HomeSection id="affinity">
+  <div class="home-affinity">
+    <SectionHead
+      class="home-affinity__head"
+      eyebrow="Affinity matching"
+      title="Someone who"
+      lead="Pick what matters to you across eight identity dimensions. Gender-neutral and culturally inclusive by design."
+    >
+      <Fragment slot="accent">gets it.</Fragment>
+    </SectionHead>
+    <div class="home-affinity__picker">
+      <ul class="home-affinity__chips" aria-label="Eight identity dimensions, three selected">
+        {chips.map((c) => (
+          <li>
+            <Chip variant={c.on ? 'selected' : 'default'}>{c.label}{c.on && <span class="home-affinity__sr"> (selected)</span>}</Chip>
+          </li>
+        ))}
+      </ul>
+      <p class="home-affinity__helper">Three selected · matches are weighted by affinity, never filtered out</p>
+    </div>
+  </div>
+</HomeSection>
+
+<style>
+  .home-affinity { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 3rem; }
+  .home-affinity :global(.home-affinity__head) { margin-bottom: 0; }
+  .home-affinity__picker { display: flex; flex-direction: column; gap: 1rem; }
+  .home-affinity__chips { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
+  .home-affinity__helper { margin: 0; font-size: 0.875rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .home-affinity__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  @media (max-width: 900px) { .home-affinity { grid-template-columns: 1fr; gap: 1.5rem; } }
+</style>

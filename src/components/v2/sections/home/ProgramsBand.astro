@@ -1,0 +1,25 @@
+---
+import HomeSection from './HomeSection.astro';
+import AudienceCard from './AudienceCard.astro';
+import Button from '../../ui/Button.astro';
+import CohortCard from '../../mocks/CohortCard.astro';
+---
+<HomeSection id="programs">
+  <div class="home-programs">
+    <AudienceCard wide eyebrow="For programs" headline="Keep the clinicians you" id="home-programs-title">
+      <Fragment slot="accent">trained.</Fragment>
+      <p>Community mental-health centers and training programs sponsor a cohort. Priced per clinician per month. Chestnut Hill College is first in line.</p>
+      <Button slot="actions" variant="primary" small href="/programs#proposal" dataAction="home-programs-sponsor">Sponsor a cohort</Button>
+      <CohortCard slot="aside" />
+    </AudienceCard>
+  </div>
+</HomeSection>
+
+<style>
+  /* The shared [data-illustrative] pill style lands on the CohortCard article; restore card typography. */
+  .home-programs :global([data-mock="CohortCard"]) {
+    display: block; max-width: none; border-style: solid; text-transform: none; letter-spacing: normal; font-weight: 400;
+    border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface-muted, #ECE8DF); box-shadow: none;
+    font-size: inherit;
+  }
+</style>

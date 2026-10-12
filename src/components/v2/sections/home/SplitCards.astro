@@ -1,0 +1,30 @@
+---
+import HomeSection from './HomeSection.astro';
+import AudienceCard from './AudienceCard.astro';
+import Button from '../../ui/Button.astro';
+import IllustrativeTag from './IllustrativeTag.astro';
+import { appLinks } from '../../../../config/app';
+---
+<HomeSection id="split">
+  <h2 class="home-split__sr">Who Lily is for</h2>
+  <div class="home-split">
+    <AudienceCard eyebrow="For supervisors" headline="Supervise without the" id="home-split-sup">
+      <Fragment slot="accent">admin.</Fragment>
+      <p>Agreements written, hours counted, payments on time. You keep your rate. Lily keeps the paperwork.</p>
+      <Button slot="actions" variant="primary" href={appLinks.supervisorSignup} dataAction="home-split-join-supervisor">Join as a supervisor</Button>
+    </AudienceCard>
+    <AudienceCard eyebrow="For graduates" headline="A supervisor you can" id="home-split-grad">
+      <Fragment slot="accent">afford.</Fragment>
+      <p>Rates from $75 an hour, shown before you ask. Individual or group. Hours logged and signed weekly.</p>
+      <IllustrativeTag slot="note" />
+      <Button slot="actions" variant="outline" href={appLinks.graduateSignup} dataAction="home-split-find-supervisor">Find a supervisor</Button>
+    </AudienceCard>
+  </div>
+</HomeSection>
+
+<style>
+  .home-split__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .home-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+  .home-split :global(.home-aud) { align-items: flex-start; }
+  @media (max-width: 900px) { .home-split { grid-template-columns: 1fr; } }
+</style>

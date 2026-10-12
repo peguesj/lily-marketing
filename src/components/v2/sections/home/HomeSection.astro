@@ -1,0 +1,23 @@
+---
+import Container from '../../ui/Container.astro';
+/**
+ * Home page band: a <section> carrying data-home-section (used by the page contract test)
+ * and the 96px inter-section rhythm (48px above + 48px below), wrapping the v2 Container.
+ */
+interface Props {
+  id: string;
+  /** Id of the heading that labels the region. */
+  labelledby?: string;
+  class?: string;
+}
+const { id, labelledby, class: extra } = Astro.props;
+---
+<section class:list={['home-sec', extra]} data-home-section={id} aria-labelledby={labelledby}>
+  <Container><slot /></Container>
+</section>
+
+<style>
+  .home-sec { position: relative; padding-block: calc(var(--section-rhythm, 96px) / 2); }
+  /* Let section headings run on one line at desktop width (the primitive caps the text column at 46rem). */
+  .home-sec :global(.v2-sectionhead__text) { max-width: 60rem; }
+</style>

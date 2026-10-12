@@ -1,0 +1,51 @@
+---
+import HomeSection from './HomeSection.astro';
+import HomeIcon from './HomeIcon.astro';
+import IllustrativeTag from './IllustrativeTag.astro';
+import TextLink from './TextLink.astro';
+import { appLinks } from '../../../../config/app';
+
+const paths = [
+  { icon: 'users', title: 'Supervising', body: 'Set your rate, format and availability. Lily sends you graduates who fit.', cta: 'Join as a supervisor', href: appLinks.supervisorSignup, action: 'home-path-supervise' },
+  { icon: 'clock', title: 'Earning your hours', body: 'See verified supervisors near you, rate shown up front. Pick, agree, start logging.', cta: 'Find a supervisor', href: appLinks.graduateSignup, action: 'home-path-graduate' },
+  { icon: 'building', title: 'Sponsoring a program', body: 'Cover supervision for a cohort so the clinicians you trained stay with you.', cta: 'Sponsor a cohort', href: '/programs#proposal', action: 'home-path-sponsor' },
+] as const;
+---
+<HomeSection id="paths" labelledby="home-paths-title">
+  <h2 id="home-paths-title" class="home-sr">Three ways to use Lily</h2>
+  <ul class="home-paths">
+    {paths.map((p) => (
+      <li>
+        <article class="home-path">
+          <span class="home-path__icon"><HomeIcon name={p.icon} /></span>
+          <h3 class="home-path__title">{p.title}</h3>
+          <p class="home-path__body">{p.body}</p>
+          <TextLink class="home-path__link" href={p.href} dataAction={p.action}>{p.cta}</TextLink>
+        </article>
+      </li>
+    ))}
+  </ul>
+  <IllustrativeTag class="home-paths__tag" />
+</HomeSection>
+
+<style>
+  .home-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .home-paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 0; padding: 0; list-style: none; }
+  .home-paths > li { display: flex; }
+  .home-path {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; width: 100%;
+    padding: 1.75rem 1.75rem 1.5rem;
+    border-radius: var(--radius-card, 1.25rem);
+    background: var(--lily-surface, #F8F5EF);
+    box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+  }
+  .home-path__icon {
+    display: grid; place-items: center; width: 2.75rem; height: 2.75rem; margin-bottom: 0.5rem;
+    border-radius: 0.75rem; background: var(--lily-surface-muted, #ECE8DF); color: var(--lily-primary, #1B6B3E);
+  }
+  .home-path__title { margin: 0; font-size: 1.375rem; font-weight: 600; line-height: 1.2; color: var(--lily-forest, #14522E); }
+  .home-path__body { margin: 0; flex: 1; font-size: 0.9375rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .home-path :global(.home-path__link) { margin-top: 0.25rem; }
+  .home-paths ~ :global(.home-paths__tag) { margin-top: 1.5rem; }
+  @media (max-width: 900px) { .home-paths { grid-template-columns: 1fr; } }
+</style>

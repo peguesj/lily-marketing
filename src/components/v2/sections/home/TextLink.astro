@@ -1,0 +1,12 @@
+---
+/** Arrow text link used inside cards. The arrow is decorative. */
+interface Props { href: string; dataAction?: string; class?: string }
+const { href, dataAction, class: extra } = Astro.props;
+---
+<a class:list={['home-link', extra]} href={href} data-action={dataAction}><slot /><span aria-hidden="true"> →</span></a>
+
+<style>
+  .home-link { font-size: 0.9375rem; font-weight: 600; color: var(--lily-primary, #1B6B3E); text-decoration: none; width: fit-content; }
+  .home-link:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+  .home-link:focus-visible { outline: 2px solid var(--lily-forest, #14522E); outline-offset: 3px; border-radius: 0.25rem; }
+</style>
