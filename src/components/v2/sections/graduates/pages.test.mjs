@@ -168,7 +168,7 @@ test('/programs audiences label named institutions as pilot conversations and th
   for (const s of ['Community mental-health centers', 'Group practices', 'Colleges and training programs']) {
     assert.ok(progText.includes(s), s);
   }
-  assert.match(progText, /Chestnut Hill: pilot conversation, not a confirmed partnership/);
+  assert.match(progText, /Chestnut Hill: pilot conversation, not (a )?confirmed partnership/);
   assert.match(progText, /proposed 30-day/i);
   for (const s of ['Days 1–7', 'Days 8–14', 'Days 15–21', 'Days 22–30']) assert.ok(new RegExp(s, 'i').test(progText), s);
   assert.match(progText, /subject to local supervisor availability/i);

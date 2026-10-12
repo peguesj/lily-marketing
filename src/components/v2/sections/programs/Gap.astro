@@ -1,0 +1,41 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+
+const costs = [
+  { title: 'A vacancy to fill', body: 'Recruiting starts again. Your team carries the gap.' },
+  { title: 'Trust to rebuild', body: 'Clients lose continuity. Care needs a new handoff.' },
+  { title: 'Experience lost', body: 'Years of mentorship leave with the clinician.' },
+];
+---
+<Section tone="surface" ariaLabelledby="prog-gap-title">
+  <SectionHead
+    eyebrow="The cost of the gap"
+    title="Two miserable years end in a"
+    lead="Make supervision part of the support you offer, before someone else does."
+  >
+    <Fragment slot="accent">resignation.</Fragment>
+  </SectionHead>
+  <ul class="prog-gap">
+    {costs.map((c) => (
+      <li class="prog-gap__card">
+        <h3 class="prog-gap__title">{c.title}</h3>
+        <p class="prog-gap__body">{c.body}</p>
+      </li>
+    ))}
+  </ul>
+  <figure class="prog-quote">
+    <blockquote>&ldquo;I want their next chapter to be here, not somewhere they can finally afford.&rdquo;</blockquote>
+    <figcaption>Illustrative program-director persona · not a testimonial</figcaption>
+  </figure>
+</Section>
+
+<style>
+  .prog-gap { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.5rem; }
+  .prog-gap__card { padding: 1.75rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-canvas, #F5F1E9); border: 1px solid var(--lily-border, #D5DFD9); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .prog-gap__title { margin: 0 0 0.5rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.375rem; font-weight: 500; color: var(--lily-forest, #14522E); }
+  .prog-gap__body { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .prog-quote { margin: 2.5rem 0 0; padding: 2rem 2.25rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-forest, #14522E); color: var(--lily-canvas, #F5F1E9); }
+  .prog-quote blockquote { margin: 0; max-width: 40rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-style: italic; font-size: clamp(1.375rem, 3vw, 1.875rem); line-height: 1.3; }
+  .prog-quote figcaption { margin-top: 1rem; font-size: 0.8125rem; letter-spacing: 0.04em; color: var(--lily-peach, #F0B882); }
+</style>

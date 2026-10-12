@@ -1,0 +1,95 @@
+---
+import Section from '../../ui/Section.astro';
+import CohortCard from '../../mocks/CohortCard.astro';
+import HoursLogPreview from '../../mocks/HoursLogPreview.astro';
+
+const roster = [
+  { name: 'Priya R.', track: 'LCSW track', hours: 1240, week: 'Both signed' },
+  { name: 'Marcus B.', track: 'LPC track', hours: 612, week: 'Needs review' },
+];
+const pct = (n: number) => Math.round((n / 3000) * 100);
+---
+<Section tone="surface" ariaLabelledby="prog-walk-title">
+  <header class="prog-walk__head">
+    <p class="prog-walk__eyebrow">Screen walkthrough · illustrative data</p>
+    <h2 id="prog-walk-title" class="prog-walk__h2">See progress. Protect <em>privacy</em>.</h2>
+    <p class="prog-walk__flag" data-illustrative>Illustrative · pending validation</p>
+  </header>
+  <div class="prog-walk">
+    <div class="prog-walk__col">
+      <p class="prog-walk__eyebrow">Cohort overview · Example · October 2026</p>
+      <h3 class="prog-walk__title">Nine clinicians. One place to check in.</h3>
+      <CohortCard eyebrow="OCTOBER 2026 COHORT" count={9} matched={7} due="2 awaiting a match · 1 weekly sign-off pending" />
+      <table class="prog-roster">
+        <caption>Sample cohort roster <span>Fictional clinicians</span></caption>
+        <thead>
+          <tr><th scope="col">Clinician / track</th><th scope="col">Signed work hours</th><th scope="col">This week</th></tr>
+        </thead>
+        <tbody>
+          {roster.map((r) => (
+            <tr>
+              <th scope="row">{r.name} · {r.track}</th>
+              <td>
+                <span class="prog-roster__hrs">{r.hours.toLocaleString('en-US')} of 3,000 hours</span>
+                <span class="prog-roster__bar" aria-hidden="true"><span style={`width:${pct(r.hours)}%`}></span></span>
+              </td>
+              <td>{r.week}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p class="prog-walk__note">Signed work hours and supervision contact hours are recorded separately.</p>
+    </div>
+    <div class="prog-walk__col">
+      <p class="prog-walk__eyebrow">Cohort report · Sample preview</p>
+      <h3 class="prog-walk__title">Ready for <em>your board</em>.</h3>
+      <div class="prog-report">
+        <p class="prog-report__head">October 2026 · 9 enrolled clinicians</p>
+        <div class="prog-report__cols">
+          <div>
+            <h4>Included</h4>
+            <ul><li>Participation and signed hours</li><li>Agreed rates and sponsor spend</li></ul>
+          </div>
+          <div>
+            <h4>Excluded</h4>
+            <ul><li>Notes and clinical content</li></ul>
+          </div>
+        </div>
+        <p class="prog-report__export">Export cohort report (sample, not interactive)</p>
+      </div>
+      <HoursLogPreview showExports={false} />
+      <p class="prog-walk__note">The ring counts signed work hours. The weekly rows are supervision contact sessions, recorded separately. Maya Okafor is a fictional example.</p>
+    </div>
+  </div>
+  <p class="prog-walk__fine">Planned pilot experience. Sample records, not customer data. A program report is not a licensure approval.</p>
+</Section>
+
+<style>
+  .prog-walk__head { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 3rem; }
+  .prog-walk__h2 { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 600; line-height: 1.15; color: var(--lily-forest, #14522E); }
+  .prog-walk__h2 em { font-style: italic; font-weight: 500; color: var(--lily-primary, #1B6B3E); }
+  .prog-walk__flag { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-forest, #14522E); }
+  .prog-walk { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; align-items: start; }
+  .prog-walk__col { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+  .prog-walk__eyebrow { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .prog-walk__title { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.75rem; font-weight: 500; line-height: 1.2; color: var(--lily-forest, #14522E); }
+  .prog-walk__title em { font-style: italic; color: var(--lily-primary, #1B6B3E); }
+  .prog-walk__note { margin: 0; max-width: 32rem; font-size: 0.875rem; line-height: 1.5; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .prog-walk__fine { margin: 2.5rem 0 0; font-size: 0.8125rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+  .prog-roster { width: 100%; max-width: 34rem; border-collapse: collapse; font-size: 0.875rem; color: var(--lily-forest, #14522E); background: var(--lily-canvas, #F5F1E9); border-radius: var(--radius-card-sm, 0.875rem); overflow: hidden; }
+  .prog-roster caption { text-align: left; padding-bottom: 0.5rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .prog-roster caption span { margin-left: 0.5rem; padding: 2px 8px; border-radius: 9999px; background: var(--lily-surface-muted, #ECE8DF); letter-spacing: 0.04em; text-transform: none; }
+  .prog-roster th, .prog-roster td { padding: 0.75rem 0.875rem; text-align: left; border-bottom: 1px solid var(--lily-border, #D5DFD9); vertical-align: top; }
+  .prog-roster thead th { font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .prog-roster tbody th { font-weight: 600; }
+  .prog-roster__hrs { display: block; margin-bottom: 0.375rem; }
+  .prog-roster__bar { display: block; height: 6px; border-radius: 9999px; background: var(--lily-surface-muted, #ECE8DF); overflow: hidden; }
+  .prog-roster__bar span { display: block; height: 100%; background: var(--lily-primary, #1B6B3E); }
+  .prog-report { box-sizing: border-box; width: 100%; max-width: 420px; padding: 1.25rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-canvas, #F5F1E9); border: 1px solid var(--lily-border, #D5DFD9); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); color: var(--lily-forest, #14522E); }
+  .prog-report__head { margin: 0 0 0.75rem; font-weight: 600; }
+  .prog-report__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .prog-report h4 { margin: 0 0 0.375rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .prog-report ul { margin: 0; padding-left: 1.125rem; font-size: 0.875rem; line-height: 1.5; }
+  .prog-report__export { margin: 1rem 0 0; font-size: 0.8125rem; color: var(--lily-text-muted-aa, #4E6B5A); }
+  @media (max-width: 960px) { .prog-walk { grid-template-columns: minmax(0, 1fr); } }
+</style>

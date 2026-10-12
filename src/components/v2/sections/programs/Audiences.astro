@@ -1,0 +1,32 @@
+---
+import Section from '../../ui/Section.astro';
+import SectionHead from '../../ui/SectionHead.astro';
+
+const audiences = [
+  { title: 'Community mental-health centers', body: 'Support your early-career team without adding another spreadsheet to manage.', note: '' },
+  { title: 'Group practices', body: 'Make fairly priced supervision part of your offer to the next clinician you hire.', note: '' },
+  { title: 'Colleges and training programs', body: 'Build a bridge beyond graduation.', note: 'Chestnut Hill: pilot conversation, not confirmed partnership.' },
+];
+---
+<Section tone="surface" ariaLabelledby="prog-aud-title">
+  <SectionHead eyebrow="Who it is for" title="For the places clinicians">
+    <Fragment slot="accent">grow.</Fragment>
+  </SectionHead>
+  <ul class="prog-aud">
+    {audiences.map((a) => (
+      <li class="prog-aud__card">
+        <h3>{a.title}</h3>
+        <p>{a.body}</p>
+        {a.note && <p class="prog-aud__note">{a.note}</p>}
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<style>
+  .prog-aud { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.5rem; }
+  .prog-aud__card { padding: 1.75rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-canvas, #F5F1E9); border: 1px solid var(--lily-border, #D5DFD9); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .prog-aud__card h3 { margin: 0 0 0.5rem; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.375rem; font-weight: 500; color: var(--lily-forest, #14522E); }
+  .prog-aud__card p { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .prog-aud__card .prog-aud__note { margin-top: 0.75rem; font-size: 0.8125rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+</style>

@@ -1,0 +1,50 @@
+---
+import Section from '../../ui/Section.astro';
+import Blob from '../../ui/Blob.astro';
+import Eyebrow from '../../ui/Eyebrow.astro';
+import Button from '../../ui/Button.astro';
+import TrustStrip from '../../ui/TrustStrip.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+---
+<Section tone="canvas" ariaLabelledby="prog-hero-title" class="prog-hero">
+  <Blob color="teal" top="-8rem" right="-10rem" opacity={0.14} />
+  <Blob color="peach" width="22rem" height="16rem" bottom="-5rem" left="-8rem" opacity={0.2} />
+  <div class="prog-hero__grid">
+    <div class="prog-hero__copy">
+      <Eyebrow>For programs and employers</Eyebrow>
+      <h1 id="prog-hero-title" class="prog-hero__title">Keep the clinicians you <em>trained</em>.</h1>
+      <p class="prog-hero__lead">Losing a clinician the month they get licensed hurts everyone.</p>
+      <p class="prog-hero__lead">Help your graduates find supervision they can afford, and give them a reason to build their future with you.</p>
+      <div class="prog-hero__actions">
+        <Button href="#proposal" dataAction="programs-hero-cohort">Talk to us about a cohort →</Button>
+        <Button variant="text" href="#pilot" dataAction="programs-hero-pilot">Explore the pilot ↓</Button>
+      </div>
+    </div>
+    <div class="prog-hero__panel">
+      <TrustStrip items={['Pennsylvania · LPC and LCSW first', 'Verified supervision · Transparent rates', 'Private by design']} />
+      <IllustrativeNotice>
+        <p>Supervisor verification, licensure and eligibility are proposed pilot steps. Rules, sources and timelines are pending validation.</p>
+      </IllustrativeNotice>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .prog-hero { overflow: hidden; padding-block: 88px 80px; }
+  .prog-hero__grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 3rem; align-items: center; }
+  .prog-hero__copy { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+  .prog-hero__title {
+    margin: 0;
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    color: var(--lily-forest, #14522E);
+  }
+  .prog-hero__title em { font-style: italic; color: var(--lily-primary, #1B6B3E); }
+  .prog-hero__lead { margin: 0; max-width: 34rem; font-size: 1.1875rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .prog-hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; align-items: center; margin-top: 0.5rem; }
+  .prog-hero__panel { display: flex; flex-direction: column; gap: 1.5rem; padding: 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); border: 1px solid var(--lily-border, #D5DFD9); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  @media (max-width: 900px) { .prog-hero__grid { grid-template-columns: minmax(0, 1fr); } }
+</style>
