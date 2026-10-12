@@ -1,0 +1,32 @@
+---
+// Internal preview of the v2 conversion forms. Not linked, not indexed.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WaitlistForm from '../components/v2/forms/WaitlistForm.tsx';
+import ContactForm from '../components/v2/forms/ContactForm.tsx';
+import CohortProposalForm from '../components/v2/forms/CohortProposalForm.tsx';
+---
+
+<BaseLayout title="v2 forms preview | Lily" description="Internal preview of the v2 conversion forms." noindex={true}>
+  <section class="container wide" style="padding: 3rem 0; display: grid; gap: 3rem;">
+    <div id="waitlist-supervisor">
+      <h2>WaitlistForm &middot; supervisor</h2>
+      <WaitlistForm client:visible defaultAudience="supervisor" appHref="/signup" />
+    </div>
+    <div id="waitlist-graduate">
+      <h2>WaitlistForm &middot; graduate (compact)</h2>
+      <WaitlistForm client:visible defaultAudience="graduate" compact appHref="/signup" />
+    </div>
+    <div id="waitlist-program">
+      <h2>WaitlistForm &middot; program</h2>
+      <WaitlistForm client:visible defaultAudience="program" />
+    </div>
+    <div id="contact">
+      <h2>ContactForm</h2>
+      <ContactForm client:visible />
+    </div>
+    <div id="cohort">
+      <h2>CohortProposalForm</h2>
+      <CohortProposalForm client:visible />
+    </div>
+  </section>
+</BaseLayout>
