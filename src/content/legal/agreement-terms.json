@@ -1,0 +1,17 @@
+{
+  "_source": "Single source for the ten supervision-agreement terms shown on /terms#agreement. Wording is draft, pending counsel review. Text inside {{double braces}} is an example value (rates, cadence, notice periods are placeholders, not Lily policy) and is rendered with an Example marker.",
+  "version": "1.0",
+  "status": "draft",
+  "terms": [
+    { "n": 1, "title": "Parties", "text": "Graduate (Supervisee) and Licensed Supervisor, each identified by verified Lily profile" },
+    { "n": 2, "title": "Rate", "text": "{{$95}} per 50-minute individual session; {{$45}} per person for groups of up to six" },
+    { "n": 3, "title": "Cadence", "text": "Weekly, {{Thu 7:00pm}}, adjustable by mutual written notice" },
+    { "n": 4, "title": "Format", "text": "Video or in person; {{1 of every 4}} sessions may be group" },
+    { "n": 5, "title": "Hours goal", "text": "{{3,000}} supervised hours toward licensure, about {{24 months}}" },
+    { "n": 6, "title": "Cancellation", "text": "{{24 hours}} notice; later cancellations are billable at {{50%}}" },
+    { "n": 7, "title": "Payment", "text": "Supervisee pays supervisor directly after each session, within {{7 days}}" },
+    { "n": 8, "title": "Electronic signatures", "text": "Both parties agree typed or tapped signatures in Lily are binding" },
+    { "n": 9, "title": "Modifications", "text": "Changes take effect only when both parties accept them in the app" },
+    { "n": 10, "title": "Termination", "text": "Either party may end with {{14 days}} notice; logged hours remain valid" }
+  ]
+}

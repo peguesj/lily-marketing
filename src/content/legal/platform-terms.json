@@ -1,0 +1,47 @@
+{
+  "_source": "The five platform-term parts shown as an accordion on /terms. Wording is draft, pending counsel review. Only the first part and the PA pilot scope are specified in the v2 design (specs/site-terms.md); the remaining bodies are plain-language draft copy consistent with the design's one-line summaries. Parts flagged unsourced render a visible 'Unsourced draft pending counsel review' label.",
+  "parts": [
+    {
+      "key": "accounts",
+      "title": "Accounts and eligibility",
+      "paragraphs": [
+        "You must be 18 or older. Graduates hold or are completing an MA, MSW, or PsyD. Supervisors hold an active license and have practiced 5+ years. One person, one account; keep your sign-in private."
+      ],
+      "chip": "Pennsylvania pilot: LPC and LCSW first"
+    },
+    {
+      "key": "verification",
+      "title": "Verification consent",
+      "paragraphs": [
+        "By applying as a supervisor you consent to Lily checking your license status with the applicable licensing jurisdiction, and to showing the result of that check on your profile. A completed check reflects what the licensing source showed on the day it ran; it is not an endorsement of your supervision.",
+        "You can withdraw consent by closing your account. Existing signed agreements and logged hours stay on record."
+      ],
+      "unsourced": true
+    },
+    {
+      "key": "payments",
+      "title": "Payments and Lily's share",
+      "paragraphs": [
+        "Supervisors set their own rates, and the rate is stated in the agreement before anyone signs. There is no Lily fee at launch. If that changes, we will give you 30 days notice in the app, and the change will not apply to agreements already signed.",
+        "Card payments between graduates and supervisors run through our payment processor only if you opt into payments in Lily."
+      ],
+      "unsourced": true
+    },
+    {
+      "key": "sponsorship",
+      "title": "Cohort sponsorship",
+      "paragraphs": [
+        "A program may sponsor a cohort of graduates. A sponsor sees participation records: membership, hours and signature status, and aggregated reports. A sponsor does not see messages or affinity answers, and does not become a party to the supervision agreement."
+      ],
+      "unsourced": true
+    },
+    {
+      "key": "acceptable-use",
+      "title": "Acceptable use",
+      "paragraphs": [
+        "Be honest in your profile, your agreement and your sign-offs. Do not log hours that did not happen, impersonate another person, share clinical records or therapy notes through Lily, or use the platform to harass anyone. We may suspend an account while we look into a report."
+      ],
+      "unsourced": true
+    }
+  ]
+}

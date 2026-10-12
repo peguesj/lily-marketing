@@ -1,0 +1,57 @@
+---
+import Container from '../../ui/Container.astro';
+import Eyebrow from '../../ui/Eyebrow.astro';
+import Chip from '../../ui/Chip.astro';
+import Blob from '../../ui/Blob.astro';
+import PetalMark from '../../ui/PetalMark.astro';
+/** Terms hero: h1 with one italic phrase, lead, and effective-date / version / pilot chips (mono). */
+interface Props {
+  effective: string;
+  version: string;
+  scope: string;
+}
+const { effective, version, scope } = Astro.props;
+---
+<section class="thero">
+  <Blob color="teal" top="-8rem" right="-10rem" opacity={0.14} />
+  <Blob color="peach" width="20rem" height="14rem" bottom="-4rem" left="-6rem" opacity={0.16} />
+  <Container class="thero__inner">
+    <div class="thero__text">
+      <Eyebrow>Terms and agreement</Eyebrow>
+      <h1 class="thero__title">The terms, and what you <em class="thero__accent">sign</em>.</h1>
+      <p class="thero__lead">Plain-language platform terms, the supervision agreement both sides sign in the app, and the exact words of the weekly sign-off. Read it once, keep a copy, and ask us anything.</p>
+      <ul class="thero__chips" aria-label="Terms version">
+        <li><Chip variant="teal"><span class="thero__mono">Effective {effective}</span></Chip></li>
+        <li><Chip variant="teal"><span class="thero__mono">Version {version}</span></Chip></li>
+        <li><Chip variant="peach"><span class="thero__mono">{scope}</span></Chip></li>
+      </ul>
+    </div>
+    <div class="thero__art" aria-hidden="true">
+      <PetalMark petals={5} size={240} />
+    </div>
+  </Container>
+</section>
+
+<style>
+  .thero { position: relative; overflow: hidden; padding-block: 80px 64px; background: var(--lily-canvas, #F5F1E9); }
+  .thero :global(.thero__inner) { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 3rem; }
+  .thero__text { display: flex; flex-direction: column; gap: 1rem; max-width: 42rem; }
+  .thero__title {
+    margin: 0;
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    color: var(--lily-forest, #14522E);
+  }
+  .thero__accent { font-style: italic; font-weight: 500; color: var(--lily-primary, #1B6B3E); }
+  .thero__lead { margin: 0; font-size: 1.1875rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .thero__chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0 0; padding: 0; list-style: none; }
+  .thero__mono { font-family: var(--font-mono, 'Source Code Pro', Menlo, monospace); font-size: 0.75rem; letter-spacing: 0.04em; }
+  .thero__art { display: grid; place-items: center; }
+  @media (max-width: 800px) {
+    .thero :global(.thero__inner) { grid-template-columns: 1fr; }
+    .thero__art { display: none; }
+  }
+</style>

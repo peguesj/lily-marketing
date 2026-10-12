@@ -1,0 +1,41 @@
+---
+/** Role-scoped data disclosure: what a graduate, supervisor or program admin shares. */
+interface Props {
+  role: 'graduate' | 'supervisor' | 'program-admin';
+  label: string;
+  title: string;
+  lines: string[];
+  notes: string[];
+}
+const { role, label, title, lines, notes } = Astro.props;
+---
+<article class="role" data-role-card={role}>
+  <p class="role__label">{label}</p>
+  <h3 class="role__title">{title}</h3>
+  <ul class="role__lines">
+    {lines.map((l) => <li>{l}</li>)}
+  </ul>
+  <ul class="role__notes">
+    {notes.map((n) => (
+      <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3.500 8.200 6.500 11l6-6.500" stroke="currentColor" stroke-width="1.700" stroke-linecap="round" stroke-linejoin="round" /></svg><span>{n}</span></li>
+    ))}
+  </ul>
+</article>
+
+<style>
+  .role {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    padding: 2rem 1.75rem;
+    border-radius: var(--radius-card, 1.25rem);
+    background: var(--lily-surface, #F8F5EF);
+    box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%));
+  }
+  .role__label { margin: 0; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .role__title { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.5rem; font-weight: 600; line-height: 1.25; color: var(--lily-forest, #14522E); }
+  .role__lines { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.9375rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .role__notes { margin: auto 0 0; padding: 1rem 0 0; list-style: none; display: flex; flex-direction: column; gap: 0.5rem; border-top: 1px solid var(--lily-border, #D5DFD9); }
+  .role__notes li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 600; color: var(--lily-forest, #14522E); }
+  .role__notes svg { flex: none; color: var(--lily-primary, #1B6B3E); }
+</style>

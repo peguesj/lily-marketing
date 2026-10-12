@@ -1,0 +1,24 @@
+---
+import Container from '../../ui/Container.astro';
+import Button from '../../ui/Button.astro';
+import LegalHead from '../terms/LegalHead.astro';
+/** Dark-forest retention disclosure: dual-signed hours logs may outlast the account as licensure evidence. */
+interface Props { askHref: string }
+const { askHref } = Astro.props;
+---
+<section class="retention" data-retention-band aria-labelledby="retention-title">
+  <Container class="retention__inner">
+    <LegalHead id="retention-title" onDark eyebrow="Retention and licensure evidence" title="Your hours log can" class="retention__head">
+      <Fragment slot="accent">outlast your account</Fragment>
+    </LegalHead>
+    <p class="retention__body">After account deletion, Lily retains dual-signed hours logs only as licensure evidence. You can request removal where retention is not required or no longer serves the agreement you completed.</p>
+    <Button variant="inverse" href={askHref}>Ask about retention</Button>
+  </Container>
+</section>
+
+<style>
+  .retention { padding-block: 80px; background: var(--lily-forest, #14522E); color: var(--lily-canvas, #F5F1E9); }
+  .retention :global(.retention__inner) { display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .retention :global(.retention__head) { margin-bottom: 0; }
+  .retention__body { margin: 0; max-width: 44rem; font-size: 1.0625rem; line-height: 1.6; color: var(--lily-canvas, #F5F1E9); }
+</style>

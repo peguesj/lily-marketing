@@ -1,0 +1,47 @@
+---
+/** How Lily uses information, and when it is shared. Sponsors see hours and signatures only. */
+const uses = [
+  ['Matching', 'compare your preferences, eligibility and availability.'],
+  ['Verification', 'confirm an active license with the applicable licensing jurisdiction.'],
+  ['Agreements', 'prepare the terms you and your supervisor review and sign.'],
+  ['Reporting', 'show your weekly hours progress, including 1,240 of 3,000 hours.'],
+  ['Notifications', 'remind you to attest, sign or review a scheduled session.'],
+] as const;
+const shares = [
+  'Your agreement partner',
+  'State-board verification service',
+  'Stripe, only if you opt into payments',
+  'Your sponsoring program: hours and signatures only',
+  'Security, hosting and communication processors',
+] as const;
+---
+<div class="disclosure">
+  <section class="disclosure__col" aria-labelledby="uses-title" data-disclosure="uses">
+    <h3 id="uses-title" class="disclosure__title">How Lily uses your information</h3>
+    <ul class="disclosure__list">
+      {uses.map(([k, v]) => <li><strong>{k}:</strong> {v}</li>)}
+    </ul>
+    <p class="disclosure__reporting-note">The 1,240 of 3,000 figure is an example of how progress is shown, not a real member's record.</p>
+  </section>
+  <section class="disclosure__col" aria-labelledby="shares-title" data-disclosure="shares">
+    <h3 id="shares-title" class="disclosure__title">When information is shared</h3>
+    <ul class="disclosure__list">
+      {shares.map((s) => <li>{s}</li>)}
+    </ul>
+    <p class="disclosure__sponsor-note">Sponsoring programs do not see messages or affinity answers.</p>
+    <p class="disclosure__sell">We do not sell your personal information.</p>
+  </section>
+</div>
+
+<style>
+  .disclosure { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+  .disclosure__col { display: flex; flex-direction: column; gap: 1rem; padding: 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .disclosure__title { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.375rem; font-weight: 600; line-height: 1.25; color: var(--lily-forest, #14522E); }
+  .disclosure__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9375rem; line-height: 1.55; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .disclosure__list li { position: relative; padding-left: 1.25rem; }
+  .disclosure__list li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--lily-teal, #318171); }
+  .disclosure__list strong { color: var(--lily-forest, #14522E); font-weight: 600; }
+  .disclosure__reporting-note, .disclosure__sponsor-note { margin: 0; font-size: 0.8125rem; font-style: italic; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .disclosure__sell { margin: auto 0 0; padding-top: 1rem; border-top: 1px solid var(--lily-border, #D5DFD9); font-weight: 600; color: var(--lily-forest, #14522E); }
+  @media (max-width: 800px) { .disclosure { grid-template-columns: 1fr; } }
+</style>

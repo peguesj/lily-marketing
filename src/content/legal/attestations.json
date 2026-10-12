@@ -1,0 +1,24 @@
+{
+  "_source": "Single source for attestation wording shown on /terms. Must match LilyAi.Supervision.Attestations (lib/lily_ai/supervision/attestations.ex) byte-for-byte; scripts/__tests__/legal-pages.test.mjs enforces this. Statements are immutable once published: a wording change adds a _v2 key. Wording is draft, pending counsel review.",
+  "agreement_supervisor_v1": {
+    "version": 1,
+    "kind": "agreement_supervisor",
+    "signer": "Supervisor",
+    "when": "At countersignature of the supervision agreement",
+    "text": "I attest my license is active, I meet the supervision requirements that apply to me, and I will co-sign the weekly hours log honestly."
+  },
+  "agreement_supervisee_v1": {
+    "version": 1,
+    "kind": "agreement_supervisee",
+    "signer": "Graduate",
+    "when": "At countersignature of the supervision agreement",
+    "text": "I've read the supervision terms. Lily records attestations; it doesn't certify hours to the board."
+  },
+  "weekly_signoff_v1": {
+    "version": 1,
+    "kind": "weekly_signoff",
+    "signer": "Supervisor",
+    "when": "At every weekly sign-off",
+    "text": "I supervised these hours as described. Lily records attestations; it does not certify hours to the board."
+  }
+}

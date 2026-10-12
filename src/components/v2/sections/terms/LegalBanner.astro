@@ -1,0 +1,41 @@
+---
+import Container from '../../ui/Container.astro';
+import IllustrativeNotice from '../../ui/IllustrativeNotice.astro';
+/**
+ * Top-of-page draft banner shared by /privacy and /terms. Wraps the D1 IllustrativeNotice,
+ * which doubles as the [data-illustrative] marker scripts/check-pages.mjs requires for the
+ * eligibility / licensure / verification wording on these pages.
+ */
+---
+<div class="legal-banner" data-draft-banner>
+  <Container>
+    <IllustrativeNotice>
+      <p>Draft for the Pennsylvania pilot. Pending counsel review; not yet in effect.</p>
+    </IllustrativeNotice>
+  </Container>
+</div>
+
+<style>
+  .legal-banner {
+    padding-block: 1rem;
+    background: var(--lily-surface-muted, #ECE8DF);
+    border-bottom: 1px solid var(--lily-border, #D5DFD9);
+  }
+  /* The site-wide [data-illustrative] pill rule (uppercase, 11px, inline-flex) is meant for
+     small tags; reset it here so the notice reads as a banner. */
+  .legal-banner :global([data-illustrative]) {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 100%;
+    padding: 0.75rem 1.25rem;
+    border: 1px dashed color-mix(in srgb, var(--lily-primary, #1B6B3E) 45%, transparent);
+    border-radius: var(--radius-card-sm, 0.875rem);
+    background: var(--lily-canvas, #F5F1E9);
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+  .legal-banner :global(.v2-illustrative__detail) { font-size: 0.9375rem; color: var(--lily-forest, #14522E); }
+</style>

@@ -1,0 +1,62 @@
+---
+import Eyebrow from '../../ui/Eyebrow.astro';
+/**
+ * Section heading for the legal pages (shared by /privacy and /terms).
+ *
+ * Same look as ui/SectionHead (eyebrow, Playfair heading, one italic accent phrase) but it
+ * renders a <div>, not a <header>: scripts/check-pages.mjs pools every <header> element into
+ * one "header" region, and headings such as "Requirements differ by state and license" would
+ * then fail the illustrative rule, because that pooled region cannot carry a notice.
+ * Slot "accent" holds the italic phrase; `suffix` is the punctuation after it.
+ */
+interface Props {
+  eyebrow?: string;
+  /** Text before the accent phrase. */
+  title: string;
+  /** Punctuation after the accent phrase. */
+  suffix?: string;
+  lead?: string;
+  onDark?: boolean;
+  level?: 2 | 3;
+  id?: string;
+  class?: string;
+}
+const { eyebrow, title, suffix = '.', lead, onDark = false, level = 2, id, class: extra } = Astro.props;
+const Tag = `h${level}` as 'h2' | 'h3';
+const hasAccent = Astro.slots.has('accent');
+---
+<div class:list={['legal-head', onDark && 'legal-head--on-dark', extra]}>
+  {eyebrow && <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow>}
+  <Tag id={id} class="legal-head__title">{title}{hasAccent && ' '}{hasAccent && <em class="legal-head__accent"><slot name="accent" /></em>}{suffix}</Tag>
+  {lead && <p class="legal-head__lead">{lead}</p>}
+</div>
+
+<style>
+  .legal-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 46rem;
+    margin-bottom: 3rem;
+  }
+  .legal-head__title {
+    margin: 0;
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--lily-forest, #14522E);
+  }
+  .legal-head__accent { font-style: italic; font-weight: 500; color: var(--lily-primary, #1B6B3E); }
+  .legal-head__lead {
+    margin: 0;
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: 1.125rem;
+    line-height: 1.55;
+    color: var(--lily-text-muted-aa, #4E6B5A);
+  }
+  .legal-head--on-dark .legal-head__title { color: var(--lily-canvas, #F5F1E9); }
+  .legal-head--on-dark .legal-head__accent { color: var(--lily-peach, #F0B882); }
+  .legal-head--on-dark .legal-head__lead { color: color-mix(in srgb, var(--lily-canvas, #F5F1E9) 88%, transparent); }
+</style>

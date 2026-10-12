@@ -1,0 +1,19 @@
+---
+/** A privacy control: title, plain description and one action link. */
+interface Props { title: string; body: string; actionLabel: string; actionHref: string; }
+const { title, body, actionLabel, actionHref } = Astro.props;
+---
+<article class="choice" data-choice-card>
+  <h3 class="choice__title">{title}</h3>
+  <p class="choice__body">{body}</p>
+  <a class="choice__action" href={actionHref}>{actionLabel}<span aria-hidden="true"> →</span></a>
+</article>
+
+<style>
+  .choice { display: flex; flex-direction: column; align-items: flex-start; gap: 0.875rem; padding: 2rem; border-radius: var(--radius-card, 1.25rem); background: var(--lily-surface, #F8F5EF); box-shadow: var(--shadow-card, 0 4px 8px rgb(20 82 46 / 8%)); }
+  .choice__title { margin: 0; font-family: var(--font-display, 'Playfair Display', Georgia, serif); font-size: 1.375rem; font-weight: 600; line-height: 1.25; color: var(--lily-forest, #14522E); }
+  .choice__body { margin: 0; font-size: 0.9375rem; line-height: 1.6; color: var(--lily-text-muted-aa, #4E6B5A); }
+  .choice__action { margin-top: auto; font-size: 0.9375rem; font-weight: 600; color: var(--lily-primary, #1B6B3E); text-decoration: none; }
+  .choice__action:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+  .choice__action:focus-visible { outline: 2px solid var(--lily-forest, #14522E); outline-offset: 3px; border-radius: 0.25rem; }
+</style>
