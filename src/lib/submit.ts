@@ -4,6 +4,7 @@
  * Posts JSON to the Phoenix `SubmitController` (`POST /api/submit`). Contract:
  *   - honeypot `_h` non-empty -> 200 {"ok":true} (silently dropped)
  *   - missing `email`         -> 400 {"error":"Email required"}
+ *   - malformed `email`       -> 422 {"error":"Email invalid"}
  *   - otherwise               -> 200 {"ok":true}
  *
  * Success is only reported when the server answers 2xx with `{ok:true}`;
@@ -66,7 +67,10 @@ export async function postSubmission(
     if (response === 'timeout') return fail('network');
 
     if (response.status >= 500) return fail('server');
-    if (response.status >= 400) return fail('invalid');
+    // Only a validation rejection blames the visitor's input. Every other 4xx (404 for a
+    // missing or misrouted endpoint, 401/403, 405, 429) is the service's problem, not theirs.
+    if (response.status === 400 || response.status === 422) return fail('invalid');
+    if (response.status >= 400) return fail('server');
 
     let data: unknown;
     try {

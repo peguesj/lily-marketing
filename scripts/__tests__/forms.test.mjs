@@ -250,6 +250,18 @@ test('postSubmission maps a 400 to invalid', async () => {
   assert.deepEqual(out, { ok: false, error: 'invalid' });
 });
 
+test('postSubmission maps a 422 (rejected email) to invalid', async () => {
+  const out = await postSubmission({ type: 'waitlist', email: 'nope' }, { fetchImpl: async () => res(422, { error: 'Email invalid' }) });
+  assert.deepEqual(out, { ok: false, error: 'invalid' });
+});
+
+test('postSubmission does not blame the visitor for a missing or misrouted endpoint (404, 405, 401, 403, 429 -> server)', async () => {
+  for (const status of [401, 403, 404, 405, 429]) {
+    const out = await postSubmission({ type: 'waitlist', email: 'a@b.co' }, { fetchImpl: async () => res(status, {}) });
+    assert.deepEqual(out, { ok: false, error: 'server' }, `status ${status}`);
+  }
+});
+
 test('postSubmission maps 5xx and unconfirmed 200 to server', async () => {
   assert.deepEqual(await postSubmission({ type: 'contact' }, { fetchImpl: async () => res(503, {}) }), { ok: false, error: 'server' });
   assert.deepEqual(await postSubmission({ type: 'contact' }, { fetchImpl: async () => res(200, { nope: 1 }) }), { ok: false, error: 'server' });
