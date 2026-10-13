@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { postSubmission, type SubmitErrorKind, type SubmissionPayload } from '../../../lib/submit.ts';
 import './forms.css';
 
@@ -15,6 +15,17 @@ export const ERROR_COPY: Record<SubmitErrorKind, string> = {
   invalid: 'Something in that form was not accepted. Check your email address and try again.',
   server: 'Something went wrong on our side. Please try again in a moment.',
 };
+
+/**
+ * False during server render and until React has hydrated the form. A submit button that is
+ * disabled until then stops an early click or Enter from falling through to the native
+ * `<form method="post" action="/api/submit">` and navigating the tab to the raw JSON reply.
+ */
+export function useHydrated() {
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+  return hydrated;
+}
 
 /** Success is only ever set after the server confirms ({ok:true}). */
 export function useSubmission() {
@@ -34,7 +45,8 @@ export function useSubmission() {
   }, []);
 
   const reset = useCallback(() => setPhase({ kind: 'idle' }), []);
-  return { phase, send, reset };
+  const hydrated = useHydrated();
+  return { phase, send, reset, hydrated };
 }
 
 /** Focus the first invalid control (by key order) once it has rendered. */

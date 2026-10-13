@@ -40,7 +40,7 @@ export default function CohortProposalForm({ compact = false }: CohortProposalFo
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [showErrors, setShowErrors] = useState(false);
   const [announce, setAnnounce] = useState('');
-  const { phase, send } = useSubmission();
+  const { phase, send, hydrated } = useSubmission();
   const successRef = useRef<HTMLDivElement>(null);
 
   const orgErrors = useMemo(() => validateCohortOrg(org).errors, [org]);
@@ -148,7 +148,7 @@ export default function CohortProposalForm({ compact = false }: CohortProposalFo
                 Back
               </button>
             ) : null}
-            <button type="submit" className="lv2f-btn" disabled={submitting}>
+            <button type="submit" className="lv2f-btn" disabled={submitting || !hydrated}>
               {step === 1 ? 'Request a cohort proposal' : submitting ? 'Sending…' : 'Send request'}
             </button>
           </div>

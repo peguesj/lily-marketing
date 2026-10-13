@@ -93,7 +93,7 @@ export default function WaitlistForm({ defaultAudience, compact = false, appHref
   const [showErrors, setShowErrors] = useState(false);
   const [announce, setAnnounce] = useState('');
   const [shareMsg, setShareMsg] = useState('');
-  const { phase, send, reset } = useSubmission();
+  const { phase, send, reset, hydrated } = useSubmission();
   const successRef = useRef<HTMLDivElement>(null);
 
   const supResult = useMemo(() => validateSupervisor(sup), [sup]);
@@ -258,7 +258,7 @@ export default function WaitlistForm({ defaultAudience, compact = false, appHref
           {phase.kind === 'error' ? <RetryBanner error={phase.error} onRetry={submit} /> : null}
 
           <div className="lv2f-actions">
-            <button type="submit" className="lv2f-btn" disabled={submitting}>
+            <button type="submit" className="lv2f-btn" disabled={submitting || !hydrated}>
               {submitting ? 'Checking…' : ctaLabel}
             </button>
           </div>

@@ -27,3 +27,14 @@ test('every v2 form posts to /api/submit and carries an off-screen _h honeypot',
     assert.match(f, /<input[^>]*type="hidden"[^>]*name="type"|<input[^>]*name="type"[^>]*type="hidden"/i, 'hidden type field for no-JS posts');
   }
 });
+
+test('every server-rendered submit button is disabled until the form hydrates (no raw-JSON native post)', () => {
+  const html = readFileSync(page, 'utf8');
+  const forms = [...html.matchAll(/<form\b[^>]*>[\s\S]*?<\/form>/gi)].map((m) => m[0]);
+  assert.ok(forms.length >= 5, `expected 5 forms, found ${forms.length}`);
+  for (const f of forms) {
+    const buttons = [...f.matchAll(/<button\b[^>]*type="submit"[^>]*>/gi)].map((m) => m[0]);
+    assert.ok(buttons.length > 0, 'form has a submit button');
+    for (const b of buttons) assert.match(b, /\sdisabled(=|\s|>)/, `submit must start disabled: ${b}`);
+  }
+});

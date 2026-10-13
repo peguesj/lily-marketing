@@ -30,7 +30,7 @@ export default function ContactForm({ defaultTopic, compact = false }: ContactFo
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [showErrors, setShowErrors] = useState(false);
   const [announce, setAnnounce] = useState('');
-  const { phase, send } = useSubmission();
+  const { phase, send, hydrated } = useSubmission();
   const successRef = useRef<HTMLDivElement>(null);
 
   const { errors } = useMemo(() => validateContact(v), [v]);
@@ -104,7 +104,7 @@ export default function ContactForm({ defaultTopic, compact = false }: ContactFo
           <Honeypot value={honeypot} onChange={setHoneypot} />
           {phase.kind === 'error' ? <RetryBanner error={phase.error} onRetry={submit} /> : null}
           <div className="lv2f-actions">
-            <button type="submit" className="lv2f-btn" disabled={submitting}>
+            <button type="submit" className="lv2f-btn" disabled={submitting || !hydrated}>
               {submitting ? 'Sending…' : 'Send my message'}
             </button>
           </div>
