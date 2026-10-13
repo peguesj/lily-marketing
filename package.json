@@ -14,7 +14,7 @@
     "check:pages": "node scripts/check-pages.mjs",
     "check:pages:strict": "node scripts/check-pages.mjs --strict",
     "test:check-pages": "node --test scripts/check-pages.test.mjs",
-    "test:unit": "node --test scripts/check-pages.test.mjs scripts/preview-routes.test.mjs scripts/__tests__/forms.test.mjs",
+    "test:unit": "node --test scripts/check-pages.test.mjs scripts/preview-routes.test.mjs scripts/host-redirects.test.mjs scripts/__tests__/forms.test.mjs",
     "test:dist": "MOCKS_SKIP_BUILD=1 node --test scripts/__tests__/ui-kit.test.mjs scripts/__tests__/mocks.test.mjs scripts/__tests__/forms-render.test.mjs scripts/__tests__/landmarks.test.mjs",
     "test:pages": "SUPERVISORS_SKIP_BUILD=1 PAGES_SKIP_BUILD=1 HP_SKIP_BUILD=1 RT_SKIP_BUILD=1 node --test --test-concurrency=1 src/components/v2/sections/home/__tests__/home.test.mjs src/components/v2/sections/supervisors/supervisors.test.mjs src/components/v2/sections/graduates/pages.test.mjs src/components/v2/sections/how/how.test.mjs src/components/v2/sections/pricing/pricing.test.mjs src/components/v2/sections/research/research-trust.test.mjs src/components/v2/sections/waitlist/about-contact-waitlist.test.mjs src/components/v2/sections/terms/legal-pages.test.mjs",
     "test": "npm run test:unit && npm run build && npm run test:dist && npm run test:pages && npm run check:pages:strict"
