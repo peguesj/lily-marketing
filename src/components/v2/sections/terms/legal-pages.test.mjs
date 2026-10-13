@@ -146,7 +146,10 @@ test('/terms: ten numbered agreement terms with example values labelled as examp
 
 test('/terms: fine-print cards and CTA hrefs', () => {
   const text = textOf(terms);
-  for (const needle of ['Liability', 'Governing law', 'Commonwealth of Pennsylvania', '30 days', 'legal@lily.example']) assert.ok(text.includes(needle), needle);
+  for (const needle of ['Liability', 'Governing law', 'Commonwealth of Pennsylvania', '30 days', 'hello@asklily.health']) assert.ok(text.includes(needle), needle);
+  // A legal page never shows a non-deliverable example address or says it is a placeholder.
+  assert.doesNotMatch(terms, /lily\.example|placeholder address/i, 'no placeholder contact address');
+  assert.match(terms, /href="mailto:hello@asklily\.health"/);
   assert.match(terms, /href="https:\/\/[^"]*\/app\/signup\/supervisor"/);
   assert.match(terms, /href="https:\/\/[^"]*\/app\/sign-in"/);
 });
